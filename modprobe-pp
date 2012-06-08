@@ -1,0 +1,117 @@
+#!/usr/bin/python
+
+import  os
+import  sys
+import  math
+
+class   ModprobePrettyprint( object ):
+
+    VERSION = "1.0.0"
+
+    def __init__( self, out = sys.stdout ):
+        self.out = out
+        self.lines = []
+        self.fmt = "%31s\t%s"
+        self.target_width = 0
+        return
+
+    def process( self, fyle = sys.stdin ):
+        self.lines = []
+        for line in fyle:
+            n = line.find( '#' )
+            if n > -1: line = line[:n]
+            try:
+                tokens = line.strip().split()
+                if len(tokens) < 3: continue
+            except Exception, e:
+                continue
+            verb = tokens[0]
+            target = tokens[1]
+            self.target_width = max( self.target_width, len(target) )
+            options = tokens[2:]
+            options.sort()
+            key = '%s|%s' % (verb,target)
+            self.lines.append( (key, verb, target, options ) )
+        self.lines.sort( key = lambda (key, verb,target,options): key )
+        return
+
+    def do_dir( self, dn ):
+        if not os.path.isdir( dn ):
+            print >>sys.stderr, 'Not a directory: "%s"; ignored.' % dn
+            return
+        files = os.listdir( dn )
+        files.sort()
+        for file in files:
+            self.do_name( os.path.join( dn, file ) )
+        return
+
+    def do_file( self, name ):
+        if not os.path.isfile( name ):
+            print >>sys.stderr, 'Not a file: "%s"; ignored.' % name
+            return
+        try:
+            fd = open( name, 'rt' )
+        except Exception, e:
+            print >>sys.stderr, 'Cannot open "%s" for reading.' % name
+            raise e
+        self.process( fd )
+        fd.close()
+        return
+
+    def do_name( self, name ):
+        if os.path.isfile( name ):
+            if not name.endswith( '.conf' ):
+                print >>sys.stderr, "Expected '%s' to end with '.conf'." % name
+            self.do_file( name )
+        elif os.path.isdir( name ):
+            if not name.endswith( '.d' ):
+                print >>sys.stderr, "Expected name '%s' to end with '.d'." % name
+            self.do_dir( name )
+        else:
+            print >>sys.stderr, 'Ignoring unknown filetype: "%s".' % name
+        return
+
+    def show( self, out = None, line_number = False ):
+        if out is None:
+            out = self.out
+        n = 0
+        fmt = '%%-7s %%-%ds %%s' % self.target_width
+        for key,verb,target,options in self.lines:
+            if line_number:
+                n += 1
+                print >>out, "%-4s" % ('%d:' % n),
+
+            print >>out, fmt % (
+                verb,
+                target,
+                ' '.join( options )
+            )
+        return
+
+if __name__ == '__main__':
+    from    optparse    import  OptionParser
+
+    p = OptionParser(
+        prog        =os.path.basename( sys.argv[0] ),
+        version     ="%prog " + ModprobePrettyprint.VERSION,
+        usage       ="usage: %prog [-o ofile] [file...]",
+        description ="""Display sysctl.conf file in canonical form.""",
+        epilog      = '''Reads from stdin if no files are given.'''
+    )
+    p.add_option( "-n", "--number", dest="line_number", action="store_true",
+                 default=False, help="show line numbers" )
+    p.add_option( "-o", "--out", dest="ofile", help="write output to file",
+                 metavar="FILE", default=None )
+    (options, args) = p.parse_args()
+    if options.ofile is None:
+        out = sys.stdout
+    else:
+        out = open( options.ofile, 'wt' )
+    mpp = ModprobePrettyprint( out=out )
+    if len(args) == 0:
+        mpp.process()
+    else:
+        for optarg in args:
+            mpp.do_name( optarg )
+    mpp.show( line_number = options.line_number )
+    exit(0)

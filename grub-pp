@@ -1,0 +1,110 @@
+#!/usr/bin/python
+# vim: et sw=4 ts=4
+
+me = 'grub-pp'
+
+import  os
+import  sys
+import  re
+
+class   GrubPrettyprint( object ):
+
+    def __init__( self ):
+        self.default = None
+        self.title_cnt = 0
+        return
+
+    def do_name( self, name ):
+        if os.path.isdir( name ):
+            self.do_dir( name )
+        elif os.path.isfile( name ) and name.endswith( '.conf' ):
+            self.do_file( name )
+        else:
+            print >>sys.stderr, 'Ignoring "%s".' % name
+        return
+
+    def do_dir( self, dn ):
+        try:
+            names = os.listdir( dn )
+        except Exception, e:
+            print >>sys.stderr, 'Cannot read directory "%s".' % dn
+            raise e
+        names.sort()
+        for name in names:
+            self.do_name( name )
+        return
+
+    def do_file( self, fn ):
+        try:
+            f = open( fn, 'rt' )
+        except Exception, e:
+            print >>sys.stderr, "Cannot open '%s' for reading." % fn
+            raise e
+        self.process( f )
+        f.close()
+        return
+
+    def process( self, f = sys.stdin ):
+        title_no = 0
+        for line in f:
+            line = line.rstrip()
+            if line[0] == '#':
+                # Just copy column-1 comments intact
+                print >>self.out, line
+                continue
+            # Drop embedded comments
+            bp = line.find( '#' )
+            if bp > -1: line = line[:bp]
+            line = line.rstrip()
+            if line[0].isspace():
+                tokens = line.split()
+                # Ignore blank input lines
+                n = len(tokens)
+                if n == 1:
+                    print '\t%s' % tokens[0]
+                elif n == 2:
+                    print '\t%s\t%s' % ( tokens[0], tokens[1] )
+                elif n > 2:
+                    options = tokens[1:]
+                    options.sort()
+                    print '\t%s\%s\t%\s' % (
+                        tokens[0],
+                        tokens[1],
+                        ' '.join(options)
+                    )
+            elif line.startswith( 'default=' ):
+                self.default = int( line[8:] )
+            elif line.startswith( 'title' ):
+                mo = re.search(  r'^.*\((.*)\).*$', line )
+                if mo is None:
+                    extra = ''
+                else:
+                    extra = mo.group(1)
+                print >>self.out, '#'
+                if self.default == self.title_cnt:
+                    print >>self.out, '# Stanza %d: (DEFAULT) %s' % (title_no, extra)
+                else:
+                    print >>self.out, '# Stanza %d: %s' % (title_no, extra)
+                self.title_cnt += 1
+                print >>self.out, '#'
+                print >>self.out, '%s' % line
+                title_no += 1
+            else:
+                print >>self.out, '%s' % line
+            pass
+        f.close()
+        return
+
+    def report( self ):
+        return
+
+if __name__ == '__main__':
+    me = os.path.basename( sys.argv[0] )
+    gpp = GrubPrettyprint()
+    if len( sys.argv ) == 1:
+        gpp.process()
+    else:
+        for fn in sys.argv[1:]:
+            gpp.do_name( fn )
+    gpp.report()
+    exit(0)
