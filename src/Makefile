@@ -3,26 +3,30 @@ TARGET=all
 
 PREFIX=${DESTDIR}/opt
 BINDIR=${PREFIX}/bin
-SUBDIRS=src
+SUBDIRS=
 
 INSTALL=install
 
 .PHONY: ${TARGETS} ${SUBDIRS}
 
-all::
+PPFILES	:=$(wildcard *-pp)
+
+all::	${PPFILES}
 
 ${TARGETS}::
 
 clobber distclean:: clean
 
-check::
-	./ ${ARGS}
+check::	${PPFILES}
+	./${PPFILES} ${ARGS}
 
-install::
-	${INSTALL} -D  ${BINDIR}/
+install:: ${PPFILES}
+	for pp in ${PFILES}; do						\
+		${INSTALL} -D $${pp} ${BINDIR}/$${pp};			\
+	done
 
 uninstall::
-	${RM} ${BINDIR}/
+	cd ${BINDIR} && ${RM} ${PPFILES}
 
 ifneq	(,${SUBDIRS})
 ${TARGETS}::
