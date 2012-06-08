@@ -74,6 +74,7 @@ class   GrubPrettyprint( object ):
                     )
             elif line.startswith( 'default=' ):
                 self.default = int( line[8:] )
+                print line
             elif line.startswith( 'title' ):
                 mo = re.search(  r'^.*\((.*)\).*$', line )
                 if mo is None:
