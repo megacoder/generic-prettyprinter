@@ -56,9 +56,9 @@ class	MeminfoPrettyPrint( object ):
 		return
 
 	def	print_lines( self ):
-		fmt = '%%-%ds %%%ds' % (self.maxfield, self.maxvalue)
+		fmt = '%%-%ds %%%ds' % (self.maxfield+1, self.maxvalue)
 		for (field, value) in self.lines:
-			print fmt % (field, value)
+			print fmt % (field + ':', value)
 		return
 
 if __name__ == '__main__':
