@@ -21,8 +21,8 @@ check::	${PPFILES}
 	./${PPFILES} ${ARGS}
 
 install:: ${PPFILES}
-	for pp in ${PFILES}; do						\
-		${INSTALL} -D $${pp} ${BINDIR}/$${pp};			\
+	for f in ${PPFILES}; do						\
+		${INSTALL} -D $${f} ${BINDIR}/$${f};			\
 	done
 
 uninstall::
