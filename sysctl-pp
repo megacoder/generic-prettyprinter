@@ -4,7 +4,7 @@ import  os
 import  sys
 import  math
 
-class   ModprobePrettyprint( object ):
+class   SysctlPrettyprint( object ):
 
     VERSION = "1.0.0"
 
@@ -12,55 +12,45 @@ class   ModprobePrettyprint( object ):
         self.out = out
         self.lines = []
         self.fmt = "%31s\t%s"
-        self.target_width = 0
         return
 
     def load( self, fyle = sys.stdin ):
         self.lines = []
+        maxlen = 0
         for line in fyle:
             n = line.find( '#' )
             if n > -1: line = line[:n]
             try:
-                tokens = line.strip().split()
-                if len(tokens) < 3: continue
+                key, value = line.split( '=', 1 )
             except Exception, e:
                 continue
-            verb = tokens[0]
-            target = tokens[1]
-            self.target_width = max( self.target_width, len(target) )
-            options = tokens[2:]
-            options.sort()
-            key = '%s|%s' % (verb,target)
-            self.lines.append( (key, verb, target, options ) )
-        self.lines.sort( key = lambda (key, verb,target,options): key )
+            k = key.strip()
+            maxlen = max( maxlen, len(k) )
+            self.lines.append( (k, value.strip()) )
+        self.fmt = "%%%ds = %%s" % maxlen
+        self.lines.sort( key = lambda (key,value): key.lower() )
         return
 
     def show( self, out = None, line_number = False ):
         if out is None:
             out = self.out
         n = 0
-        fmt = '%%-7s %%-%ds %%s' % self.target_width
-        for key,verb,target,options in self.lines:
+        for key,value in self.lines:
             if line_number:
                 n += 1
                 print >>out, "%-4s" % ('%d:' % n),
-
-            print >>out, fmt % (
-                verb,
-                target,
-                ' '.join( options )
-            )
+            print >>out, self.fmt % (key, value)
         return
 
 if __name__ == '__main__':
     from    optparse    import  OptionParser
 
     p = OptionParser(
-        prog        =os.path.basename( sys.argv[0] ),
-        version     ="%prog " + ModprobePrettyprint.VERSION,
-        usage       ="usage: %prog [-o ofile] [file...]",
-        description ="""Display sysctl.conf file in canonical form.""",
-        epilog      = '''Reads from stdin if no files are given.'''
+        prog=os.path.basename( sys.argv[0] ),
+        version="%prog " + SysctlPrettyprint.VERSION,
+        usage="usage: %prog [-o ofile] [file...]",
+        description="""Display sysctl.conf file in canonical form.""",
+        epilog = '''Reads from stdin if no files are given.'''
     )
     p.add_option( "-n", "--number", dest="line_number", action="store_true",
                  default=False, help="show line numbers" )
@@ -72,9 +62,9 @@ if __name__ == '__main__':
     else:
         out = open( options.ofile, 'wt' )
     if len(args) == 0:
-        mpp = ModprobePrettyprint( out=out )
-        mpp.load()
-        mpp.show( line_number = options.line_number )
+        spp = SysctlPrettyprint( out=out )
+        spp.load()
+        spp.show( line_number = options.line_number )
     else:
         for optarg in args:
             try:
@@ -82,7 +72,7 @@ if __name__ == '__main__':
             except Exception, e:
                 print >>sys.stderr, "Cannot open '%s' for reading." % optarg
                 continue
-            mpp = ModprobePrettyprint( out=out )
-            mpp.load( fd )
+            spp = SysctlPrettyprint( out=out )
+            spp.load( fd )
             fd.close()
-            mpp.show()
+            spp.show()

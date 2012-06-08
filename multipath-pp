@@ -1,0 +1,91 @@
+#!/usr/bin/python
+# vim: noet sw=4 ts=4
+
+import	os
+import	sys
+import	string
+
+class	MultipathPrettyPrint( object ):
+
+	INDENT_WITH = '        '
+
+	def __init__( self ):
+		self.depth = 0
+		return
+
+	def spew( self, tokens ):
+		line = ''
+		for x in xrange( 0, self.depth ):
+			line = line + MultipathPrettyPrint.INDENT_WITH
+		line = line + tokens[0]
+		if len(tokens) > 1:
+			while True:
+				line = line + ' '
+				if len(line) >= 36: break
+			line = line + ' '.join(tokens[1:])
+		print '%s' % line
+		return
+
+	def	process( self, f = sys.stdin ):
+		self.depth = 0
+		for line in f:
+			# Column-1 comments are copied verbatim
+			if line.startswith( '#' ):
+				print line,
+				continue
+			# All other lines are to be correctly indented
+			# Ensure that magic tokens are whitespace-delimited
+			tokens = line.strip().replace( '{', ' { ' ).replace( '}', ' } ').split()
+			if len(tokens) > 0:
+				final = tokens[-1]
+				if final == '{':
+					self.spew( [' '.join(tokens)] )
+					self.depth += 1
+				elif final == '}':
+					self.depth -= 1
+					self.spew( ['%s' % ' '.join(tokens)] )
+				elif tokens[0][0] == '#':
+					self.spew( ['%s' % line] )
+				else:
+					self.spew( tokens )
+		return
+
+	def do_file( self, fn ):
+		if not os.path.isfile( fn ): return
+		f = open( fn, 'rt' )
+		self.process( f )
+		f.close()
+		return
+
+	def do_directory( self, dn ):
+		if not os.path.isdir( dn ): return
+		names = os.listdir( dn );
+		names.sort()
+		for name in names:
+			p = os.path.join( dn, name )
+			if p.endswith( '.conf' ) and os.path.isfile( p ):
+				self.do_file( p )
+			elif os.path.isdir( p ):
+				self.do_directory( p )
+			else:
+				# Silently ignore anything else.
+				pass
+		return
+
+if __name__ == '__main__':
+	mpp = MultipathPrettyPrint()
+	me = os.path.basename( sys.argv[0] )
+	if len(sys.argv) == 1:
+		mpp.process( sys.stdin )
+		# mpp.do_file( '/etc/multipath.conf' )
+		# mpp.do_directory( '/etc/multipath.d' )
+	else:
+		for arg in sys.argv[1:]:
+			if arg == '-':
+				mpp.process()
+			elif os.path.isfile( arg ):
+				mpp.do_file( arg )
+			elif os.path.isdir( arg ):
+				mpp.do_directory( arg )
+			else:
+				print >>sys.stderr, '%s: ignoring "%s".\n' % (me, arg)

@@ -45,12 +45,11 @@ class   GrubPrettyprint( object ):
         return
 
     def process( self, f = sys.stdin ):
-        title_no = 0
         for line in f:
             line = line.rstrip()
             if line[0] == '#':
                 # Just copy column-1 comments intact
-                print >>self.out, line
+                print line
                 continue
             # Drop embedded comments
             bp = line.find( '#' )
@@ -65,9 +64,10 @@ class   GrubPrettyprint( object ):
                 elif n == 2:
                     print '\t%s\t%s' % ( tokens[0], tokens[1] )
                 elif n > 2:
-                    options = tokens[1:]
+                    options = tokens[2:]
+                    # options.sort( key=lambda x:x.lower() )
                     options.sort()
-                    print '\t%s\%s\t%\s' % (
+                    print '\t%s\t%s\t%s' % (
                         tokens[0],
                         tokens[1],
                         ' '.join(options)
@@ -80,17 +80,16 @@ class   GrubPrettyprint( object ):
                     extra = ''
                 else:
                     extra = mo.group(1)
-                print >>self.out, '#'
+                print '#'
                 if self.default == self.title_cnt:
-                    print >>self.out, '# Stanza %d: (DEFAULT) %s' % (title_no, extra)
+                    print '# Stanza %d: (DEFAULT) %s' % (self.title_cnt, extra)
                 else:
-                    print >>self.out, '# Stanza %d: %s' % (title_no, extra)
+                    print '# Stanza %d: %s' % (self.title_cnt, extra)
                 self.title_cnt += 1
-                print >>self.out, '#'
-                print >>self.out, '%s' % line
-                title_no += 1
+                print '#'
+                print line
             else:
-                print >>self.out, '%s' % line
+                print line
             pass
         f.close()
         return
