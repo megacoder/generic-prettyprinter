@@ -9,6 +9,8 @@ def	process( f = sys.stdin ):
 	last = None
 	old_delta = None
 	fmt = '%a %b %d %H:%M:%S %Y'
+	print '#  Day Mon Dy HH:MM:SS YYYY  Delta'
+	print '#  --- --- -- -------- ---- -------'
 	for line in f:
 		if not line.startswith( 'oswbb heartbeat' ): continue
 		tokens = line.rstrip().split( ':', 1 )
