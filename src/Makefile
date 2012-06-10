@@ -9,24 +9,28 @@ INSTALL=install
 
 .PHONY: ${TARGETS} ${SUBDIRS}
 
-PPFILES	:=$(wildcard *-pp)
+define	INSTALL_template
+.PHONY:	install-${1}
+install:: install-${1}
+install-${1}:: ${1}
+	@cmp -s $${BINDIR}/${1} ${1} || /bin/sh -xc "${INSTALL} -Dc -m ${MODE} ${1} ${PREFIX}/${1}"
+endef
 
-all::	${PPFILES}
+FILES	:=$(wildcard *-pp)
+
+all::	${FILES}
 
 ${TARGETS}::
 
 clobber distclean:: clean
 
-check::	${PPFILES}
-	./${PPFILES} ${ARGS}
+check::	${FILES}
+	./${FILES} ${ARGS}
 
-install:: ${PPFILES}
-	for f in ${PPFILES}; do						\
-		${INSTALL} -D $${f} ${BINDIR}/$${f};			\
-	done
+$(foreach f,${FILES},$(eval $(call INSTALL_template,${f})))
 
 uninstall::
-	cd ${BINDIR} && ${RM} ${PPFILES}
+	cd ${BINDIR} && ${RM} ${FILES}
 
 ifneq	(,${SUBDIRS})
 ${TARGETS}::
