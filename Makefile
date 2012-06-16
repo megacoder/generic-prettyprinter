@@ -19,7 +19,6 @@ check::
 	./ ${ARGS}
 
 install::
-	${INSTALL} -D  ${BINDIR}/
 
 uninstall::
 	${RM} ${BINDIR}/

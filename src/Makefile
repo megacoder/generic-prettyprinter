@@ -13,7 +13,8 @@ define	INSTALL_template
 .PHONY:	install-${1}
 install:: install-${1}
 install-${1}:: ${1}
-	@cmp -s $${BINDIR}/${1} ${1} || /bin/sh -xc "${INSTALL} -Dc -m ${MODE} ${1} ${PREFIX}/${1}"
+	@cmp -s $${BINDIR}/${1} ${1} || \
+	/bin/sh -xc '${INSTALL} -Dc -m 0755 "${1}" "${BINDIR}/${1}"'
 endef
 
 FILES	:=$(wildcard *-pp)
