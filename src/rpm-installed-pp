@@ -1,11 +1,9 @@
 #!/bin/sh
 (
 	if [ $# -eq 0 ]; then
-		echo "local" >&2
-		rpm -qa --qf='%{INSTALLTIME:day} %{NAME}-%{VERSION}-%{RELEASE}.%{ARCH} %{VENDOR}\n'
+		rpm -qa --qf='%{INSTALLTIME} %{NAME}-%{VERSION}-%{RELEASE}.%{ARCH} %{VENDOR}\n'
 	else
-		echo "file" >&2
-		cat "$@"
+		cat -- "$@"
 	fi
 ) |
 python -c "
