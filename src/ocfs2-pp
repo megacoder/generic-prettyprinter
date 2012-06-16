@@ -3,16 +3,22 @@
 
 import	os
 import	sys
+import	stat
 
 class	OcfsPrettyPrint( object ):
 
 	def	__init__( self ):
 		self._new_stanza()
+		self.out = sys.stdout
+		return
+
+	def	set_output( self, f ):
+		self.out = f
 		return
 
 	def	_new_stanza( self ):
 		self.content = []
-		self.longest = 0
+		self.longest = 15
 		return
 
 	def	_dump_stanza( self ):
@@ -25,16 +31,39 @@ class	OcfsPrettyPrint( object ):
 
 	def	_out_header( self, line ):
 		self._dump_stanza()
-		print >>self.out, '%s' % line
+		print >>self.out, line
 		return
 
-	def pretty_print( self, fn = '/etc/ocfs2/cluster.conf', out = sys.stdout ):
-		self.out = out
+	def	do_name( self, name ):
 		try:
-			fyle = open( fn, 'rt' )
+			mode = os.stat( name )[stat.ST_MODE]
 		except Exception, e:
-			print >>sys.stderr, 'Cannot open %s: %s' % (fn, e)
+			print >>sys.stderr, 'Cannot stat "%s".' % name
 			raise e
+		if stat.S_ISREG( mode ):
+			try:
+				f = open( name, 'rt' )
+			except Exception, e:
+				print >>sys.stderr, 'Cannot open "%s".' % name
+				raise e
+			self.process( f )
+			f.close()
+		elif stat.S.ISDIR( mode ):
+			self.do_dir( name )
+		return
+
+	def	do_dir( self, name ):
+		try:
+			files = os.listdir( name )
+		except Exception, e:
+			print >>sys.stderr, 'Cannot list directory "%s".' % name
+			raise e
+		files.sort()
+		for file in files:
+			self.do_name( file )
+		return
+
+	def process( self, fyle ):
 		self._new_stanza()
 		for line in fyle:
 			if line[0].isspace() is not True:
@@ -48,14 +77,11 @@ class	OcfsPrettyPrint( object ):
 				value = parts[1].strip()
 				self.longest = max( self.longest, len(name) )
 				self.content.append( (name,value) )
-		fyle.close()
 		self._dump_stanza()
 		return
 
 if __name__ == '__main__':
 	import	optparse
-	import	os
-	import	sys
 
 	p = optparse.OptionParser(
 		description = """Display an Oracle OCFS2 cluster.conf file in canonical format.""",
@@ -87,9 +113,14 @@ if __name__ == '__main__':
 			raise IOError
 	if len(args) == 0:
 		opp = OcfsPrettyPrint()
-		opp.pretty_print( out = o )
+		opp.set_output( o )
+		opp.do_name( '/etc/ocfs2/cluster.conf' )
 	else:
 		for arg in args:
 			opp = OcfsPrettyPrint()
-			opp.pretty_print( fn = arg, out = o )
+			opp.set_output( o )
+			if arg == '-':
+				opp.process( sys.stdin )
+			else:
+				opp.do_name( arg )
 	# The end..
