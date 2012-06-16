@@ -1,0 +1,7 @@
+#!/bin/sh
+FMT='%{INSTALLTIME} %{NAME}-%{VERSION}-%{RELEASE}.%{ARCH} %{VENDOR}\n'
+rpm -qa --qf="${FMT}" "${@}"						|
+sort -n									|
+while read ts name rest; do
+	printf "%s\t%-55s\t%s\n" "`date -d @${ts} '+%F %T'`" "${name}" "${rest}"
+done
