@@ -1,7 +1,29 @@
 #!/bin/sh
 FMT='%{INSTALLTIME} %{NAME}-%{VERSION}-%{RELEASE}.%{ARCH} %{VENDOR}\n'
 rpm -qa --qf="${FMT}" "${@}"						|
-sort -n									|
-while read ts name rest; do
-	printf "%s\t%-55s\t%s\n" "`date -d @${ts} '+%F %T'`" "${name}" "${rest}"
-done
+python -c "
+import	os
+import	sys
+import	time
+import	datetime
+lines = []
+for line in sys.stdin:
+	tokens = line.rstrip().split()
+	if len(tokens) >= 3:
+		when = tokens[0]
+		name = tokens[1]
+		rest = tokens[2:]
+		lines.append( (when, name, rest) )
+lines.sort(
+	key = lambda (when,name,rest): when
+)
+for (when, name, rest) in lines:
+	# stim = time.gmtime( int(when) )
+	s = datetime.datetime.fromtimestamp( int(when) )
+	print '%s  %-63s  %s' % (
+		s,
+		name,
+		' '.join(rest)
+	)
+exit(0)
+"
