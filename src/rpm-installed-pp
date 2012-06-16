@@ -1,6 +1,13 @@
 #!/bin/sh
-FMT='%{INSTALLTIME} %{NAME}-%{VERSION}-%{RELEASE}.%{ARCH} %{VENDOR}\n'
-rpm -qa --qf="${FMT}" "${@}"						|
+(
+	if [ $# -eq 0 ]; then
+		echo "local" >&2
+		rpm -qa --qf='%{INSTALLTIME:day} %{NAME}-%{VERSION}-%{RELEASE}.%{ARCH} %{VENDOR}\n'
+	else
+		echo "file" >&2
+		cat "$@"
+	fi
+) |
 python -c "
 import	os
 import	sys
