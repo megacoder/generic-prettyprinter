@@ -1,0 +1,95 @@
+#!/usr/bin/python
+# vim: sw=4 ts=4 noet
+
+import	os
+import	sys
+
+class	OcfsPrettyPrint( object ):
+
+	def	__init__( self ):
+		self._new_stanza()
+		return
+
+	def	_new_stanza( self ):
+		self.content = []
+		self.longest = 0
+		return
+
+	def	_dump_stanza( self ):
+		fmt = ' %%%ds = %%s' % self.longest
+		self.content.sort( key = lambda (n,v): n.upper() )
+		for (name,value) in self.content:
+			print >>self.out, fmt % (name, value)
+		self._new_stanza()
+		return
+
+	def	_out_header( self, line ):
+		self._dump_stanza()
+		print >>self.out, '%s' % line
+		return
+
+	def pretty_print( self, fn = '/etc/ocfs2/cluster.conf', out = sys.stdout ):
+		self.out = out
+		try:
+			fyle = open( fn, 'rt' )
+		except Exception, e:
+			print >>sys.stderr, 'Cannot open %s: %s' % (fn, e)
+			raise e
+		self._new_stanza()
+		for line in fyle:
+			if line[0].isspace() is not True:
+				self._out_header( line.rstrip() )
+			else:
+				parts = line.strip().split( '=', 1 )
+				if len(parts) < 2:
+					self._out_header( line.rstrip() )
+					continue
+				name = parts[0].strip()
+				value = parts[1].strip()
+				self.longest = max( self.longest, len(name) )
+				self.content.append( (name,value) )
+		fyle.close()
+		self._dump_stanza()
+		return
+
+if __name__ == '__main__':
+	import	optparse
+	import	os
+	import	sys
+
+	p = optparse.OptionParser(
+		description = """Display an Oracle OCFS2 cluster.conf file in canonical format.""",
+		usage = '%prog [-o ofile] [file]',
+		prog = os.path.basename( sys.argv[0] )
+	)
+	p.add_option(
+		'-o',
+		'--output',
+		action='store',
+		type='string',
+		dest='ofile',
+		help = 'Output written to file; defaults to stdout.'
+	)
+	p.set_defaults(
+		ofile = None
+	)
+	opt, args = p.parse_args()
+	o = sys.stdout
+	if opt.ofile:
+		try:
+			os.unlink( opt.ofile )
+		except:
+			pass
+		try:
+			o = open( opt.ofile, 'wt' )
+		except:
+			print >>sys.stderr, 'Cannot open "%s" for writing.' % opt.ofile
+			raise IOError
+	if len(args) == 0:
+		opp = OcfsPrettyPrint()
+		opp.pretty_print( out = o )
+	else:
+		for arg in args:
+			opp = OcfsPrettyPrint()
+			opp.pretty_print( fn = arg, out = o )
+	# The end..
