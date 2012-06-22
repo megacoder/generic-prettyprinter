@@ -100,7 +100,7 @@ class	Mounts( object ):
 				','.join(attr)
 			)
 			if self.is_proc:
-				print '\tbackup=%s\tfsck=%s'
+				print '\tbackup=%s\tfsck=%s' % (backup, fsck)
 		return
 
 if __name__ == '__main__':
