@@ -18,19 +18,6 @@ class	LvmPrettyPrint( object ):
 		self.max_name = 15
 		return
 
-	def spew( self, tokens ):
-		line = ''
-		for x in xrange( 0, self.depth ):
-			line = line + LvmPrettyPrint.INDENT_WITH
-		line = line + tokens[0]
-		if len(tokens) > 1:
-			while True:
-				line = line + ' '
-				if len(line) >= 36: break
-			line = line + ' '.join(tokens[1:])
-		print '%s' % line
-		return
-
 	def	_process( self, f = sys.stdin ):
 		for line in f:
 			# Column-1 comments are copied verbatim
