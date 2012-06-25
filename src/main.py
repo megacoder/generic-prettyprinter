@@ -32,31 +32,51 @@ class Main( object ):
         opts, args = p.parse_args()
         o = Obj()
         if len(sys.argv) == 1:
-            o._process()
+            o.process()
         else:
             for arg in sys.argv[1:]:
                 if arg == '-':
                     o.process()
                 elif os.path.isfile( arg ):
-                    o.process( arg )
+                    try:
+                        f = open( arg, 'rt' )
+                    except Exception, e:
+                        print >>sys.stderr, 'Cannot open "%s" to read.' % arg
+                        raise e
+                    o.process( f )
+                    f.close()
                 else:
                     for root, dirs, files in os.walk( arg ):
                         for file in files:
                             if not file.startswith( '.' ):
-                                o.process( os.path.join( root, file ) )
+                                fn = os.path.join( root, file )
+                                if o.notify( fn ):
+                                    try:
+                                        f = open( fn )
+                                    except Exception, e:
+                                        print >>sys.stderr, 'Cannot read "%s.".' % (
+                                            fn
+                                        )
+                                        raise e
+                                    o.process( f )
+                                    f.close()
                         if '.git' in dirs:
                             dirs.remove( '.git' )
         o.finish()
-        return
+        return 0
 
 if __name__ == '__main__':
     class PrettyPrint( object ):
         def __init__( self ):
             return
-        def process( self, fn ):
-            print fn
+        def process( self, f = sys.stdin ):
+            for line in f:
+                print line,
             return
         def finish( self ):
             return
+        def notify( self, fn ):
+            print fn
+            return True
     m = Main( sys.argv )
-    m.main( PrettyPrint )
+    exit( m.main( PrettyPrint ) )

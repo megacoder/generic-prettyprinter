@@ -5,14 +5,23 @@ import	os
 import	sys
 import	string
 
+sys.path.append( os.path.dirname( sys.argv[0] ) )
+
+import	main
+
 class	MultipathPrettyPrint( object ):
-
 	INDENT_WITH = '        '
-
 	def __init__( self ):
 		self.depth = 0
 		return
-
+	def process( self, fn ):
+		print fn
+		return
+	def finish( self ):
+		return
+	def	notify( self, fn ):
+		want = fn.endswith( '.conf' )
+		return want
 	def spew( self, tokens ):
 		line = ''
 		for x in xrange( 0, self.depth ):
@@ -47,45 +56,15 @@ class	MultipathPrettyPrint( object ):
 				elif tokens[0][0] == '#':
 					self.spew( ['%s' % line] )
 				else:
-					self.spew( tokens )
-		return
-
-	def do_file( self, fn ):
-		if not os.path.isfile( fn ): return
-		f = open( fn, 'rt' )
-		self.process( f )
-		f.close()
-		return
-
-	def do_directory( self, dn ):
-		if not os.path.isdir( dn ): return
-		names = os.listdir( dn );
-		names.sort()
-		for name in names:
-			p = os.path.join( dn, name )
-			if p.endswith( '.conf' ) and os.path.isfile( p ):
-				self.do_file( p )
-			elif os.path.isdir( p ):
-				self.do_directory( p )
-			else:
-				# Silently ignore anything else.
-				pass
+					tokens = ' '.join( tokens ).split( '=', 1 )
+					if len(tokens) == 2:
+						self.spew( [
+							'%s = %s' % ( tokens[0], tokens[1] )
+						] )
+					else:
+						self.spew( tokens )
 		return
 
 if __name__ == '__main__':
-	mpp = MultipathPrettyPrint()
-	me = os.path.basename( sys.argv[0] )
-	if len(sys.argv) == 1:
-		mpp.process( sys.stdin )
-		# mpp.do_file( '/etc/multipath.conf' )
-		# mpp.do_directory( '/etc/multipath.d' )
-	else:
-		for arg in sys.argv[1:]:
-			if arg == '-':
-				mpp.process()
-			elif os.path.isfile( arg ):
-				mpp.do_file( arg )
-			elif os.path.isdir( arg ):
-				mpp.do_directory( arg )
-			else:
-				print >>sys.stderr, '%s: ignoring "%s".\n' % (me, arg)
+    m = main.Main( sys.argv )
+    exit( m.main( MultipathPrettyPrint ) )
