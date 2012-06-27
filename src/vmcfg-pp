@@ -42,14 +42,21 @@ class   ovmCfg( object ):
     def reconstruct( self, out = None ):
         if out == None:
             out = self.out
+        l = 0
+        inventory = []
         for key in self.keys:
-            print >>out, '%13s = ' % key,
+            l = max( l, len(key) )
+            inventory.append(key)
+        inventory.sort( key = lambda s: s.lower() )
+        fmt = '%%%ds =' % l
+        for key in inventory:
+            print >>out, fmt % key,
             s = self.pp.pformat( self.locals[key] )
             lines = s.split( '\n' )
             leadin = ''
             for line in lines:
                 print >>out, '%s%s' % (leadin, line)
-                leadin = ' '*(16+2)
+                leadin = ' '*(l+4)
         return
 
 if __name__ == '__main__':
