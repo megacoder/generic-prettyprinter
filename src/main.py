@@ -5,6 +5,8 @@ import  os
 import  sys
 import  optparse
 
+me = 'main-pp'
+
 class Main( object ):
 
     def __init__( self, argv ):
@@ -66,17 +68,15 @@ class Main( object ):
         return 0
 
 if __name__ == '__main__':
-    class PrettyPrint( object ):
-        def __init__( self ):
-            return
-        def process( self, f = sys.stdin ):
-            for line in f:
-                print line,
-            return
-        def finish( self ):
-            return
-        def notify( self, fn ):
-            print fn
-            return True
+    # Get base name of application, without any extention or '-pp' trailer
+    sys.path.append( os.path.dirname( sys.argv[0] ) )
+    me = os.path.basename( sys.argv[0] ).split( '.' )[0].replace( '-pp', '' )
+    dll_name = '%s-pp' % me
+    try:
+        dll = __import__(dll_name)
+    except Exception, e:
+        print >>sys.stderr, 'Cannot import dll "%s".' % dll
+        raise e
+    print >>sys.stderr, 'Import of "%s" succeeded!.' % dll
     m = Main( sys.argv )
-    exit( m.main( PrettyPrint ) )
+    exit( m.main( dll.PrettyPrint ) )
