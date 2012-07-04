@@ -70,12 +70,15 @@ class Main( object ):
 
 if __name__ == '__main__':
     # Get base name of application, without any extention or '-pp' trailer
-    sys.path.append( os.path.dirname( sys.argv[0] ) )
+    bindir = os.path.dirname( sys.argv[0] )
+    plugdir = os.path.join( bindir, 'plugins' )
+    sys.path.append( plugdir )
     me = os.path.basename( sys.argv[0] ).split( '.' )[0].replace( '-pp', '' )
+    print 'me=%s' % me
     if me == canonical_me:
         sys.argv.pop(0)
         me = sys.argv[0]
-    dll_name = '%s-pp' % me
+    dll_name = '%s-plugin' % me
     try:
         dll = __import__(dll_name)
     except Exception, e:
