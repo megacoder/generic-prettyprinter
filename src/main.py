@@ -5,7 +5,8 @@ import  os
 import  sys
 import  optparse
 
-me = 'main-pp'
+canonical_me = 'main'
+me = canonical_me
 
 class Main( object ):
 
@@ -71,11 +72,14 @@ if __name__ == '__main__':
     # Get base name of application, without any extention or '-pp' trailer
     sys.path.append( os.path.dirname( sys.argv[0] ) )
     me = os.path.basename( sys.argv[0] ).split( '.' )[0].replace( '-pp', '' )
+    if me == canonical_me:
+        sys.argv.pop(0)
+        me = sys.argv[0]
     dll_name = '%s-pp' % me
     try:
         dll = __import__(dll_name)
     except Exception, e:
-        print >>sys.stderr, 'Cannot import dll "%s".' % dll
+        print >>sys.stderr, 'Cannot import dll "%s".' % dll_name
         raise e
     print >>sys.stderr, 'Import of "%s" succeeded!.' % dll
     m = Main( sys.argv )
