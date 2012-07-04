@@ -5,7 +5,7 @@ import  os
 import  sys
 import  optparse
 
-canonical_me = 'main'
+canonical_me = 'gpp'
 me = canonical_me
 
 class Main( object ):
