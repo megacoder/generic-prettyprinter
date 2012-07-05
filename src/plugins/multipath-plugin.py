@@ -5,23 +5,18 @@ import	os
 import	sys
 import	string
 
-sys.path.append( os.path.dirname( sys.argv[0] ) )
+class	PrettyPrint( object ):
 
-import	main
-
-class	MultipathPrettyPrint( object ):
 	INDENT_WITH = '        '
+
 	def __init__( self ):
+		self.reset()
+		return
+
+	def	reset( self ):
 		self.depth = 0
 		return
-	def process( self, fn ):
-		print fn
-		return
-	def finish( self ):
-		return
-	def	notify( self, fn ):
-		want = fn.endswith( '.conf' )
-		return want
+
 	def spew( self, tokens ):
 		line = ''
 		for x in xrange( 0, self.depth ):
@@ -65,6 +60,5 @@ class	MultipathPrettyPrint( object ):
 						self.spew( tokens )
 		return
 
-if __name__ == '__main__':
-    m = main.Main( sys.argv )
-    exit( m.main( MultipathPrettyPrint ) )
+	def	finish( self ):
+		return

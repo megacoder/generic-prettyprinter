@@ -1,0 +1,48 @@
+#!/usr/bin/python
+# vim: noet sw=4 ts=4
+
+import	sys
+import	os
+
+class	PrettyPrint( object ):
+
+	def	__init__( self ):
+		self.reset()
+		return
+
+	def	reset( self ):
+		self.lines = []
+		self.max_canonical_name = 0
+		return
+
+	def	process( self, f = sys.stdin ):
+		for line in f:
+			line = line.rstrip()
+			if line.startswith( '#' ):
+				print line
+				continue
+			tokens = line.split()
+			n = len( tokens )
+			if n < 2: continue
+			addr = tokens[0]
+			name = tokens[1]
+			self.max_canonical_name = max( self.max_canonical_name, len(name) )
+			aliases = []
+			if n > 2:
+				aliases = tokens[2:]
+				aliases.sort()
+			ip = 0
+			if addr.find(':') == -1:
+					for octet in addr.split('.'):
+						ip = ip * 256 + int(octet)
+			self.lines.append(
+				(ip, addr, name, aliases)
+			)
+		return
+
+	def	finish( self ):
+		self.lines.sort( key = lambda (ip,addr,name,aliases): ip )
+		fmt = '%%-15s %%-%ds %%s' % self.max_canonical_name
+		for ip, addr, name, aliases in self.lines:
+			print fmt % (addr, name, ' '.join(aliases) )
+		return

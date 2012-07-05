@@ -4,39 +4,16 @@
 import	sys
 import	os
 
-me = 'cups-pp'
-nonfatal = 0
-
-class	CupsPrettyprint( object ):
+class	PrettyPrint( object ):
 
 	def	__init__( self ):
+		self.reset()
+		return
+
+	def	reset( self ):
 		self.depth = 0
 		self.comment_column = 40
 		self.leadin = '  '
-		self.out = sys.stdout
-		return
-
-	def	do_dir( self, dn ):
-		files = os.listdir( dn )
-		files.sort()
-		for file in files:
-			path = os.path.join( dn, file )
-			if os.path.isdir( path ):
-				self.do_dir( path )
-			elif os.path.isfile( path ):
-				self.do_file( path )
-			else:
-				pass
-		return
-
-	def	do_file( self, fn ):
-		try:
-			fd = open( fn, 'rt' )
-		except Exception, e:
-			print >>sys.stderr, 'Cannot open "%s" for reading.' % fn
-			raise e
-		self.process( fd )
-		fd.close()
 		return
 
 	def	indent( self, content, comment ):
@@ -45,7 +22,7 @@ class	CupsPrettyprint( object ):
 		# Align comments before writing line
 		if len(comment) > 0:
 			line = line + (' '*max( 1, 40 - len(line))) + '# ' + comment
-		print >>self.out, line
+		print line
 		return
 
 	def	process( self, fd = sys.stdin ):
@@ -54,7 +31,7 @@ class	CupsPrettyprint( object ):
 			l = len(parts)
 			if l == 0:
 				# Blank line
-				print >>self.out
+				print
 				continue
 			if l == 1:
 				content = parts[0]
@@ -97,22 +74,5 @@ class	CupsPrettyprint( object ):
 					self.depth += 1
 		return
 
-	def	report( self, out = sys.stdout ):
+	def	finish( self ):
 		return
-
-if __name__ == '__main__':
-	me = os.path.basename( sys.argv[0] )
-	cpp = CupsPrettyprint()
-	if len( sys.argv ) == 1:
-		cpp.process()
-	else:
-		for fn in sys.argv[1:]:
-			if os.path.isdir( fn ):
-				cpp.do_dir( fn )
-			elif os.path.isfile( fn ):
-				cpp.do_file( fn )
-			else:
-				print >>sys.stderr, "Don't know what to do with \"%s\"." % fn
-				nonfatal += 1
-	cpp.report()
-	exit( 1 if nonfatal > 0 else 0 )

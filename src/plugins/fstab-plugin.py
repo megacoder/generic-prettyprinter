@@ -6,9 +6,13 @@
 import	os
 import	sys
 
-class   FstabPrettyprint( object ):
+class   PrettyPrint( object ):
 
     def __init__( self ):
+        self.reset()
+        return
+
+    def reset( self ):
         return
 
     def pad(self, parts, cols):
@@ -21,7 +25,7 @@ class   FstabPrettyprint( object ):
             s = s + " " * n + parts.pop(0)
         return s
 
-    def process( self, f = sys.stdin, out = sys.stdout ):
+    def process( self, f = sys.stdin ):
         for line in f:
             line = line.strip()
             if not line.startswith( '#' ):
@@ -37,29 +41,8 @@ class   FstabPrettyprint( object ):
                     line = self.pad(parts,[
                         0, 24, 47, 55, 77, 79
                     ])
-            print >>out, line
+            print line
         return
 
-    def do_file( self, fn, out = sys.stdout ):
-        try:
-            f = open( fn, 'rt' )
-        except Exception, e:
-            print >>sys.stderr, 'Cannot open "%s" for reading.' % fn
-            raise e
-        self.process( f, out )
-        f.close()
+    def finish( self ):
         return
-
-
-if __name__ == '__main__':
-    pp = FstabPrettyprint()
-    argc = len(sys.argv)
-    if argc == 1:
-        pp.process()
-    else:
-        for optarg in sys.argv[1:]:
-            if optarg == '-':
-                pp.process()
-            else:
-                pp.do_file( optarg )
-    sys.exit( 0 )
