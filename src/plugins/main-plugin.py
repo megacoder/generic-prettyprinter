@@ -6,16 +6,15 @@
 ########################################################################
 
 import  sys
+from    superclass import MetaPrettyPrinter
 
-class PrettyPrint( object ):
+class PrettyPrint( MetaPrettyPrinter ):
+    NAME = 'main'
+    DESCRIPTION = 'I am an 80/80 list.'
     def __init__( self ):
+        super( PrettyPrint, self ).__init__()
         return
     def process( self, f = sys.stdin ):
         for line in f:
             print line,
         return
-    def finish( self ):
-        return
-    def notify( self, fn ):
-        print fn
-        return True

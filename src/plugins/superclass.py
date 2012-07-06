@@ -23,7 +23,7 @@ class   MetaPrettyPrinter( object ):
         try:
             f = open( fn, 'rt' )
         except Exception, e:
-            self.error( 'cannot open "%s" for reading.' % name )
+            self.error( 'cannot open "%s" for reading.' % fn, e )
             raise e
         self.process( f )
         f.close()
@@ -32,7 +32,7 @@ class   MetaPrettyPrinter( object ):
         try:
             files = os.listdir( dn )
         except Exception, e:
-            self.error( 'cannot list directory "%s".' % dn )
+            self.error( 'cannot list directory "%s".' % dn, e )
             raise e
         files.sort()
         for fn in files:
@@ -47,6 +47,9 @@ class   MetaPrettyPrinter( object ):
         return False
     def finish( self ):
         return
-    def error( self, msg ):
+    def error( self, msg, e = None ):
         print >>sys.stderr, msg
+        if e is not None:
+            print >>sys.stderr, e
+            raise e
         return

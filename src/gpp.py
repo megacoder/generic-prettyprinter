@@ -13,11 +13,15 @@ class Main( object ):
     def __init__( self, argv ):
         return
 
-    def main( self, Obj, argv = [ '???' ] ):
-        self.me = os.path.basename( argv[0] )
+    def main( self, Obj, argv = [ '???' ], usage = '%prog [-o file] [file..]',
+             description = """FIXME""", prog = None ):
+        if prog is not None:
+            self.me = prog
+        else:
+            self.me = os.path.basename( argv[0] )
         p = optparse.OptionParser(
-            description = """FIXME""",
-            usage = '%prog [-o ofile] [file..]',
+            description = description,
+            usage = usage,
             prog = self.me
         )
         p.add_option(
@@ -41,30 +45,11 @@ class Main( object ):
                 if arg == '-':
                     o.process()
                 elif os.path.isfile( arg ):
-                    try:
-                        f = open( arg, 'rt' )
-                    except Exception, e:
-                        print >>sys.stderr, 'Cannot open "%s" to read.' % arg
-                        raise e
-                    o.process( f )
-                    f.close()
+                    o.do_file( arg )
+                elif os.path.isdir( arg ):
+                    o.do_dir( arg )
                 else:
-                    for root, dirs, files in os.walk( arg ):
-                        for file in files:
-                            if not file.startswith( '.' ):
-                                fn = os.path.join( root, file )
-                                if o.notify( fn ):
-                                    try:
-                                        f = open( fn )
-                                    except Exception, e:
-                                        print >>sys.stderr, 'Cannot read "%s.".' % (
-                                            fn
-                                        )
-                                        raise e
-                                    o.process( f )
-                                    f.close()
-                        if '.git' in dirs:
-                            dirs.remove( '.git' )
+                    o.error( 'no such file "%s".' % arg )
         o.finish()
         return 0
 
@@ -72,9 +57,8 @@ if __name__ == '__main__':
     # Get base name of application, without any extention or '-pp' trailer
     bindir = os.path.dirname( sys.argv[0] )
     plugdir = os.path.join( bindir, 'plugins' )
-    sys.path.append( plugdir )
+    sys.path.insert( 0, plugdir )
     me = os.path.basename( sys.argv[0] ).split( '.' )[0].replace( '-pp', '' )
-    print 'me=%s' % me
     if me == canonical_me:
         sys.argv.pop(0)
         me = sys.argv[0]
@@ -84,6 +68,9 @@ if __name__ == '__main__':
     except Exception, e:
         print >>sys.stderr, 'Cannot import dll "%s".' % dll_name
         raise e
-    print >>sys.stderr, 'Import of "%s" succeeded!.' % dll
     m = Main( sys.argv )
-    exit( m.main( dll.PrettyPrint ) )
+    exit( m.main(
+        dll.PrettyPrint,
+        prog = dll.PrettyPrint.NAME,
+        description = dll.PrettyPrint.DESCRIPTION
+    ) )
