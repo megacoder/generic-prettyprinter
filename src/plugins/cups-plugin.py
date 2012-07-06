@@ -3,10 +3,15 @@
 
 import	sys
 import	os
+from	superclass import MetaPrettyPrinter
 
-class	PrettyPrint( object ):
+class	PrettyPrint( MetaPrettyPrinter ):
+
+	NAME	= 'cups-pp'
+	DESCRIPTION = """Print cups configuration file."""
 
 	def	__init__( self ):
+		super(PrettyPrint, self).__init__()
 		self.reset()
 		return
 
@@ -72,7 +77,4 @@ class	PrettyPrint( object ):
 						content = '%-15s %s>' % ( verb, ' '.join(args))
 					self.indent( content, comment )
 					self.depth += 1
-		return
-
-	def	finish( self ):
 		return
