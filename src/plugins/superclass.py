@@ -15,6 +15,8 @@ class   MetaPrettyPrinter( object ):
             self.do_file( name )
         elif os.path.isdir( name ):
             self.do_dir( name )
+        elif os.path.islink( name ):
+            self.error( 'ignoring symlink "%s".' % name )
         else:
             self.error( 'unknown file type, ignoring "%s".' % name )
             raise ValueError

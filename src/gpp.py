@@ -44,12 +44,8 @@ class Main( object ):
             for arg in sys.argv[1:]:
                 if arg == '-':
                     o.process()
-                elif os.path.isfile( arg ):
-                    o.do_file( arg )
-                elif os.path.isdir( arg ):
-                    o.do_dir( arg )
                 else:
-                    o.error( 'no such file "%s".' % arg )
+                    o.do_name( arg )
         o.finish()
         return 0
 

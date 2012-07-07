@@ -4,10 +4,15 @@ import  os
 import  sys
 import  math
 
-class   PrettyPrint( object ):
+from    superclass  import  MetaPrettyPrinter
+
+class   PrettyPrint( MetaPrettyPrinter ):
+
+    NAME = 'sysctl-pp'
+    DESCRIPTION="""Output /etc/sysctl.conf in canonical form."""
 
     def __init__( self, out = sys.stdout ):
-        self.reset()
+        super( PrettyPrint, self ).__init__()
         return
 
     def reset( self ):
@@ -16,6 +21,9 @@ class   PrettyPrint( object ):
         self.fmt    = "%31s\t%s"
         self.maxlen = 0
         return
+
+    def ignore( self, name ):
+        return not name.endswith( '.conf' )
 
     def process( self, fyle = sys.stdin ):
         for line in fyle:
