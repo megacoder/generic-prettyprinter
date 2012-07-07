@@ -1,17 +1,22 @@
 #!/usr/bin/python
 # vim: noet sw=4 ts=4
+#
+# FYI: Currently, the OSWbb heartbeat file is generated like this:
+#	$ date '+oswbb hearbeat %a %b %d %H:%M:%S %Y'
+# But this is subject to change at any time.
 
 import	datetime
 import	os
 import	sys
+import	superclass
 
-class	PrettyPrint( object ):
+class	PrettyPrint( superclass.MetaPrettyPrinter ):
+
+	NAME = 'oswbb-hearbeat-pp'
+	DESCRIPTION="""Display OSWBB's heartbeat file, highlighting jitter."""
 
 	def	__init__( self ):
-		self.reset()
-		return
-
-	def	reset( self ):
+		super( PrettyPrint, self ).__init__()
 		return
 
 	def	process( f = sys.stdin ):
@@ -45,7 +50,4 @@ class	PrettyPrint( object ):
 				print '%s %s %s' % ( flag, when, delta )
 				last = dt
 				old_delta = delta
-		return
-
-	def	finish( self ):
 		return
