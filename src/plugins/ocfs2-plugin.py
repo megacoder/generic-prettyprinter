@@ -4,11 +4,16 @@
 import	os
 import	sys
 import	stat
+from	superclass	import	MetaPrettyPrinter
 
-class	PrettyPrint( object ):
+class	PrettyPrint( MetaPrettyPrinter ):
+
+	NAME = 'ocfs2-pp'
+	DESCRIPTION = """Display Oracle OCFS2 configuration files in canonical
+	format."""
 
 	def	__init__( self ):
-		self.reset()
+		super( PrettyPrint, self ).__init__()
 		return
 
 	def	reset( self ):
@@ -24,16 +29,16 @@ class	PrettyPrint( object ):
 		fmt = ' %%%ds = %%s' % self.longest
 		self.content.sort( key = lambda (n,v): n.upper() )
 		for (name,value) in self.content:
-			print >>self.out, fmt % (name, value)
+			print fmt % (name, value)
 		self._new_stanza()
 		return
 
 	def	_out_header( self, line ):
 		self._dump_stanza()
-		print >>self.out, line
+		print line
 		return
 
-	def process( self, f ):
+	def process( self, f = sys.stdin ):
 		self._new_stanza()
 		for line in f:
 			if line[0].isspace() is not True:
@@ -48,7 +53,4 @@ class	PrettyPrint( object ):
 				self.longest = max( self.longest, len(name) )
 				self.content.append( (name,value) )
 		self._dump_stanza()
-		return
-
-	def	finish( self ):
 		return
