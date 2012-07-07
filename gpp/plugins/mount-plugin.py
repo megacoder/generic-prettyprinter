@@ -4,60 +4,29 @@
 import	sys
 import	os
 import	stat
+import	superclass
 
-class	Mounts( object ):
+class	PrettyPrint( superclass.MetaPrettyPrinter ):
+
+	NAME = 'mount-pp'
+	DESCRIPTION = """Display /proc/mounts or mount(8) in a canonical form."""
 
 	def	__init__( self ):
-		self._reset()
+		super( PrettyPrint, self ).__init__()
 		return
 
-	def	_reset( self ):
+	def	reset( self ):
 		self.lines = []
 		self.is_proc = False
 		return
 
-	def	do_name( self, name ):
-		try:
-			mode = os.stat( name )[stat.ST_MODE]
-		except Exception, e:
-			print >>sys.stderr, 'Cannot stat "%s".' % name
-			raise e
-		if stat.S_ISREG( mode ):
-			self.do_file( name )
-		elif stat.S_ISDIR( mode ):
-			self.do_dir( name )
-		else:
-			print >>sys.stderr, 'Ignoring "%s".' % name
-		return
-
-	def	do_dir( self, dn ):
-		try:
-			files = os.listdir( dn )
-		except Exception, e:
-			print >>sys.stderr, 'Cannot read directory "%s".' % dn
-			raise e
-		files.sort()
-		for file in files:
-			self.do_name( os.path.join( dn, file ) )
-		return
-
-	def	do_file( self, fn ):
-		try:
-			f = open( fn, 'rt' )
-		except Exception, e:
-			print >>sys.stderr, 'Cannot read file "%s".' % fn
-			raise e
-		self._process( f )
-		f.close()
-		return
-
-	def	_process( self, f = sys.stdin ):
+	def	process( self, f = sys.stdin ):
 		first = True
 		for line in f:
 			tokens = line.rstrip().split()
 			n = len( tokens )
 			if n != 6:
-				print >>sys.stderr, 'Huh? %s' % line.rstrip()
+				self.error( 'Huh? %s' % line.rstrip() )
 			else:
 				if first:
 					self.is_proc = tokens[5].isdigit()
@@ -84,7 +53,7 @@ class	Mounts( object ):
 				)
 		return
 
-	def	fini( self ):
+	def	finish( self ):
 		others = False
 		fmt = '%-39s %s\n\ttype=%s\tattr=%s'
 		self.lines.sort()
@@ -102,16 +71,3 @@ class	Mounts( object ):
 			if self.is_proc:
 				print '\tbackup=%s\tfsck=%s' % (backup, fsck)
 		return
-
-if __name__ == '__main__':
-	mpp = Mounts()
-	if len(sys.argv) == 1:
-		mpp._process()
-	else:
-		for fn in sys.argv[1:]:
-			if fn == '-':
-				mpp._process()
-			else:
-				mpp.do_name( fn )
-	mpp.fini()
-	exit(0)
