@@ -5,14 +5,15 @@
 
 import	os
 import	sys
+import  superclass
 
-class   PrettyPrint( object ):
+class   PrettyPrint( superclass.MetaPrettyPrinter ):
+
+    NAME = 'fstab-pp'
+    DESCRIPTION = """Display /etc/fstab files in canonical style."""
 
     def __init__( self ):
-        self.reset()
-        return
-
-    def reset( self ):
+        super( PrettyPrint, self ).__init__()
         return
 
     def pad(self, parts, cols):
@@ -42,7 +43,4 @@ class   PrettyPrint( object ):
                         0, 24, 47, 55, 77, 79
                     ])
             print line
-        return
-
-    def finish( self ):
         return
