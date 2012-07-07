@@ -2,11 +2,15 @@
 
 import	os
 import	sys
+import	superclass
 
-class	PrettyPrint( object ):
+class	PrettyPrint( superclass.MetaPrettyPrinter ):
+
+	NAME = 'slabinfo-pp'
+	DESCRIPTION = """Display /proc/slabinfo in conical form."""
 
 	def	__init__( self ):
-		self.reset()
+		super( PrettyPrint, self ).__init__()
 		return
 
 	def	reset( self ):
