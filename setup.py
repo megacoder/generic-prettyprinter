@@ -10,6 +10,5 @@ setup(
 	author = 'Tommy Reynolds',
 	author_email = 'Tommy.Reynolds@MegaCoder.com',
 	url = 'http://www.MegaCoder.com',
-	py_modules=[ 'gpp' ]
-	package_dir=[ '': 'src' ]
+	packages = [ 'gpp' ]
 )
