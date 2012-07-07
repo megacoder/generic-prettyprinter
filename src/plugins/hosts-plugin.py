@@ -3,11 +3,15 @@
 
 import	sys
 import	os
+import	superclass
 
-class	PrettyPrint( object ):
+class	PrettyPrint( superclass.MetaPrettyPrinter ):
+
+	NAME = 'hosts-pp'
+	DESCRIPTION="""Display /etc/hosts in canonical style."""
 
 	def	__init__( self ):
-		self.reset()
+		super( PrettyPrint, self ).__init__()
 		return
 
 	def	reset( self ):
