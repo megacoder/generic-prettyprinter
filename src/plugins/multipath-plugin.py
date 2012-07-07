@@ -4,13 +4,17 @@
 import	os
 import	sys
 import	string
+import	superclass
 
-class	PrettyPrint( object ):
+class	PrettyPrint( superclass.MetaPrettyPrinter ):
+
+	NAME = 'multipath-pp'
+	DESCRIPTION="""Display /etc/multipath.conf in conical style."""
 
 	INDENT_WITH = '        '
 
 	def __init__( self ):
-		self.reset()
+		super( PrettyPrint, self ).__init__()
 		return
 
 	def	reset( self ):
@@ -20,7 +24,7 @@ class	PrettyPrint( object ):
 	def spew( self, tokens ):
 		line = ''
 		for x in xrange( 0, self.depth ):
-			line = line + MultipathPrettyPrint.INDENT_WITH
+			line = line + PrettyPrint.INDENT_WITH
 		line = line + tokens[0]
 		if len(tokens) > 1:
 			while True:
