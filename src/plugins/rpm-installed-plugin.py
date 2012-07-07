@@ -4,13 +4,20 @@ import	sys
 import	time
 import	datetime
 
-class	PrettyPrint( object ):
+import	superclass
+
+class	PrettyPrint( superclass.MetaPrettyPrinter ):
+
+	NAME = 'rpm-installed-pp'
+	DESCRIPTION="""List date RPM packages were installed."""
+
 	def	__init__( self ):
-		self.reset()
+		super( PrettyPrint, self ).__init__()
 		return
 
 	def	reset( self ):
 		self.lines = []
+		self.max_name = 15
 		return
 
 	def	process( self, f = None ):
@@ -21,11 +28,10 @@ class	PrettyPrint( object ):
 				'-qa',
 				"--qf='%{INSTALLTIME} %{NAME} %{VENDOR}'\n"
 			]
-			print 'cmd=[%s]' % cmd
 			try:
-				p = subprocess.Popen( cmd, stdout=subprocess.PIPE )
-				(odata,oerrors) = p.communicate()
-				p.close()
+				odata = []
+				for l in subprocess.check_output( cmd ).split( '\n' ):
+					odata.append( l[1:-1] )
 			except Exception, e:
 				print >>sys.stderr, 'Cannot invoke "%s".' % cmd
 				raise e
@@ -36,6 +42,7 @@ class	PrettyPrint( object ):
 			if len(tokens) >= 3:
 				when = tokens[0]
 				name = tokens[1]
+				self.max_name = max( self.max_name, len(name) )
 				rest = tokens[2:]
 				self.lines.append( (when, name, rest) )
 		return
@@ -44,11 +51,11 @@ class	PrettyPrint( object ):
 		self.lines.sort(
 			key = lambda (when,name,rest): when
 		)
-		print self.lines
+		fmt = '%%s  %%-%ds  %%s' % self.max_name
 		for (when, name, rest) in self.lines:
 			# stim = time.gmtime( int(when) )
 			s = datetime.datetime.fromtimestamp( int(when) )
-			print '%s  %-63s  %s' % (
+			print fmt % (
 				s,
 				name,
 				' '.join(rest)
