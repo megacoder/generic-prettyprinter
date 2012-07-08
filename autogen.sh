@@ -1,2 +1,2 @@
 #!/bin/sh
-autoreconf -fvim
+autoreconf -fvi
