@@ -2,7 +2,9 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.68])
-AC_INIT([FULL-PACKAGE-NAME], [VERSION], [BUG-REPORT-ADDRESS])
+AC_INIT([gpp], [1.0.0], [Tommy.Reynolds@MegaCoder.com])
+
+AM_INIT_AUTOMAKE
 
 # Checks for programs.
 
@@ -14,7 +16,10 @@ AC_INIT([FULL-PACKAGE-NAME], [VERSION], [BUG-REPORT-ADDRESS])
 
 # Checks for library functions.
 
-AC_CONFIG_FILES([Makefile
-                 src/Makefile
-                 src/plugins/Makefile])
+AC_CONFIG_FILES([
+        gpp.spec
+        Makefile
+        src/Makefile
+        src/plugins/Makefile
+])
 AC_OUTPUT
