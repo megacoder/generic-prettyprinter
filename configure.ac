@@ -4,8 +4,6 @@
 AC_PREREQ([2.68])
 AC_INIT([gpp], [1.0.0], [Tommy.Reynolds@MegaCoder.com])
 
-AM_INIT_AUTOMAKE
-
 # Checks for programs.
 
 # Checks for libraries.

@@ -4,30 +4,31 @@
 
 Prefix: %{prefix}
 
-Summary: Correctly quote and brace shell parameters to also work with make(1)
-Name: shellize
+Summary: Generic pretty-printer, using plugins
+Name: gpp
 Version: %{ver}
 Release: %{rel}
-Source: http://ftp.megacoder.com/shellize/%{name}-%{ver}.tar.gz
+Source: http://ftp.megacoder.com/gpp/%{name}-%{ver}.tar.gz
 License: GPLv2
 URL: http://www.megacoder.com/
 Group: Applications/System
 BuildRoot: %{_tmppath}/%{name}-root
 BuildArch: noarch
+BuildRequires: python
+Requires: python
 
 %description
-Convert shell script into pidgin make(1).
+Generic pretty-printer, with plugins
 
 %prep
 
 %setup -q
 %build
-	CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%{prefix}
-	make
 
 %install
 	rm -rf ${RPM_BUILD_ROOT}
-	make prefix=${RPM_BUILD_ROOT}%{prefix} install
+	mkdir -p ${RPM_BUILD_ROOT}%{python_sitelib}/%{name}
+	install -c -m 0644 src/plugins/*.py ${RPM_BUILD_ROOT}%{python_sitelib}/%{name}/
 
 %clean
 	rm -rf ${RPM_BUILD_ROOT}
