@@ -1,4 +1,4 @@
-libexec_DATA=blkid-plugin.py cups-plugin.py fstab-plugin.py            \
+python_sitelib_DATA=blkid-plugin.py cups-plugin.py fstab-plugin.py     \
          hosts-plugin.py ifcfg-plugin.py lvm-plugin.py main-plugin.py  \
          meminfo-plugin.py modprobe-plugin.py mount-plugin.py          \
          multipath-plugin.py ocfs2-plugin.py oswbb-heartbeat-plugin.py \
