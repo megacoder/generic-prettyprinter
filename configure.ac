@@ -16,8 +16,5 @@ AC_INIT([gpp], [1.0.0], [Tommy.Reynolds@MegaCoder.com])
 
 AC_CONFIG_FILES([
         gpp.spec
-        Makefile
-        src/Makefile
-        src/plugins/Makefile
 ])
 AC_OUTPUT
