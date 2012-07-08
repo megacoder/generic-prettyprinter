@@ -1,13 +1,16 @@
 #!/usr/bin/python
 # vim: et sw=4 ts=4
 
-me = 'vmstat-pp'
-
 import  os
 import  sys
 import  csv
+import  superclass
 
-class   VMPP( object ):
+class   PrettyPrint( superclass.MetaPrettyPrinter ):
+
+    NAME = 'vmstat-pp'
+    DESCRIPTION = """Display vmstat(1) output in a canonical style."""
+
     HEADINGS = {
         'r'      : 'procs',
         'b'      : 'procs',
@@ -31,43 +34,13 @@ class   VMPP( object ):
     }
 
     def __init__( self ):
-        self.reset()
+        super( PrettyPrint, self ).__init__()
         return
 
     def reset( self ):
+        super( PrettyPrint, self ).reset()
         self.minors = None
-        self.content = dict([(h, {}) for h in set(VMPP.HEADINGS.values())])
-        return
-
-    def do_name( self, name ):
-        if os.path.isdir( name ):
-            self.do_dir( name )
-        elif os.path.isfile( name ):
-            self.do_file( name )
-        else:
-            print >>sys.stderr, 'Ignoring "%s".' % name
-        return
-
-    def do_dir( self, dn ):
-        try:
-            names = os.listdir( dn )
-        except Exception, e:
-            print >>sys.stderr, 'Cannot read directory "%s".' % dn
-            raise e
-        names.sort()
-        for name in names:
-            if os.path.isdir( name ) or name.endswith( '.conf' ):
-                self.do_name( os.path.join( dn, name ) )
-        return
-
-    def do_file( self, fn ):
-        try:
-            f = open( fn, 'rt' )
-        except Exception, e:
-            print >>sys.stderr, "Cannot open '%s' for reading." % fn
-            raise e
-        self.process( f )
-        f.close()
+        self.content = dict([(h, {}) for h in set(PrettyPrint.HEADINGS.values())])
         return
 
     def process( self, f = sys.stdin ):
@@ -83,37 +56,25 @@ class   VMPP( object ):
                 self.minors = values
                 for h in values:
                     try:
-                        self.content[ VMPP.HEADINGS[h] ][h] = []
+                        self.content[ PrettyPrint.HEADINGS[h] ][h] = []
                     except Exception, e:
                         print >>sys.stderr, 'Unknown minor header "%s"' % h
                         raise e
             elif values[0] != self.minors[0] and \
-            values[0] != VMPP.HEADINGS[ self.minors[0] ]:
+            values[0] != PrettyPrint.HEADINGS[ self.minors[0] ]:
                 for i, v in enumerate(values):
                     self.content[
-                        VMPP.HEADINGS[self.minors[i]]
+                        PrettyPrint.HEADINGS[self.minors[i]]
                     ][
                         self.minors[i]
                     ].append( int(v) )
         return
 
-    def report( self ):
-        print self.content
+    def finish( self ):
         for i, minor in enumerate( self.minors ):
-            major = VMPP.HEADINGS[minor]
+            major = PrettyPrint.HEADINGS[minor]
             s = []
             values = self.content[major][minor]
             # values.sort()
             print '%s\t%s\t%d\t%d' % (major, minor, min(values), max(values))
         return
-
-if __name__ == '__main__':
-    me = os.path.basename( sys.argv[0] )
-    vpp = VMPP()
-    if len( sys.argv ) == 1:
-        vpp.process()
-    else:
-        for fn in sys.argv[1:]:
-            vpp.do_name( fn )
-    vpp.report()
-    exit(0)
