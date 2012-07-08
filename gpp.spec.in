@@ -1,0 +1,42 @@
+%define ver @VERSION@
+%define rel 1
+%define prefix /usr
+
+Prefix: %{prefix}
+
+Summary: Correctly quote and brace shell parameters to also work with make(1)
+Name: shellize
+Version: %{ver}
+Release: %{rel}
+Source: http://ftp.megacoder.com/shellize/%{name}-%{ver}.tar.gz
+License: GPLv2
+URL: http://www.megacoder.com/
+Group: Applications/System
+BuildRoot: %{_tmppath}/%{name}-root
+BuildArch: noarch
+
+%description
+Convert shell script into pidgin make(1).
+
+%prep
+
+%setup -q
+%build
+	CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%{prefix}
+	make
+
+%install
+	rm -rf ${RPM_BUILD_ROOT}
+	make prefix=${RPM_BUILD_ROOT}%{prefix} install
+
+%clean
+	rm -rf ${RPM_BUILD_ROOT}
+
+%files
+%defattr(-,root,root)
+%doc AUTHORS COPYING README INSTALL NEWS LICENSE TODO
+%{_bindir}/%{name}
+
+%changelog
+* Tue May 16 2009 Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+- Booger
