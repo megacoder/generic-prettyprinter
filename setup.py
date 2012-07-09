@@ -10,4 +10,5 @@ setup(
 	author_email ='Tommy.Reynolds@MegaCoder.com',
 	url          ='http://www.MegaCoder.com',
 	packages     =['src', 'src/plugins'],
+	package_dir = { 'gpp' : 'src' },
 )
