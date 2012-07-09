@@ -50,14 +50,16 @@ class Main( object ):
         return 0
 
 if __name__ == '__main__':
-    # Get base name of application, without any extention or '-pp' trailer
+    # Our plugins are in a "plugins/" directory in the directory where we live.
     bindir = os.path.dirname( sys.argv[0] )
     plugdir = os.path.join( bindir, 'plugins' )
     sys.path.insert( 0, plugdir )
+    # Intuit pretty print mode if our name ends with '-pp'
     me = os.path.basename( sys.argv[0] ).split( '.' )[0].replace( '-pp', '' )
     if me == canonical_me:
         sys.argv.pop(0)
         me = sys.argv[0]
+    # Here we go...
     dll_name = '%s-plugin' % me
     try:
         dll = __import__(dll_name)
