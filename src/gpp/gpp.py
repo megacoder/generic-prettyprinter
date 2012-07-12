@@ -5,24 +5,22 @@ import  os
 import  sys
 import  optparse
 
-canonical_me = 'gpp'
-me = canonical_me
+class GenericPrettyPrinter( object ):
 
-class GenericPrettyPrint( object ):
-
-    def __init__( self, argv ):
+    def __init__( self ):
         return
 
-    def doit( self, Obj, argv = [ '???' ], usage = '%prog [-o file] [file..]',
-             description = """FIXME""", prog = None ):
-        if prog is not None:
-            self.me = prog
-        else:
-            self.me = os.path.basename( argv[0] )
+    def doit( self, Obj ):
+        o = Obj()
+        self.me = o.NAME
+        try:
+            usage = o.USAGE
+        except Exception, e:
+            usage = '%prog [-o file] [file..]'
         p = optparse.OptionParser(
-            description = description,
+            description = o.DESCRIPTION,
             usage = usage,
-            prog = self.me
+            prog = o.NAME
         )
         p.add_option(
             '-o',
@@ -37,7 +35,6 @@ class GenericPrettyPrint( object ):
             ofile = None
         )
         opts, args = p.parse_args()
-        o = Obj()
         if len(sys.argv) == 1:
             o.process()
         else:
@@ -49,30 +46,32 @@ class GenericPrettyPrint( object ):
         o.finish()
         return 0
 
-    def main( self ):
-        # Our plugins are in a "plugins/" directory in the directory where we live.
+    def prettyprint( self ):
+        # Plugins are in "plugins/" directory under where we live.
         bindir = os.path.dirname( sys.argv[0] )
         plugdir = os.path.join( bindir, 'plugins' )
         sys.path.insert( 0, plugdir )
-        # Intuit pretty print mode if our name ends with '-pp'
-        me = os.path.basename( sys.argv[0] ).split( '.' )[0].replace( '-pp', '' )
-        if me == canonical_me:
+        # Intuit the kind of prettyprinter we want to be
+        if sys.argv[0].endswith( '-pp' ):
+            sys.argv[0] = os.path.basename( sys.argv[0] )[:-3]
+        elif len(sys.argv) >= 2:
             sys.argv.pop(0)
-            me = sys.argv[0]
+            kind = sys.argv[0]
+        else:
+            print >>sys.stderr, 'usage: %s kind [file..]' % (
+                os.path.basename( sys.argv[0] )
+            )
+            raise ValueError
         # Here we go...
-        dll_name = '%s-plugin' % me
+        dll_name = '%s-plugin' % kind
         try:
             dll = __import__(dll_name)
         except Exception, e:
             print >>sys.stderr, 'Cannot import dll "%s".' % dll_name
             raise e
-        m = Main( sys.argv )
-        return( m.main(
-            dll.PrettyPrint,
-            prog = dll.PrettyPrint.NAME,
-            description = dll.PrettyPrint.DESCRIPTION
-        ) )
+        retval = self.doit( Obj = dll.PrettyPrint )
+        return retval
 
 if __name__ == '__main__':
     gpp = GenericPrettyPrinter()
-    gpp.main()
+    gpp.prettyprint()
