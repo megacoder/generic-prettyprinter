@@ -59,7 +59,7 @@ class GenericPrettyPrinter( object ):
             kind = sys.argv[0]
         else:
             print >>sys.stderr, 'usage: %s kind [file..]' % (
-                os.path.basename( sys.argv[0] )
+                sys.argv[0].split( os.sep )[-1]
             )
             raise ValueError
         # Here we go...
