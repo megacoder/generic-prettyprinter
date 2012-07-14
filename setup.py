@@ -23,6 +23,6 @@ setup(
 		]
 	},
 	scripts			=[
-		'scripts/gpp.sh'
+		'scripts/gpp'
 	],
 )
