@@ -62,8 +62,6 @@ class GenericPrettyPrinter( object ):
             raise ValueError
         # Here we go...
         dll_name = '%s-plugin' % kind
-        print 'plugdir=%s' % plugdir
-        print 'dll_name=%s' % dll_name
         try:
             dll = __import__(dll_name)
         except Exception, e:
