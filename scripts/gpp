@@ -5,4 +5,6 @@ import	sys
 import	gpp
 
 pp = gpp.GenericPrettyPrinter()
-exit(pp.prettyprint())
+exit(pp.prettyprint(
+	os.path.join( os.path.dirname( gpp.__file__ ), 'plugins' )
+))

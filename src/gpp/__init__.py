@@ -46,10 +46,8 @@ class GenericPrettyPrinter( object ):
         o.finish()
         return 0
 
-    def prettyprint( self ):
+    def prettyprint( self, plugdir ):
         # Plugins are in "plugins/" directory under where we live.
-        bindir = os.path.dirname( sys.argv[0] )
-        plugdir = os.path.join( bindir, 'plugins' )
         sys.path.insert( 0, plugdir )
         # Intuit the kind of prettyprinter we want to be
         if sys.argv[0].endswith( '-pp' ):
@@ -64,6 +62,8 @@ class GenericPrettyPrinter( object ):
             raise ValueError
         # Here we go...
         dll_name = '%s-plugin' % kind
+        print 'plugdir=%s' % plugdir
+        print 'dll_name=%s' % dll_name
         try:
             dll = __import__(dll_name)
         except Exception, e:
@@ -74,4 +74,6 @@ class GenericPrettyPrinter( object ):
 
 if __name__ == '__main__':
     gpp = GenericPrettyPrinter()
-    gpp.prettyprint()
+    gpp.prettyprint(
+        os.path.join( os.path.dirname( gpp.__file__ ), 'plugins' )
+    )
