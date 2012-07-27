@@ -15,28 +15,28 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def reset( self ):
         super( PrettyPrint, self ).reset()
-        self.max_clause = 14
         return
 
     def process( self, f = sys.stdin ):
         for line in f:
             octothorpe = line.find( '#' )
             if octothorpe == -1:
-                comment = None
+                comment = ""
             else:
-                comment = line[octothorpe+1:].rstrip()
+                comment = line[octothorpe:].rstrip()
                 line = line[:octothorpe]
             forbidden = False
-            clauses = line.rstrip().split( ',' )
+            clauses = line.split( ',' )
+            for i in xrange(0,len(clauses)):
+                clauses[i] = clauses[i].strip()
             for clause in clauses:
-                self.max_clause = max( self.max_clause, len(clause) )
                 if clause.find( '==' ) > -1:
                     if forbidden:
-                        print >>sys.stderr, 'Predicate "%s" follows definition.' % clause
+                        print '#' * 72
+                        print '# ERROR'
+                        print '# Predicate "%s" follows definition.' % clause
+                        print '#' * 72
                 elif clause.find( '=' ) > -1:
                     forbidden = True
-            fmt = '%%-%d.%ds' % (self.max_clause, self.max_clause)
-            for i in xrange(0,len(clauses)):
-                clauses[i] = fmt % clauses[i]
-            print ', '.join(clauses)
+            print '%s%s' % (', '.join(clauses), comment)
         return
