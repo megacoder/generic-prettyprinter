@@ -37,6 +37,6 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                     forbidden = True
             fmt = '%%-%d.%ds' % (self.max_clause, self.max_clause)
             for i in xrange(0,len(clauses)):
-                clause[i] = fmt % clause[i]
+                clauses[i] = fmt % clauses[i]
             print ', '.join(clauses)
         return
