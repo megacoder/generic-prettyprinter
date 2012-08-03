@@ -6,7 +6,7 @@ import	os
 from	DistUtilsExtra.command	import	*
 
 setup(
-	name             ='gpp',
+	name             ='generic-prettyprinter',
 	version          ='0.0.7',
 	description      ='Generic Pretty Printer, using plugins',
 	author           ='Tommy Reynolds',
