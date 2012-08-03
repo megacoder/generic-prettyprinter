@@ -44,9 +44,12 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def finish( self ):
         self.content.sort()
-        for share,specs in self.content:
-            print '%-23s\t%s' % (
-                share,
-                '(' + ('),('.join(specs)) + ')'
-            )
+        share_fmt = '%%-%d.%ds' % (self.max_share, self.max_share)
+        spec_fmt  = ' %%-%d.%ds' % (self.max_spec, self.max_spec)
+        for share,roster in self.content:
+            print share_fmt % share,
+            for host,attrs in roster:
+                howto = '%s(%s)' % (host,attrs)
+                print spec_fmt % howto,
+            print
         return
