@@ -1,2 +1,2 @@
 #!/bin/zsh
-python ./setup.py "$@"
+python ./setup.py "${@:-bdist}"
