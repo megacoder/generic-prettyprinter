@@ -14,17 +14,17 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         return
 
     def reset( self ):
+        super( PrettyPrint, self ).reset()
         self.keys   = None
         self.code   = None
-        self.fn     = None
         self.locals = None
         return
 
     def compile( self ):
         try:
-            self.code = compile( self.script, self.fn, 'exec' )
+            self.code = compile( self.script, self.filename, 'exec' )
         except:
-            self.error( 'File "%s" appears to be corrupt.' % self.fn )
+            self.error( 'File "%s" appears to be corrupt.' % self.filename )
             raise SyntaxError
         self.locals = dict()
         globals = dict()
@@ -43,9 +43,11 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def process( self, f = None ):
         if f is None:
-            self.fn = '{stdin}'
+            self.filename = '{stdin}'
             self.script = sys.stdin.readlines()
-            self.compile()
+        else:
+            self.script = f.readlines()
+        self.compile()
         return
 
     def finish( self ):
