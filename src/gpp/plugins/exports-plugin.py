@@ -1,7 +1,4 @@
 #!/usr/bin/python
-# Print /etf/fstab getting the fields as close to their intended columns as may
-# be.  Long fields push the remainder of the line over as little as is possible
-# so that the columns come nearer to alignment.
 
 import	os
 import	sys
@@ -9,8 +6,8 @@ import  superclass
 
 class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
-    NAME = 'export'
-    DESCRIPTION = """Display /etc/export files in canonical style."""
+    NAME = 'exports'
+    DESCRIPTION = """Display /etc/exports files in canonical style."""
 
     def __init__( self ):
         super( PrettyPrint, self ).__init__()
@@ -21,6 +18,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def process( self, f = sys.stdin ):
         for line in f:
+            self.lineno += 1
             line = line.strip()
             if not line.startswith( '#' ):
                 tokens = line.rstrip().split()
