@@ -9,6 +9,8 @@ class   MetaPrettyPrinter( object ):
         self.reset()
         return
     def reset( self ):
+        self.lineno = 0
+        self.filename = None
         return
     def do_name( self, name ):
         if os.path.isfile( name ):
@@ -27,6 +29,8 @@ class   MetaPrettyPrinter( object ):
         except Exception, e:
             self.error( 'cannot open "%s" for reading.' % fn, e )
             raise e
+        self.filename = fn
+        self.lineno = 0
         self.process( f )
         f.close()
         return
@@ -43,6 +47,7 @@ class   MetaPrettyPrinter( object ):
         return
     def process( self, f = sys.stdin ):
         for line in f:
+            self.lineno += 1
             print line,
         return
     def ignore( self, name ):
@@ -50,6 +55,10 @@ class   MetaPrettyPrinter( object ):
     def finish( self ):
         return
     def error( self, msg, e = None ):
+        if self.filename is not None:
+            print >>sys.stderr, 'File %s: ' % self.filename,
+        if self.lineno > 0:
+            print >>sys.stderr, 'Line %d: ' % self.lineno,
         print >>sys.stderr, msg
         if e is not None:
             print >>sys.stderr, e
