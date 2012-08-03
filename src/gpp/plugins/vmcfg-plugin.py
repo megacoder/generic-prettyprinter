@@ -2,9 +2,9 @@
 
 import  pprint
 import  sys
-import  superclass
+from    superclass  import  MetaPrettyPrinter
 
-class   PrettyPrint( superclass.MetaPrettyPrinter ):
+class   PrettyPrint( MetaPrettyPrinter ):
 
     NAME = 'vmcfg'
     DESCRIPTION = """Display vm.cfg files in canonical style."""
@@ -25,6 +25,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             self.code = compile( self.script, self.filename, 'exec' )
         except:
             self.error( 'File "%s" appears to be corrupt.' % self.filename )
+            print >>sys.stderr, self.script
             raise SyntaxError
         self.locals = dict()
         globals = dict()
@@ -37,16 +38,24 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         return
 
     def do_file( self, fn ):
-        self.fn = fn
-        self.compile()
+        self.filename = fn
+        try:
+            f = open( fn, 'rt' )
+        except Exception, e:
+            self.error( 'Cannot open file for reading.' )
+            self.filename = None
+            raise e
+        self.process( f )
+        f.close()
         return
 
     def process( self, f = None ):
         if f is None:
             self.filename = '{stdin}'
-            self.script = sys.stdin.readlines()
-        else:
-            self.script = f.readlines()
+            f = sys.stdin
+        self.script = ''
+        for line in f:
+            self.script += line
         self.compile()
         return
 
@@ -54,9 +63,10 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         if self.keys is None:
             self.error( 'No input detected.' )
         else:
+            pp = pprint.PrettyPrinter()
             for key in self.keys:
                 print '%13s = ' % key,
-                s = pprint.PrettyPrint.pformat( self.locals[key] )
+                s = pp.pformat( self.locals[key] )
                 lines = s.split( '\n' )
                 leadin = ''
                 for line in lines:
