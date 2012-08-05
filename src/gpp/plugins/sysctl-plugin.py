@@ -3,10 +3,9 @@
 import  os
 import  sys
 import  math
+import  superclass
 
-from    superclass  import  MetaPrettyPrinter
-
-class   PrettyPrint( MetaPrettyPrinter ):
+class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     NAME = 'sysctl-pp'
     DESCRIPTION="""Output /etc/sysctl.conf in canonical form."""
@@ -16,6 +15,7 @@ class   PrettyPrint( MetaPrettyPrinter ):
         return
 
     def reset( self ):
+        super( PrettyPrint, self ).reset()
         self.out    = sys.stdout
         self.lines  = []
         self.fmt    = "%31s\t%s"
@@ -25,17 +25,16 @@ class   PrettyPrint( MetaPrettyPrinter ):
     def ignore( self, name ):
         return not name.endswith( '.conf' )
 
-    def process( self, fyle = sys.stdin ):
-        for line in fyle:
-            n = line.find( '#' )
-            if n > -1: line = line[:n]
-            try:
-                key, value = line.split( '=', 1 )
-            except Exception, e:
-                continue
-            k = key.strip()
-            self.maxlen = max( self.maxlen, len(k) )
-            self.lines.append( (k, value.strip()) )
+    def next_line( self, line ):
+        n = line.find( '#' )
+        if n > -1: line = line[:n]
+        try:
+            key, value = line.split( '=', 1 )
+        except Exception, e:
+            return
+        k = key.strip()
+        self.maxlen = max( self.maxlen, len(k) )
+        self.lines.append( (k, value.strip()) )
         return
 
     def finish( self ):

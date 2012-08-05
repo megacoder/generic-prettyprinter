@@ -16,30 +16,27 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         self.content   = []
         return
 
-    def process( self, f = sys.stdin ):
-        for line in f:
-            self.lineno += 1
-            line = line.strip()
-            if not line.startswith( '#' ):
-                tokens = line.rstrip().split()
-                # Format is
-                #   <name> <host>(<param>[,...]) ...
-                # Reformat only regular, or bind-mount, lines
-                share = tokens[0]
-                self.max_share = max( self.max_share, len(share) )
-                roster = []
-                for token in tokens[1:]:
-                    self.max_spec = max( self.max_spec, len(token) )
-                    lparen = token.find( '(' )
-                    if lparen > -1:
-                        host = token[:lparen]
-                        list = token[lparen+1:-1]
-                        params = list.split( ',' )
-                        params.sort()
-                        list = ','.join( params )
-                        roster.append( (host, list) )
-                roster.sort( key = lambda (h,l): h.lower() )
-                self.content.append( (share, roster) )
+    def next_line( self, line ):
+        if not line.startswith( '#' ):
+            tokens = line.rstrip().split()
+            # Format is
+            #   <name> <host>(<param>[,...]) ...
+            # Reformat only regular, or bind-mount, lines
+            share = tokens[0]
+            self.max_share = max( self.max_share, len(share) )
+            roster = []
+            for token in tokens[1:]:
+                self.max_spec = max( self.max_spec, len(token) )
+                lparen = token.find( '(' )
+                if lparen > -1:
+                    host = token[:lparen]
+                    list = token[lparen+1:-1]
+                    params = list.split( ',' )
+                    params.sort()
+                    list = ','.join( params )
+                    roster.append( (host, list) )
+            roster.sort( key = lambda (h,l): h.lower() )
+            self.content.append( (share, roster) )
         return
 
     def finish( self ):

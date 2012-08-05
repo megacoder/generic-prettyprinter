@@ -15,33 +15,32 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	reset( self ):
+		super( PrettyPrint, self ).reset()
 		self.lines = []
 		self.max_canonical_name = 0
 		return
 
-	def	process( self, f = sys.stdin ):
-		for line in f:
-			line = line.rstrip()
-			if line.startswith( '#' ):
-				print line
-				continue
+	def	next_line( self, line ):
+		if line.startswith( '#' ):
+			print line
+		else:
 			tokens = line.split()
 			n = len( tokens )
-			if n < 2: continue
-			addr = tokens[0]
-			name = tokens[1]
-			self.max_canonical_name = max( self.max_canonical_name, len(name) )
-			aliases = []
-			if n > 2:
-				aliases = tokens[2:]
-				aliases.sort()
-			ip = 0
-			if addr.find(':') == -1:
+			if n >= 2:
+				addr = tokens[0]
+				name = tokens[1]
+				self.max_canonical_name = max( self.max_canonical_name, len(name) )
+				aliases = []
+				if n > 2:
+					aliases = tokens[2:]
+					aliases.sort()
+				ip = 0
+				if addr.find(':') == -1:
 					for octet in addr.split('.'):
 						ip = ip * 256 + int(octet)
-			self.lines.append(
-				(ip, addr, name, aliases)
-			)
+				self.lines.append(
+					(ip, addr, name, aliases)
+				)
 		return
 
 	def	finish( self ):

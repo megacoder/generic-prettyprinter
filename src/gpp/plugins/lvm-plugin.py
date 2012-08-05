@@ -18,6 +18,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	reset( self ):
+		super( PrettyPrint, self ).reset()
 		self.stanza = []
 		self.max_name = 15
 		return
@@ -30,29 +31,32 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		self.reset()
 		return
 
-	def	process( self, f = sys.stdin ):
-		for line in f:
-			# Column-1 comments are copied verbatim
-			if line.lstrip().startswith( '#' ):
+	def	next_line( self, line ):
+		# Column-1 comments are copied verbatim
+		if line.lstrip().startswith( '#' ):
+			print line
+			return
+		# All other lines are to be correctly indented
+		if line.find( '{' ) > -1:
+			l = line.rstrip().replace( '{', ' { ' ).replace( '}', ' } ' )
+			tokens = l.split()
+			print '\t'.join( tokens )
+			# Dump any cruft from a partially-completed stanza
+			self.reset()
+		elif line.find( '}' ) > -1:
+			self.dump_stanza()
+			l = line.rstrip().replace( '{', ' { ' ).replace( '}', ' } ' )
+			tokens = l.split()
+			print '\t'.join( tokens )
+		else:
+			tokens = line.rstrip().split( '=' )
+			if len(tokens) != 2:
 				print line,
-				continue
-			# All other lines are to be correctly indented
-			if line.find( '{' ) > -1:
-				l = line.rstrip().replace( '{', ' { ' ).replace( '}', ' } ' )
-				tokens = l.split()
-				print '\t'.join( tokens )
-				# Dump any cruft from a partially-completed stanza
-				self.reset()
-			elif line.find( '}' ) > -1:
-				self.dump_stanza()
-				l = line.rstrip().replace( '{', ' { ' ).replace( '}', ' } ' )
-				tokens = l.split()
-				print '\t'.join( tokens )
-			else:
-				tokens = line.rstrip().split( '=' )
-				if len(tokens) != 2:
-					print line,
-					continue
-				self.max_name = max( self.max_name, len(tokens[0]) )
-				self.stanza.append( tokens )
+				return
+			self.max_name = max( self.max_name, len(tokens[0]) )
+			self.stanza.append( tokens )
+		return
+
+	def	finish( self ):
+		self.dump_stanza()
 		return

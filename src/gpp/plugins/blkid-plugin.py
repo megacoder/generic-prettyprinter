@@ -18,14 +18,14 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	reset( self ):
+		super( PrettyPrint, self ).reset()
 		self.lines = []
 		self.max_name = 15
 		return
 
-	def	process( self, f = sys.stdin ):
-		for line in f:
-			tokens = line.rstrip().split( ':', 1 )
-			if len(tokens) != 2: continue
+	def	next_line( self, line ):
+		tokens = line.rstrip().split( ':', 1 )
+		if len(tokens) == 2:
 			self.max_name = max( self.max_name, len( tokens[0] ) )
 			self.lines.append( (tokens[0], tokens[1].split()) )
 		return

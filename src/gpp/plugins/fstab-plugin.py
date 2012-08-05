@@ -26,21 +26,19 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             s = s + " " * n + parts.pop(0)
         return s
 
-    def process( self, f = sys.stdin ):
-        for line in f:
-            line = line.strip()
-            if not line.startswith( '#' ):
-                parts = line.split()
-                l = len(parts)
-                # Reformat only regular, or bind-mount, lines
-                if l == 4 or l == 6:
-                    #
-                    opts = parts[3].split(',')
-                    opts.sort()
-                    parts[3]  = ",".join(opts)
-                    #
-                    line = self.pad(parts,[
-                        0, 24, 47, 55, 77, 79
-                    ])
-            print line
+    def next_line( self, line ):
+        if not line.startswith( '#' ):
+            parts = line.split()
+            l = len(parts)
+            # Reformat only regular, or bind-mount, lines
+            if l == 4 or l == 6:
+                #
+                opts = parts[3].split(',')
+                opts.sort()
+                parts[3]  = ",".join(opts)
+                #
+                line = self.pad(parts,[
+                    0, 24, 47, 55, 77, 79
+                ])
+        print line
         return

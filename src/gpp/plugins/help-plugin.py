@@ -1,4 +1,4 @@
-#/usr/bin/pathon
+#/usr/bin/python
 # vim: et sw=4 ts=4
 
 ########################################################################
@@ -7,9 +7,9 @@
 
 import  os
 import  sys
-from    superclass import MetaPrettyPrinter
+import  superclass
 
-class PrettyPrint( MetaPrettyPrinter ):
+class PrettyPrint( superclass.MetaPrettyPrinter ):
     NAME = 'plugins'
     DESCRIPTION = 'Display list of known plugins.'
 
@@ -18,7 +18,7 @@ class PrettyPrint( MetaPrettyPrinter ):
         self.names = []
         return
 
-    def process( self, f = None ):
+    def do_open_file( self, f = None ):
         self.names = os.listdir( sys.path[0] )
         return
 

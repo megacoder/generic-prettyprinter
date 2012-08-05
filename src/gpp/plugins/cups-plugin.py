@@ -3,9 +3,9 @@
 
 import	sys
 import	os
-from	superclass import MetaPrettyPrinter
+import	superclass
 
-class	PrettyPrint( MetaPrettyPrinter ):
+class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	NAME	= 'cups-pp'
 	DESCRIPTION = """Print cups configuration file."""
@@ -16,6 +16,7 @@ class	PrettyPrint( MetaPrettyPrinter ):
 		return
 
 	def	reset( self ):
+		super(PrettyPrint, self).reset()
 		self.depth = 0
 		self.comment_column = 40
 		self.leadin = '  '
@@ -30,51 +31,50 @@ class	PrettyPrint( MetaPrettyPrinter ):
 		print line
 		return
 
-	def	process( self, fd = sys.stdin ):
-		for line in fd:
-			parts = line.strip().split( '#', 1 )
-			l = len(parts)
-			if l == 0:
-				# Blank line
-				print
-				continue
-			if l == 1:
-				content = parts[0]
-				comment = ''
-			else:
-				content = parts[0]
-				comment = parts[1]
+	def	next_line( self, line ):
+		parts = line.split( '#', 1 )
+		l = len(parts)
+		if l == 0:
+			# Blank line
+			print
+			return
+		if l == 1:
 			content = parts[0]
-			if len(content) == 0:
-				# No content, treat comment as content
-				self.indent( '#' + comment, '' )
-				continue
-			# Align args after command
-			parts = content.split( ' ', 1 )
-			if len(parts) == 1:
-				verb = parts[0]
-				args = ''
+			comment = ''
+		else:
+			content = parts[0]
+			comment = parts[1]
+		content = parts[0]
+		if len(content) == 0:
+			# No content, treat comment as content
+			self.indent( '#' + comment, '' )
+			return
+		# Align args after command
+		parts = content.split( ' ', 1 )
+		if len(parts) == 1:
+			verb = parts[0]
+			args = ''
+		else:
+			verb = parts[0]
+			args = parts[1]
+		content = '%-15s %s' % (verb, args)
+		if not content.startswith( '<' ):
+			# Non-directive line
+			self.indent( content, comment )
+		else:
+			# Directive line
+			if content.startswith( '</' ):
+				# pop: move left, then print end-directive
+				self.depth = max( 0, self.depth - 1 )
+				self.indent( content,  comment )
 			else:
-				verb = parts[0]
-				args = parts[1]
-			content = '%-15s %s' % (verb, args)
-			if not content.startswith( '<' ):
-				# Non-directive line
+				# push: print, then move right
+				parts = content[:-1].split()
+				if len(parts) > 1:
+					verb = parts[0]
+					args = parts[1:]
+					args.sort()
+					content = '%-15s %s>' % ( verb, ' '.join(args))
 				self.indent( content, comment )
-			else:
-				# Directive line
-				if content.startswith( '</' ):
-					# pop: move left, then print end-directive
-					self.depth = max( 0, self.depth - 1 )
-					self.indent( content,  comment )
-				else:
-					# push: print, then move right
-					parts = content[:-1].split()
-					if len(parts) > 1:
-						verb = parts[0]
-						args = parts[1:]
-						args.sort()
-						content = '%-15s %s>' % ( verb, ' '.join(args))
-					self.indent( content, comment )
-					self.depth += 1
+				self.depth += 1
 		return

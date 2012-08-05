@@ -36,11 +36,11 @@ class GenericPrettyPrinter( object ):
         )
         opts, args = p.parse_args()
         if len(sys.argv) == 1:
-            o.process()
+            o.do_open_file()
         else:
             for arg in sys.argv[1:]:
                 if arg == '-':
-                    o.process()
+                    o.do_open_file()
                 else:
                     o.do_name( arg )
         o.finish()
