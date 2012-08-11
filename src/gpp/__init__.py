@@ -35,9 +35,11 @@ class GenericPrettyPrinter( object ):
             ofile = None
         )
         opts, args = p.parse_args()
-        if len(sys.argv) == 1:
+        argc = len(sys.argv)
+        if argc <= 1:
             o.do_open_file()
         else:
+            o.advise( argc = argc )
             for arg in sys.argv[1:]:
                 if arg == '-':
                     o.do_open_file()
