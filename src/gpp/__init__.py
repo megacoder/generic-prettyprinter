@@ -60,18 +60,56 @@ class GenericPrettyPrinter( object ):
                 sys.argv[0].split( os.sep )[-1]
             )
             raise ValueError
+        p = optparse.OptionParser(
+            description = o.DESCRIPTION,
+            usage = usage,
+            prog = o.NAME
+        )
+        p.add_option(
+            '-o',
+            '--out',
+            action='store',
+            type='string',
+            dest='ofile',
+            help='Output written to file; defaults to stdout.',
+            metavar='file'
+        )
+        p.add_option(
+            '-t',
+            '--type',
+            action='store',
+            type='string',
+            dest='kind',
+            help='kind of pretty-printer desired.',
+            metavar='file'
+        )
+        p.set_defaults(
+            ofile = None,
+            kind = "text"
+        )
+        opts, args = p.parse_args()
         # Here we go...
-        dll_name = '%s-plugin' % kind
+        dll_name = '%s-plugin' % opts.kind
         try:
             dll = __import__(dll_name)
         except Exception, e:
-            print >>sys.stderr, 'Cannot import dll "%s".' % dll_name
-            raise e
+            print >>sys.stderr, 'Sorry, no prettyprinter for "%s".' % opts.kind
+            return True
+        if opts.ofile is not None:
+            try:
+                sys.stdout = open( opts.ofile, 'wt' )
+            except Exception, e:
+                print >>sys.stderr, 'Cannot open "%s" for writing.' % opts.ofile
+                return True
+        sys.argv = [ sys.argv[0] ] + args
         retval = self.doit( Obj = dll.PrettyPrint )
         return retval
 
 if __name__ == '__main__':
     gpp = GenericPrettyPrinter()
-    gpp.prettyprint(
+    retval = gpp.prettyprint(
         os.path.join( os.path.dirname( gpp.__file__ ), 'plugins' )
     )
+    if retval:
+        exit(1)
+    exit(0)
