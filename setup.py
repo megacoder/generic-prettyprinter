@@ -7,7 +7,7 @@ from	DistUtilsExtra.command	import	*
 
 setup(
 	name             ='generic-prettyprinter',
-	version          ='0.0.10',
+	version          ='0.0.11',
 	description      ='Generic Pretty Printer, using plugins',
 	author           ='Tommy Reynolds',
 	author_email     ='Tommy.Reynolds@MegaCoder.com',
