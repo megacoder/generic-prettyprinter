@@ -18,6 +18,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	reset( self ):
+		super( PrettyPrint, self ).reset()
 		self.depth = 0
 		self.do_capture = False
 		self.captured = []
