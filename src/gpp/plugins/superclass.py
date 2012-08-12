@@ -11,8 +11,12 @@ class   MetaPrettyPrinter( object ):
         return
 
     def reset( self ):
+        self.fileno = 0
         self.lineno = 0
         self.filename = None
+        return
+
+    def advise( **kwargs ):
         return
 
     def do_name( self, name ):
@@ -45,6 +49,7 @@ class   MetaPrettyPrinter( object ):
         except Exception, e:
             self.error( 'cannot open "%s" for reading.' % fn, e )
             raise e
+        self.fileno += 1
         self.filename = fn
         self.lineno = 0
         self.begin_file( f )
