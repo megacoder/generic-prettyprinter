@@ -7,65 +7,42 @@ import  optparse
 
 class GenericPrettyPrinter( object ):
 
+    NAME = 'N/A'
+    USAGE = '%prog [-o file] [-t type] [file..]'
+    DESCRIPTION = """Generic pretty-printer with loadable modules."""
+
     def __init__( self ):
         return
 
-    def doit( self, Obj ):
+    def doit( self, Obj, names = [] ):
         o = Obj()
-        self.me = o.NAME
-        try:
-            usage = o.USAGE
-        except Exception, e:
-            usage = '%prog [-o file] [file..]'
-        p = optparse.OptionParser(
-            description = o.DESCRIPTION,
-            usage = usage,
-            prog = o.NAME
-        )
-        p.add_option(
-            '-o',
-            '--out',
-            action='store',
-            type='string',
-            dest='ofile',
-            help='Output written to file; defaults to stdout.',
-            metavar='file'
-        )
-        p.set_defaults(
-            ofile = None
-        )
-        opts, args = p.parse_args()
         argc = len(sys.argv)
-        if argc <= 1:
+        n = len(names)
+        if n < 1:
+            # Give plugin a chance to handle its no-file method
             o.do_open_file()
         else:
-            o.advise( argc = argc )
-            for arg in sys.argv[1:]:
-                if arg == '-':
+            # Iterate through the names
+            o.advise( argc = n )
+            for name in names:
+                if name == '-':
                     o.do_open_file()
                 else:
-                    o.do_name( arg )
+                    o.do_name( name )
         o.finish()
-        return 0
+        return False
 
     def prettyprint( self, plugdir ):
         # Plugins are in "plugins/" directory under where we live.
         sys.path.insert( 0, plugdir )
         # Intuit the kind of prettyprinter we want to be
+        kind = 'text'
         if sys.argv[0].endswith( '-pp' ):
-            sys.argv[0] = os.path.basename( sys.argv[0] )[:-3]
-        elif len(sys.argv) >= 2:
-            sys.argv.pop(0)
-            kind = sys.argv[0]
-        else:
-            print >>sys.stderr, 'usage: %s kind [file..]' % (
-                sys.argv[0].split( os.sep )[-1]
-            )
-            raise ValueError
+            kind = os.path.basename( sys.argv[0] )[:-3]
         p = optparse.OptionParser(
-            description = o.DESCRIPTION,
-            usage = usage,
-            prog = o.NAME
+            description = """Generic pretty-printer""",
+            usage = '%prog [-o ofile] [-t type] [file..]',
+            prog = 'gpp'
         )
         p.add_option(
             '-o',
@@ -82,7 +59,7 @@ class GenericPrettyPrinter( object ):
             action='store',
             type='string',
             dest='kind',
-            help='kind of pretty-printer desired.',
+            help='kind of pretty-printer desired; defaults to text.',
             metavar='file'
         )
         p.set_defaults(
@@ -103,8 +80,7 @@ class GenericPrettyPrinter( object ):
             except Exception, e:
                 print >>sys.stderr, 'Cannot open "%s" for writing.' % opts.ofile
                 return True
-        sys.argv = [ sys.argv[0] ] + args
-        retval = self.doit( Obj = dll.PrettyPrint )
+        retval = self.doit( Obj = dll.PrettyPrint, names = args )
         return retval
 
 if __name__ == '__main__':

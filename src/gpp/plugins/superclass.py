@@ -16,7 +16,7 @@ class   MetaPrettyPrinter( object ):
         self.filename = None
         return
 
-    def advise( **kwargs ):
+    def advise( self, **kwargs ):
         return
 
     def do_name( self, name ):
