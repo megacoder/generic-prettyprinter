@@ -6,23 +6,23 @@ import	superclass
 
 class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
-	NAME = 'meminfo-pp'
-	DESCRIPTION="""Display /proc/modprobe in canonical style."""
+	NAME = 'meminfo'
+	DESCRIPTION="""Display /proc/meminfo in canonical style."""
 
 	def	__init__( self ):
 		super( PrettyPrint, self ).__init__()
 		return
 
 	def	reset( self ):
+		super( PrettyPrint, self ).reset()
 		self.lines = []
 		self.maxfield = 12
 		self.maxvalue = 12
 		return
 
-	def	process( self, f = sys.stdin ):
-		for line in f:
-			tokens = line.rstrip().split( ':' )
-			if len(tokens) == 0: continue
+	def	next_line( self, line ):
+		tokens = line.rstrip().split( ':' )
+		if len(tokens) > 0:
 			field = tokens[0].strip()
 			value = tokens[1].strip()
 			self.maxfield = max( self.maxfield, len(field) )
@@ -33,7 +33,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	finish( self ):
-		fmt = '%%-%ds %%%ds' % (self.maxfield+1, self.maxvalue)
+		fmt = '%%-%ds  %%%ds' % (self.maxfield, self.maxvalue)
 		for (field, value) in self.lines:
 			print fmt % (field + ':', value)
 		return

@@ -18,12 +18,13 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	reset( self ):
+		super( PrettyPrint, self ).reset()
 		self.depth = 0
 		self.do_capture = False
 		self.captured = []
 		return
 
-	def spew( self, tokens, comment = None ):
+	def _spew( self, tokens, comment = None ):
 		line = PrettyPrint.INDENT_WITH * self.depth
 		if len(tokens) > 0:
 			noun = tokens[0]
@@ -38,53 +39,55 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		print line + leadin
 		return
 
-	def	process( self, f = sys.stdin ):
+	def	begin_file( self, name ):
+		super( PrettyPrint, self ).begin_file()
 		self.depth = 0
-		for line in f:
-			line = line.strip()
-			# Column-1 comments are copied verbatim
-			octothorpe = line.find( '#' )
-			if octothorpe == 0:
-				print line
-				continue
-			if octothorpe == -1:
-				comment = None
-			else:
-				comment = line[octothorpe:]
-				line = line[:octothorpe]
-			# All other lines are to be correctly indented
-			# Ensure that magic tokens are whitespace-delimited
-			line = line.replace( '{', ' { ' )
-			line = line.replace( '}', ' } ' )
-			tokens = line.split()
-			if len(tokens) == 0:
-				self.spew( [], comment )
-			else:
-				keyword = tokens[0]
-				final = tokens[-1]
-				if final == '{':
-					self.spew( tokens, comment )
-					self.depth += 1
-					if keyword in [ 'device' ]:
-						self.captured = []
-						self.do_capture = True
-				elif final == '}':
-					self.captured.sort( key = lambda (t, c) : t[0].lower() )
-					for saved, said in self.captured:
-						self.spew( saved, said )
-					self.do_capture = False
+		return
+
+	def	_end_block( self ):
+		self.captured.sort( key = lambda (t, c) : t[0].lower() )
+		for saved, said in self.captured:
+			self._spew( saved, said )
+		self.captured = []
+		return
+
+	def	next_line( self, line ):
+		line = line.strip()
+		octothorpe = line.find( '#' )
+		if octothorpe == -1:
+			comment = None
+		else:
+			comment = line[octothorpe:]
+			line = line[:octothorpe]
+		# Ensure that magic tokens are whitespace-delimited
+		line = line.replace( '{', ' { ' )
+		line = line.replace( '}', ' } ' )
+		tokens = line.split()
+		if len(tokens) == 0:
+			self._spew( [], comment )
+		else:
+			keyword = tokens[0]
+			final = tokens[-1]
+			if final == '{':
+				self._spew( tokens, comment )
+				self.depth += 1
+				if keyword in [ 'device' ]:
 					self.captured = []
-					self.depth -= 1
-					self.spew( tokens, comment )
+					self.do_capture = True
+			elif final == '}':
+				self._end_block()
+				self.do_capture = False
+				self.depth -= 1
+				self._spew( tokens, comment )
+			else:
+				equals = line.find( '=' )
+				if equals > -1:
+					tokens = [ line[:equals], line[equals:] ]
+					tokens = [ ' = '.join(tokens) ]
+				if self.do_capture:
+					self.captured.append( (tokens, comment) )
 				else:
-					equals = line.find( '=' )
-					if equals > -1:
-						tokens = [ line[:equals], line[equals:] ]
-						tokens = [ ' = '.join(tokens) ]
-					if self.do_capture:
-						self.captured.append( (tokens, comment) )
-					else:
-						self.spew( tokens, comment )
+					self._spew( tokens, comment )
 		return
 
 	def	finish( self ):
