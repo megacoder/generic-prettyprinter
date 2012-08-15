@@ -40,7 +40,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	begin_file( self, name ):
-		super( PrettyPrint, self ).begin_file()
+		super( PrettyPrint, self ).begin_file( name )
 		self.depth = 0
 		return
 
@@ -56,6 +56,9 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		octothorpe = line.find( '#' )
 		if octothorpe == -1:
 			comment = None
+		elif octothorpe == 0:
+			print line
+			return
 		else:
 			comment = line[octothorpe:]
 			line = line[:octothorpe]
