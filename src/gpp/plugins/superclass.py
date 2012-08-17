@@ -52,9 +52,9 @@ class   MetaPrettyPrinter( object ):
         self.fileno += 1
         self.filename = fn
         self.lineno = 0
-        self.begin_file( f )
+        self.begin_file( fn )
         self.do_open_file( f )
-        self.end_file( f )
+        self.end_file( fn )
         f.close()
         return
 
