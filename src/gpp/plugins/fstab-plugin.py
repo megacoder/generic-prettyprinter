@@ -42,3 +42,15 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                 ])
         print line
         return
+
+    def begin_file( self, name ):
+        if self.multi > 1:
+            print '#' * 80
+            print '# File %d of %d: %s' % (self.fileno, self.multi, name)
+            print '#' * 80
+        return
+
+    def end_file( self, name ):
+        if self.multi > 1 and self.multi != self.fileno:
+            print
+        return

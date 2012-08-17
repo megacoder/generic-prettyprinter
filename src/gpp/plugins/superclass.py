@@ -14,9 +14,13 @@ class   MetaPrettyPrinter( object ):
         self.fileno = 0
         self.lineno = 0
         self.filename = None
+        self.multi = 0
         return
 
     def advise( self, **kwargs ):
+        for key in kwargs:
+            if key == 'argc':
+                self.multi = kwargs[key]
         return
 
     def do_name( self, name ):
