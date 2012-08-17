@@ -49,21 +49,20 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def begin_file( self, name ):
-		if self.multi > 1:
-			print '#' * 80
-			print '# File %d of %d: %s' % (self.fileno, self.multi, name)
-			print '#' * 80
+		super( PrettyPrint, self ).begin_file( name )
 		self.lines = []
 		return
 
 	def end_file( self, name ):
 		self.lines.sort()
 		for (name, value) in self.lines:
+			if not name in PrettyPrint.NAMES:
+				print '# WARNING: setting "%s" is unknown; is it new?' % name
 			print '%s=%s' % ( name, value )
 		for key in self.used.keys():
 			if not self.used[key]:
-				print '# Setting "%s" not specified.' % key
-		if self.multi > 1 and self.multi != self.fileno:
-			print
+				print '# WARNING: setting "%s" not specified.' % key
+		self._prepare_settings()
+		super( PrettyPrint, self ).end_file( name )
 		return
 

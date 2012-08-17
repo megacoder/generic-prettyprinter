@@ -92,6 +92,3 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				else:
 					self._spew( tokens, comment )
 		return
-
-	def	finish( self ):
-		return

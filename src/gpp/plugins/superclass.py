@@ -36,9 +36,14 @@ class   MetaPrettyPrinter( object ):
         return
 
     def begin_file( self, fn ):
+        if self.multi > 1:
+            print 'File %d of %d: %s' % (self.fileno, self.multi, fn)
+            print
         return
 
     def end_file( self, fn ):
+        if self.fileno < self.multi:
+            print
         self.filename = None
         self.lineno = 0
         return
