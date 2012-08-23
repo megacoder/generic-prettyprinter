@@ -1,4 +1,6 @@
 generic-prettyprinter
 =====================
 
-Trivial prettyprinters for lots of kinds of files.  Really easy to extend.
+o	Displays a variety of files in a canonical form.
+o	Trivial prettyprinters for lots of kinds of files.
+o	Really easy to extend.
