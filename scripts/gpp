@@ -1,0 +1,10 @@
+#!/usr/bin/python
+#vim: noet sw=4 ts=4
+import	os
+import	sys
+import	gpp
+
+pp = gpp.GenericPrettyPrinter()
+exit(pp.prettyprint(
+	os.path.join( os.path.dirname( gpp.__file__ ), 'plugins' )
+))
