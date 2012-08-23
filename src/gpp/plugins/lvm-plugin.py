@@ -38,8 +38,8 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	next_line( self, line ):
-		# Column-1 comments are copied verbatim
-		if line.lstrip().startswith( '#' ):
+		line = line.strip()
+		if line.startswith( '#' ):
 			print line
 			return
 		# All other lines are to be correctly indented
@@ -51,10 +51,9 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			self.finish_stanza( self.begins_with, self.stanza, self.ends_with )
 		else:
 			tokens = line.rstrip().split( '=', 1 )
-			if len(tokens) < 2:
-				tokens[2] = '{missing}'
-			self.max_name = max( self.max_name, len(tokens[0]) )
-			self.stanza.append( tokens )
+			if len(tokens) == 2:
+				self.max_name = max( self.max_name, len(tokens[0]) )
+				self.stanza.append( tokens )
 		return
 
 	def	finish( self ):
