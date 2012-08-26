@@ -17,7 +17,6 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		super( PrettyPrint, self ).reset()
 		self.lines = []
 		self.maxfield = 12
-		self.maxvalue = 12
 		return
 
 	def	next_line( self, line ):
@@ -26,14 +25,22 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			field = tokens[0].strip()
 			value = tokens[1].strip()
 			self.maxfield = max( self.maxfield, len(field) )
+			values = value.split()
+			# Some entries have no specific units specified
 			if not value.endswith( 'kB' ):
-				value = value + '   '
-			self.maxvalue = max( self.maxvalue, len(value) )
-			self.lines.append( (field, value) )
+				# Null units to make the columns line up
+				values.append( '  ' )
+			if len(values) >= 2 :
+				self.lines.append( (field, values) )
 		return
 
 	def	finish( self ):
-		fmt = '%%-%ds  %%%ds' % (self.maxfield, self.maxvalue)
-		for (field, value) in self.lines:
-			print fmt % (field + ':', value)
+		maxvalue = 12
+		for (field,values) in self.lines:
+			maxvalue = max( maxvalue, len(values[0]) )
+		ffmt = '%%-%ds' % (self.maxfield+1)
+		vfmt = '%%%ds %%s' % maxvalue
+		fmt = ffmt + '  ' + vfmt
+		for (field, values) in self.lines:
+			print fmt % (field + ':', values[0], values[1])
 		return
