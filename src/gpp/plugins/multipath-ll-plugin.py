@@ -8,10 +8,8 @@ import	superclass
 
 class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
-	NAME = 'multipath-pp'
-	DESCRIPTION="""Display /etc/multipath.conf in conical style."""
-
-	INDENT_WITH = '        '
+	NAME = 'multipath-ii'
+	DESCRIPTION="""Display "# multipath -ll" in conical style."""
 
 	def __init__( self ):
 		super( PrettyPrint, self ).__init__()
@@ -19,76 +17,68 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	reset( self ):
 		super( PrettyPrint, self ).reset()
-		self.depth = 0
-		self.do_capture = False
-		self.captured = []
+		self._new_path()
+		self.paths   = []
+		self.maxname = 0
+		self.maxuuid = 0
+		self.maxdev  = 0
 		return
 
-	def _spew( self, tokens, comment = None ):
-		line = PrettyPrint.INDENT_WITH * self.depth
-		if len(tokens) > 0:
-			noun = tokens[0]
-			line += noun
-			if len(tokens) > 1:
-				line += ' '*(21-len(noun)) + ' '
-				line += ' '.join(tokens[1:])
-		if comment is None:
-			leadin = ''
-		else:
-			leadin = ' '*(64-len(line)) + comment
-		print line + leadin
+	def	_new_path( self ):
+		self.components = []
+		self.pathname = []
+		self.attrs = []
 		return
 
 	def	begin_file( self, name ):
 		super( PrettyPrint, self ).begin_file( name )
-		self.depth = 0
+		self.reset()
 		return
 
-	def	_end_block( self ):
-		self.captured.sort( key = lambda (t, c) : t[0].lower() )
-		for saved, said in self.captured:
-			self._spew( saved, said )
-		self.captured = []
+	def	end_file( self, name ):
+		self._dump_paths()
 		return
 
 	def	next_line( self, line ):
-		line = line.strip()
-		octothorpe = line.find( '#' )
-		if octothorpe == -1:
-			comment = None
-		elif octothorpe == 0:
-			print line
-			return
+		if line[0].isalnum():
+			if len(self.components) > 0:
+				self.paths.append((self.pathname, self.attrs, self.components))
+			self._new_path()
+			tokens = line.split()
+			if len(tokens) == 4:
+				name = tokens[0]
+				self.maxname = max( self.maxname, len(name) )
+				uuid = tokens[1]
+				self.maxuuid = max( self.maxuuid, len(uuid) )
+				dev  = tokens[2]
+				self.maxdev = max( self.maxdev, len(dev) )
+				san  = tokens[3]
+				self.pathname = [name, uuid, dev, san]
+		elif line[0] == '[':
+			self.attrs = line.strip()
 		else:
-			comment = line[octothorpe:]
-			line = line[:octothorpe]
-		# Ensure that magic tokens are whitespace-delimited
-		line = line.replace( '{', ' { ' )
-		line = line.replace( '}', ' } ' )
-		tokens = line.split()
-		if len(tokens) == 0:
-			self._spew( [], comment )
-		else:
-			keyword = tokens[0]
-			final = tokens[-1]
-			if final == '{':
-				self._spew( tokens, comment )
-				self.depth += 1
-				if keyword in [ 'device' ]:
-					self.captured = []
-					self.do_capture = True
-			elif final == '}':
-				self._end_block()
-				self.do_capture = False
-				self.depth -= 1
-				self._spew( tokens, comment )
-			else:
-				equals = line.find( '=' )
-				if equals > -1:
-					tokens = [ line[:equals], line[equals:] ]
-					tokens = [ ' = '.join(tokens) ]
-				if self.do_capture:
-					self.captured.append( (tokens, comment) )
-				else:
-					self._spew( tokens, comment )
+			self.components.append( line )
+		return
+
+	def	_key( self, ((name,uuid,dev,san),attr,parts) ):
+		return dev.lower()
+
+	def	_dump_paths( self ):
+		if len(self.paths) > 0:
+			self.paths.sort( key = self._key )
+			tfmt = '%%-%ds %%-%ds %%-%ds %%s' % (
+				self.maxname,
+				self.maxuuid,
+				self.maxdev
+			)
+			for ((name,uuid,dev,san),attr,parts) in self.paths:
+				print tfmt % (name, uuid, dev, san)
+				print '%s' % attr
+				for part in parts:
+					print '%s' % part
+		self.reset()
+		return
+
+	def	finish( self ):
+		self._dump_paths()
 		return
