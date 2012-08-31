@@ -24,7 +24,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		self.captured = []
 		return
 
-	def _spew( self, tokens, comment = None ):
+	def _spew( self, tokens ):
 		line = PrettyPrint.INDENT_WITH * self.depth
 		if len(tokens) > 0:
 			noun = tokens[0]
@@ -32,10 +32,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			if len(tokens) > 1:
 				line += ' '*(21-len(noun)) + ' '
 				line += ' '.join(tokens[1:])
-		if comment is None:
-			leadin = ''
-		else:
-			leadin = ' '*(64-len(line)) + comment
+		leadin = ''
 		print line + leadin
 		return
 
@@ -54,25 +51,18 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 	def	next_line( self, line ):
 		line = line.strip()
 		octothorpe = line.find( '#' )
-		if octothorpe == -1:
-			comment = None
-		elif octothorpe == 0:
-			print line
-			return
-		else:
-			comment = line[octothorpe:]
+		if octothorpe > -1:
 			line = line[:octothorpe]
+		line = line.strip()
 		# Ensure that magic tokens are whitespace-delimited
 		line = line.replace( '{', ' { ' )
 		line = line.replace( '}', ' } ' )
 		tokens = line.split()
-		if len(tokens) == 0:
-			self._spew( [], comment )
-		else:
+		if len(tokens) > 0:
 			keyword = tokens[0]
 			final = tokens[-1]
 			if final == '{':
-				self._spew( tokens, comment )
+				self._spew( tokens )
 				self.depth += 1
 				if keyword in [ 'device' ]:
 					self.captured = []
@@ -81,14 +71,14 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				self._end_block()
 				self.do_capture = False
 				self.depth -= 1
-				self._spew( tokens, comment )
+				self._spew( tokens )
 			else:
 				equals = line.find( '=' )
 				if equals > -1:
 					tokens = [ line[:equals], line[equals:] ]
 					tokens = [ ' = '.join(tokens) ]
 				if self.do_capture:
-					self.captured.append( (tokens, comment) )
+					self.captured.append( tokens )
 				else:
-					self._spew( tokens, comment )
+					self._spew( tokens )
 		return
