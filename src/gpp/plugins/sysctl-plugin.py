@@ -17,13 +17,27 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
     def reset( self ):
         super( PrettyPrint, self ).reset()
         self.out    = sys.stdout
-        self.lines  = []
         self.fmt    = "%31s\t%s"
+        self._setup()
+        return
+
+    def _setup( self ):
         self.maxlen = 0
+        self.lines  = []
         return
 
     def ignore( self, name ):
         return not name.endswith( '.conf' )
+
+    def next_file( self, name ):
+        super( PrettyPrint, self ).next_file( name )
+        self._setup()
+        return
+
+    def end_file( self, name ):
+        self._show()
+        super( PrettyPrint, self ).end_file( name )
+        return
 
     def next_line( self, line ):
         n = line.find( '#' )
@@ -37,7 +51,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         self.lines.append( (k, value.strip()) )
         return
 
-    def finish( self ):
+    def _show( self ):
         self.fmt = "%%%ds = %%s" % self.maxlen
         self.lines.sort( key = lambda (key,value): key.lower() )
         for key,value in self.lines:
