@@ -10,6 +10,8 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 	NAME	= 'cups-pp'
 	DESCRIPTION = """Print cups configuration file."""
 
+	PLAIN = [ 'info', 'deviceuri' ]
+
 	def	__init__( self ):
 		super(PrettyPrint, self).__init__()
 		self.reset()
@@ -17,64 +19,69 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	reset( self ):
 		super(PrettyPrint, self).reset()
-		self.depth = 0
-		self.comment_column = 40
-		self.leadin = '  '
+		self._init_section()
+		self._clear_all_sections()
 		return
 
-	def	indent( self, content, comment ):
-		# Indent content first
-		line = (self.leadin * self.depth) + content
-		# Align comments before writing line
-		if len(comment) > 0:
-			line = line + (' '*max( 1, 40 - len(line))) + '# ' + comment
-		print line
+	def	_clear_all_sections( self ):
+		self.sections = []
+		return
+
+	def	_init_section( self ):
+		self.kind    = 'Dunno'
+		self.options = []
+		self.name    = 'Dunno'
 		return
 
 	def	next_line( self, line ):
-		parts = line.split( '#', 1 )
-		l = len(parts)
-		if l == 0:
-			# Blank line
-			print
-			return
-		if l == 1:
-			content = parts[0]
-			comment = ''
-		else:
-			content = parts[0]
-			comment = parts[1]
-		content = parts[0]
-		if len(content) == 0:
-			# No content, treat comment as content
-			self.indent( '#' + comment, '' )
-			return
-		# Align args after command
-		parts = content.split( ' ', 1 )
-		if len(parts) == 1:
-			verb = parts[0]
-			args = ''
-		else:
-			verb = parts[0]
-			args = parts[1]
-		content = '%-15s %s' % (verb, args)
-		if not content.startswith( '<' ):
-			# Non-directive line
-			self.indent( content, comment )
-		else:
-			# Directive line
-			if content.startswith( '</' ):
-				# pop: move left, then print end-directive
-				self.depth = max( 0, self.depth - 1 )
-				self.indent( content,  comment )
+		line = line.split( '#', 1 )[0].strip()	# Drop comments!
+		if len(line) > 0:
+			lowLine = line.lower()
+			for (f,t) in [ ('\t', ' '), ('<', '< '), ('>', ' >') ]:
+				line = line.replace( f, t )
+			if lowLine.startswith( '</' ):
+				self.sections.append( (self.kind, self.name, self.options) )
+			elif lowLine.startswith( '<' ):
+				self._init_section()
+				tokens = line.split()
+				self.kind = tokens[1]
+				if len(tokens) > 2:
+					self.name = ' '.join(tokens[2:-1])
 			else:
-				# push: print, then move right
-				parts = content[:-1].split()
-				if len(parts) > 1:
-					verb = parts[0]
-					args = parts[1:]
-					args.sort()
-					content = '%-15s %s>' % ( verb, ' '.join(args))
-				self.indent( content, comment )
-				self.depth += 1
+				tokens = line.split( ' ' )
+				if len(tokens) >= 2:
+					self.options.append( (tokens[0], tokens[1:]) )
 		return
+
+	def	_dump_section( self, kind, name, options ):
+		print '<%s %s>' % (kind, name)
+		options.sort()
+		maxname = 15
+		widths = {}
+		for (name, vals) in options:
+			maxname = max( maxname, len(name) )
+			if name.lower() not in PrettyPrint.PLAIN:
+				for i in xrange( 0, len(vals) ):
+					width = len(vals[i])
+					try:
+						widths[i] = max( widths[i], width )
+					except Exception, e:
+						widths[i] = width
+		fmt = ' %%-%ds ' % maxname
+		for (name, vals) in options:
+			print fmt % name,
+			if name.lower() in PrettyPrint.PLAIN:
+				print ' '.join( vals ),
+			else:
+				for i in xrange( 0, len(vals) ):
+					vfmt = '%%-%ds' % widths[i]
+					print vfmt % vals[i],
+			print
+		print '</%s>' % kind
+		return
+
+	def	end_file( self, fname ):
+		self.sections.sort( key = lambda (k,p,o): '%s %s' % (k,p.lower()) )
+		for (kind, name, options) in self.sections:
+			self._dump_section( kind, name, options )
+		self._clear_all_sections()
