@@ -7,10 +7,11 @@ import	superclass
 
 class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
-	NAME	= 'apache-pp'
-	DESCRIPTION = """Print apache-style configuration files."""
+	NAME	= 'snmpd-pp'
+	DESCRIPTION = """Print snmpd-style configuration files."""
 
-	PLAIN = [ 'info', 'deviceuri' ]
+	PLAIN = [ ] # List of names for lesser prettyprinting
+	CUTOFF = 2	# Glob tokens[CUTOFF:] together, not padded
 
 	def	__init__( self ):
 		super(PrettyPrint, self).__init__()
@@ -19,69 +20,51 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	reset( self ):
 		super(PrettyPrint, self).reset()
-		self._init_section()
-		self._clear_all_sections()
+		self._init_all()
 		return
 
-	def	_clear_all_sections( self ):
-		self.sections = []
-		return
-
-	def	_init_section( self ):
-		self.kind    = 'Dunno'
-		self.options = []
-		self.name    = 'Dunno'
+	def	_init_all( self ):
+		self.entries = []
 		return
 
 	def	next_line( self, line ):
 		line = line.split( '#', 1 )[0].strip()	# Drop comments!
-		if len(line) > 0:
-			lowLine = line.lower()
-			for (f,t) in [ ('\t', ' '), ('<', '< '), ('>', ' >') ]:
-				line = line.replace( f, t )
-			if lowLine.startswith( '</' ):
-				self.sections.append( (self.kind, self.name, self.options) )
-			elif lowLine.startswith( '<' ):
-				self._init_section()
-				tokens = line.split()
-				self.kind = tokens[1]
-				if len(tokens) > 2:
-					self.name = ' '.join(tokens[2:-1])
-			else:
-				tokens = line.split( ' ' )
-				if len(tokens) >= 2:
-					self.options.append( (tokens[0], tokens[1:]) )
+		tokens = line.split()
+		if len(tokens) > 0:
+			self.entries.append( tokens )
 		return
 
-	def	_dump_section( self, kind, name, options ):
-		print '<%s %s>' % (kind, name)
-		options.sort()
-		maxname = 15
-		widths = {}
-		for (name, vals) in options:
-			maxname = max( maxname, len(name) )
-			if name.lower() not in PrettyPrint.PLAIN:
-				for i in xrange( 0, len(vals) ):
-					width = len(vals[i])
-					try:
-						widths[i] = max( widths[i], width )
-					except Exception, e:
-						widths[i] = width
-		fmt = ' %%-%ds ' % maxname
-		for (name, vals) in options:
-			print fmt % name,
-			if name.lower() in PrettyPrint.PLAIN:
-				print ' '.join( vals ),
+	def	_dump( self ):
+		self.entries.sort()
+		widths = { 0:15, 1:15 }
+		for tokens in self.entries:
+			name = tokens[0].lower()
+			if name not in PrettyPrint.PLAIN:
+				for tokens in self.entries:
+					n = min( PrettyPrint.CUTOFF, len(tokens) )
+					for i in xrange( 0, n ):
+						n = len(tokens[i])
+						try:
+							widths[i] = max( widths[i], n )
+						except Exception, e:
+							widths[i] = n
+		for tokens in self.entries:
+			name = tokens[0]
+			fmt = '%%-%ds' % widths[0]
+			print fmt % tokens[0],
+			if name in PrettyPrint.PLAIN:
+				print ' '.join(tokens[1:]),
 			else:
-				for i in xrange( 0, len(vals) ):
-					vfmt = '%%-%ds' % widths[i]
-					print vfmt % vals[i],
+				n = len(tokens)
+				cutoff = min( PrettyPrint.CUTOFF, n )
+				for i in xrange( 1, cutoff ):
+					fmt = '%%-%ds' % widths[i]
+					print fmt % tokens[i],
+				if cutoff < n:
+					print ' '.join(tokens[cutoff:]),
 			print
-		print '</%s>' % kind
 		return
 
 	def	end_file( self, fname ):
-		self.sections.sort( key = lambda (k,p,o): '%s %s' % (k,p.lower()) )
-		for (kind, name, options) in self.sections:
-			self._dump_section( kind, name, options )
-		self._clear_all_sections()
+		self._dump()
+		self._init_all()
