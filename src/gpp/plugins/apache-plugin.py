@@ -7,8 +7,8 @@ import	superclass
 
 class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
-	NAME	= 'cups-pp'
-	DESCRIPTION = """Print cups configuration file."""
+	NAME	= 'apache-pp'
+	DESCRIPTION = """Print apache-style configuration files."""
 
 	PLAIN = [ 'info', 'deviceuri' ]
 
