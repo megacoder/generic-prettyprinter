@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-VERSION	= '0.0.31'
+VERSION	= '0.0.32'
 
 from	distutils.core			import	setup
 import	glob
@@ -15,7 +15,7 @@ setup(
 	author_email     ='Tommy.Reynolds@MegaCoder.com',
 	license          ='GPL',
 	url              ='http://www.MegaCoder.com',
-	long_description =open('README').read(),
+	long_description =open('src/gpp/README.txt').read(),
 	packages         =['gpp' ],
 	package_dir      ={ 'gpp':'src/gpp' },
 	package_data     ={ 'gpp': [ 'plugins/*.py', 'doc/*', 'examples/*', '*.txt',
