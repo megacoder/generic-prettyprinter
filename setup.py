@@ -18,7 +18,8 @@ setup(
 	long_description =open('README').read(),
 	packages         =['gpp' ],
 	package_dir      ={ 'gpp':'src/gpp' },
-	package_data     ={ 'gpp': [ 'plugins/*.py' ] },
+	package_data     ={ 'gpp': [ 'plugins/*.py', 'doc/*', 'examples/*', '*.txt',
+							'*.html'] },
 	entry_points     ={
 		'console_scripts': [
 			'gpp = gpp:Main'
