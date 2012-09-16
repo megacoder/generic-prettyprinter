@@ -17,48 +17,70 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	reset( self ):
 		super( PrettyPrint, self ).reset()
-		self.begins_with = None
-		self.ends_with   = None
-		self.max_name    = 15
-		self.stanza      = []
 		self.stanzas     = []
+		self.new_stanza( None )
 		return
 
-	def	dump_stanza( self, beginning, content, ending ):
-		fmt = '%%%ds = %%s' % self.max_name
-		content.sort()
-		print '\t'.join(beginning)
-		for tokens in content:
+	def	new_stanza( self, header ):
+		self.header   = header
+		self.footer   = None
+		self.stanza   = []
+		return
+
+	def	finish_stanza( self, footer ):
+		self.stanza.sort()
+		self.stanzas.append( (self.header, self.stanza, footer) )
+		return
+
+	def	dump_stanza( self, header, body, footer ):
+		maxname = 13
+		for (f,v) in body:
+			maxname = max( maxname, len(f) )
+		fmt = '%%%ds = %%s' % (maxname+2)
+		body.sort()
+		print '\t'.join(header)
+		if len(body) > 0: print
+		for tokens in body:
 			print fmt % ( tokens[0], ' '.join( tokens[1:] ) )
-		print '\t'.join(ending)
+		print
+		print '\t'.join(footer)
 		return
 
-	def	finish_stanza( self, beginning, content, ending ):
-		self.stanzas.append( (beginning, content, ending) )
-		return
+	def	expand( self, line ):
+		# print '|%s|-->' % line,
+		for (f,t) in [
+			('{', ' { '),
+			('}', ' } '),
+			('=', ' = '),
+			( '[', ' [ '),
+			( ']', ' ] ')
+		]:
+			line = line.replace( f, t )
+		# print '|%s|' % line
+		return line
 
 	def	next_line( self, line ):
-		line = line.strip()
-		if line.startswith( '#' ):
-			print line
-			return
-		# All other lines are to be correctly indented
-		if line.find( '{' ) > -1:
-			self.begins_with = line.rstrip().replace( '{', ' { ' ).replace( '}', ' } ' ).split()
-			self.stanza = []
-		elif line.find( '}' ) > -1:
-			self.ends_with = line.rstrip().replace( '{', ' { ' ).replace( '}', ' } ' ).split()
-			self.finish_stanza( self.begins_with, self.stanza, self.ends_with )
+		line = line.split( '#', 1 )[0].strip()
+		if len(line) == 0: return
+		if line.endswith( '{' ):
+			self.new_stanza( self.expand(line).split() )
+		elif line.startswith( '}' ):
+			self.finish_stanza( self.expand(line).split() )
 		else:
-			tokens = line.rstrip().split( '=', 1 )
-			if len(tokens) == 2:
-				self.max_name = max( self.max_name, len(tokens[0]) )
+			tokens = line.split( '=', 1 )
+			n = len(tokens)
+			if n == 2:
+				for i in xrange( 0, n ):
+					tokens[i] = tokens[i].strip()
 				self.stanza.append( tokens )
 		return
 
 	def	finish( self ):
-		if len(self.stanzas) > 0:
-			self.stanzas.sort()
-			for (beginning,content,ending) in self.stanzas:
-				self.dump_stanza( beginning, content, ending )
+		self.stanzas.sort()
+		others = False
+		for (header,body,footer) in self.stanzas:
+			if others:
+				print
+			self.dump_stanza( header, body, footer )
+			others = True
 		return
