@@ -4,7 +4,10 @@ if [ $# -eq 0 ]; then
 	# set -- bdist --format=gztar
 	set -- bdist --format=rpm
 fi
-markdown2 README.md						|	\
-	tee src/generic-prettyprinter/README.html		|	\
-	lynx -dump -stdin >src/generic-prettyprinter/README.txt
+(
+	set +x
+	markdown2 README.md					|	\
+		tee README.html					|	\
+	lynx -dump -stdin >README.txt
 python ./setup.py "${@}"
+) 2>&1 | tee bootstrap.log
