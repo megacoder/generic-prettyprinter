@@ -15,9 +15,9 @@ setup(
 	author_email     ='Tommy.Reynolds@MegaCoder.com',
 	license          ='GPL',
 	url              ='http://www.MegaCoder.com',
-	long_description =open('src/gpp/README.txt').read(),
-	packages         =['gpp' ],
-	package_dir      ={ 'gpp':'src/gpp' },
-	package_data     ={ 'gpp': [ 'plugins/*.py', '*.txt', '*.html' ] },
+	long_description =open('src/generic-prettyprinter/README.txt').read(),
+	packages         =['generic-prettyprinter' ],
+	package_dir      ={ 'generic-prettyprinter':'src/generic-prettyprinter' },
+	package_data     ={ 'generic-prettyprinter': [ 'plugins/*.py', '*.txt', '*.html' ] },
 	scripts			=[ 'scripts/gpp' ],
 )
