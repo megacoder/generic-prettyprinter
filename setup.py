@@ -18,8 +18,6 @@ setup(
 	long_description =open('src/gpp/README.txt').read(),
 	packages         =['gpp' ],
 	package_dir      ={ 'gpp':'src/gpp' },
-	package_data     ={ 'gpp': [ 'plugins/*.py' ] },
-	scripts			=[
-		'scripts/gpp'
-	],
+	package_data     ={ 'gpp': [ 'plugins/*.py', '*.txt', '*.html' ] },
+	scripts			=[ 'scripts/gpp' ],
 )
