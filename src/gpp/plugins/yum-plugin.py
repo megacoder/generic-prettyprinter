@@ -45,7 +45,11 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	finish( self ):
 		self.feeds.sort( key = lambda (n,l,f) : n.lower() )
+		others = False
 		for (name, max_name, entries) in self.feeds:
+			if others:
+				print
+			others = True
 			print '[%s]' % name
 			fmt = '%%%ds = %%s' % max_name
 			for (id,value) in entries:
