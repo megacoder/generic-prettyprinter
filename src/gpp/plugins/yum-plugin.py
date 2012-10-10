@@ -51,6 +51,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				print
 			others = True
 			print '[%s]' % name
+			print
 			fmt = '%%%ds = %%s' % max_name
 			for (id,value) in entries:
 				print fmt % ( id, value )
