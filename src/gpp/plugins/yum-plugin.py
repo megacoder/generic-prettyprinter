@@ -25,6 +25,9 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		self.max_name = 1
 		return
 
+	def	ignore( self, fn ):
+		return not fn.endswith( '.repo' )
+
 	def	next_line( self, line ):
 		octothorpe = line.find( '#' )
 		if octothorpe > -1:
