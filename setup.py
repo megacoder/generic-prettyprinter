@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-VERSION	= '0.0.36'
+VERSION	= '0.0.37'
 
 from	distutils.core			import	setup
 import	glob
@@ -8,7 +8,7 @@ import	os
 from	DistUtilsExtra.command	import	*
 
 setup(
-	name             ='gpp',
+	name             ='generic_prettyprinter',
 	version          = VERSION,
 	description      ='Generic Pretty Printer, using plugins',
 	author           ='Tommy Reynolds',
@@ -16,8 +16,8 @@ setup(
 	license          ='GPL',
 	url              ='http://www.MegaCoder.com',
 	long_description =open('README.txt').read(),
-	packages         =['gpp' ],
-	package_dir      ={ 'gpp':'src/gpp' },
-	package_data     ={ 'gpp': [ 'plugins/*.py', '*.txt', '*.html' ] },
+	packages         =['generic_prettyprinter' ],
+	package_dir      ={ 'generic_prettyprinter':'src/gpp' },
+	package_data     ={ 'generic_prettyprinter': [ 'plugins/*.py', '*.txt', '*.html' ] },
 	scripts			=[ 'scripts/gpp' ],
 )
