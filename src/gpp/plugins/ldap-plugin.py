@@ -23,7 +23,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         tokens = line.split()
         if len(tokens) > 0:
             name = tokens[0].upper()
-            self.settings.append( name, ' '.join(tokens[1:]) )
+            self.settings.append( (name, ' '.join(tokens[1:])) )
         return
 
     def _flush( self ):
@@ -32,7 +32,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         for (n,v) in self.settings:
             max_name = max( max_name, len(n) )
         fmt = ' %%%ds  %%s' % max_name
-        for (n,v) in self.setings:
+        for (n,v) in self.settings:
             print fmt % (n, v)
         self.reset()
         return
