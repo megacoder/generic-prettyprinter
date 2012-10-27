@@ -42,9 +42,9 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	_end_block( self ):
-		self.captured.sort( key = lambda (t, c) : t[0].lower() )
-		for saved, said in self.captured:
-			self._spew( saved, said )
+		self.captured.sort( key = lambda t : t[0].lower() )
+		for tokens in self.captured:
+			self._spew( tokens )
 		self.captured = []
 		return
 
