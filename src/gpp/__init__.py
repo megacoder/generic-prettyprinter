@@ -69,10 +69,13 @@ class GenericPrettyPrinter( object ):
         opts, args = p.parse_args()
         # Here we go...
         dll_name = '%s-plugin' % opts.kind
+        # DEBUG print >>sys.stderr, 'Loading module %s' % dll_name
         try:
             dll = __import__(dll_name)
         except Exception, e:
             print >>sys.stderr, 'Sorry, no prettyprinter for "%s".' % opts.kind
+            # DEBUG print >>sys.stderr, 'What follows is the python error indicator we received:'
+            print >>sys.stderr, e
             return True
         if opts.ofile is not None:
             try:
