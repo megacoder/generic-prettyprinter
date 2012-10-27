@@ -28,30 +28,34 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		tokens = line.rstrip().split( ':', 1 )
 		if len(tokens) == 2:
 			self.max_name = max( self.max_name, len( tokens[0] ) )
-			args = tokens[1].split()
-			args.sort()
-			for arg in args:
+			args = {}
+			for arg in tokens[1].split():
 				kind = arg.split( '=', 1 )[0]
 				try:
 					self.max_kinds[kind] = max( self.max_kinds[kind], len(arg) )
 				except:
 					self.max_kinds[kind] = len(arg)
+				args[kind] = arg
 			self.lines.append( (tokens[0], args) )
 		return
 
 	def	finish( self ):
 		self.lines.sort( key = lambda (n,a): string.lower(n) )
+		kinds = []
 		kind_fmts = {}
+		for kind in self.max_kinds.keys():
+			kinds.append( kind )
+			kind_fmts[kind] = '%%-%ds' % self.max_kinds[kind]
+		kinds.sort()
 		for (name, args) in self.lines:
-			for arg in args:
-				kind = arg.split('=',1)[0]
-				kind_fmts[kind] = '%%-%ds' % self.max_kinds[kind]
-		for (name, args) in self.lines:
-			args.sort()
 			options = ''
-			for arg in args:
-				kind = arg.split( '=', 1 )[0]
-				options = options + ' ' + (kind_fmts[kind] % arg)
+			keys = args.keys()
+			for kind in kinds:
+				if kind in keys:
+					s = kind_fmts[kind] % args[kind]
+				else:
+					s = kind_fmts[kind] % ""
+				options = options + ' ' + s
 			fmt = '%%%ds :%%s' % self.max_name
 			print fmt % ( name, options )
 		return
