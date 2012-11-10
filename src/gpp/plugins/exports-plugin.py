@@ -27,7 +27,6 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             roster = []
             for token in tokens[1:]:
                 self.max_spec = max( self.max_spec, len(token) )
-                print 'token=%s' % token
                 lparen = token.find( '(' )
                 if lparen > -1:
                     host = token[:lparen]
