@@ -17,24 +17,25 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         return
 
     def next_line( self, line ):
-        if not line.startswith( '#' ):
-            tokens = line.rstrip().split()
+        tokens = line.split( '#', 1 )[0].strip().split()
+        if len(tokens) > 0:
             # Format is
-            #   <name> <host>(<param>[,...]) ...
+            #   <share> <host>(<param>[,...]) ...
             # Reformat only regular, or bind-mount, lines
             share = tokens[0]
             self.max_share = max( self.max_share, len(share) )
             roster = []
             for token in tokens[1:]:
                 self.max_spec = max( self.max_spec, len(token) )
+                print 'token=%s' % token
                 lparen = token.find( '(' )
                 if lparen > -1:
                     host = token[:lparen]
-                    list = token[lparen+1:-1]
-                    params = list.split( ',' )
+                    attrs = token[lparen+1:-1]
+                    params = attrs.split( ',' )
                     params.sort()
-                    list = ','.join( params )
-                    roster.append( (host, list) )
+                    ordered = ','.join( params )
+                    roster.append( (host, ordered) )
             roster.sort( key = lambda (h,l): h.lower() )
             self.content.append( (share, roster) )
         return
