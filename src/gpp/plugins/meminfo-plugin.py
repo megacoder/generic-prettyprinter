@@ -95,5 +95,16 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			)
 		except Exception, e:
 			pass
-		self._end_notes()
+		try:
+			dom0mem = (
+				502 + int(
+					(observed['MemTotal'] / 1024.0 * 0.0205) + 0.5
+				)
+			)
+			self._addto_notes(
+				'Recommended memory if dom0 = %d MB' % dom0mem
+			)
+			self._end_notes()
+		except:
+			pass
 		return
