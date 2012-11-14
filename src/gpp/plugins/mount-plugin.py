@@ -8,7 +8,7 @@ import	superclass
 
 class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
-	NAME = 'mount-pp'
+	NAME = 'mount'
 	DESCRIPTION = """Display /proc/mounts or mount(8) in a canonical form."""
 
 	def	__init__( self ):
@@ -16,6 +16,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	reset( self ):
+		super( PrettyPrint, self ).reset()
 		self.lines = []
 		self.is_proc = False
 		return
