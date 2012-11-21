@@ -18,10 +18,10 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         super( PrettyPrint, self ).reset()
         self.out    = sys.stdout
         self.fmt    = "%31s\t%s"
-        self._setup()
+        self._prepare_for_next_file()
         return
 
-    def _setup( self ):
+    def _prepare_for_next_file( self ):
         self.maxlen = 0
         self.lines  = []
         return
@@ -29,9 +29,9 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
     def ignore( self, name ):
         return not name.endswith( '.conf' )
 
-    def next_file( self, name ):
-        super( PrettyPrint, self ).next_file( name )
-        self._setup()
+    def begin_file( self, name ):
+        super( PrettyPrint, self ).begin_file( name )
+        self._prepare_for_next_file()
         return
 
     def end_file( self, name ):
