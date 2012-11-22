@@ -21,7 +21,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	_prepare( self ):
 		self.content = []
-		self.maxfield = 12
+		self.maxvia = 12
 		return
 
 	def	begin_file( self, name ):
