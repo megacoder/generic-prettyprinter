@@ -36,7 +36,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         return
 
     def _flush( self ):
-        if len(self.settings) > 0 and len(self.prolog) > 0:
+        if len(self.settings) > 0 or len(self.prolog) > 0:
             self.settings.sort( key = lambda (n,v): n )
             for line in self.prolog:
                 print line
