@@ -92,7 +92,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                     n = len(tokens)
                     sep = '\t'
                     for i in xrange( 0, n ):
-                        fmt = '%%s%%%-ds' % self.widths[i]
+                        fmt = '%%s%%-%-ds' % self.widths[i]
                         print fmt % (sep, tokens[i]),
                         sep = ' '
                     print
