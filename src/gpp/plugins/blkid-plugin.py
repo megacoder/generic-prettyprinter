@@ -19,6 +19,10 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	reset( self ):
 		super( PrettyPrint, self ).reset()
+		self._prepare()
+		return
+
+	def	_prepare( self ):
 		self.lines = []
 		self.max_name = 15
 		self.max_kinds = {}
@@ -39,7 +43,12 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			self.lines.append( (tokens[0], args) )
 		return
 
-	def	finish( self ):
+	def	begin_file( self, fn ):
+		super( PrettyPrint, self ).begin_file( fn )
+		self._prepare()
+		return
+
+	def	end_file( self, fn ):
 		self.lines.sort( key = lambda (n,a): string.lower(n) )
 		kinds = []
 		kind_fmts = {}
@@ -58,4 +67,5 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				options = options + ' ' + s
 			fmt = '%%%ds :%%s' % self.max_name
 			print fmt % ( name, options )
+		super( PrettyPrint, self ).end_file( fn )
 		return
