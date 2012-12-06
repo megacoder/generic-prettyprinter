@@ -17,6 +17,10 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	reset( self ):
 		super( PrettyPrint, self ).reset()
+		self._prepare()
+		return
+
+	def	_prepare( self ):
 		self.stanzas     = []
 		self.new_stanza( None )
 		return
@@ -75,7 +79,12 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				self.stanza.append( tokens )
 		return
 
-	def	finish( self ):
+	def	begin_file( self, fn ):
+		super( PrettyPrint, self ).begin_file( fn )
+		self._prepare()
+		return
+
+	def	end_file( self, fn ):
 		self.stanzas.sort()
 		others = False
 		for (header,body,footer) in self.stanzas:
@@ -83,4 +92,5 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				print
 			self.dump_stanza( header, body, footer )
 			others = True
+		super( PrettyPrint, self ).end_file( fn )
 		return
