@@ -15,8 +15,17 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	reset( self ):
 		super( PrettyPrint, self ).reset()
+		self._prepare()
+		return
+
+	def	_prepare( self ):
 		self.tokens = []
 		self.max_name = 1
+		return
+
+	def	begin_file( self, name ):
+		super( PrettyPrint, self ).begin_file( name )
+		self._prepare()
 		return
 
 	def	next_line( self, line ):
@@ -33,9 +42,10 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			 ) )
 		return
 
-	def	finish( self ):
+	def	end_file( self, name ):
 		fmt = '%%-9s %%-%ds %%s' % self.max_name
 		self.tokens.sort( key = lambda (v,n,o) : (v.lower(),n.lower()) )
 		for verb,name,rest in self.tokens:
 			print fmt % (verb, name, rest)
+		super( PrettyPrint, self ).end_file( name )
 		return
