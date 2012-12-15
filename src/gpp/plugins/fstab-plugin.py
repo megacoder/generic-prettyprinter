@@ -14,43 +14,47 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def __init__( self ):
         super( PrettyPrint, self ).__init__()
+        self.reset()
         return
 
-    def pad(self, parts, cols):
-        s = ""
-        while len(parts) > 0:
-            c = cols.pop(0)
-            l = len(s)
-            n = c - l
-            if n < 1 and c > 0: n = 1
-            s = s + " " * n + parts.pop(0)
-        return s
+    def reset( self ):
+        super( PrettyPrint, self ).reset()
+        self.widths = {}
+        self.entries = []
+        return
 
     def next_line( self, line ):
-        if not line.startswith( '#' ):
-            parts = line.split()
-            l = len(parts)
-            # Reformat only regular, or bind-mount, lines
-            if l == 4 or l == 6:
-                #
-                opts = parts[3].split(',')
-                opts.sort()
-                parts[3]  = ",".join(opts)
-                #
-                line = self.pad(parts,[
-                    0, 24, 47, 55, 77, 79
-                ])
-        print line
+        parts = line.split( '#', 1 )[0].strip().split()
+        L = len( parts )
+        if (L == 4) or (L == 6):
+            for i in xrange( 0, L ):
+                # Reformat only regular, or bind-mount, lines
+                if L == 4 or L == 6:
+                    k = len( parts[i] )
+                    try:
+                        w = self.widths[i]
+                    except:
+                        w = k
+                    self.widths[i] = max( k, w )
+            self.entries.append( (L, parts) )
+        return
+
+    def dump( self ):
+        for (L, parts) in self.entries:
+            sep = ''
+            for i in xrange( 0, L ):
+                fmt = '%%s%%-%ds' % self.widths[i]
+                print fmt % (sep, parts[i]),
+                sep = ' '
+            print
         return
 
     def begin_file( self, name ):
-        if self.multi > 1:
-            print '#' * 80
-            print '# File %d of %d: %s' % (self.fileno, self.multi, name)
-            print '#' * 80
+        super( PrettyPrint, self ).begin_file( name )
+        self.reset()
         return
 
     def end_file( self, name ):
-        if self.multi > 1 and self.multi != self.fileno:
-            print
+        self.dump()
+        super( PrettyPrint, self ).end_file( name )
         return
