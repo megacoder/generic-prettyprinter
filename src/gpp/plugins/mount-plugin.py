@@ -10,6 +10,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	NAME = 'mount'
 	DESCRIPTION = """Display /proc/mounts or mount(8) in a canonical form."""
+	FIELDS = ['name', 'mp', 'type', 'backup', 'fsck', 'attr' ]
 
 	def	__init__( self ):
 		super( PrettyPrint, self ).__init__()
@@ -17,58 +18,73 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	reset( self ):
 		super( PrettyPrint, self ).reset()
-		self.lines = []
+		self._prepare()
+		return
+
+	def	_prepare( self ):
+		self.widths = {}
+		self.content = []
 		self.is_proc = False
+		self.first = True
 		return
 
-	def	process( self, f = sys.stdin ):
-		first = True
-		for line in f:
-			tokens = line.rstrip().split()
-			n = len( tokens )
-			if n != 6:
-				self.error( 'Huh? %s' % line.rstrip() )
-			else:
-				if first:
-					self.is_proc = tokens[5].isdigit()
-					first = False
-				if self.is_proc:
-					# /proc/mounts type of file.
-					name   = tokens[0]
-					mp     = tokens[1]
-					type   = tokens[2]
-					attr   = tokens[3].split( ',' )
-					backup = tokens[4]
-					fsck   = tokens[5]
-				else:
-					# /bin/mount type of file
-					name   = tokens[0]
-					mp     = tokens[2]
-					type   = tokens[4]
-					attr   = tokens[5][1:-1].split( ',' )
-					backup = None
-					fsck   = None
-				attr.sort()
-				self.lines.append(
-					( name, mp, type, attr, backup, fsck )
-				)
+	def	begin_file( self, name ):
+		super( PrettyPrint, self ).begin_file( name )
+		self._prepare()
 		return
 
-	def	finish( self ):
-		others = False
-		fmt = '%-39s %s\n\ttype=%s\tattr=%s'
-		self.lines.sort()
-		for (name, mp, type, attr, backup, fsck) in self.lines:
-			# print name, mp, type, ','.join(attr), backup, fsck
-			if others:
-				print
-			others = True
-			print fmt % (
-				name,
-				mp,
-				type,
-				','.join(attr)
-			)
+	def	next_line( self, line ):
+		tokens = line.rstrip().split()
+		n = len( tokens )
+		if n != 6:
+			self.error( 'Huh? %s' % line.rstrip() )
+		else:
+			if self.first:
+				self.is_proc = tokens[5].isdigit()
+				self.first = False
+			fields = {}
 			if self.is_proc:
-				print '\tbackup=%s\tfsck=%s' % (backup, fsck)
+				# /proc/mounts type of file.
+				fields['name']   = tokens[0]
+				fields['mp']     = tokens[1]
+				fields['type']   = tokens[2]
+				attr             = tokens[3].split( ',' )
+				fields['backup'] = tokens[4]
+				fields['fsck']   = tokens[5]
+			else:
+				# /bin/mount type of file
+				fields['name']   = tokens[0]
+				fields['mp']     = tokens[2]
+				fields['type']   = tokens[4]
+				attr             = tokens[5][1:-1].split( ',' )
+				fields['backup'] = None
+				fields['fsck']   = None
+			attr.sort()
+			fields['attr'] = ','.join(attr)
+			for key in fields.keys():
+				field = fields[key]
+				if field is not None:
+					try:
+						self.widths[key] = max(self.widths[key], len(field))
+					except:
+						self.widths[key] = len(field)
+			self.content.append( fields )
+		return
+
+	def	end_file( self, name ):
+		self.content.sort( key = lambda f: f['name'] )
+		for fields in self.content:
+			line = ""
+			sep = ''
+			for key in PrettyPrint.FIELDS:
+				try:
+					field = fields[key]
+					if field is not None:
+						fmt = '%%s%%-%ds' % self.widths[key]
+						line += fmt % (sep, field)
+						sep = ' '
+				except:
+					pass
+			print line.rstrip()
+		super( PrettyPrint, self ).end_file( name )
 		return
