@@ -19,8 +19,17 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def reset( self ):
         super( PrettyPrint, self ).reset()
+        self._prepare()
+        return
+
+    def _prepare( self ):
         self.widths = {}
         self.entries = []
+        return
+
+    def begin_file( self, name ):
+        super( PrettyPrint, self ).begin_file( name )
+        self._prepare()
         return
 
     def next_line( self, line ):
@@ -47,11 +56,6 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                 print fmt % (sep, parts[i]),
                 sep = ' '
             print
-        return
-
-    def begin_file( self, name ):
-        super( PrettyPrint, self ).begin_file( name )
-        self.reset()
         return
 
     def end_file( self, name ):
