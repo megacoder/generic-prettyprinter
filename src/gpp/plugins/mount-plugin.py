@@ -71,7 +71,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			self.content.append( fields )
 		return
 
-	def	end_file( self, name ):
+	def	_report( self ):
 		self.content.sort( key = lambda f: f['name'] )
 		for fields in self.content:
 			line = ""
@@ -86,5 +86,15 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				except:
 					pass
 			print line.rstrip()
+		self._prepare()
+		return
+
+	def	end_file( self, name ):
+		self._report()
 		super( PrettyPrint, self ).end_file( name )
+		return
+
+	def	finish( self ):
+		if not self.first:
+			self._report()
 		return

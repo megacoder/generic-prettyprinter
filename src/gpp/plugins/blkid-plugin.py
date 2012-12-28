@@ -48,7 +48,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		self._prepare()
 		return
 
-	def	end_file( self, fn ):
+	def	_report( self ):
 		self.lines.sort( key = lambda (n,a): string.lower(n) )
 		kinds = []
 		kind_fmts = {}
@@ -67,5 +67,15 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				options = options + ' ' + s
 			fmt = '%%%ds :%%s' % self.max_name
 			print fmt % ( name, options )
+		self._prepare()
+		return
+
+	def	end_file( self, name ):
+		self._report()
 		super( PrettyPrint, self ).end_file( fn )
+		return
+
+	def	finish( self ):
+		if len(self.lines) > 0:
+			self._report()
 		return

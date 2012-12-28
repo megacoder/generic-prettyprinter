@@ -60,5 +60,11 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def end_file( self, name ):
         self.dump()
+        self._prepare()
         super( PrettyPrint, self ).end_file( name )
+        return
+
+    def finish( self ):
+        if len(self.entries) > 0:
+            self.dump()
         return

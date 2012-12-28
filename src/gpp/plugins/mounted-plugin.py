@@ -86,7 +86,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		print
 		return
 
-	def	end_file( self, name ):
+	def	_report( self ):
 		self.content.sort()
 		self._print_set( self.title )
 		bars = self.title
@@ -96,5 +96,15 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		print
 		for tokens in self.content:
 			self._print_set( tokens )
+		self._prepare()
+		return
+
+	def	end_file( self, name ):
+		self._report()
 		super( PrettyPrint, self ).end_file( name )
+		return
+
+	def	finish( self ):
+		if not self.first:
+			self._report()
 		return
