@@ -24,7 +24,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		self.widths  = {}
 		self.content = []
 		self.first   = True
-		self.title	 = []
+		self.title	 = None
 		return
 
 	def	begin_file( self, name ):
@@ -47,11 +47,18 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		if n == 0: return
 		if self.first:
 			if tokens[0] == 'Kernel':
-				# Discard header
-				return
-			self.first = False
-			self.title = tokens
-			self._max_widths( tokens )
+				# route -n
+				pass
+			elif tokens[0] == 'Iface':
+				# /proc/net/route
+				self.first = False
+				self.title = tokens
+				self._max_widths( tokens )
+			else:
+				# ip route show -- there is no title
+				self.first = False
+				self._max_widths( tokens )
+				self.content.append( tokens )
 		else:
 			self._max_widths( tokens )
 			self.content.append( tokens )
@@ -73,12 +80,13 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	end_file( self, name ):
 		self.content.sort()
-		self._print_set( self.title )
-		bars = self.title
-		for i in xrange( 0, len(bars) ):
-			bars[i] = '-' * self.widths[i]
-		self._print_set( bars )
-		print
+		if self.title:
+			self._print_set( self.title )
+			bars = self.title
+			for i in xrange( 0, len(bars) ):
+				bars[i] = '-' * self.widths[i]
+			self._print_set( bars )
+			print
 		for tokens in self.content:
 			self._print_set( tokens )
 		super( PrettyPrint, self ).end_file( name )
