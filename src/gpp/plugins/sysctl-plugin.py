@@ -18,10 +18,10 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         super( PrettyPrint, self ).reset()
         self.out    = sys.stdout
         self.fmt    = "%31s\t%s"
-        self._prepare_for_next_file()
+        self._prepare()
         return
 
-    def _prepare_for_next_file( self ):
+    def _prepare( self ):
         self.maxlen = 0
         self.lines  = []
         return
@@ -31,7 +31,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def begin_file( self, name ):
         super( PrettyPrint, self ).begin_file( name )
-        self._prepare_for_next_file()
+        self._prepare()
         return
 
     def end_file( self, name ):
@@ -56,4 +56,10 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         self.lines.sort( key = lambda (key,value): key.lower() )
         for key,value in self.lines:
             print self.fmt % (key, value)
+        self._prepare()
+        return
+
+    def finish( self ):
+        if len(self.lines) > 0:
+            self._show()
         return
