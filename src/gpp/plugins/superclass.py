@@ -42,6 +42,7 @@ class   MetaPrettyPrinter( object ):
         return
 
     def end_file( self, fn ):
+        self.report()
         if self.fileno < self.multi:
             print
         self.filename = None
@@ -88,7 +89,11 @@ class   MetaPrettyPrinter( object ):
                 self.do_name( os.path.join( dn, fn ) )
         return
 
+    def report( self, final = False ):
+        return
+
     def finish( self ):
+        self.report( final = True )
         return
 
     def error( self, msg, e = None ):
