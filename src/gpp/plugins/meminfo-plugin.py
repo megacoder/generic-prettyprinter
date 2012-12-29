@@ -60,7 +60,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 	def	_end_notes( self ):
 		return
 
-	def	_report( self ):
+	def	report( self, final = False ):
 		maxvalue = 12
 		for (field,values) in self.lines:
 			maxvalue = max( maxvalue, len(values[0]) )
@@ -117,14 +117,4 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		except:
 			pass
 		self._prepare()
-		return
-
-	def	end_file( self, name ):
-		self._report()
-		super( PrettyPrint, self ).end_file( name )
-		return
-
-	def	finish( self ):
-		if len(self.lines) > 0:
-			self._report()
 		return
