@@ -34,11 +34,6 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         self._prepare()
         return
 
-    def end_file( self, name ):
-        self._show()
-        super( PrettyPrint, self ).end_file( name )
-        return
-
     def next_line( self, line ):
         n = line.find( '#' )
         if n > -1: line = line[:n]
@@ -51,15 +46,10 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         self.lines.append( (k, value.strip()) )
         return
 
-    def _show( self ):
+    def report( self, final = False ):
         self.fmt = "%%%ds = %%s" % self.maxlen
         self.lines.sort( key = lambda (key,value): key.lower() )
         for key,value in self.lines:
             print self.fmt % (key, value)
         self._prepare()
-        return
-
-    def finish( self ):
-        if len(self.lines) > 0:
-            self._show()
         return
