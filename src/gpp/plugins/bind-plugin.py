@@ -11,8 +11,6 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 	NAME = 'bind'
 	DESCRIPTION="""Display /etc/named.conf and friends in conical style."""
 
-	INDENT_WITH = '        '
-
 	def __init__( self ):
 		super( PrettyPrint, self ).__init__()
 		return
@@ -65,6 +63,34 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	_process( self ):
+		indent = 0
+		empty = True
+		line = ' ' * indent
 		for token in self.tokens:
-			print token
+			if token is ';':
+				print '%s%s' % ( line, token )
+				empty = True
+				line = ' ' * indent
+			elif token is '{':
+				print '%s\t%s' % (line, token)
+				indent += 8
+				line = ' ' * indent
+				empty = True
+			elif token is '}':
+				if not empty:
+					print line
+					empty = True
+				indent -= 8
+				line = (' ' * indent) + token
+				empty = False
+			else:
+				if empty:
+					line += token
+					empty = False
+				else:
+					line += ( ' ' + token )
+		if indent != 0:
+			if not empty:
+				print line
+			print '# Syntax error on input.'
 		return
