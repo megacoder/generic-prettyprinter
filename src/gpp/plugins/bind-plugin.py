@@ -24,21 +24,6 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		self.tokens = []
 		return
 
-	def _spew( self, tokens, comment = None ):
-		line = PrettyPrint.INDENT_WITH * self.depth
-		if len(tokens) > 0:
-			noun = tokens[0]
-			line += noun
-			if len(tokens) > 1:
-				line += ' '*(21-len(noun)) + ' '
-				line += ' '.join(tokens[1:])
-		if comment is None:
-			leadin = ''
-		else:
-			leadin = ' '*(64-len(line)) + comment
-		print line + leadin
-		return
-
 	def	begin_file( self, name ):
 		super( PrettyPrint, self ).begin_file( name )
 		self._prepare()
