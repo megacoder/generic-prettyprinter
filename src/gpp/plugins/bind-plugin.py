@@ -21,18 +21,41 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	_prepare( self ):
-		self.tokens = []
+		self.nodes    = []
+		self.node_cnt = 0
+		self.focus    = self._new_node()
 		return
 
-	def	begin_file( self, name ):
-		super( PrettyPrint, self ).begin_file( name )
-		self._prepare()
-		return
+	def	_new_node(
+		self,
+		content = [],
+		parent  = None,
+		child   = None
+	):
+		self.nodes.append(
+			{
+				'content': content,
+				'parent': parent,
+				'child': child
+			}
+		)
+		n = self.node_cnt
+		self.node_cnt += 1
+		return n
 
-	def	end_file( self, name ):
-		self._process()
-		self._prepare()
-		super( PrettyPrint, self ).end_file( name )
+	def	_do_token( self, token ):
+		if token is ';':
+			self.nodes[ self.focus ].content += [ token ]
+		elif token is '{':
+			self.nodes[ self.focus ].content += [ token ]
+			self.nodes[ self.focus ].child = self._new_node(
+				parent = self.focus
+			)
+		elif token is '}':
+			self.focus = self.nodes[ self.focus ].parent
+			self.nodes[ self.node.current ].content += [ token ]
+		else:
+			self.nodes[ self.node.current ].content += [ token ]
 		return
 
 	def	next_line( self, line ):
@@ -43,39 +66,26 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		line = line.replace( '{', ' { ' )
 		line = line.replace( '}', ' } ' )
 		line = line.replace( ';', ' ; ' )
-		tokens = line.split()
-		self.tokens += tokens
+		for token in line.split():
+			self._do_token( token )
 		return
 
-	def	_process( self ):
-		indent = 0
-		empty = True
-		line = ' ' * indent
-		for token in self.tokens:
-			if token is ';':
-				print '%s%s' % ( line, token )
-				empty = True
-				line = ' ' * indent
-			elif token is '{':
-				print '%s\t%s' % (line, token)
-				indent += 8
-				line = ' ' * indent
-				empty = True
-			elif token is '}':
-				if not empty:
-					print line
-					empty = True
-				indent -= 8
-				line = (' ' * indent) + token
-				empty = False
-			else:
-				if empty:
-					line += token
-					empty = False
-				else:
-					line += ( ' ' + token )
-		if indent != 0:
-			if not empty:
-				print line
-			print '# Syntax error on input.'
+	def	_process( self, focus = self.focus, indent = 0 ):
+		print '%s%s' % (
+			' ' * indent,
+			' '.join( self.nodes[ focus ].content )
+		)
+		if self.nodes[ focus ].child:
+			self._process( self.nodes[ focus ].child, indent = indent + 8 )
+		return
+
+	def	begin_file( self, name ):
+		super( PrettyPrint, self ).begin_file( name )
+		self._prepare()
+		return
+
+	def	end_file( self, name ):
+		self._process( 0 )
+		self._prepare()
+		super( PrettyPrint, self ).end_file( name )
 		return
