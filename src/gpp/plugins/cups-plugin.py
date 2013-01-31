@@ -8,6 +8,9 @@ import	superclass
 
 class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
+	INDENT = 1
+	WIDTH  = 15
+
 	NAME = 'cups'
 	DESCRIPTION="""Display /etc/cups/cups.conf and friends in conical style."""
 
@@ -64,39 +67,40 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	_show_node( self, focus = 0, indent = 0 ):
 		# print 'show node %d\n%s' % ( focus, self.nodes[focus] )
-		leadin = ' ' * indent
-		header = self.nodes[focus]['header']
-		if header:
-			line = '%-15s %s' % (
-				header[0],
-				' '.join( header[1:] )
-			)
-			print '%s%s' % ( leadin, line )
-		if focus > 0:
-			contleadin = leadin + ' '
-		else:
-			contleadin = leadin
-		width = 14
+		width = PrettyPrint.WIDTH - 1
 		for obj in self.nodes[focus]['content']:
 			if type(obj) == list:
 				width = max( width, len(obj[0]) )
+		sorted_content = sorted(self.nodes[focus]['content'])
+		# First pass gets plain entries only
+		leadin = ' ' * indent
 		fmt = '%%-%ds %%s' % width
-		for obj in sorted(self.nodes[focus]['content']):
-			if type(obj) == int:
-				# This is a node
-				self._show_node( focus = obj, indent = indent + 8 )
-			elif type(obj) == list:
+		for obj in sorted_content:
+			if type(obj) == list:
 				# This is a list of tokens
 				line = fmt % (
 					obj[0],
 					' '.join( obj[1:] )
 				)
-				print '%s%s' % ( contleadin, line )
-			else:
-				# WTF?
-				print 'huh? %s' % obj
-		if self.nodes[focus]['footer']:
-			print '%s%s' % ( leadin, ' '.join( self.nodes[ focus ]['footer']) )
+				print '%s%s' % ( leadin, line )
+		# The second pass gets any children
+		for obj in sorted_content:
+			if type(obj) == int:
+				# This is a node
+				header = self.nodes[obj]['header']
+				if header:
+					fmt = '%%-%ds %%s' % PrettyPrint.WIDTH
+					line = fmt % (
+						header[0],
+						' '.join( header[1:] )
+					)
+					print '%s%s' % ( leadin, line )
+				self._show_node(
+					focus = obj,
+					indent = indent + PrettyPrint.INDENT
+				)
+				if self.nodes[obj]['footer']:
+					print '%s%s' % ( leadin, ' '.join( self.nodes[ obj ]['footer']) )
 		return
 
 	def	begin_file( self, name ):
