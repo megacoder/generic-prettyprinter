@@ -10,7 +10,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
     NAME = 'sysctl-pp'
     DESCRIPTION="""Output /etc/sysctl.conf in canonical form."""
 
-    def __init__( self, out = sys.stdout ):
+    def __init__( self ):
         super( PrettyPrint, self ).__init__()
         return
 
