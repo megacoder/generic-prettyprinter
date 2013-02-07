@@ -89,6 +89,10 @@ class   MetaPrettyPrinter( object ):
                 self.do_name( os.path.join( dn, fn ) )
         return
 
+    def println( self, s ):
+        print >>sys.stdout, s
+        return
+
     def report( self, final = False ):
         return
 
