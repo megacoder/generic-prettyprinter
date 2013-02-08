@@ -33,18 +33,15 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def next_line( self, line ):
         tokens = line.split( '#', 1 )[0].split()
-        n = len(tokens)
-        if n > 0:
+        if len(tokens) > 0:
             self.tokens.append( tokens )
         return
 
     def report( self, final = False ):
-        # Order the lines
-        self.tokens.sort( key = lambda (t) : t[0].lower() )
         # Space groups of similar lines similarly
         last_kind = None
         lines = []
-        for tokens in self.tokens:
+        for tokens in sorted( self.tokens, key = lambda t : t[0].lower() ):
             kind = tokens[0].lower()
             if kind != last_kind:
                 if len(lines) > 0:
@@ -65,7 +62,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                 try:
                     widths[i] = max( widths[i], len(tokens[i]) )
                 except:
-                    widths[i] = max( 15, len(tokens[i]) )
+                    widths[i] = max( 12, len(tokens[i]) )
         # Dump group using fixed-width columns
         for tokens in lines:
             s = ""
