@@ -50,7 +50,7 @@ class   MetaPrettyPrinter( object ):
         return
 
     def next_line( self, s ):
-        print s
+        self.println( s )
         return
 
     def do_file( self, fn ):
