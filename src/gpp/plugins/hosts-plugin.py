@@ -49,4 +49,5 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		fmt = '%%-15s %%-%ds %%s' % self.max_canonical_name
 		for ip, addr, name, aliases in self.lines:
 			print fmt % (addr, name, ' '.join(aliases) )
+		self._prepare()
 		return
