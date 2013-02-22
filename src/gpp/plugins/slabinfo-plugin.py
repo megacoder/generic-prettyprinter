@@ -11,49 +11,72 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	__init__( self ):
 		super( PrettyPrint, self ).__init__()
+		self._prepare()
 		return
 
-	def	reset( self ):
-		self.fmt = ''
-		self.tokens = []
-		self.maxname = 23
+	def	_prepare( self ):
+		self.version = None
+		self.headers = None
+		self.widths  = {
+			1: 23
+		}
+		self.tokens  = []
 		return
 
-	def	process( self, f ):
-		lineno = 0
-		for line in f:
-			lineno += 1
-			if lineno == 1:
-				print line.strip()
-			elif lineno == 2:
-				if line[0] != '#':
-					printf >>sys.stderr, 'Format error.'
-					raise IOError
-				tokens = line.rstrip().split()
-				if len(tokens) < 2:
-					printf >>sys.stderr, 'Title format error.'
-					raise IOError
-				tokens = [ '# Name' ] + tokens[2:]
-				self.fmts = []
-				for token in tokens:
-					l = len(token)
-					self.fmts.append( '%%%d.%ds ' % (l, l) )
-				self.tokens.append( tokens )
+	def	max_sizes( self, tokens ):
+		i = 1
+		for token in tokens:
+			try:
+				self.widths[i] = max( self.widths[i], len(token) )
+			except:
+				self.widths[i] = len(token)
+			i += 1
+		return
+
+	def	next_line( self, line ):
+		# print 'line=[%s]' % line
+		if line.startswith( 'slabinfo' ):
+			# Version line
+			# print 'line1=[%s]' % line
+			self.version = line
+		elif line.startswith( '#' ):
+			# Column titles
+			tokens = [ '# name' ] + line.split()[2:]
+			self.max_sizes( tokens )
+			self.headers = tokens
+		else:
+			tokens = line.split()
+			self.max_sizes( tokens )
+			self.tokens.append( tokens )
+		return
+
+	def	print_aligned( self, tokens ):
+		i = 1
+		line = ''
+		sep = ''
+		for token in tokens:
+			if i == 1:
+				just = '-'
 			else:
-				tokens = line.rstrip().split()
-				if len(tokens) > 0:
-					self.maxname = max( self.maxname, len(tokens[0]) )
-				self.tokens.append( tokens )
+				just = ''
+			fmt = '%%%s%d.%ds' % (
+				just,
+				self.widths[i],
+				self.widths[i]
+			)
+			line = line + sep + (fmt % token)
+			sep = ' '
+			i += 1
+		self.println( line )
 		return
 
-	def	finish( self ):
-		self.fmts[0] = '%%%d.%ds' % (self.maxname, self.maxname)
+	def	report( self, final = False ):
+		if self.version:
+			self.println( self.version )
+		if self.headers:
+			self.print_aligned( self.headers )
+		self.tokens.sort( key = lambda t : t[0].lower() )
 		for tokens in self.tokens:
-			for fmt in self.fmts:
-				try:
-					token = tokens.pop(0)
-				except Exception, e:
-					token = 'N/A'
-				print fmt % token,
-			print
+			self.print_aligned( tokens )
+		self._prepare()
 		return
