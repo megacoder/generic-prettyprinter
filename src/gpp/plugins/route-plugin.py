@@ -49,7 +49,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			if tokens[0] == 'Kernel':
 				# route -n
 				pass
-			elif tokens[0] == 'Iface':
+			elif tokens[0] == 'Iface' or tokens[0] == 'Destination':
 				# /proc/net/route
 				self.first = False
 				self.title = tokens
