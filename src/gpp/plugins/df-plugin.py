@@ -31,29 +31,37 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         self._prepare()
         return
 
+    def _get_widths( self, parts ):
+        for i in xrange( 0, len(parts) ):
+            w = len(parts[i])
+            try:
+                self.widths[i] = max( self.widths[i], w )
+            except:
+                self.widths[i] = w
+        return
+
     def next_line( self, line ):
         parts = line.split( '#', 1 )[0].strip().split()
-        n = len( parts )
         if self.first:
             if line.startswith( 'Filesystem' ):
+                parts[-2] = ' '.join( parts[-2:] )
+                parts = parts[:-1]
                 self.headers = parts
-            self.first = false
-        else:
-            for i in xrange( 0, n ):
-                w = len(parts[i])
-                try:
-                    self.widths[i] = max( self.widths[i], w )
-                except:
-                    self.widths[i] = w
+                self._get_widths( parts )
+            self.first = False
+        elif len(parts) > 0:
+            self._get_widths( parts )
             self.entries.append( parts )
         return
 
     def _print_tuples( self, tuples ):
         sep = ''
+        line = ''
         for i in xrange( 0, len(tuples) ):
             fmt = '%%s%%-%ds' % self.widths[i]
-            print fmt % ( sep, tuples[i] )
-            sep = ' '
+            line += fmt % ( sep, tuples[i] )
+            sep = '  '
+        self.println( line )
         return
 
     def report( self, final = False ):
