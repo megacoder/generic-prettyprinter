@@ -75,11 +75,14 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
     def report( self, final = False ):
         if self.titles:
             if self.timestamp:
-                self.println( '' )
                 self.println( self.timestamp )
                 self.println( '' )
             self._calc_widths()
             self._show( self.titles )
+            underbars = []
+            for i in xrange( 0, len(self.titles) ):
+                underbars.append( '-' * self.widths[i] )
+            self._show( underbars )
             for entry in self.entries:
                 self._show( entry )
         if not final:
