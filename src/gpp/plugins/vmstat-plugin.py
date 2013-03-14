@@ -11,70 +11,77 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
     NAME = 'vmstat-pp'
     DESCRIPTION = """Display vmstat(1) output in a canonical style."""
 
-    HEADINGS = {
-        'r'      : 'procs',
-        'b'      : 'procs',
-        'swpd'   : 'memory',
-        'free'   : 'memory',
-        'inact'  : 'memory',
-        'active' : 'memory',
-        'buff'   : 'memory',
-        'cache'  : 'memory',
-        'si'     : 'swap',
-        'so'     : 'swap',
-        'bi'     : 'io',
-        'bo'     : 'io',
-        'in'     : 'system',
-        'cs'     : 'system',
-        'us'     : 'cpu',
-        'sy'     : 'cpu',
-        'id'     : 'cpu',
-        'wa'     : 'cpu',
-        'st'     : 'cpu'
-    }
-
     def __init__( self ):
         super( PrettyPrint, self ).__init__()
         return
 
     def reset( self ):
         super( PrettyPrint, self ).reset()
-        self.minors = None
-        self.content = dict([(h, {}) for h in set(PrettyPrint.HEADINGS.values())])
+        self._prepare()
         return
 
-    def process( self, f = sys.stdin ):
-        reader = csv.reader( f, delimiter = ' ', skipinitialspace = True )
-        lineno = 0
-        for values in reader:
-            lineno += 1
-            if lineno == 1:
-                # This is the main headers, we want to skip them
-                pass
-            elif lineno == 2:
-                # This is the subheaders; flag those we have
-                self.minors = values
-                for h in values:
+    def _prepare( self ):
+        self.timestamp = None
+        self.titles    = None
+        self.widths    = {}
+        self.entries   = []
+        return
+
+    def begin_file( self, name ):
+        super( PrettyPrint, self ).begin_file( name )
+        self._prepare()
+        return
+
+    def end_file( self, name ):
+        super( PrettyPrint, self ).end_file( name )
+        return
+
+    def next_line( self, line ):
+        if line.startswith( 'Linux OSW' ):
+            self.report()
+        elif line.startswith( 'zzz ***' ):
+            self.timestamp = line[7:]
+        elif line.startswith( 'procs' ):
+            pass
+        elif line.startswith( ' r ' ):
+            self.titles = line.split()
+        else:
+            self.entries.append( line.split() )
+        return
+
+    def _calc_widths( self ):
+        self.widths = {}
+        if self.titles:
+            for i in xrange( 0, len(self.titles) ):
+                self.widths[i] = len( self.titles[i] )
+            for entry in self.entries:
+                for i in xrange( 0, len(entry) ):
                     try:
-                        self.content[ PrettyPrint.HEADINGS[h] ][h] = []
-                    except Exception, e:
-                        print >>sys.stderr, 'Unknown minor header "%s"' % h
-                        raise e
-            elif values[0] != self.minors[0] and \
-            values[0] != PrettyPrint.HEADINGS[ self.minors[0] ]:
-                for i, v in enumerate(values):
-                    self.content[
-                        PrettyPrint.HEADINGS[self.minors[i]]
-                    ][
-                        self.minors[i]
-                    ].append( int(v) )
+                        self.widths[i] = max( self.widths[i], len( entry[i] ) )
+                    except:
+                        self.widths[i] = len( entry[i] )
         return
 
-    def finish( self ):
-        for i, minor in enumerate( self.minors ):
-            major = PrettyPrint.HEADINGS[minor]
-            s = []
-            values = self.content[major][minor]
-            # values.sort()
-            print '%s\t%s\t%d\t%d' % (major, minor, min(values), max(values))
+    def _show( self, tokens ):
+        line = ''
+        sep  = ''
+        for i in xrange( 0, len(tokens) ):
+            fmt = '%%s%%%ds' % self.widths[i]
+            line += fmt % (sep, tokens[i])
+            sep = '  '
+        self.println( line )
+        return
+
+    def report( self, final = False ):
+        if self.titles:
+            if self.timestamp:
+                self.println( '' )
+                self.println( self.timestamp )
+                self.println( '' )
+            self._calc_widths()
+            self._show( self.titles )
+            for entry in self.entries:
+                self._show( entry )
+        if not final:
+            self._prepare()
         return
