@@ -42,10 +42,10 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			 ) )
 		return
 
-	def	end_file( self, name ):
+	def	report( self, final = False ):
 		fmt = '%%-9s %%-%ds %%s' % self.max_name
 		self.tokens.sort( key = lambda (v,n,o) : (v.lower(),n.lower()) )
 		for verb,name,rest in self.tokens:
-			print fmt % (verb, name, rest)
-		super( PrettyPrint, self ).end_file( name )
+			self.println( fmt % (verb, name, rest) )
+		self._prepare()
 		return
