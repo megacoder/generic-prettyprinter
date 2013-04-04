@@ -29,7 +29,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	_in_section( self ):
-		return False if self.name else True
+		return True if self.name else False
 
 	def	_open_section( self, name ):
 		if self._in_section():
@@ -41,7 +41,9 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	_close_section( self ):
 		if self.name:
-			self.entries.sort()
+			self.entries.sort(
+				key = lambda (n,v) : n.lower()
+			)
 			self.sections.append( [self.name, self.max_name, self.entries] )
 		self.name    = None
 		return
@@ -57,9 +59,9 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			line = line.strip()
 			if len(line) > 0:
 				if self._in_section():
-					name,settings = line.split( '=', 1 )
+					name,value = line.split( '=', 1 )
 					self.max_name = max( self.max_name, len(name) )
-					self._add_to_section( [name, settings] )
+					self.entries.append( [name, value] )
 		return
 
 	def	report( self, final = False ):
@@ -72,9 +74,6 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				print
 			others = True
 			print name
-			settings.sort(
-				key = lambda (n,v) : n.lower()
-			)
 			fmt = '%%-%ds = %%s' % maxlen
 			for (n,v) in settings:
 				print fmt % (n,v)
