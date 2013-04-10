@@ -45,6 +45,12 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             pass
         elif line.startswith( ' r ' ):
             self.titles = line.split()
+        elif line.startswith( 'SNAP_INTERVAL' ):
+            pass
+        elif line.startswith( 'CPU_COUNT' ):
+            pass
+        elif line.startswith( 'OSWBB_ARCHIVE_DEST' ):
+            pass
         else:
             self.entries.append( line.split() )
         return
