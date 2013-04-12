@@ -16,6 +16,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		'ORACLEASM_SCANEXCLUDE',
 		'ORACLEASM_SCANORDER',
 		'ORACLEASM_UID',
+		'ORACLEASM_USE_LOGICAL_BLOCK_SIZE',
 	]
 
 	def __init__( self ):
