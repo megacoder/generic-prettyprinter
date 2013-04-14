@@ -47,9 +47,11 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         return
 
     def begin_file( self, fn ):
-        print '#'*72
-        print '# %s' % fn
-        print '#'*72
+        herald = '# %s' % fn
+        bars = '*' * max( 72, len(herald) )
+        print bars
+        print herald
+        print bars
         return
 
     def end_file( self, fn ):
