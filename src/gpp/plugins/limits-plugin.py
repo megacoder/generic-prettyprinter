@@ -29,29 +29,35 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	next_line( self, line ):
-		octothorpe = line.find( '#' )
-		if octothorpe > -1:
-			line = line[:octothorpe]
+		line = line.split( '#', 1 )[0]
 		tokens = line.split()
 		n = len(tokens)
-		if n == 3:
+		if n == 4:
 			for i in xrange( 0, n ):
 				try:
 					self.widths[i] = max( self.widths[i], len(tokens[i]) )
 				except:
 					self.widths[i] = len(tokens[i])
-			tokens[2] = int( tokens[2] )
+			tokens[3] = int( tokens[3] )
 			self.entries.append( tokens )
 		return
 
 	def	report( self, final = False ):
 		if len(self.entries) > 0:
-			fmt = '%%-ds  %%-%ds  %%%dd' % (
+			fmt = '%%%-ds  %%-%ds  %%-%ds  %%%dd' % (
 				self.widths[0],
 				self.widths[1],
-				self.widths[2]
+				self.widths[2],
+				self.widths[3]
 			)
-			for user,which,value in sorted( self.entries ):
-				print fmt % ( user, which, value )
+			for domain, type, item, value in sorted( self.entries, key = lambda
+										   (domain,type,item,value) :
+				'%s:%s:%s' % (
+					domain,
+					item,
+					type
+				)
+			):
+				print fmt % ( domain, type, item, value )
 		self._prepare()
 		return
