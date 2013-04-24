@@ -38,7 +38,6 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 					self.widths[i] = max( self.widths[i], len(tokens[i]) )
 				except:
 					self.widths[i] = len(tokens[i])
-			tokens[3] = int( tokens[3] )
 			self.entries.append( tokens )
 		return
 
@@ -52,7 +51,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	report( self, final = False ):
 		if len(self.entries) > 0:
-			fmt = '%%%-ds  %%-%ds  %%-%ds  %%%dd' % (
+			fmt = '%%%-ds  %%-%ds  %%-%ds  %%%ds' % (
 				self.widths[0],
 				self.widths[1],
 				self.widths[2],
