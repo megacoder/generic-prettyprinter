@@ -42,6 +42,14 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			self.entries.append( tokens )
 		return
 
+	def	_sort( self, (domain,type,item,value) ):
+		key = '%s:%s:%s' % (
+			domain,
+			item,
+			type
+		)
+		return key
+
 	def	report( self, final = False ):
 		if len(self.entries) > 0:
 			fmt = '%%%-ds  %%-%ds  %%-%ds  %%%dd' % (
@@ -50,14 +58,8 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				self.widths[2],
 				self.widths[3]
 			)
-			for domain, type, item, value in sorted( self.entries, key = lambda
-										   (domain,type,item,value) :
-				'%s:%s:%s' % (
-					domain,
-					item,
-					type
-				)
-			):
+			self.entries.sort( key = self._sort )
+			for domain, type, item, value in self.entries:
 				print fmt % ( domain, type, item, value )
 		self._prepare()
 		return
