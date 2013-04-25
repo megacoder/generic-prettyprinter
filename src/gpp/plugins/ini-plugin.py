@@ -20,6 +20,8 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	_prepare( self ):
 		self.name     = None
+		self.entries  = []
+		self.max_name = None
 		self.sections = []
 		return
 
@@ -28,54 +30,58 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		self._prepare()
 		return
 
+	def	end_file( self, name ):
+		self._close_section()
+		self.report()
+		super( PrettyPrint, self ).end_file( name )
+		return
+
 	def	_in_section( self ):
 		return True if self.name else False
 
 	def	_open_section( self, name ):
-		if self._in_section():
-			self._close_section()
+		self._close_section()
 		self.name     = name
-		self.max_name = 14
+		self.max_name = max( 14, len(name) )
 		self.entries  = []
 		return
 
 	def	_close_section( self ):
-		if self.name:
+		if self._in_section():
 			self.entries.sort(
 				key = lambda (n,v) : n.lower()
 			)
 			self.sections.append( [self.name, self.max_name, self.entries] )
-		self.name    = None
+		self.name     = None
+		self.max_name = None
+		self.entries  = None
 		return
 
 	def	next_line( self, line ):
-		octothorpe = line.find( '#' )
-		if octothorpe > -1:
-			line = line[:octothorpe]
+		line = line.split( '#', 1 )[0].rstrip()
 		if line.startswith( '[' ):
 			self._close_section()
-			self._open_section( line.strip() )
+			self._open_section( line )
 		else:
 			line = line.strip()
-			if len(line) > 0:
-				if self._in_section():
-					name,value = line.split( '=', 1 )
-					self.max_name = max( self.max_name, len(name) )
-					self.entries.append( [name, value] )
+			if len(line) > 0 and self._in_section():
+				name,value = line.split( '=', 1 )
+				name = name.strip()
+				value = value.strip()
+				self.max_name = max( self.max_name, len(name) )
+				self.entries.append( [name, value] )
 		return
 
 	def	report( self, final = False ):
-		self.sections.sort(
-			key = lambda (n,m,s) : n.lower()
-		)
 		others = False
-		for (name,maxlen,settings) in self.sections:
+		for (name,maxlen,settings) in sorted( self.sections, key =
+			lambda (n,m,s) : n.lower() ):
 			if others:
-				print
+				self.println()
 			others = True
-			print name
+			self.println( name )
 			fmt = '%%-%ds = %%s' % maxlen
 			for (n,v) in settings:
-				print fmt % (n,v)
+				self.println( fmt % (n,v) )
 		self._prepare()
 		return

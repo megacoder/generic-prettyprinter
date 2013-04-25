@@ -11,6 +11,7 @@ class   MetaPrettyPrinter( object ):
         return
 
     def reset( self ):
+        self.out    = sys.stdout
         self.fileno = 0
         self.lineno = 0
         self.filename = None
@@ -37,14 +38,14 @@ class   MetaPrettyPrinter( object ):
 
     def begin_file( self, fn ):
         if self.multi > 1:
-            print 'File %d of %d: %s' % (self.fileno, self.multi, fn)
-            print
+            self.println( 'File %d of %d: %s' % (self.fileno, self.multi, fn) )
+            self.println()
         return
 
     def end_file( self, fn ):
         self.report()
         if self.fileno < self.multi:
-            print
+            self.println()
         self.filename = None
         self.lineno = 0
         return
@@ -89,8 +90,8 @@ class   MetaPrettyPrinter( object ):
                 self.do_name( os.path.join( dn, fn ) )
         return
 
-    def println( self, s ):
-        print >>sys.stdout, s
+    def println( self, s = '' ):
+        print >>self.out, s
         return
 
     def report( self, final = False ):
