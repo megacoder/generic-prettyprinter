@@ -102,28 +102,30 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				'Could not calculate default vm.min_free_kbytes'
 			)
 		try:
-			wasted_memory = (
-				observed['HugePages_Total'] - observed['HugePages_Free']
-			) * observed['Hugepagesize']
-			if wasted_memory > 0:
-				self._addto_notes(
-					'Physical memory wasted on unused HugePages = %d kB' % (
-						wasted_memory
+			if 'HugePages_Total' in observed:
+				wasted_memory = (
+					observed['HugePages_Total'] - observed['HugePages_Free']
+				) * observed['Hugepagesize']
+				if wasted_memory > 0:
+					self._addto_notes(
+						'Wasted physical memory in unused HugePages = %d kB' % (
+							wasted_memory
+						)
 					)
-				)
 		except:
 			self._addto_notes(
 				'Could not calculate wasted hugepages space.'
 			)
 		try:
-			working_space = (
-				observed['MemTotal'] - (
-					observed['HugePages_Total'] * observed['Hugepagesize']
+			if 'HugePages_Total' in observed:
+				working_space = (
+					observed['MemTotal'] - (
+						observed['HugePages_Total'] * observed['Hugepagesize']
+					)
 				)
-			)
-			self._addto_notes(
-				'Physical memory available to the O/S = %d kB' % working_space
-			)
+				self._addto_notes(
+					'Physical memory not in HugePages = %d kB' % working_space
+				)
 		except:
 			self._addto_notes(
 				'Could not calculate available physical memory.'
