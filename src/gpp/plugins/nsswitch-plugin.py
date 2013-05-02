@@ -37,7 +37,7 @@ class	PrettyPrint( MetaPrettyPrinter ):
 		return
 
 	def	next_line( self, line ):
-		tokens = line.split( '#', 1 )[0].strip().split()
+		tokens = line.split( '#', 1 )[0].strip().split(':', 1)
 		if len(tokens) == 2:
 			name  = tokens[0].strip()
 			value = ' '.join( tokens[1].strip().split() )
@@ -46,7 +46,7 @@ class	PrettyPrint( MetaPrettyPrinter ):
 		return
 
 	def	report( self, final = False ):
-		fmt = '%%-%ds %%s' % self.max_name
+		fmt = '%%-%ds: %%s' % self.max_name
 		for name,value in sorted( self.settings ):
 			self.println( fmt % (name, value) )
 		return
