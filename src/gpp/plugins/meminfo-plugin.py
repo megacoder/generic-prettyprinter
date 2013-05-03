@@ -103,13 +103,17 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			)
 		try:
 			if 'HugePages_Total' in observed:
-				wasted_memory = (
-					observed['HugePages_Total'] - observed['HugePages_Free']
-				) * observed['Hugepagesize']
+				hp = observed['HugePages_Total']
+				if 'HugePages_Free' in observed:
+					hp -= observed['HugePages_Free']
+				if 'HugePages_Rsvd' in observed:
+					hp += observed['HugePages_Rsvd']
+				wasted_memory = hp * observed['Hugepagesize']
 				if wasted_memory > 0:
 					self._addto_notes(
-						'Wasted physical memory in unused HugePages = %d kB' % (
-							wasted_memory
+						'Physical memory in unused HugePages = %d kB (%d pages)' % (
+							wasted_memory,
+							hp
 						)
 					)
 		except:
