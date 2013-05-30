@@ -15,6 +15,10 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	reset( self ):
 		super( PrettyPrint, self ).reset()
+		self.prepare_for_new_file()
+		return
+
+	def	prepare_for_new_file( self ):
 		self.feeds    = []
 		self._new_repo()
 		return
@@ -29,9 +33,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return not fn.endswith( '.repo' )
 
 	def	next_line( self, line ):
-		octothorpe = line.find( '#' )
-		if octothorpe > -1:
-			line = line[:octothorpe]
+		line = line.split( '#', 1 )[0]
 		if line.startswith( '[' ):
 			if self.name is not None:
 				self.feed.sort( key = lambda (x,y): x.lower() )
@@ -46,7 +48,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				self.feed.append( (name, value) )
 		return
 
-	def	finish( self ):
+	def	report( self, final = False ):
 		self.feeds.sort( key = lambda (n,l,f) : n.lower() )
 		others = False
 		for (name, max_name, entries) in self.feeds:
@@ -58,4 +60,5 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			fmt = ' %%%ds = %%s' % max_name
 			for (id,value) in entries:
 				print fmt % ( id, value )
+		self.prepare_for_new_file()
 		return
