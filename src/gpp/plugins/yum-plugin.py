@@ -32,12 +32,16 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 	def	ignore( self, fn ):
 		return not fn.endswith( '.repo' )
 
+	def	add_repo( self ):
+		if self.name is not None:
+			self.feed.sort( key = lambda (x,y): x.lower() )
+			self.feeds.append( (self.name, self.max_name, self.feed) )
+		return
+
 	def	next_line( self, line ):
 		line = line.split( '#', 1 )[0]
 		if line.startswith( '[' ):
-			if self.name is not None:
-				self.feed.sort( key = lambda (x,y): x.lower() )
-				self.feeds.append( (self.name, self.max_name, self.feed) )
+			self.add_repo()
 			self._new_repo( line.strip()[1:-1] )
 		else:
 			tokens = line.split( '=', 1 )
@@ -49,6 +53,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	report( self, final = False ):
+		self.add_repo()
 		self.feeds.sort( key = lambda (n,l,f) : n.lower() )
 		others = False
 		for (name, max_name, entries) in self.feeds:
