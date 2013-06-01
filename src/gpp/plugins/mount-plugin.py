@@ -61,7 +61,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			attr              = tokens[5][1:-1].split( ',' )
 			fields['backup']  = None
 			fields['fsck']    = None
-			fields['details'] = None
+			fields['details'] = tokens[6]
 		attr.sort()
 		fields['attr'] = ','.join(attr)
 		for key in fields.keys():
