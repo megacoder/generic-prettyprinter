@@ -35,8 +35,9 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	next_line( self, line ):
 		tokens = line.rstrip().split()
-		n = len( tokens )
-		if n != 6 and n != 7:
+		if len(tokens) == 6:
+			tokens.append( None )
+		if len(tokens) != 7:
 			self.error( 'Huh? %s' % line.rstrip() )
 		else:
 			if self.first:
@@ -45,20 +46,22 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			fields = {}
 			if self.is_proc:
 				# /proc/mounts type of file.
-				fields['name']   = tokens[0]
-				fields['mp']     = tokens[1]
-				fields['type']   = tokens[2]
-				attr             = tokens[3].split( ',' )
-				fields['backup'] = tokens[4]
-				fields['fsck']   = tokens[5]
+				fields['name']    = tokens[0]
+				fields['mp']      = tokens[1]
+				fields['type']    = tokens[2]
+				attr              = tokens[3].split( ',' )
+				fields['backup']  = tokens[4]
+				fields['fsck']    = tokens[5]
+				fields['details'] = tokens[6]
 			else:
 				# /bin/mount type of file
-				fields['name']   = tokens[0]
-				fields['mp']     = tokens[2]
-				fields['type']   = tokens[4]
-				attr             = tokens[5][1:-1].split( ',' )
-				fields['backup'] = None
-				fields['fsck']   = None
+				fields['name']    = tokens[0]
+				fields['mp']      = tokens[2]
+				fields['type']    = tokens[4]
+				attr              = tokens[5][1:-1].split( ',' )
+				fields['backup']  = None
+				fields['fsck']    = None
+				fields['details'] = None
 			attr.sort()
 			fields['attr'] = ','.join(attr)
 			for key in fields.keys():
