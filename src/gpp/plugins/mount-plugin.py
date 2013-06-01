@@ -36,7 +36,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 	def	next_line( self, line ):
 		tokens = line.rstrip().split()
 		n = len( tokens )
-		if n != 6:
+		if n != 6 and n != 7:
 			self.error( 'Huh? %s' % line.rstrip() )
 		else:
 			if self.first:
