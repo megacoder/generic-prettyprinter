@@ -10,7 +10,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	NAME = 'mount'
 	DESCRIPTION = """Display /proc/mounts or mount(8) in a canonical form."""
-	FIELDS = ['name', 'mp', 'type', 'backup', 'fsck', 'attr' ]
+	FIELDS = ['name', 'mp', 'type', 'backup', 'fsck', 'attr', 'details' ]
 
 	def	__init__( self ):
 		super( PrettyPrint, self ).__init__()
