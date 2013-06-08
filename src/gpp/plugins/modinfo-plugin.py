@@ -38,10 +38,10 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			if self.others:
 				self.println()
 			self.others = True
-			maxname = 7
+			maxkey = 7
 			for key in sorted( self.info.keys() ):
-				maxname = max( maxname, len( self.info[key] ) )
-			fmt = '%%%ds: %%s' % maxname
+				maxkey = max( maxkey, len( key ) )
+			fmt = '%%%ds: %%s' % maxkey
 			for key in sorted( self.info.keys() ):
 				self.println( fmt % (key, self.info[key]) )
 			self.info = {}
@@ -54,5 +54,5 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			value = tokens[1]
 			if field == "filename":
 				self.report()
-			self.info[field] = value
+			self.info[field.strip()] = value.strip()
 		return
