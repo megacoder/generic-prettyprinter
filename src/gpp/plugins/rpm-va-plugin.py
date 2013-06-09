@@ -51,13 +51,15 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	_process( self, state, flags, name ):
-		comment = '['
+		comment = ''
+		sep = ''
 		if state != 'missing':
 			for i in xrange( 0, len(PrettyPrint.STATES) ):
 				if state[i] != '.':
-					comment += ':' + PrettyPrint.STATES[i]
+					comment += sep + PrettyPrint.STATES[i]
+					sep = ' '
 		for c in flags:
 			if c in PrettyPrint.FORMATS:
-				comment += ':' + PrettyPrint.FORMATS[c]
-		comment += ':]'
+				comment += sep + PrettyPrint.FORMATS[c]
+				sep = ' '
 		self.println( self.fmt % (state, flags, name, comment) )
