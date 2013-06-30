@@ -11,17 +11,22 @@ class   MetaPrettyPrinter( object ):
         return
 
     def reset( self ):
-        self.out    = sys.stdout
-        self.fileno = 0
-        self.lineno = 0
-        self.filename = None
-        self.multi = 0
+        self.out          = sys.stdout
+        self.fileno       = 0
+        self.lineno       = 0
+        self.filename     = None
+        self.multi        = 0
+        self.do_backslash = None
         return
 
     def advise( self, **kwargs ):
         for key in kwargs:
             if key == 'argc':
                 self.multi = kwargs[key]
+        return
+
+    def allow_continuation( self, value = '\\' ):
+        self.do_backslash = value
         return
 
     def do_name( self, name ):
@@ -70,9 +75,15 @@ class   MetaPrettyPrinter( object ):
         return
 
     def do_open_file( self, f = sys.stdin ):
-        for line in f:
+        line = ''
+        for segment in f:
             self.lineno += 1
-            self.next_line( line.rstrip() )
+            line += segment.rstrip()
+            if self.do_backslash and line[-1] == self.do_backslash:
+                line[-1] = ' '
+                continue
+            self.next_line( line )
+            line = ''
         return
 
     def ignore( self, name ):
