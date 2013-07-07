@@ -36,6 +36,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			1,
 			48
 		)
+		self.lines = []
 		return
 
 	def	next_line( self, line ):
@@ -62,4 +63,10 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			if c in PrettyPrint.FORMATS:
 				comment += sep + PrettyPrint.FORMATS[c]
 				sep = ' '
-		self.println( self.fmt % (state, flags, name, comment) )
+		self.lines.append( [state, flags, name, comment] )
+
+	def	report( self, final = False ):
+		if final:
+			self.lines.sort( key = lambda t: t[2] )
+			for [state, flags, name, comment] in self.lines:
+				self.println( self.fmt % (state, flags, name, comment) )
