@@ -9,17 +9,17 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 	NAME = 'rpm-vt-pp'
 	DESCRIPTION = """Display 'rpm -Va' output in canonical style."""
 
-	STATES = [
-		'Size',
-		'Mode',
-		'MD5',
-		'Devno',
-		'Link',
-		'UID',
-		'GID',
-		'MTIME',
-		'Capabilities'
-	]
+	STATES = {
+		'S': 'Size',
+		'M': 'Mode',
+		'5': 'MD5',
+		'D': 'Devno',
+		'L': 'Link',
+		'U': 'UID',
+		'G': 'GID',
+		'T': 'MTIME',
+		'P': 'Capabilities'
+	}
 
 	FORMATS = {
 		'c': '%config',
@@ -54,9 +54,9 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		comment = ''
 		sep = ''
 		if state != 'missing':
-			for i in xrange( 0, len(PrettyPrint.STATES) ):
-				if state[i] != '.':
-					comment += sep + PrettyPrint.STATES[i]
+			for c in state:
+				if c in PrettyPrint.STATES:
+					comment += sep + PrettyPrint.STATES[c]
 					sep = ' '
 		for c in flags:
 			if c in PrettyPrint.FORMATS:
