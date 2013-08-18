@@ -8,7 +8,7 @@ import	superclass
 
 class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
-	NAME = 'bind'
+	NAME = 'bind-pp'
 	DESCRIPTION="""Display /etc/named.conf and friends in conical style."""
 
 	def __init__( self ):
@@ -29,8 +29,8 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 	def	_new_node(
 		self,
 		content = [],
-		parent  = None,
-		child   = None
+		parent  = 0,
+		child   = 0
 	):
 		self.nodes.append(
 			{
@@ -45,17 +45,17 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	_do_token( self, token ):
 		if token is ';':
-			self.nodes[ self.focus ].content += [ token ]
+			self.nodes[ self.focus ]['content'] += [ token ]
 		elif token is '{':
-			self.nodes[ self.focus ].content += [ token ]
-			self.nodes[ self.focus ].child = self._new_node(
+			self.nodes[ self.focus ]['content'] += [ token ]
+			self.nodes[ self.focus ]['child'] = self._new_node(
 				parent = self.focus
 			)
 		elif token is '}':
-			self.focus = self.nodes[ self.focus ].parent
-			self.nodes[ self.node.current ].content += [ token ]
+			self.focus = self.nodes[ self.focus ]['parent']
+			self.nodes[ self.focus ]['content'] += [ token ]
 		else:
-			self.nodes[ self.node.current ].content += [ token ]
+			self.nodes[ self.focus ]['content'] += [ token ]
 		return
 
 	def	next_line( self, line ):
@@ -70,13 +70,23 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			self._do_token( token )
 		return
 
-	def	_process( self, focus = self.focus, indent = 0 ):
+	def	_report( self, focus = None, indent = 0 ):
+		if not focus:
+			focus = self.focus
+		for node in self.nodes[ focus ]:
+			for key in sorted( node ):
+				print key
+		return
 		print '%s%s' % (
 			' ' * indent,
-			' '.join( self.nodes[ focus ].content )
+			'X'.join( self.nodes[ focus ]['content'] )
 		)
-		if self.nodes[ focus ].child:
-			self._process( self.nodes[ focus ].child, indent = indent + 8 )
+		if self.nodes[ focus ]['child']:
+			self._report( self.nodes[ focus ]['child'], indent = indent + 8 )
+		return
+
+	def	report( self, final = False ):
+		self._report( 0 )
 		return
 
 	def	begin_file( self, name ):
@@ -85,7 +95,6 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	end_file( self, name ):
-		self._process( 0 )
 		self._prepare()
 		super( PrettyPrint, self ).end_file( name )
 		return
