@@ -5,6 +5,7 @@ import	os
 import	string
 import	superclass
 import	sys
+import	shlex
 
 class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
@@ -33,13 +34,14 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		if len(tokens) == 2:
 			self.max_name = max( self.max_name, len( tokens[0] ) )
 			args = {}
-			for arg in tokens[1].split():
-				kind = arg.split( '=', 1 )[0]
+			for arg in shlex.split( tokens[1] ):
+				kind, value = arg.split( '=', 1 )
+				nv = '%s="%s"' % (kind.strip(), value.strip())
+				args[kind] = nv
 				try:
-					self.max_kinds[kind] = max( self.max_kinds[kind], len(arg) )
+					self.max_kinds[kind] = max( self.max_kinds[kind], len(nv) )
 				except:
-					self.max_kinds[kind] = len(arg)
-				args[kind] = arg
+					self.max_kinds[kind] = len(nv)
 			self.lines.append( (tokens[0], args) )
 		return
 
