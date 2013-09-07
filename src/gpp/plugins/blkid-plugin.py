@@ -43,8 +43,8 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			self.lines.append( (tokens[0], args) )
 		return
 
-	def	begin_file( self, fn ):
-		super( PrettyPrint, self ).begin_file( fn )
+	def	begin_file( self, name ):
+		super( PrettyPrint, self ).begin_file( name )
 		self._prepare()
 		return
 
@@ -72,7 +72,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	end_file( self, name ):
 		self._report()
-		super( PrettyPrint, self ).end_file( fn )
+		super( PrettyPrint, self ).end_file( name )
 		return
 
 	def	finish( self ):
