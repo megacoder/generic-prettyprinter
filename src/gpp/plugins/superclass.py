@@ -14,7 +14,7 @@ class   MetaPrettyPrinter( object ):
         self.out          = sys.stdout
         self.fileno       = 0
         self.lineno       = 0
-        self.filename     = None
+        self.filename     = '{stdin}'
         self.multi        = 0
         self.do_backslash = None
         return
