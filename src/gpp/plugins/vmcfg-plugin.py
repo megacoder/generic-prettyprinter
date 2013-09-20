@@ -11,13 +11,14 @@ class   PrettyPrint( MetaPrettyPrinter ):
 
     def __init__( self ):
         super( PrettyPrint, self ).__init__()
+        self._prepare()
         return
 
-    def reset( self ):
-        super( PrettyPrint, self ).reset()
+    def _prepare( self ):
         self.keys   = None
         self.code   = None
         self.locals = None
+        self.script = ''
         return
 
     def compile( self ):
@@ -37,32 +38,33 @@ class   PrettyPrint( MetaPrettyPrinter ):
         self.keys.sort()
         return
 
-    def do_file( self, fn ):
-        self.filename = fn
-        try:
-            f = open( fn, 'rt' )
-        except Exception, e:
-            self.error( 'Cannot open file for reading.' )
-            self.filename = None
-            raise e
-        self.process( f )
-        f.close()
+    def begin_file( self, name ):
+        super( PrettyPrint, self ).begin_file( name )
+        self._prepare()
         return
 
-    def process( self, f = None ):
-        if f is None:
-            self.filename = '{stdin}'
-            f = sys.stdin
-        self.script = ''
-        for line in f:
-            self.script += line
-        self.compile()
-        return
-
-    def finish( self ):
-        if self.keys is None:
-            self.error( 'No input detected.' )
+    def next_line( self, line ):
+        if line.startswith( './' ):
+            self.compile()
+            self.report()
+            self._prepare()
+            if self.lineno > 1:
+                self.println()
+            self.println( '# --> %s' % line[1:] )
+            self.println()
         else:
+            self.script += '%s\n' % line
+        return
+
+    def end_file( self, name ):
+        self.compile()
+        self.report()
+        self._prepare()
+        super( PrettyPrint, self ).end_file( name )
+        return
+
+    def report( self, final = False ):
+        if self.keys:
             pp = pprint.PrettyPrinter()
             for key in self.keys:
                 print '%13s = ' % key,

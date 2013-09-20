@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-VERSION	= '0.0.95'
+VERSION	= '0.0.96'
 
 from	distutils.core			import	setup
 import	glob
