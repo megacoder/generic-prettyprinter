@@ -22,56 +22,66 @@ class   PrettyPrint( MetaPrettyPrinter ):
         return
 
     def compile( self ):
-        try:
-            self.code = compile( self.script, self.filename, 'exec' )
-        except:
-            self.error( 'File "%s" appears to be corrupt.' % self.filename )
-            print >>sys.stderr, self.script
-            raise SyntaxError
-        self.locals = dict()
-        globals = dict()
-        try:
-            eval( self.code, globals, self.locals )
-        except:
-            raise SyntaxError
-        self.keys =  self.locals.keys()
-        self.keys.sort()
-        return
+        while True:
+            if self.script:
+                try:
+                    self.code = compile( self.script, self.filename, 'exec' )
+                except:
+                    self.error( 'File "%s" appears to be corrupt.' % self.filename )
+                    self.error( '%s' % self.script )
+                    break
+                self.locals = dict()
+                globals = dict()
+                try:
+                    eval( self.code, globals, self.locals )
+                except Exception, e:
+                    self.println( 'Could not evaluate code' )
+                    self.println( ' %s' % e )
+                    break
+                self.keys =  self.locals.keys()
+                break
+            return
 
-    def begin_file( self, name ):
-        super( PrettyPrint, self ).begin_file( name )
-        self._prepare()
-        return
+        def begin_file( self, name ):
+            super( PrettyPrint, self ).begin_file( name )
+            self._prepare()
+            return
 
-    def next_line( self, line ):
-        if line.startswith( './' ):
+        def next_line( self, line ):
+            if line.startswith( '/' ):
+                pass
+            elif line.startswith( './' ):
+                self.compile()
+                self.report()
+                self._prepare()
+                if self.lineno > 1:
+                    self.println()
+                self.println( '# --> %s' % line[1:] )
+                self.println()
+            elif len(line) > 0:
+                self.script += '%s\n' % line
+            return
+
+        def end_file( self, name ):
             self.compile()
             self.report()
             self._prepare()
-            if self.lineno > 1:
-                self.println()
-            self.println( '# --> %s' % line[1:] )
-            self.println()
-        else:
-            self.script += '%s\n' % line
-        return
+            super( PrettyPrint, self ).end_file( name )
+            return
 
-    def end_file( self, name ):
-        self.compile()
-        self.report()
-        self._prepare()
-        super( PrettyPrint, self ).end_file( name )
-        return
-
-    def report( self, final = False ):
-        if self.keys:
-            pp = pprint.PrettyPrinter()
-            for key in self.keys:
-                print '%13s = ' % key,
-                s = pp.pformat( self.locals[key] )
-                lines = s.split( '\n' )
-                leadin = ''
-                for line in lines:
-                    print '%s%s' % (leadin, line)
-                    leadin = ' '*(16+2)
-        return
+        def report( self, final = False ):
+            if len(self.script) == 0:
+                self.println( 'No script detected' )
+            elif not self.keys:
+                self.println( 'no content detected' )
+            else:
+                pp = pprint.PrettyPrinter()
+                for key in sorted( self.keys ):
+                    print '%13s = ' % key,
+                    s = pp.pformat( self.locals[key] )
+                    lines = s.split( '\n' )
+                    leadin = ''
+                    for line in lines:
+                        print '%s%s' % (leadin, line)
+                        leadin = ' '*(16+2)
+            return
