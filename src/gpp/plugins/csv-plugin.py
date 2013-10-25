@@ -30,16 +30,17 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	report( self, final = False ):
 		rows = []
+		widths = {}
 		for row in csv.reader( self.lines ):
 			for i in xrange( 0, len(row) ):
 				try:
-					self.widths[i] = max( self.widths[i], len(row[i]) )
+					widths[i] = max( widths[i], len(row[i]) )
 				except:
-					self.widths[i] = len(row[i])
+					widths[i] = len(row[i])
 			rows.append( row )
 		fmts = {}
-		for i in self.widths.keys():
-			fmts[i] = '%%s%%-%ds' % self.widths[i]
+		for i in widths.keys():
+			fmts[i] = '%%s%%-%ds' % widths[i]
 		for row in rows:
 			sep = ''
 			line = ''
