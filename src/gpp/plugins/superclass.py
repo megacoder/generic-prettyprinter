@@ -60,18 +60,17 @@ class   MetaPrettyPrinter( object ):
         return
 
     def do_file( self, fn ):
-        try:
-            f = open( fn, 'rt' )
-        except Exception, e:
-            self.error( 'cannot open "%s" for reading.' % fn, e )
-            raise e
         self.fileno += 1
         self.filename = fn
         self.lineno = 0
         self.begin_file( fn )
-        self.do_open_file( f )
+        try:
+            with open( fn, 'rt' ) as f:
+                self.do_open_file( f )
+        except Exception, e:
+            self.error( 'cannot open "%s" for reading.' % fn, e )
+            raise e
         self.end_file( fn )
-        f.close()
         return
 
     def do_open_file( self, f = sys.stdin ):
