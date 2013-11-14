@@ -69,7 +69,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			maxvalue = max( maxvalue, len(values[0]) )
 		ffmt = '%%-%ds' % (self.maxfield+1)
 		vfmt = '%%%ds %%s' % maxvalue
-		fmt = ffmt + '  ' + vfmt
+		fmt = ffmt + '	' + vfmt
 		observed = {}
 		for (field, values) in self.lines:
 			observed[field] = int(values[0])
@@ -91,11 +91,20 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				str(observed)
 			)
 		try:
+			managed_memory = float( observed[ 'MemTotal' ] )
+			if 'HugePages_Total' in observed:
+			    managed_memory -= observed['HugePages_Total']
 			min_free_kbytes = int(
-				math.sqrt( float(observed['MemTotal']) * 4.0 ) + 0.5
+			    (math.sqrt( managed_memory ) * 4.0) + 0.5
+			)
+			recommended_min_free_kbytes = int(
+			    (managed_memory * 0.005) + 0.5
 			)
 			self._addto_notes(
 				'Default vm.min_free_kbytes = %d kB' % min_free_kbytes
+			)
+			self._addto_notes(
+			    'Recommended vm.min_free_kbytes = %d kB' % recommended_min_free_kbytes
 			)
 		except:
 			self._addto_notes(
