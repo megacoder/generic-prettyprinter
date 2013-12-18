@@ -11,6 +11,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     NAME = 'fstab-pp'
     DESCRIPTION = """Display /etc/fstab files in canonical style."""
+    GLOB = None
 
     def __init__( self ):
         super( PrettyPrint, self ).__init__()

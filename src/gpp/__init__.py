@@ -14,10 +14,22 @@ class GenericPrettyPrinter( object ):
     def __init__( self ):
         return
 
+    def own_glob( self, pattern = None ):
+        if not pattern:
+            try:
+                pattern = self.GLOB
+            except Exception, e:
+                pattern = '*'
+        return glob.glob( pattern )
+
     def doit( self, Obj, names = [] ):
         o = Obj()
         argc = len(sys.argv)
         n = len(names)
+        # Allow plugin to figure out where its files are
+        if n < 1:
+            names = o.own_glob()
+            n = len( names )
         if n < 1:
             # Give plugin a chance to handle its no-file method
             o.do_open_file()

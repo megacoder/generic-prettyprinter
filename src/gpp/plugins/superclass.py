@@ -3,8 +3,11 @@
 
 import  os
 import  sys
+import  glob
 
 class   MetaPrettyPrinter( object ):
+
+    GLOB = '*'
 
     def __init__( self ):
         self.reset()
@@ -18,6 +21,11 @@ class   MetaPrettyPrinter( object ):
         self.multi        = 0
         self.do_backslash = None
         return
+
+    def own_glob( self, pattern = None ):
+        if not pattern:
+            pattern = self.GLOB
+        return glob.glob( pattern ) if pattern else []
 
     def advise( self, **kwargs ):
         for key in kwargs:
