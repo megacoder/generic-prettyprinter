@@ -10,6 +10,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	NAME = 'blkdev'
 	DESCRIPTION="""Display block device numbers in canonical style."""
+	GLOB = r'/sys/block/*/uevent'
 
 	def	__init__( self ):
 		super( PrettyPrint, self ).__init__()
@@ -21,13 +22,12 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	_prepare( self ):
-		self.devices = {}
+		self.devices = []
 		self.attributes = {}
 		self.widths = {}
 		return
 
 	def	begin_file( self, name ):
-		super( PrettyPrint, self ).begin_file( name )
 		self.attributes = {}
 		return
 
@@ -44,32 +44,27 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		if len(tokens) == 2:
 			field = tokens[0].strip()
 			value = tokens[1].strip()
-			for s in [field, value]:
-				self._keep_width( s )
+			self._keep_width( field )
 			self.attributes[field] = value
 		return
 
 	def	end_file( self, name ):
-		if 'DEVNAME' in self.attributes:
-			self.devices[ self.attributes['DEVNAME'] ] = self.attributes
+		if 'DEVNAME' in self.attributes.keys():
+			self.devices.append( self.attributes )
 		return
 
 	def	report( self, final = False ):
-		keys = sorted( self.devices.keys )
-		fmts = []
+		keys = sorted( self.widths.keys() )
+		fmts = {}
 		for key in keys:
 			fmts[ key ] = '%%-%ds' % self.widths[ key ]
-		others = False
 		for device in sorted( self.devices ):
+			line = ''
 			for key in keys:
 				if key in device:
-					s = device[ key ],
+					s = device[ key ]
 				else:
 					s = ''
-				if others:
-					print ' ',
-				others = True
-				print fmts[ key ] % s,
-			if others:
-				print
+				line += (fmts[key] % s)
+			self.println( line )
 		return
