@@ -1,6 +1,6 @@
 %define name generic_prettyprinter
-%define version 1.0.2
-%define unmangled_version 1.0.2
+%define version 1.0.6
+%define unmangled_version 1.0.6
 %define release 1
 
 Summary: Generic Pretty Printer, using plugins

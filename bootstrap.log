@@ -6,161 +6,165 @@ running check
 warning: sdist: manifest template 'MANIFEST.in' does not exist (using default file list)
 
 writing manifest file 'MANIFEST'
-creating generic_prettyprinter-1.0.2
-creating generic_prettyprinter-1.0.2/scripts
-creating generic_prettyprinter-1.0.2/src
-creating generic_prettyprinter-1.0.2/src/gpp
-creating generic_prettyprinter-1.0.2/src/gpp/plugins
-making hard links in generic_prettyprinter-1.0.2...
-hard linking README.txt -> generic_prettyprinter-1.0.2
-hard linking setup.py -> generic_prettyprinter-1.0.2
-hard linking scripts/gpp -> generic_prettyprinter-1.0.2/scripts
-hard linking src/gpp/__init__.py -> generic_prettyprinter-1.0.2/src/gpp
-hard linking src/gpp/plugins/apache-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/arp-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/asm-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/bind-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/blkdev-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/blkid-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/chrony-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/crontab-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/csv-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/cups-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/df-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/exports-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/fstab-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/grub-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/help-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/hosts-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/ifcfg-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/ini-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/ins-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/iscsi-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/kdump-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/ldap-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/limits-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/lvm-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/main-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/meminfo-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/modinfo-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/modprobe-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/mount-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/mounted-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/multipath-ll-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/multipath-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/nsswitch-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/ntp-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/o2cb-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/ocfs2-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/oswbb-heartbeat-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/pam-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/partitions-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/printcap-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/procsys-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/resolv-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/route-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/rpm-installed-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/rpm-va-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/slabinfo-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/smb-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/snmpd-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/ssh-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/superclass.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/sysctl-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/tcpwrapper-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/text-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/udev-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/vmcfg-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/vmstat-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
-hard linking src/gpp/plugins/yum-plugin.py -> generic_prettyprinter-1.0.2/src/gpp/plugins
+creating generic_prettyprinter-1.0.6
+creating generic_prettyprinter-1.0.6/scripts
+creating generic_prettyprinter-1.0.6/src
+creating generic_prettyprinter-1.0.6/src/gpp
+creating generic_prettyprinter-1.0.6/src/gpp/plugins
+making hard links in generic_prettyprinter-1.0.6...
+hard linking README.txt -> generic_prettyprinter-1.0.6
+hard linking setup.py -> generic_prettyprinter-1.0.6
+hard linking scripts/gpp -> generic_prettyprinter-1.0.6/scripts
+hard linking src/gpp/__init__.py -> generic_prettyprinter-1.0.6/src/gpp
+hard linking src/gpp/plugins/apache-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/arp-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/asm-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/bind-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/blkdev-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/blkid-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/chrony-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/crontab-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/csv-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/cups-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/df-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/exports-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/free-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/fstab-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/grub-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/help-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/hosts-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/ifcfg-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/ini-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/ins-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/iscsi-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/kdump-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/ldap-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/limits-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/lvm-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/main-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/meminfo-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/modinfo-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/modprobe-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/mount-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/mounted-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/multipath-ll-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/multipath-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/nsswitch-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/ntp-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/o2cb-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/ocfs2-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/oswbb-heartbeat-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/pam-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/partitions-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/printcap-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/procsys-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/python.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/resolv-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/route-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/rpm-installed-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/rpm-va-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/slabinfo-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/smb-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/snmpd-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/ssh-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/superclass.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/sysctl-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/tcpwrapper-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/text-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/udev-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/vmcfg-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/vmstat-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
+hard linking src/gpp/plugins/yum-plugin.py -> generic_prettyprinter-1.0.6/src/gpp/plugins
 Creating tar archive
-removing 'generic_prettyprinter-1.0.2' (and everything under it)
-copying dist/generic_prettyprinter-1.0.2.tar.gz -> build/bdist.linux-x86_64/rpm/SOURCES
+removing 'generic_prettyprinter-1.0.6' (and everything under it)
+copying dist/generic_prettyprinter-1.0.6.tar.gz -> build/bdist.linux-x86_64/rpm/SOURCES
 building RPMs
 rpmbuild -ba --define _topdir /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm --clean build/bdist.linux-x86_64/rpm/SPECS/generic_prettyprinter.spec
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.j4kxR9
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.RsbYT0
 + umask 022
 + cd /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILD
 + cd /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILD
-+ rm -rf generic_prettyprinter-1.0.2
-+ /usr/bin/gzip -dc /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/SOURCES/generic_prettyprinter-1.0.2.tar.gz
++ rm -rf generic_prettyprinter-1.0.6
++ /usr/bin/gzip -dc /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/SOURCES/generic_prettyprinter-1.0.6.tar.gz
 + /usr/bin/tar -xvvf -
-drwxr-xr-x reynolds/reynolds 0 2014-01-02 13:51 generic_prettyprinter-1.0.2/
-drwxr-xr-x reynolds/reynolds 0 2014-01-02 13:51 generic_prettyprinter-1.0.2/scripts/
--rwxr-xr-x reynolds/reynolds 213 2013-11-14 13:13 generic_prettyprinter-1.0.2/scripts/gpp
-drwxr-xr-x reynolds/reynolds   0 2014-01-02 13:51 generic_prettyprinter-1.0.2/src/
-drwxr-xr-x reynolds/reynolds   0 2014-01-02 13:51 generic_prettyprinter-1.0.2/src/gpp/
-drwxr-xr-x reynolds/reynolds   0 2014-01-02 13:51 generic_prettyprinter-1.0.2/src/gpp/plugins/
--rw-r--r-- reynolds/reynolds 2178 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/apache-plugin.py
--rw-r--r-- reynolds/reynolds 1172 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/arp-plugin.py
--rw-r--r-- reynolds/reynolds 1663 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/asm-plugin.py
--rw-r--r-- reynolds/reynolds 2180 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/bind-plugin.py
--rw-r--r-- reynolds/reynolds 1428 2013-12-18 08:03 generic_prettyprinter-1.0.2/src/gpp/plugins/blkdev-plugin.py
--rw-r--r-- reynolds/reynolds 1856 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/blkid-plugin.py
--rw-r--r-- reynolds/reynolds 2140 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/chrony-plugin.py
--rw-r--r-- reynolds/reynolds 1513 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/crontab-plugin.py
--rw-r--r-- reynolds/reynolds 1062 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/csv-plugin.py
--rw-r--r-- reynolds/reynolds 2898 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/cups-plugin.py
--rw-r--r-- reynolds/reynolds 1937 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/df-plugin.py
--rw-r--r-- reynolds/reynolds 1742 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/exports-plugin.py
--rw-r--r-- reynolds/reynolds 1943 2013-12-18 08:23 generic_prettyprinter-1.0.2/src/gpp/plugins/fstab-plugin.py
--rw-r--r-- reynolds/reynolds 3477 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/grub-plugin.py
--rw-r--r-- reynolds/reynolds  961 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/help-plugin.py
--rw-r--r-- reynolds/reynolds 1182 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/hosts-plugin.py
--rw-r--r-- reynolds/reynolds 1726 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/ifcfg-plugin.py
--rw-r--r-- reynolds/reynolds 1941 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/ini-plugin.py
--rw-r--r-- reynolds/reynolds 1284 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/ins-plugin.py
--rw-r--r-- reynolds/reynolds 1013 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/iscsi-plugin.py
--rw-r--r-- reynolds/reynolds  917 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/kdump-plugin.py
--rw-r--r-- reynolds/reynolds 1198 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/ldap-plugin.py
--rw-r--r-- reynolds/reynolds 1330 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/limits-plugin.py
--rw-r--r-- reynolds/reynolds 2078 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/lvm-plugin.py
--rw-r--r-- reynolds/reynolds  539 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/main-plugin.py
--rw-r--r-- reynolds/reynolds 3849 2013-11-14 13:50 generic_prettyprinter-1.0.2/src/gpp/plugins/meminfo-plugin.py
--rw-r--r-- reynolds/reynolds 1227 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/modinfo-plugin.py
--rw-r--r-- reynolds/reynolds 1109 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/modprobe-plugin.py
--rw-r--r-- reynolds/reynolds 2375 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/mount-plugin.py
--rw-r--r-- reynolds/reynolds 2311 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/mounted-plugin.py
--rw-r--r-- reynolds/reynolds 1833 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/multipath-ll-plugin.py
--rw-r--r-- reynolds/reynolds 1896 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/multipath-plugin.py
--rw-r--r-- reynolds/reynolds 1174 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/nsswitch-plugin.py
--rw-r--r-- reynolds/reynolds 2075 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/ntp-plugin.py
--rw-r--r-- reynolds/reynolds 1468 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/o2cb-plugin.py
--rw-r--r-- reynolds/reynolds 1913 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/ocfs2-plugin.py
--rw-r--r-- reynolds/reynolds 1328 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/oswbb-heartbeat-plugin.py
--rw-r--r-- reynolds/reynolds 1665 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/pam-plugin.py
--rw-r--r-- reynolds/reynolds 1253 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/partitions-plugin.py
--rwxr-xr-x reynolds/reynolds  983 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/printcap-plugin.py
--rw-r--r-- reynolds/reynolds 1152 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/procsys-plugin.py
--rw-r--r-- reynolds/reynolds 1140 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/resolv-plugin.py
--rw-r--r-- reynolds/reynolds 2122 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/route-plugin.py
--rw-r--r-- reynolds/reynolds 1330 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/rpm-installed-plugin.py
--rw-r--r-- reynolds/reynolds 1501 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/rpm-va-plugin.py
--rw-r--r-- reynolds/reynolds 1620 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/slabinfo-plugin.py
--rw-r--r-- reynolds/reynolds 1954 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/smb-plugin.py
--rw-r--r-- reynolds/reynolds 1598 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/snmpd-plugin.py
--rw-r--r-- reynolds/reynolds 1186 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/ssh-plugin.py
--rw-r--r-- reynolds/reynolds 3358 2013-12-18 08:23 generic_prettyprinter-1.0.2/src/gpp/plugins/superclass.py
--rw-r--r-- reynolds/reynolds 1382 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/sysctl-plugin.py
--rw-r--r-- reynolds/reynolds 1303 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/tcpwrapper-plugin.py
--rw-r--r-- reynolds/reynolds  272 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/text-plugin.py
--rw-r--r-- reynolds/reynolds 1293 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/udev-plugin.py
--rw-r--r-- reynolds/reynolds 2404 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/vmcfg-plugin.py
--rw-r--r-- reynolds/reynolds 2725 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/vmstat-plugin.py
--rw-r--r-- reynolds/reynolds 1554 2013-11-14 13:13 generic_prettyprinter-1.0.2/src/gpp/plugins/yum-plugin.py
--rwxr-xr-x reynolds/reynolds 3267 2013-12-18 08:20 generic_prettyprinter-1.0.2/src/gpp/__init__.py
--rw-r--r-- reynolds/reynolds  181 2014-01-02 13:51 generic_prettyprinter-1.0.2/README.txt
--rwxr-xr-x reynolds/reynolds  708 2014-01-02 13:51 generic_prettyprinter-1.0.2/setup.py
--rw-r--r-- reynolds/reynolds  472 2014-01-02 13:51 generic_prettyprinter-1.0.2/PKG-INFO
+drwxr-xr-x reynolds/reynolds 0 2014-03-12 11:57 generic_prettyprinter-1.0.6/
+drwxr-xr-x reynolds/reynolds 0 2014-03-12 11:57 generic_prettyprinter-1.0.6/scripts/
+-rwxr-xr-x reynolds/reynolds 213 2013-11-14 13:13 generic_prettyprinter-1.0.6/scripts/gpp
+drwxr-xr-x reynolds/reynolds   0 2014-03-12 11:57 generic_prettyprinter-1.0.6/src/
+drwxr-xr-x reynolds/reynolds   0 2014-03-12 11:57 generic_prettyprinter-1.0.6/src/gpp/
+drwxr-xr-x reynolds/reynolds   0 2014-03-12 11:57 generic_prettyprinter-1.0.6/src/gpp/plugins/
+-rw-r--r-- reynolds/reynolds 2178 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/apache-plugin.py
+-rw-r--r-- reynolds/reynolds 1172 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/arp-plugin.py
+-rw-r--r-- reynolds/reynolds 1663 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/asm-plugin.py
+-rw-r--r-- reynolds/reynolds 2180 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/bind-plugin.py
+-rw-r--r-- reynolds/reynolds 1428 2013-12-18 08:03 generic_prettyprinter-1.0.6/src/gpp/plugins/blkdev-plugin.py
+-rw-r--r-- reynolds/reynolds 1856 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/blkid-plugin.py
+-rw-r--r-- reynolds/reynolds 2140 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/chrony-plugin.py
+-rw-r--r-- reynolds/reynolds 1513 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/crontab-plugin.py
+-rw-r--r-- reynolds/reynolds 1062 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/csv-plugin.py
+-rw-r--r-- reynolds/reynolds 2898 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/cups-plugin.py
+-rw-r--r-- reynolds/reynolds 1937 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/df-plugin.py
+-rw-r--r-- reynolds/reynolds 1742 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/exports-plugin.py
+-rw-r--r-- reynolds/reynolds 2127 2014-03-12 11:57 generic_prettyprinter-1.0.6/src/gpp/plugins/free-plugin.py
+-rw-r--r-- reynolds/reynolds 1943 2013-12-18 08:23 generic_prettyprinter-1.0.6/src/gpp/plugins/fstab-plugin.py
+-rw-r--r-- reynolds/reynolds 3477 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/grub-plugin.py
+-rw-r--r-- reynolds/reynolds  961 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/help-plugin.py
+-rw-r--r-- reynolds/reynolds 1182 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/hosts-plugin.py
+-rw-r--r-- reynolds/reynolds 1726 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/ifcfg-plugin.py
+-rw-r--r-- reynolds/reynolds 1941 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/ini-plugin.py
+-rw-r--r-- reynolds/reynolds 1284 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/ins-plugin.py
+-rw-r--r-- reynolds/reynolds 1013 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/iscsi-plugin.py
+-rw-r--r-- reynolds/reynolds  917 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/kdump-plugin.py
+-rw-r--r-- reynolds/reynolds 1198 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/ldap-plugin.py
+-rw-r--r-- reynolds/reynolds 1330 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/limits-plugin.py
+-rw-r--r-- reynolds/reynolds 2078 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/lvm-plugin.py
+-rw-r--r-- reynolds/reynolds  539 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/main-plugin.py
+-rw-r--r-- reynolds/reynolds 3849 2013-11-14 13:50 generic_prettyprinter-1.0.6/src/gpp/plugins/meminfo-plugin.py
+-rw-r--r-- reynolds/reynolds 1227 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/modinfo-plugin.py
+-rw-r--r-- reynolds/reynolds 1109 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/modprobe-plugin.py
+-rw-r--r-- reynolds/reynolds 2375 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/mount-plugin.py
+-rw-r--r-- reynolds/reynolds 2311 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/mounted-plugin.py
+-rw-r--r-- reynolds/reynolds 1833 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/multipath-ll-plugin.py
+-rw-r--r-- reynolds/reynolds 1896 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/multipath-plugin.py
+-rw-r--r-- reynolds/reynolds 1174 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/nsswitch-plugin.py
+-rw-r--r-- reynolds/reynolds 2075 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/ntp-plugin.py
+-rw-r--r-- reynolds/reynolds 1468 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/o2cb-plugin.py
+-rw-r--r-- reynolds/reynolds 1913 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/ocfs2-plugin.py
+-rw-r--r-- reynolds/reynolds 1328 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/oswbb-heartbeat-plugin.py
+-rw-r--r-- reynolds/reynolds 1665 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/pam-plugin.py
+-rw-r--r-- reynolds/reynolds 1253 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/partitions-plugin.py
+-rwxr-xr-x reynolds/reynolds  983 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/printcap-plugin.py
+-rw-r--r-- reynolds/reynolds 1152 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/procsys-plugin.py
+-rw-r--r-- reynolds/reynolds 2405 2014-02-16 15:15 generic_prettyprinter-1.0.6/src/gpp/plugins/python.py
+-rw-r--r-- reynolds/reynolds 1140 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/resolv-plugin.py
+-rw-r--r-- reynolds/reynolds 2122 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/route-plugin.py
+-rw-r--r-- reynolds/reynolds 1330 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/rpm-installed-plugin.py
+-rw-r--r-- reynolds/reynolds 1501 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/rpm-va-plugin.py
+-rw-r--r-- reynolds/reynolds 1620 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/slabinfo-plugin.py
+-rw-r--r-- reynolds/reynolds 1954 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/smb-plugin.py
+-rw-r--r-- reynolds/reynolds 1598 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/snmpd-plugin.py
+-rw-r--r-- reynolds/reynolds 1186 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/ssh-plugin.py
+-rw-r--r-- reynolds/reynolds 3358 2013-12-18 08:23 generic_prettyprinter-1.0.6/src/gpp/plugins/superclass.py
+-rw-r--r-- reynolds/reynolds 1382 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/sysctl-plugin.py
+-rw-r--r-- reynolds/reynolds 1303 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/tcpwrapper-plugin.py
+-rw-r--r-- reynolds/reynolds  272 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/text-plugin.py
+-rw-r--r-- reynolds/reynolds 1293 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/udev-plugin.py
+-rw-r--r-- reynolds/reynolds 2404 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/vmcfg-plugin.py
+-rw-r--r-- reynolds/reynolds 2725 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/vmstat-plugin.py
+-rw-r--r-- reynolds/reynolds 1554 2013-11-14 13:13 generic_prettyprinter-1.0.6/src/gpp/plugins/yum-plugin.py
+-rwxr-xr-x reynolds/reynolds 3267 2013-12-18 08:20 generic_prettyprinter-1.0.6/src/gpp/__init__.py
+-rw-r--r-- reynolds/reynolds  181 2014-03-12 11:57 generic_prettyprinter-1.0.6/README.txt
+-rwxr-xr-x reynolds/reynolds  708 2014-03-12 09:30 generic_prettyprinter-1.0.6/setup.py
+-rw-r--r-- reynolds/reynolds  472 2014-03-12 11:57 generic_prettyprinter-1.0.6/PKG-INFO
 + STATUS=0
 + '[' 0 -ne 0 ']'
-+ cd generic_prettyprinter-1.0.2
++ cd generic_prettyprinter-1.0.6
 + /usr/bin/chmod -Rf a+rX,u+w,g-w,o-w .
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.HgncMk
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.jIH5gz
 + umask 022
 + cd /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILD
-+ cd generic_prettyprinter-1.0.2
++ cd generic_prettyprinter-1.0.6
 + python setup.py build
 running build
 running build_py
@@ -181,6 +185,7 @@ copying src/gpp/plugins/csv-plugin.py -> build/lib/generic_prettyprinter/plugins
 copying src/gpp/plugins/cups-plugin.py -> build/lib/generic_prettyprinter/plugins
 copying src/gpp/plugins/df-plugin.py -> build/lib/generic_prettyprinter/plugins
 copying src/gpp/plugins/exports-plugin.py -> build/lib/generic_prettyprinter/plugins
+copying src/gpp/plugins/free-plugin.py -> build/lib/generic_prettyprinter/plugins
 copying src/gpp/plugins/fstab-plugin.py -> build/lib/generic_prettyprinter/plugins
 copying src/gpp/plugins/grub-plugin.py -> build/lib/generic_prettyprinter/plugins
 copying src/gpp/plugins/help-plugin.py -> build/lib/generic_prettyprinter/plugins
@@ -210,6 +215,7 @@ copying src/gpp/plugins/pam-plugin.py -> build/lib/generic_prettyprinter/plugins
 copying src/gpp/plugins/partitions-plugin.py -> build/lib/generic_prettyprinter/plugins
 copying src/gpp/plugins/printcap-plugin.py -> build/lib/generic_prettyprinter/plugins
 copying src/gpp/plugins/procsys-plugin.py -> build/lib/generic_prettyprinter/plugins
+copying src/gpp/plugins/python.py -> build/lib/generic_prettyprinter/plugins
 copying src/gpp/plugins/resolv-plugin.py -> build/lib/generic_prettyprinter/plugins
 copying src/gpp/plugins/route-plugin.py -> build/lib/generic_prettyprinter/plugins
 copying src/gpp/plugins/rpm-installed-plugin.py -> build/lib/generic_prettyprinter/plugins
@@ -231,180 +237,184 @@ creating build/scripts-2.7
 copying and adjusting scripts/gpp -> build/scripts-2.7
 changing mode of build/scripts-2.7/gpp from 644 to 755
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.er0uZv
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.cn0GQ7
 + umask 022
 + cd /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILD
-+ '[' /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64 '!=' / ']'
-+ rm -rf /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64
-++ dirname /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64
++ '[' /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64 '!=' / ']'
++ rm -rf /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64
+++ dirname /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64
 + mkdir -p /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT
-+ mkdir /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64
-+ cd generic_prettyprinter-1.0.2
-+ python setup.py install -O1 --root=/home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64 --record=INSTALLED_FILES
++ mkdir /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64
++ cd generic_prettyprinter-1.0.6
++ python setup.py install -O1 --root=/home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64 --record=INSTALLED_FILES
 running install
 running build
 running build_py
 running build_scripts
 running install_lib
-creating /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr
-creating /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib
-creating /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7
-creating /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages
-creating /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter
-copying build/lib/generic_prettyprinter/__init__.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter
-creating /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/apache-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/arp-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/asm-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/bind-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/blkdev-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/blkid-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/chrony-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/crontab-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/csv-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/cups-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/df-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/exports-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/fstab-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/grub-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/help-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/hosts-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/ifcfg-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/ini-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/ins-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/iscsi-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/kdump-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/ldap-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/limits-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/lvm-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/main-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/meminfo-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/modinfo-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/modprobe-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/mount-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/mounted-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/multipath-ll-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/multipath-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/nsswitch-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/ntp-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/o2cb-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/ocfs2-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/oswbb-heartbeat-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/pam-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/partitions-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/printcap-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/procsys-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/resolv-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/route-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/rpm-installed-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/rpm-va-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/slabinfo-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/smb-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/snmpd-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/ssh-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/superclass.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/sysctl-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/tcpwrapper-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/text-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/udev-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/vmcfg-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/vmstat-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-copying build/lib/generic_prettyprinter/plugins/yum-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/__init__.py to __init__.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/apache-plugin.py to apache-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/arp-plugin.py to arp-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/asm-plugin.py to asm-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/bind-plugin.py to bind-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/blkdev-plugin.py to blkdev-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/blkid-plugin.py to blkid-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/chrony-plugin.py to chrony-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/crontab-plugin.py to crontab-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/csv-plugin.py to csv-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/cups-plugin.py to cups-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/df-plugin.py to df-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/exports-plugin.py to exports-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/fstab-plugin.py to fstab-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/grub-plugin.py to grub-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/help-plugin.py to help-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/hosts-plugin.py to hosts-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ifcfg-plugin.py to ifcfg-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ini-plugin.py to ini-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ins-plugin.py to ins-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/iscsi-plugin.py to iscsi-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/kdump-plugin.py to kdump-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ldap-plugin.py to ldap-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/limits-plugin.py to limits-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/lvm-plugin.py to lvm-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/main-plugin.py to main-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/meminfo-plugin.py to meminfo-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/modinfo-plugin.py to modinfo-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/modprobe-plugin.py to modprobe-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/mount-plugin.py to mount-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/mounted-plugin.py to mounted-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/multipath-ll-plugin.py to multipath-ll-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/multipath-plugin.py to multipath-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/nsswitch-plugin.py to nsswitch-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ntp-plugin.py to ntp-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/o2cb-plugin.py to o2cb-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ocfs2-plugin.py to ocfs2-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/oswbb-heartbeat-plugin.py to oswbb-heartbeat-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/pam-plugin.py to pam-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/partitions-plugin.py to partitions-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/printcap-plugin.py to printcap-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/procsys-plugin.py to procsys-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/resolv-plugin.py to resolv-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/route-plugin.py to route-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/rpm-installed-plugin.py to rpm-installed-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/rpm-va-plugin.py to rpm-va-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/slabinfo-plugin.py to slabinfo-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/smb-plugin.py to smb-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/snmpd-plugin.py to snmpd-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ssh-plugin.py to ssh-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/superclass.py to superclass.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/sysctl-plugin.py to sysctl-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/tcpwrapper-plugin.py to tcpwrapper-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/text-plugin.py to text-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/udev-plugin.py to udev-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/vmcfg-plugin.py to vmcfg-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/vmstat-plugin.py to vmstat-plugin.pyc
-byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/yum-plugin.py to yum-plugin.pyc
-writing byte-compilation script '/tmp/tmpsCCk8H.py'
-/bin/python -O /tmp/tmpsCCk8H.py
-removing /tmp/tmpsCCk8H.py
+creating /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr
+creating /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib
+creating /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7
+creating /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages
+creating /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter
+copying build/lib/generic_prettyprinter/__init__.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter
+creating /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/apache-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/arp-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/asm-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/bind-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/blkdev-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/blkid-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/chrony-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/crontab-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/csv-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/cups-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/df-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/exports-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/free-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/fstab-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/grub-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/help-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/hosts-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/ifcfg-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/ini-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/ins-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/iscsi-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/kdump-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/ldap-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/limits-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/lvm-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/main-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/meminfo-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/modinfo-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/modprobe-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/mount-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/mounted-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/multipath-ll-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/multipath-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/nsswitch-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/ntp-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/o2cb-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/ocfs2-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/oswbb-heartbeat-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/pam-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/partitions-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/printcap-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/procsys-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/python.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/resolv-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/route-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/rpm-installed-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/rpm-va-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/slabinfo-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/smb-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/snmpd-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/ssh-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/superclass.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/sysctl-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/tcpwrapper-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/text-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/udev-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/vmcfg-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/vmstat-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+copying build/lib/generic_prettyprinter/plugins/yum-plugin.py -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/__init__.py to __init__.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/apache-plugin.py to apache-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/arp-plugin.py to arp-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/asm-plugin.py to asm-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/bind-plugin.py to bind-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/blkdev-plugin.py to blkdev-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/blkid-plugin.py to blkid-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/chrony-plugin.py to chrony-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/crontab-plugin.py to crontab-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/csv-plugin.py to csv-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/cups-plugin.py to cups-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/df-plugin.py to df-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/exports-plugin.py to exports-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/free-plugin.py to free-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/fstab-plugin.py to fstab-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/grub-plugin.py to grub-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/help-plugin.py to help-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/hosts-plugin.py to hosts-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ifcfg-plugin.py to ifcfg-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ini-plugin.py to ini-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ins-plugin.py to ins-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/iscsi-plugin.py to iscsi-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/kdump-plugin.py to kdump-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ldap-plugin.py to ldap-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/limits-plugin.py to limits-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/lvm-plugin.py to lvm-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/main-plugin.py to main-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/meminfo-plugin.py to meminfo-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/modinfo-plugin.py to modinfo-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/modprobe-plugin.py to modprobe-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/mount-plugin.py to mount-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/mounted-plugin.py to mounted-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/multipath-ll-plugin.py to multipath-ll-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/multipath-plugin.py to multipath-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/nsswitch-plugin.py to nsswitch-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ntp-plugin.py to ntp-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/o2cb-plugin.py to o2cb-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ocfs2-plugin.py to ocfs2-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/oswbb-heartbeat-plugin.py to oswbb-heartbeat-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/pam-plugin.py to pam-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/partitions-plugin.py to partitions-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/printcap-plugin.py to printcap-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/procsys-plugin.py to procsys-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/python.py to python.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/resolv-plugin.py to resolv-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/route-plugin.py to route-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/rpm-installed-plugin.py to rpm-installed-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/rpm-va-plugin.py to rpm-va-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/slabinfo-plugin.py to slabinfo-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/smb-plugin.py to smb-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/snmpd-plugin.py to snmpd-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ssh-plugin.py to ssh-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/superclass.py to superclass.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/sysctl-plugin.py to sysctl-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/tcpwrapper-plugin.py to tcpwrapper-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/text-plugin.py to text-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/udev-plugin.py to udev-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/vmcfg-plugin.py to vmcfg-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/vmstat-plugin.py to vmstat-plugin.pyc
+byte-compiling /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/yum-plugin.py to yum-plugin.pyc
+writing byte-compilation script '/tmp/tmpSlYSuS.py'
+/bin/python -O /tmp/tmpSlYSuS.py
+removing /tmp/tmpSlYSuS.py
 running install_scripts
-creating /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/bin
-copying build/scripts-2.7/gpp -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/bin
-changing mode of /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/bin/gpp to 755
+creating /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/bin
+copying build/scripts-2.7/gpp -> /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/bin
+changing mode of /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/bin/gpp to 755
 running install_egg_info
-Writing /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter-1.0.2-py2.7.egg-info
+Writing /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7/site-packages/generic_prettyprinter-1.0.6-py2.7.egg-info
 writing list of installed files to 'INSTALLED_FILES'
-+ /usr/lib/rpm/find-debuginfo.sh --strict-build-id -m --run-dwz --dwz-low-mem-die-limit 10000000 --dwz-max-die-limit 110000000 /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILD/generic_prettyprinter-1.0.2
++ /usr/lib/rpm/find-debuginfo.sh --strict-build-id -m --run-dwz --dwz-low-mem-die-limit 10000000 --dwz-max-die-limit 110000000 /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILD/generic_prettyprinter-1.0.6
 /usr/lib/rpm/sepdebugcrcfix: Updated 0 CRC32s, 0 CRC32s did match.
 find: 'debug': No such file or directory
 + /usr/lib/rpm/check-buildroot
 + /usr/lib/rpm/redhat/brp-compress
 + /usr/lib/rpm/redhat/brp-strip-static-archive /usr/bin/strip
 + /usr/lib/rpm/brp-python-bytecompile /usr/bin/python 1
-Bytecompiling .py files below /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64/usr/lib/python2.7/ using /usr/bin/python2.7
+Bytecompiling .py files below /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64/usr/lib/python2.7 using /usr/bin/python2.7
 + /usr/lib/rpm/redhat/brp-python-hardlink
 + /usr/lib/rpm/redhat/brp-java-repack-jars
-Processing files: generic_prettyprinter-1.0.2-1.noarch
-Provides: generic_prettyprinter = 1.0.2-1
+Processing files: generic_prettyprinter-1.0.6-1.noarch
+Provides: generic_prettyprinter = 1.0.6-1
 Requires(rpmlib): rpmlib(CompressedFileNames) <= 3.0.4-1 rpmlib(FileDigests) <= 4.6.0-1 rpmlib(PartialHardlinkSets) <= 4.0.4-1 rpmlib(PayloadFilesHavePrefix) <= 4.0-1
 Requires: /bin/python python(abi) = 2.7
-Checking for unpackaged file(s): /usr/lib/rpm/check-files /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64
-Wrote: /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/SRPMS/generic_prettyprinter-1.0.2-1.src.rpm
-Executing "/usr/bin/rpmlint /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/SRPMS/generic_prettyprinter-1.0.2-1.src.rpm":
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64
+Wrote: /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/SRPMS/generic_prettyprinter-1.0.6-1.src.rpm
+Executing "/usr/bin/rpmlint /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/SRPMS/generic_prettyprinter-1.0.6-1.src.rpm":
 generic_prettyprinter.src: W: spelling-error %description -l en_US prettyprinter -> pretty printer, pretty-printer, interpreter
 generic_prettyprinter.src: W: spelling-error %description -l en_US prettyprinters -> pretty printers, pretty-printers, interpreters
 generic_prettyprinter.src: E: no-changelogname-tag
 generic_prettyprinter.src: W: invalid-license GPL
 generic_prettyprinter.src:28: W: setup-not-quiet
-generic_prettyprinter.src: W: invalid-url Source0: generic_prettyprinter-1.0.2.tar.gz
+generic_prettyprinter.src: W: invalid-url Source0: generic_prettyprinter-1.0.6.tar.gz
 1 packages and 0 specfiles checked; 1 errors, 5 warnings.
-error: Package check "/usr/bin/rpmlint /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/SRPMS/generic_prettyprinter-1.0.2-1.src.rpm" failed.
-Wrote: /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/RPMS/noarch/generic_prettyprinter-1.0.2-1.noarch.rpm
-Executing "/usr/bin/rpmlint /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/RPMS/noarch/generic_prettyprinter-1.0.2-1.noarch.rpm":
+error: Package check "/usr/bin/rpmlint /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/SRPMS/generic_prettyprinter-1.0.6-1.src.rpm" failed.
+Wrote: /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/RPMS/noarch/generic_prettyprinter-1.0.6-1.noarch.rpm
+Executing "/usr/bin/rpmlint /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/RPMS/noarch/generic_prettyprinter-1.0.6-1.noarch.rpm":
 generic_prettyprinter.noarch: W: spelling-error %description -l en_US prettyprinter -> pretty printer, pretty-printer, interpreter
 generic_prettyprinter.noarch: W: spelling-error %description -l en_US prettyprinters -> pretty printers, pretty-printers, interpreters
 generic_prettyprinter.noarch: E: no-changelogname-tag
@@ -412,6 +422,7 @@ generic_prettyprinter.noarch: W: invalid-license GPL
 generic_prettyprinter.noarch: W: no-documentation
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/csv-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/mount-plugin.py 0644L /usr/bin/python
+generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/vmstat-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/arp-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/sysctl-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/smb-plugin.py 0644L /usr/bin/python
@@ -425,15 +436,14 @@ generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-p
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/rpm-installed-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/printcap-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/pam-plugin.py 0644L /usr/bin/python
-generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/modinfo-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/hosts-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/procsys-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/tcpwrapper-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/asm-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/grub-plugin.py 0644L /usr/bin/python
-generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/vmstat-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/o2cb-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/route-plugin.py 0644L /usr/bin/python
+generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/python.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/iscsi-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/lvm-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/yum-plugin.py 0644L /usr/bin/python
@@ -441,6 +451,7 @@ generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-p
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/multipath-ll-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/vmcfg-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/apache-plugin.py 0644L /usr/bin/python
+generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/free-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/blkdev-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/df-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ini-plugin.py 0644L /usr/bin/python
@@ -455,6 +466,7 @@ generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-p
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/oswbb-heartbeat-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/nsswitch-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ifcfg-plugin.py 0644L /usr/bin/python
+generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/modinfo-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/chrony-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ldap-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/udev-plugin.py 0644L /usr/bin/python
@@ -467,9 +479,9 @@ generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-p
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ins-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/modprobe-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: W: no-manual-page-for-binary gpp
-1 packages and 0 specfiles checked; 57 errors, 5 warnings.
-error: Package check "/usr/bin/rpmlint /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/RPMS/noarch/generic_prettyprinter-1.0.2-1.noarch.rpm" failed.
-Executing "/usr/bin/rpmlint /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/RPMS/noarch/generic_prettyprinter-1.0.2-1.noarch.rpm ":
+1 packages and 0 specfiles checked; 59 errors, 5 warnings.
+error: Package check "/usr/bin/rpmlint /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/RPMS/noarch/generic_prettyprinter-1.0.6-1.noarch.rpm" failed.
+Executing "/usr/bin/rpmlint /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/RPMS/noarch/generic_prettyprinter-1.0.6-1.noarch.rpm ":
 generic_prettyprinter.noarch: W: spelling-error %description -l en_US prettyprinter -> pretty printer, pretty-printer, interpreter
 generic_prettyprinter.noarch: W: spelling-error %description -l en_US prettyprinters -> pretty printers, pretty-printers, interpreters
 generic_prettyprinter.noarch: E: no-changelogname-tag
@@ -477,6 +489,7 @@ generic_prettyprinter.noarch: W: invalid-license GPL
 generic_prettyprinter.noarch: W: no-documentation
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/csv-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/mount-plugin.py 0644L /usr/bin/python
+generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/vmstat-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/arp-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/sysctl-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/smb-plugin.py 0644L /usr/bin/python
@@ -490,15 +503,14 @@ generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-p
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/rpm-installed-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/printcap-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/pam-plugin.py 0644L /usr/bin/python
-generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/modinfo-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/hosts-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/procsys-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/tcpwrapper-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/asm-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/grub-plugin.py 0644L /usr/bin/python
-generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/vmstat-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/o2cb-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/route-plugin.py 0644L /usr/bin/python
+generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/python.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/iscsi-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/lvm-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/yum-plugin.py 0644L /usr/bin/python
@@ -506,6 +518,7 @@ generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-p
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/multipath-ll-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/vmcfg-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/apache-plugin.py 0644L /usr/bin/python
+generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/free-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/blkdev-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/df-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ini-plugin.py 0644L /usr/bin/python
@@ -520,6 +533,7 @@ generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-p
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/oswbb-heartbeat-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/nsswitch-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ifcfg-plugin.py 0644L /usr/bin/python
+generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/modinfo-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/chrony-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ldap-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/udev-plugin.py 0644L /usr/bin/python
@@ -532,18 +546,18 @@ generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-p
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/ins-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: E: non-executable-script /usr/lib/python2.7/site-packages/generic_prettyprinter/plugins/modprobe-plugin.py 0644L /usr/bin/python
 generic_prettyprinter.noarch: W: no-manual-page-for-binary gpp
-1 packages and 0 specfiles checked; 57 errors, 5 warnings.
-error: Package check "/usr/bin/rpmlint /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/RPMS/noarch/generic_prettyprinter-1.0.2-1.noarch.rpm " failed.
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.nSfuy9
+1 packages and 0 specfiles checked; 59 errors, 5 warnings.
+error: Package check "/usr/bin/rpmlint /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/RPMS/noarch/generic_prettyprinter-1.0.6-1.noarch.rpm " failed.
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.zoksbA
 + umask 022
 + cd /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILD
-+ cd generic_prettyprinter-1.0.2
-+ rm -rf /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.2-1.x86_64
++ cd generic_prettyprinter-1.0.6
++ rm -rf /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILDROOT/generic_prettyprinter-1.0.6-1.x86_64
 + exit 0
-Executing(--clean): /bin/sh -e /var/tmp/rpm-tmp.sdvDJM
+Executing(--clean): /bin/sh -e /var/tmp/rpm-tmp.CHKVTt
 + umask 022
 + cd /home/reynolds/src/g/generic-prettyprinter.git/build/bdist.linux-x86_64/rpm/BUILD
-+ rm -rf generic_prettyprinter-1.0.2
++ rm -rf generic_prettyprinter-1.0.6
 + exit 0
-moving build/bdist.linux-x86_64/rpm/SRPMS/generic_prettyprinter-1.0.2-1.src.rpm -> dist
-moving build/bdist.linux-x86_64/rpm/RPMS/noarch/generic_prettyprinter-1.0.2-1.noarch.rpm -> dist
+moving build/bdist.linux-x86_64/rpm/SRPMS/generic_prettyprinter-1.0.6-1.src.rpm -> dist
+moving build/bdist.linux-x86_64/rpm/RPMS/noarch/generic_prettyprinter-1.0.6-1.noarch.rpm -> dist

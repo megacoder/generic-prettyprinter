@@ -15,6 +15,7 @@ src/gpp/plugins/csv-plugin.py
 src/gpp/plugins/cups-plugin.py
 src/gpp/plugins/df-plugin.py
 src/gpp/plugins/exports-plugin.py
+src/gpp/plugins/free-plugin.py
 src/gpp/plugins/fstab-plugin.py
 src/gpp/plugins/grub-plugin.py
 src/gpp/plugins/help-plugin.py
@@ -44,6 +45,7 @@ src/gpp/plugins/pam-plugin.py
 src/gpp/plugins/partitions-plugin.py
 src/gpp/plugins/printcap-plugin.py
 src/gpp/plugins/procsys-plugin.py
+src/gpp/plugins/python.py
 src/gpp/plugins/resolv-plugin.py
 src/gpp/plugins/route-plugin.py
 src/gpp/plugins/rpm-installed-plugin.py
