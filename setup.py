@@ -17,7 +17,6 @@ setup(
 	url              = 'http://www.MegaCoder.com',
 	long_description =open('README.txt').read(),
 	packages         =[ 'generic_prettyprinter' ],
-	package_dir      ={ 'generic_prettyprinter':'src/gpp' },
 	package_data     ={ 'generic_prettyprinter': [ 'plugins/*.py', '*.txt', '*.html' ] },
-	scripts          =[ 'scripts/gpp' ],
+	scripts          =[ 'generic_prettyprinter/bin/gpp' ],
 )
