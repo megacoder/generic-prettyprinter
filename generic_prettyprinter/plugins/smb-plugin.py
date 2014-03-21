@@ -17,8 +17,11 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	reset( self ):
 		super( PrettyPrint, self ).reset()
+		self._reset()
+		return
+
+	def	_reset( self ):
 		self.section  = None
-		self.maxname  = 14
 		self.sections = []
 		return
 
@@ -33,7 +36,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 	def	_close_section( self ):
 		if self.section:
 			self.section['entries'].sort(
-				key = lambda n,v : n.lower()
+				# key = lambda n,v : n.lower()
 			)
 			self.sections.append( self.section )
 			self.section = None
@@ -41,7 +44,17 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	next_file( self, name ):
 		super( PrettyPrint, self ).next_file( name )
-		self._prepare()
+		self._reset()
+		return
+
+	def	_add_entry( self, name, value = None ):
+		self.section['maxname'] = max(
+			self.section['maxname'],
+			len(name)
+		)
+		self.section['entries'].append(
+			[name, value]
+		)
 		return
 
 	def	next_line( self, line ):
@@ -60,8 +73,13 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				else:
 					name  = line
 					value = None
-				self.max_name = max( self.max_name, len(name) )
-				self.entries.append( [name, value] )
+				self._add_entry( name, value )
+		return
+
+	def	end_file( self, name ):
+		if self.section:
+			self._close_section()
+		super( PrettyPrint, self ).end_file( name )
 		return
 
 	def	report( self, final = False ):
@@ -69,16 +87,15 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			others = False
 			for section in sorted(
 				self.sections,
-				key = lambda s : s['name'].lower()
+				key = lambda s:s['name'].lower()
 			):
 				if others:
 					self.println()
 				others = True
 				self.println( section['name'] )
+				self.println()
 				fmt = '  %%%ds = %%s' % section['maxname']
-				for name,value in sorted(
-					section['entries'],
-					key = lambda n,v: n.lower()
-				):
+				for name,value in section['entries']:
 					self.println( fmt % (name, value) )
+		self._reset()
 		return
