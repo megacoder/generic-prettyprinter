@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# vi: noet sw=4 ts=4
 
 import	os
 import	sys
@@ -6,82 +7,78 @@ import	superclass
 
 class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
-	NAME = 'smp-pp'
+	NAME = 'smb-pp'
 	DESCRIPTION = """Display smb.conf files in canonical style."""
 
 	def	__init__( self ):
 		super( PrettyPrint, self ).__init__()
+		self.reset()
 		return
 
 	def	reset( self ):
 		super( PrettyPrint, self ).reset()
-		self._prepare()
-		return
-
-	def	_prepare( self ):
-		self.name     = None
-		self.entries  = []
-		self.max_name = None
+		self.section  = None
+		self.maxname  = 14
 		self.sections = []
 		return
 
-	def	begin_file( self, name ):
-		super( PrettyPrint, self ).begin_file( name )
-		self._prepare()
-		return
-
-	def	end_file( self, name ):
-		self._close_section()
-		self.report()
-		super( PrettyPrint, self ).end_file( name )
-		return
-
-	def	_in_section( self ):
-		return True if self.name else False
-
 	def	_open_section( self, name ):
-		self._close_section()
-		self.name     = name
-		self.max_name = max( 14, len(name) )
-		self.entries  = []
+		self.section = {
+			'name'    :	name,
+			'maxname' : 14,
+			'entries' : []
+		}
 		return
 
 	def	_close_section( self ):
-		if self._in_section():
-			self.entries.sort(
-				key = lambda (n,v) : n.lower()
+		if self.section:
+			self.section['entries'].sort(
+				key = lambda n,v : n.lower()
 			)
-			self.sections.append( [self.name, self.max_name, self.entries] )
-		self.name     = None
-		self.max_name = None
-		self.entries  = None
+			self.sections.append( self.section )
+			self.section = None
+		return
+
+	def	next_file( self, name ):
+		super( PrettyPrint, self ).next_file( name )
+		self._prepare()
 		return
 
 	def	next_line( self, line ):
-		line = line.split( '#', 1 )[0].split( ';', 1 )[0]
+		line = line.split( '#', 1 )[0].rstrip()
+		line = line.split( ';', 1 )[0].rstrip()
 		if line.startswith( '[' ):
 			self._close_section()
 			self._open_section( line )
-		else:
+		elif self.section:
 			line = line.strip()
-			if len(line) > 0 and self._in_section():
-				name,value = line.split( '=', 1 )
-				name = name.strip()
-				value = value.strip()
+			if len(line) > 0:
+				if line.find( '=' ) > -1:
+					name,value = line.split( '=', 1 )
+					name       = name.strip()
+					value      = value.strip()
+				else:
+					name  = line
+					value = None
 				self.max_name = max( self.max_name, len(name) )
 				self.entries.append( [name, value] )
 		return
 
 	def	report( self, final = False ):
-		others = False
-		for (name,maxlen,settings) in sorted( self.sections, key =
-			lambda (n,m,s) : n.lower() ):
-			if others:
-				self.println()
-			others = True
-			self.println( name )
-			fmt = '%%-%ds = %%s' % maxlen
-			for (n,v) in settings:
-				self.println( fmt % (n,v) )
-		self._prepare()
+		if self.sections != []:
+			others = False
+			for section in sorted(
+				self.sections,
+				key = lambda s : s['name'].lower()
+			):
+				if others:
+					self.println()
+				others = True
+				self.println( section['name'] )
+				fmt = '  %%%ds = %%s' % section['maxname']
+				for name,value in sorted(
+					section['entries'],
+					key = lambda n,v: n.lower()
+				):
+					self.println( fmt % (name, value) )
 		return
