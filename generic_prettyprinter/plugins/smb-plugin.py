@@ -53,7 +53,10 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			len(name)
 		)
 		self.section['entries'].append(
-			[name, value]
+			{
+				'name'  : name,
+				'value' : value
+			}
 		)
 		return
 
@@ -95,7 +98,13 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				self.println( section['name'] )
 				self.println()
 				fmt = '  %%%ds = %%s' % section['maxname']
-				for name,value in section['entries']:
-					self.println( fmt % (name, value) )
+				for e in sorted(
+					section['entries'],
+					key = lambda e: e['name'].lower()
+				):
+					self.println( fmt % (
+						e['name'],
+						e['value'])
+					)
 		self._reset()
 		return
