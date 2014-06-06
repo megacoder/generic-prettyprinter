@@ -16,7 +16,7 @@ setup(
 	license          = 'GPL',
 	url              = 'http://www.MegaCoder.com',
 	long_description =open('README.txt').read(),
-	packages         =[ 'generic_prettyprinter' ],
-	package_data     ={ 'generic_prettyprinter': [ 'plugins/*.py', '*.txt', '*.html' ] },
-	scripts          =[ 'generic_prettyprinter/bin/gpp' ],
+	# packages         =[ 'generic_prettyprinter' ],
+	package_data     ={ 'generic_prettyprinter': [ 'src/*.py', '*.txt', '*.html' ] },
+	scripts          =[ 'bin/gpp' ],
 )
