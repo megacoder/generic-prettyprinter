@@ -8,15 +8,15 @@ import	glob
 import	os
 
 setup(
-	name             = 'generic_prettyprinter',
-	version          = VERSION,
-	description      = 'Generic Pretty Printer, using plugins',
-	author           = 'Tommy Reynolds',
-	author_email     = 'Tommy.Reynolds@MegaCoder.com',
-	license          = 'GPL',
-	url              = 'http://www.MegaCoder.com',
-	long_description =open('README.txt').read(),
-	# packages         =[ 'generic_prettyprinter' ],
-	package_data     ={ 'generic_prettyprinter': [ 'src/*.py', '*.txt', '*.html' ] },
-	scripts          =[ 'bin/gpp' ],
+	name             =	'generic_prettyprinter',
+	version          =	VERSION,
+	description      =	'Generic Pretty Printer, using plugins',
+	author           =	'Tommy Reynolds',
+	author_email     =	'Tommy.Reynolds@MegaCoder.com',
+	license          =	'GPL',
+	url              =	'http://www.MegaCoder.com',
+	long_description =	open('README').read(),
+	packages         =	[ 'generic_prettyprinter' ],
+	package_dir      =	{ '' : 'src' },
+	scripts          =	[ 'bin/gpp' ],
 )

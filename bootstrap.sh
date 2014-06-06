@@ -7,7 +7,7 @@ fi
 (
 	set +x
 	markdown2 README.md					|	\
-		tee README.html					|	\
-	lynx -dump -stdin >README.txt
-python ./setup.py "${@}"
+	tee README.html						|	\
+	lynx -dump -stdin >README
+	python ./setup.py "${@}"
 ) 2>&1 | tee bootstrap.log
