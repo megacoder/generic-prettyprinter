@@ -16,7 +16,7 @@ if here.startswith( os.getenv( 'HOME' ) ):
 	os.path.abspath(
 	    os.path.join(
 		os.path.dirname( here ),
-		"../.."
+                ".."
 	    )
 	)
     )
@@ -33,5 +33,5 @@ except Exception, e:
 
 pp = gpp.GenericPrettyPrinter()
 exit(pp.prettyprint(
-	os.path.join( os.path.dirname( gpp.__file__ ), 'plugins' )
+	os.path.dirname( gpp.__file__ )
 ))
