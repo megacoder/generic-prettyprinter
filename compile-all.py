@@ -6,4 +6,4 @@ import	sys
 
 sys.stderr = sys.stdout
 
-compileall.compile_dir( 'generic_prettyprinter', force = 1 )
+compileall.compile_dir( 'src', force = 1 )
