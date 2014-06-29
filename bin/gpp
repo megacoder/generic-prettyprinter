@@ -22,9 +22,9 @@ if here.startswith( os.getenv( 'HOME' ) ):
     )
 
 try:
-    import	generic_prettyprinter as gpp
+    import	gpp
 except Exception, e:
-    print >>sys.stderr, 'Cannot locate generic_prettyprinter'
+    print >>sys.stderr, 'Cannot locate gpp'
     print >>sys.stderr, 'Module path:'
     for path in sys.path:
 	print >>sys.stderr, '\t%s' % path

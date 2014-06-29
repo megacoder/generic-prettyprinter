@@ -30,9 +30,11 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			'Mask',
 			'Device',
 		]
-		self.widths = [
-			len( x ) for x in self.titles,
-		]
+		self.nTitles = len( self.titles )
+		self.widths = map(len,self.titles)
+		# print 'self.titles={}'.format(self.titles)
+		# print 'self.nTitles={}'.format(self.nTitles)
+		# print 'self.widths={}'.format(self.widths)
 		return
 
 	def	next_line( self, line ):
@@ -40,29 +42,31 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			pass
 		else:
 			tokens = line.split()
-			if len(tokens) == len( self.titles ):
-				for i in xrange( 0, len(self.titles) ):
-					self.widths[ i ] = max(
-						self.width[ i ],
-						len( tokens[ i ] )
-					)
+			if len(tokens) == self.nTitles:
+				widths = map(len,tokens)
+				self.widths = map( max, self.widths, widths )
+				# print 'appending={}'.format(tokens)
 				self.entries.append( tokens )
 		return
 
 	def	report( self, final = False ):
-		if len(self.entries) > 0:
-			fmts = [
-				'%%-%ds' % d for d in self.widths
-			]
-			self.println(
-				' '.join(
-					(fmts[i] % self.titles[i]) for i in xrange(0,len(self.titles))
-				)
-			)
-			for tokens in sorted( self.entries ):
+		if not final:
+			if len(self.entries) > 0:
+				gutter = '  '
+				fmts = [
+					('%%-%ds' % self.widths[i]) for i in xrange(0, self.nTitles)
+				]
 				self.println(
-					' '.join(
-						(fmts[i] % tokens[i]) for i in xrange(0,len(tokens ))
+					gutter.join(
+						(
+							fmts[i] % self.titles[i]
+						) for i in xrange(0,len(self.titles))
 					)
 				)
+				for tokens in sorted( self.entries ):
+					self.println(
+						gutter.join(
+							(fmts[i] % tokens[i]) for i in xrange(0,self.nTitles)
+						)
+					)
 		return

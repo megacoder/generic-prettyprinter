@@ -8,7 +8,7 @@ import	glob
 import	os
 
 setup(
-	name             =	'generic-prettyprinter',
+	name             =	'gpp',
 	version          =	VERSION,
 	description      =	'Generic Pretty Printer, using plugins',
 	author           =	'Tommy Reynolds',
@@ -16,7 +16,7 @@ setup(
 	license          =	'GPL',
 	url              =	'http://www.MegaCoder.com',
 	long_description =	open('README').read(),
-	packages         =	[ 'generic-prettyprinter' ],
-	package_dir      =	{ 'generic-prettyprinter' : 'src' },
+	packages         =	[ 'gpp' ],
+	package_dir      =	{ 'gpp' : 'src' },
 	scripts          =	[ 'bin/gpp' ],
 )

@@ -14,12 +14,12 @@ class   MetaPrettyPrinter( object ):
         return
 
     def reset( self ):
-        self.out          = sys.stdout
-        self.fileno       = 0
-        self.lineno       = 0
-        self.filename     = '{stdin}'
-        self.multi        = 0
-        self.do_backslash = None
+        self.sc_out          = sys.stdout
+        self.sc_fileno       = 0
+        self.sc_lineno       = 0
+        self.sc_filename     = '{stdin}'
+        self.sc_multi        = 0
+        self.sc_do_backslash = None
         return
 
     def own_glob( self, pattern = None ):
@@ -30,11 +30,11 @@ class   MetaPrettyPrinter( object ):
     def advise( self, **kwargs ):
         for key in kwargs:
             if key == 'argc':
-                self.multi = kwargs[key]
+                self.sc_multi = kwargs[key]
         return
 
     def allow_continuation( self, value = '\\' ):
-        self.do_backslash = value
+        self.sc_do_backslash = value
         return
 
     def do_name( self, name ):
@@ -50,17 +50,17 @@ class   MetaPrettyPrinter( object ):
         return
 
     def begin_file( self, fn ):
-        if self.multi > 1:
-            self.println( 'File %d of %d: %s' % (self.fileno, self.multi, fn) )
+        if self.sc_multi > 1:
+            self.println( 'File %d of %d: %s' % (self.sc_fileno, self.sc_multi, fn) )
             self.println()
         return
 
     def end_file( self, fn ):
         self.report()
-        if self.fileno < self.multi:
+        if self.sc_fileno < self.sc_multi:
             self.println()
-        self.filename = None
-        self.lineno = 0
+        self.sc_filename = None
+        self.sc_lineno = 0
         return
 
     def next_line( self, s ):
@@ -68,9 +68,9 @@ class   MetaPrettyPrinter( object ):
         return
 
     def do_file( self, fn ):
-        self.fileno += 1
-        self.filename = fn
-        self.lineno = 0
+        self.sc_fileno += 1
+        self.sc_filename = fn
+        self.sc_lineno = 0
         self.begin_file( fn )
         try:
             with open( fn, 'rt' ) as f:
@@ -84,9 +84,9 @@ class   MetaPrettyPrinter( object ):
     def do_open_file( self, f = sys.stdin ):
         line = ''
         for segment in f:
-            self.lineno += 1
+            self.sc_lineno += 1
             line += segment.rstrip()
-            if self.do_backslash and line[-1] == self.do_backslash:
+            if self.sc_do_backslash and line[-1] == self.sc_do_backslash:
                 line[-1] = ' '
                 continue
             self.next_line( line )
@@ -109,7 +109,7 @@ class   MetaPrettyPrinter( object ):
         return
 
     def println( self, s = '' ):
-        print >>self.out, s
+        print >>self.sc_out, s
         return
 
     def report( self, final = False ):
@@ -120,10 +120,10 @@ class   MetaPrettyPrinter( object ):
         return
 
     def error( self, msg, e = None ):
-        if self.filename is not None:
-            print >>sys.stderr, 'File %s: ' % self.filename,
-        if self.lineno > 0:
-            print >>sys.stderr, 'Line %d: ' % self.lineno,
+        if self.sc_filename is not None:
+            print >>sys.stderr, 'File %s: ' % self.sc_filename,
+        if self.sc_lineno > 0:
+            print >>sys.stderr, 'Line %d: ' % self.sc_lineno,
         print >>sys.stderr, msg
         if e is not None:
             print >>sys.stderr, e
