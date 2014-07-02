@@ -1,3 +1,14 @@
+2014-07-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bin/gpp, setup.py, src/__init__.py, src/iptables-plugin.py: 
+	Sanitized the module lookup.
+
+2014-06-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : commit f380b4ed46bdc1425c992a211f37cf8f6f75ba32 Author: Tommy
+	Reynolds <Tommy.Reynolds@MegaCoder.com> Date:   Sat Jun 28 19:15:46
+	2014 -0500
+
 2014-06-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* bin/gpp, setup.py, src/pna-plugin.py, src/superclass.py: Tighter.
@@ -100,6 +111,10 @@
 2014-06-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* src/generic_prettyprinter/pna-plugin.py: /proc/net/arp
+
+2014-06-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* README.txt: Don't archive generated file.
 
 2014-06-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
