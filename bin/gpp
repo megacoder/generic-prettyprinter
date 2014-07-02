@@ -5,23 +5,24 @@ import	os
 import	sys
 import	__main__
 
-# This hopscotch lets us run from the development directory
-# and is ignored if run from an installed place.
-
-here = os.path.abspath(
-    __main__.__file__
-)
-if here.startswith( os.getenv( 'HOME' ) ):
-    sys.path.append(
-	os.path.abspath(
-	    os.path.join(
-		os.path.dirname( here ),
-                ".."
-	    )
-	)
-    )
-
 try:
+    # This hopscotch lets us run from the development directory
+    # and is ignored if run from an installed place.
+    here = os.path.abspath(
+        os.path.expanduser(
+            __main__.__file__
+        )
+    )
+    if here.startswith( os.getenv( 'HOME' ) ):
+        sys.path.append(
+            os.path.abspath(
+                os.path.join(
+                    os.path.dirname( here ),
+                    '..',
+                    'src'
+                )
+            )
+        )
     import	gpp
 except Exception, e:
     print >>sys.stderr, 'Cannot locate gpp'
@@ -32,6 +33,4 @@ except Exception, e:
     raise e
 
 pp = gpp.GenericPrettyPrinter()
-exit(pp.prettyprint(
-	os.path.dirname( gpp.__file__ )
-))
+exit( pp.main() )

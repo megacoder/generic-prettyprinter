@@ -44,9 +44,7 @@ class GenericPrettyPrinter( object ):
         o.finish()
         return False
 
-    def prettyprint( self, plugdir ):
-        # Plugins are in "plugins/" directory under where we live.
-        sys.path.insert( 0, plugdir )
+    def main( self ):
         # Intuit the kind of prettyprinter we want to be
         kind = 'text'
         if sys.argv[0].endswith( '-pp' ):
@@ -99,10 +97,10 @@ class GenericPrettyPrinter( object ):
         return retval
 
 if __name__ == '__main__':
+    import  __main__
+    sys.path.insert( 0, os.path.dirname( __file__ ) )
     gpp = GenericPrettyPrinter()
-    retval = gpp.prettyprint(
-        os.path.join( os.path.dirname( gpp.__file__ ), 'plugins' )
-    )
+    retval = gpp.main()
     if retval:
         exit(1)
     exit(0)
