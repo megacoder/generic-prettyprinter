@@ -1,5 +1,14 @@
 2014-07-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
+	* setup.py, src/superclass.py: Added pre_begin_file and
+	post_end_file methods to superclass.
+
+2014-07-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Updated changelog
+
+2014-07-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
 	* setup.py: 1.0.14
 
 2014-07-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
