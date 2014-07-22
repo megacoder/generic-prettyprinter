@@ -1,3 +1,16 @@
+2014-07-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: 1.0.14
+
+2014-07-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/__init__.py: Insert the directory where the modules lie at the
+	front of the search path.
+
+2014-07-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Updated change log.
+
 2014-07-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* bin/gpp, setup.py, src/__init__.py, src/iptables-plugin.py: 
