@@ -49,6 +49,9 @@ class   MetaPrettyPrinter( object ):
             raise ValueError
         return
 
+    def pre_begin_file( self ):
+        return
+
     def begin_file( self, fn ):
         if self.sc_multi > 1:
             self.println( 'File %d of %d: %s' % (self.sc_fileno, self.sc_multi, fn) )
@@ -63,6 +66,9 @@ class   MetaPrettyPrinter( object ):
         self.sc_lineno = 0
         return
 
+    def post_end_file( self ):
+        return
+
     def next_line( self, s ):
         self.println( s )
         return
@@ -71,14 +77,20 @@ class   MetaPrettyPrinter( object ):
         self.sc_fileno += 1
         self.sc_filename = fn
         self.sc_lineno = 0
+        self.pre_begin_file()
         self.begin_file( fn )
         try:
             with open( fn, 'rt' ) as f:
-                self.do_open_file( f )
+                try:
+                    self.do_open_file( f )
+                except Exception, e:
+                    self.error( 'module "%s" failed.' )
+                    raise e
         except Exception, e:
             self.error( 'cannot open "%s" for reading.' % fn, e )
             raise e
         self.end_file( fn )
+        self.post_end_file()
         return
 
     def do_open_file( self, f = sys.stdin ):
