@@ -45,6 +45,7 @@ class GenericPrettyPrinter( object ):
         return False
 
     def main( self ):
+        sys.path.insert( 0, os.path.dirname( __file__ ) )
         # Intuit the kind of prettyprinter we want to be
         kind = 'text'
         if sys.argv[0].endswith( '-pp' ):
@@ -98,7 +99,6 @@ class GenericPrettyPrinter( object ):
 
 if __name__ == '__main__':
     import  __main__
-    sys.path.insert( 0, os.path.dirname( __file__ ) )
     gpp = GenericPrettyPrinter()
     retval = gpp.main()
     if retval:
