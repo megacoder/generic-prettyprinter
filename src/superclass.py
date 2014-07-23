@@ -7,7 +7,11 @@ import  glob
 
 class   MetaPrettyPrinter( object ):
 
-    GLOB = '*'
+    NAME        = 'superclass'
+    DESCRIPTION = 'Man behind the curtain.'
+    USAGE       = None
+    GLOB        = '*'
+    HELPFMT     = '%23s | %s'
 
     def __init__( self ):
         self.reset()
@@ -35,6 +39,9 @@ class   MetaPrettyPrinter( object ):
 
     def allow_continuation( self, value = '\\' ):
         self.sc_do_backslash = value
+        return
+
+    def start( self ):
         return
 
     def do_name( self, name ):
@@ -140,4 +147,20 @@ class   MetaPrettyPrinter( object ):
         if e is not None:
             print >>sys.stderr, e
             raise e
+        return
+
+    def help( self ):
+        self.println(
+            self.HELPFMT % (
+                self.NAME,
+                self.DESCRIPTION
+            )
+        )
+        if self.USAGE:
+            self.println(
+                self.HELPFMT % (
+                    '',
+                    self.USAGE
+                )
+            )
         return
