@@ -4,7 +4,7 @@ import	os
 import	sys
 import	superclass
 
-class	PrettyPrint( MetaPrettyPrinter ):
+class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	NAME = 'printcap-pp'
 	DESCRIPTION="""Display RHEL-4 printcap files in a readable style."""
