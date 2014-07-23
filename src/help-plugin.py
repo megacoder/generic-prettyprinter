@@ -16,7 +16,6 @@ class PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def __init__( self ):
         super( PrettyPrint, self ).__init__()
-        self.names = []
         return
 
     def do_open_file( self, f = None ):
@@ -27,14 +26,18 @@ class PrettyPrint( superclass.MetaPrettyPrinter ):
             os.listdir( sys.path[0] )
         ):
             if name.endswith( '-plugin.py' ):
-                self.println( name )
+                modname = name[:-3]
                 try:
-                    dll = __import__( name[:-3] )
-                    dll.help()
+                    dll = __import__( modname )
                 except Exception, e:
                     print >>sys.stderr, 'help: cannot import "%s".' % (
-                        name.split( '.' )[0]
+                        modname
                     )
                     print >>sys.stderr, e
                     raise e
+                try:
+                    o = dll.PrettyPrint()
+                    o.help()
+                except Exception, e:
+                    pass
         return
