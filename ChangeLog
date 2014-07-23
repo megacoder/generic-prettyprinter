@@ -1,3 +1,42 @@
+2014-07-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/help-plugin.py, src/rpm-installed-plugin.py: The 'gpp -t help'
+	command now works.
+
+2014-07-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/__init__.py: Turn off debug announcement of the GLOB
+	discovery.
+
+2014-07-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped version number.
+
+2014-07-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/printcap-plugin.py: Class definition did not include
+	'superclass.' discriminator.
+
+2014-07-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/help-plugin.py: Skeleton 'help' method.
+
+2014-07-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/__init__.py: Scaffolding for 'help' event to come.
+
+2014-07-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/superclass.py: 1) Added "start()" event.  2) Added archetypical "help()" event.
+
+2014-07-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bin/gpp: Put our module directory first in path, instead of last.
+
+2014-07-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Bump version number
+
 2014-07-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* setup.py, src/superclass.py: Added pre_begin_file and
