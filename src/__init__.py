@@ -78,24 +78,21 @@ class GenericPrettyPrinter( object ):
         )
         opts, args = p.parse_args()
         # Here we go...
-        if opts.kind == 'help':
-            retval = False
-        else:
-            dll_name = '%s-plugin' % opts.kind
-            # DEBUG print >>sys.stderr, 'Loading module %s' % dll_name
+        dll_name = '%s-plugin' % opts.kind
+        # DEBUG print >>sys.stderr, 'Loading module %s' % dll_name
+        try:
+            dll = __import__(dll_name)
+        except Exception, e:
+            print >>sys.stderr, 'No prettyprinter for "%s".' % opts.kind
+            print >>sys.stderr, e
+            return True
+        if opts.ofile is not None:
             try:
-                dll = __import__(dll_name)
+                sys.stdout = open( opts.ofile, 'wt' )
             except Exception, e:
-                print >>sys.stderr, 'No prettyprinter for "%s".' % opts.kind
-                print >>sys.stderr, e
+                print >>sys.stderr, 'Cannot open "%s" for writing.' % opts.ofile
                 return True
-            if opts.ofile is not None:
-                try:
-                    sys.stdout = open( opts.ofile, 'wt' )
-                except Exception, e:
-                    print >>sys.stderr, 'Cannot open "%s" for writing.' % opts.ofile
-                    return True
-            retval = self.doit( Obj = dll.PrettyPrint, names = args )
+        retval = self.doit( Obj = dll.PrettyPrint, names = args )
         return retval
 
     def do_one_module( self, kind = 'help', args = [] ):
