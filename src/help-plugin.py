@@ -10,8 +10,9 @@ import  sys
 import  superclass
 
 class PrettyPrint( superclass.MetaPrettyPrinter ):
-    NAME = 'plugins'
+    NAME        = 'plugins'
     DESCRIPTION = 'Display list of known plugins.'
+    GLOB        = None
 
     def __init__( self ):
         super( PrettyPrint, self ).__init__()
@@ -19,16 +20,21 @@ class PrettyPrint( superclass.MetaPrettyPrinter ):
         return
 
     def do_open_file( self, f = None ):
-        self.names = os.listdir( sys.path[0] )
         return
 
     def finish( self ):
-        self.names.sort()
-        for name in self.names:
+        for name in sorted(
+            os.listdir( sys.path[0] )
+        ):
             if name.endswith( '-plugin.py' ):
-                dll = __import__( name[:-3] )
-                print '%23s %s' % (
-                    dll.PrettyPrint.NAME,
-                    dll.PrettyPrint.DESCRIPTION
-                )
-        return 0
+                self.println( name )
+                try:
+                    dll = __import__( name[:-3] )
+                    dll.help()
+                except Exception, e:
+                    print >>sys.stderr, 'help: cannot import "%s".' % (
+                        name.split( '.' )[0]
+                    )
+                    print >>sys.stderr, e
+                    raise e
+        return
