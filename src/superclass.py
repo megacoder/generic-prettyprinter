@@ -7,6 +7,10 @@ import  glob
 
 class   MetaPrettyPrinter( object ):
 
+    """
+        Populate this!
+    """
+
     NAME        = 'superclass'
     DESCRIPTION = 'Man behind the curtain.'
     USAGE       = None
@@ -149,7 +153,7 @@ class   MetaPrettyPrinter( object ):
             raise e
         return
 
-    def help( self ):
+    def help( self, details = False ):
         self.println(
             self.HELPFMT % (
                 self.NAME,
@@ -162,5 +166,10 @@ class   MetaPrettyPrinter( object ):
                     '',
                     self.USAGE
                 )
+            )
+        if details:
+            self.println(
+                '',
+                self.__doc__
             )
         return
