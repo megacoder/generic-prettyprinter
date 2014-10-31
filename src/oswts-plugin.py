@@ -40,7 +40,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				parts[5]
 			)
 			try:
-				dt = datetime.datetime.strptime(
+				now = datetime.datetime.strptime(
 					reftime,
 					PrettyPrint.FMT
 				)
@@ -50,18 +50,22 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				self.println( e )
 				return
 			if self.first:
-				self.old_time = dt
-			delta = dt - self.old_time
+				self.old_time = now
+			delta = now - self.old_time
+			show = self.first
+			show = True # FIXME
 			if self.first:
 				self.old_delta = delta
 				self.first     = False
 			jitter = delta - self.old_delta
 			if jitter:
-				msg = '%s %s' %	(
+				show = True
+			if show:
+				msg = '%s %3s' %	(
 					timestamp,
-					str( jitter )
+					str( int( delta.total_seconds() + 0.5 ) )
 				)
 				self.println( msg )
 			self.old_delta = delta
-			self.old_time  = dt
+			self.old_time  = now
 		return
