@@ -24,7 +24,11 @@ try:
                 )
             )
         )
-    import	gpp
+        # for path in sys.path:
+        #    print >>sys.stderr, '> {0}'.format( path )
+        import  __init__ as gpp
+    else:
+        import	gpp
 except Exception, e:
     print >>sys.stderr, 'Cannot locate gpp'
     print >>sys.stderr, 'Module path:'

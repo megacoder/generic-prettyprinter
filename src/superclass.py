@@ -95,13 +95,17 @@ class   MetaPrettyPrinter( object ):
                 try:
                     self.do_open_file( f )
                 except Exception, e:
-                    self.error( 'module "%s" failed.' )
+                    self.error(
+                        'Error processing file "%s"; aborted.' % fn,
+                        e
+                    )
                     raise e
         except Exception, e:
             self.error( 'cannot open "%s" for reading.' % fn, e )
             raise e
-        self.end_file( fn )
-        self.post_end_file()
+        finally:
+            self.end_file( fn )
+            self.post_end_file()
         return
 
     def do_open_file( self, f = sys.stdin ):
@@ -143,6 +147,7 @@ class   MetaPrettyPrinter( object ):
         return
 
     def error( self, msg, e = None ):
+        self.sc_out.flush()
         if self.sc_filename is not None:
             print >>sys.stderr, 'File %s: ' % self.sc_filename,
         if self.sc_lineno > 0:

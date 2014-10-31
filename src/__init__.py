@@ -24,6 +24,7 @@ class GenericPrettyPrinter( object ):
 
     def doit( self, Obj, names = [] ):
         o = Obj()
+        o.start()
         argc = len(sys.argv)
         n = len(names)
         # Allow plugin to figure out where its files are
@@ -33,6 +34,7 @@ class GenericPrettyPrinter( object ):
             n = len( names )
             if n < 1:
                 # Give plugin a chance to handle its no-file method
+                o.pre_open_file()
                 o.do_open_file()
             else:
                 # Iterate through the names
