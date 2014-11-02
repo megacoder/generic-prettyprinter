@@ -58,9 +58,8 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		padding = ' ' * ((width - len(s)) / 2)
 		return padding + s
 
-	def	report( self, final = True ):
+	def	report( self, final = False ):
 		if not final:
-			self.println( 'report( final=%s )' % final )
 			return
 		old_delta       = None
 		timestamp_title = 'T I M E S T A M P'

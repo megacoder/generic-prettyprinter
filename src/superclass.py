@@ -70,7 +70,6 @@ class   MetaPrettyPrinter( object ):
         return
 
     def end_file( self, fn ):
-        self.report()
         if self.sc_fileno < self.sc_multi:
             self.println()
         self.sc_filename = None
@@ -103,9 +102,8 @@ class   MetaPrettyPrinter( object ):
         except Exception, e:
             self.error( 'cannot open "%s" for reading.' % fn, e )
             raise e
-        finally:
-            self.end_file( fn )
-            self.post_end_file()
+        self.end_file( fn )
+        self.post_end_file()
         return
 
     def do_open_file( self, f = sys.stdin ):

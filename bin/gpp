@@ -8,12 +8,13 @@ import	__main__
 try:
     # This hopscotch lets us run from the development directory
     # and is ignored if run from an installed place.
+    home = os.getenv( 'HOME' )
     here = os.path.abspath(
         os.path.expanduser(
             __main__.__file__
         )
     )
-    if here.startswith( os.getenv( 'HOME' ) ):
+    if here.startswith( home ):
         sys.path.insert(
             0,
             os.path.abspath(
@@ -24,8 +25,6 @@ try:
                 )
             )
         )
-        # for path in sys.path:
-        #    print >>sys.stderr, '> {0}'.format( path )
         import  __init__ as gpp
     else:
         import	gpp
@@ -33,7 +32,7 @@ except Exception, e:
     print >>sys.stderr, 'Cannot locate gpp'
     print >>sys.stderr, 'Module path:'
     for path in sys.path:
-	print >>sys.stderr, '\t%s' % path
+	print >>sys.stderr, '+-- %s' % path
     print >>sys.stderr, e
     raise e
 

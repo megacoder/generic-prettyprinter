@@ -22,7 +22,7 @@ class GenericPrettyPrinter( object ):
                 pattern = '*'
         return glob.glob( pattern )
 
-    def doit( self, Obj, names = [] ):
+    def session( self, Obj, names = [] ):
         o = Obj()
         o.start()
         argc = len(sys.argv)
@@ -94,7 +94,7 @@ class GenericPrettyPrinter( object ):
             except Exception, e:
                 print >>sys.stderr, 'Cannot open "%s" for writing.' % opts.ofile
                 return True
-        retval = self.doit( Obj = dll.PrettyPrint, names = args )
+        retval = self.session( Obj = dll.PrettyPrint, names = args )
         return retval
 
     def do_one_module( self, kind = 'help', args = [] ):
@@ -106,7 +106,7 @@ class GenericPrettyPrinter( object ):
             print >>sys.stderr, 'No prettyprinter for "%s".' % opts.kind
             print >>sys.stderr, e
             return True
-        retval = self.doit( Obj = dll.PrettyPrint, names = args )
+        retval = self.session( Obj = dll.PrettyPrint, names = args )
         return retval
 
 if __name__ == '__main__':
