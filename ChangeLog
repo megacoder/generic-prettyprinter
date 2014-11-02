@@ -1,3 +1,32 @@
+2014-11-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bin/gpp, src/__init__.py, src/oswts-plugin.py, src/superclass.py: 
+	Center column headers
+
+2014-11-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/oswts-plugin.py: Added column headers; calculate all column
+	widths.
+
+2014-10-31  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/oswts, src/oswts-plugin.py: Checkpoint
+
+2014-10-31  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bin/gpp, samples/oswts, setup.py, src/__init__.py,
+	src/ifcfg-plugin.py, src/oswts-plugin.py, src/superclass.py: 
+	Checkpoint
+
+2014-07-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/help-plugin.py, src/superclass.py: Allow any file names on
+	command line to display extended help for that module.
+
+2014-07-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Updated ChangeLog
+
 2014-07-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* src/help-plugin.py, src/rpm-installed-plugin.py: The 'gpp -t help'
