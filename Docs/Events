@@ -1,0 +1,17 @@
+self.start()			Begin the session
+self.own_glob()			Opportunity for plugin to find default files
+if no files given or globbed:
+  self.pre_open_file()		Opportunity to prepare for a new file
+  self.do_open_file()		Process sys.stdin
+  self.end_file()		File is closed, do any actions
+  self.post_end_file()		Called immediately after end_file()
+else:
+    foreach name:
+	 self.pre_open_file()	Opportunity to prepare for a new file
+	 self.do_open_file()	Process an already-opened file descriptor
+	 self.do_name()		Open a named file
+	 self.end_file()	File is closed, do any actions
+	 self.post_end_file()	Called immediately after end_file()
+	 	self.report()	Produce per-file output, if desired
+self.finish()			Produce final report, if desired
+  self.report( final = True )	Produce summary report, if desired

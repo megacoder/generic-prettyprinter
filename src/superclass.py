@@ -77,6 +77,7 @@ class   MetaPrettyPrinter( object ):
         return
 
     def post_end_file( self ):
+        self.report()
         return
 
     def next_line( self, s ):
