@@ -24,48 +24,89 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	_setup( self ):
-		self.first = True
-		self.old_time = None
+		self.timestamps = []
+		self.maxlen     = 10
 		return
 
 	def	next_line( self, line ):
-		if line.startswith( PrettyPrint.MARK ):
-			timestamp = line[len(PrettyPrint.MARK):]
-			parts = timestamp.split()
-			reftime = '%s %s %s %s %s' % (
-				parts[0],
-				parts[1],
-				parts[2],
-				parts[3],
-				parts[5]
+		if not line.startswith( PrettyPrint.MARK ):
+			return
+		# Only marker lines past this point
+		timestamp = line[len(PrettyPrint.MARK):]
+		self.maxlen = max( self.maxlen, len( timestamp ) )
+		parts = timestamp.split()
+		reftime = '%s %s %s %s %s' % (
+			parts[0],
+			parts[1],
+			parts[2],
+			parts[3],
+			parts[5]
+		)
+		try:
+			now = datetime.datetime.strptime(
+				reftime,
+				PrettyPrint.FMT
 			)
-			try:
-				now = datetime.datetime.strptime(
-					reftime,
-					PrettyPrint.FMT
+			self.timestamps.append( ( now, timestamp ) )
+		except Exception, e:
+			self.println( 'Fmat: %s' % PrettyPrint.FMT )
+			self.println( 'Time: %s' % refimt )
+			self.println( e )
+		return
+
+	def	_center( self, s, width = 40 ):
+		padding = ' ' * ((width - len(s)) / 2)
+		return padding + s
+
+	def	report( self, final = True ):
+		if not final:
+			self.println( 'report( final=%s )' % final )
+			return
+		old_delta       = None
+		timestamp_title = 'T I M E S T A M P'
+		delta_title     = 'Delta'
+		fmt             = '%%-%ds %%%ds' %	(
+			self.maxlen,
+			len( delta_title )
+		)
+		first = True
+		for (now, timestamp) in sorted(
+			self.timestamps,
+			key = lambda tuple : tuple[0]
+		):
+			if first:
+				self.println(
+					fmt % (
+						self._center(
+							timestamp_title,
+							self.maxlen
+						),
+						self._center(
+							delta_title,
+							len( delta_title )
+						)
+					)
 				)
-			except Exception, e:
-				self.println( 'Fmat: %s' % PrettyPrint.FMT )
-				self.println( 'Time: %s' % refimt )
-				self.println( e )
-				return
-			if self.first:
-				self.old_time = now
-			delta = now - self.old_time
-			show = self.first
-			show = True # FIXME
-			if self.first:
-				self.old_delta = delta
-				self.first     = False
-			jitter = delta - self.old_delta
+				self.println( fmt % (
+					'-' * self.maxlen,
+					'-' * len( delta_title )
+				) )
+				old_time = now
+			delta = now - old_time
+			show = first
+			if first:
+				old_delta = delta
+				first     = False
+			jitter = delta - old_delta
 			if jitter:
 				show = True
 			if show:
-				msg = '%s %3s' %	(
-					timestamp,
-					str( int( delta.total_seconds() + 0.5 ) )
+				self.println(
+					fmt % (
+						timestamp,
+						str( int( delta.total_seconds() + 0.5 ) )
+					)
 				)
-				self.println( msg )
-			self.old_delta = delta
-			self.old_time  = now
+			old_delta = delta
+			old_time  = now
 		return
