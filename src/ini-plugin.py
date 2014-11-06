@@ -37,7 +37,11 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	_in_section( self ):
-		return True if self.name else False
+		if self.name:
+			retval = True
+		else:
+			retval = False
+		return retval
 
 	def	_open_section( self, name ):
 		self._close_section()
