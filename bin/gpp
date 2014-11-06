@@ -1,5 +1,5 @@
 #!/usr/bin/python
-#vim: noet sw=4 ts=4
+# vim: noet sw=4 ts=4
 
 import	os
 import	sys
@@ -35,9 +35,18 @@ try:
 		)
 	)
 	if here.startswith( os.getenv( 'HOME' ) ):
+		# Picks up non-root installs
 		use_my(
 			here,
-			'lib/python2.4/site-packages'
+			'lib/python%d.%d/site-packages' % (
+				sys.version_info.major,
+				sys.version_info.minor,
+			)
+		)
+		# Picks up in-situ usage
+		use_my(
+			here,
+			'src'
 		)
 	try:
 		import	__init__ as gpp
