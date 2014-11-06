@@ -104,7 +104,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                             master = slave[ 'BRIDGE' ]
                         except:
                             master = None
-                        if master:
+                        if master and master == bname:
                             self.println( '  |' )
                             self.println(
                                 '  +-- {}'.format( slave['NAME'] )
