@@ -33,7 +33,11 @@ class   MetaPrettyPrinter( object ):
     def own_glob( self, pattern = None ):
         if not pattern:
             pattern = self.GLOB
-        return glob.glob( pattern ) if pattern else []
+        if pattern:
+            retval = glob.glob( pattern )
+        else:
+            retval = []
+        return retval
 
     def advise( self, **kwargs ):
         for key in kwargs:
@@ -91,18 +95,14 @@ class   MetaPrettyPrinter( object ):
         self.pre_begin_file()
         self.begin_file( fn )
         try:
-            with open( fn, 'rt' ) as f:
-                try:
-                    self.do_open_file( f )
-                except Exception, e:
-                    self.error(
-                        'Error processing file "%s"; aborted.' % fn,
-                        e
-                    )
-                    raise e
+            f = open( fn, 'rt' )
         except Exception, e:
-            self.error( 'cannot open "%s" for reading.' % fn, e )
             raise e
+        try:
+            self.do_open_file( f )
+        except Exception, e:
+            pass
+        f.close()
         self.end_file( fn )
         self.post_end_file()
         return
