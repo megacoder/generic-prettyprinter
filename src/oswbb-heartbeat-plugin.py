@@ -52,8 +52,12 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				delta = dt - self.last
 				if old_delta is None:
 					old_delta = delta
+				if flag:
+					mark = '-'
+				else:
+					mark = ' '
 				print '%s %s %s' % (
-					'-' if flag else ' ',
+					mark,
 					tokens[1],
 					delta
 				)
