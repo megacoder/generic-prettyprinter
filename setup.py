@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # vim: noet sw=4 ts=4
 
-VERSION	= '1.0.17'
+VERSION	= '1.0.18'
 
 from	distutils.core			import	setup
 import	glob
