@@ -8,29 +8,32 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
     NAME = 'ifcfg-pp'
     DESCRIPTION="""Show ifcfg network files in canonical style."""
 
-    EMPTY = {
-        'NAME': None,
-        'TYPE': 'Ethernet',
-        ' SKP': False,
-    }
-
     def __init__( self ):
         super( PrettyPrint, self ).__init__()
         return
 
     def reset( self ):
         super( PrettyPrint, self ).reset()
-        self.prolog   = []
-        self.ifaces   = []
-        self.iface    = PrettyPrint.EMPTY
+        self.prolog = []
+        self.ifaces = []
+        self.iface  = {}
         return
 
+    def _normalize( self, iface ):
+        keys = iface.keys()
+        if 'DEVICE' in keys or 'NAME' in keys:
+            if not 'TYPE' in keys:
+                iface[ 'TYPE' ] = '"Ethernet"'
+            if 'DEVICE' in keys and not 'NAME' in keys:
+                iface[ 'NAME' ] = iface[ 'DEVICE' ]
+            if 'NAME' in keys and not 'DEVICE' in keys:
+                iface[ 'DEVICE' ] = iface[ 'NAME' ]
+        # print >>sys.stderr, iface
+        return iface
+
     def pre_begin_file( self ):
-        if self.iface != PrettyPrint.EMPTY:
-            if not 'NAME' in self.iface.keys():
-                self.iface[ 'NAME' ] = self.iface[ 'DEVICE' ]
-            self.ifaces.append( self.iface )
-        self.iface = PrettyPrint.EMPTY
+        self.iface  = {}
+        self.prolog = []
         return
 
     def next_line( self, line ):
@@ -43,33 +46,94 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             else:
                 name  = parts[0]
                 value = parts[1]
-                if not value.startswith('"') and not value.startswith("'"):
-                    value = '"' + value + '"'
+                if value.startswith( '"' ) or value.startswith( "'" ):
+                    value = value[1:-1]
                 self.iface[name] = value
         return
 
     def post_end_file( self ):
-        if self.iface != PrettyPrint.EMPTY:
-            self.ifaces.append( self.iface )
+        iface = self._normalize( self.iface )
+        if 'NAME' in iface.keys():
+            self.ifaces.append( iface )
+        self.report()
         return
 
     def _show_iface( self, iface ):
+        keys = self.iface.keys()
         herald = '# %s' % iface['NAME']
         for line in self.prolog:
-            print line
-        max_name = max( self.iface.keys() )
-        print >>sys.stderr, 'max_name={0}'.format( max_name )
-        fmt = '%%%ds=%%s' % self.max_name
-        for name,value in sorted( self.iface.keys() ):
-            print fmt % (name, value)
+            self.println( '{}'.format( line ) )
+        max_name =  max(
+            map(
+                len,
+                keys
+            )
+        )
+        fmt = '%{}s=%s'.format( max_name )
+        for key in sorted( keys ):
+            self.println( fmt % (key, self.iface[key]) )
+        self.println()
         return
 
     def report( self, final = False ):
-        print >>sys.stderr, 'final={0}'.format( final )
         if final:
             self.ifaces.sort( key = lambda e: e['NAME'] )
-            for i in range( len( self.ifaces ) ):
-                if self.ifaces[i]['TYPE'] == 'Bridge':
-                    self._show_iface( iface )
-                    self.ifaces[i][' SKP'] = True
+            Nifaces = len( self.ifaces )
+            empty = True
+            title = 'S U M M A R Y'
+            self.println( title )
+            self.println( '-' * len( title ) )
+            self.println()
+            # Pass 1: construct bridged interfaces
+            for i in range( Nifaces ):
+                iface = self.ifaces[ i ]
+                keys = iface.keys()
+                if 'TYPE' in keys:
+                    kind = iface[ 'TYPE' ]
+                else:
+                    kind = None
+                if kind == 'Bridge':
+                    empty = False
+                    bname = iface[ 'NAME' ]
+                    self.println(
+                        'Bridge {}'.format( bname )
+                    )
+                    for sno in range( Nifaces ):
+                        slave = self.ifaces[ sno ]
+                        try:
+                            master = slave[ 'BRIDGE' ]
+                        except:
+                            master = None
+                        if master:
+                            self.println( '  |' )
+                            self.println(
+                                '  +-- {}'.format( slave['NAME'] )
+                            )
+                    self.println()
+            # Pass 2: construct bonded interfaces
+            bonds = {}
+            for iface in self.ifaces:
+                try:
+                    if iface[ 'SLAVE' ]:
+                        bonds[ iface[ 'MASTER' ] ] = 0
+                except:
+                    pass
+            for bond in sorted( bonds.keys() ):
+                empty = False
+                self.println( 'Bond {}'.format( bond ) )
+                for i in range( Nifaces ):
+                    iface = self.ifaces[ i ]
+                    try:
+                        if iface[ 'MASTER' ] == bond:
+                            self.println(
+                                '+-- {}'.format( iface[ 'NAME' ] )
+                            )
+                    except:
+                        pass
+            # Pass 3: TBD
+            if empty:
+                self.println()
+                self.println( 'No bonding or bridges found.' )
+        elif 'NAME' in self.iface.keys():
+            self._show_iface( self.iface )
         return

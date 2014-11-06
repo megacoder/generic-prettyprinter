@@ -24,18 +24,18 @@ try:
 	# This hopscotch lets us run from the development directory
 	# and is ignored if run from an installed place.
 	here = os.path.abspath(
-		os.path.dirname(
-			os.path.join(
-				os.path.expanduser(
-					__main__.__file__
-				),
-				'..',		# This gets us the directory holding script
-				'..'		# This gets us directory above bin/
-			)
+		os.path.join(
+			os.path.expanduser(
+				__main__.__file__
+			),
+			'..',		# Directory holding script "bin/"
+			'..'		# Directory above "../bin/"
 		)
 	)
+	# print >>sys.stderr, 'here=%s' % here
 	if here.startswith( os.getenv( 'HOME' ) ):
 		# Picks up non-root installs
+		# print >>sys.stderr, 'Compensating.'
 		use_my(
 			here,
 			'lib/python%d.%d/site-packages' % (
