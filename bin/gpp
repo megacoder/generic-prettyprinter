@@ -5,36 +5,51 @@ import	os
 import	sys
 import	__main__
 
+def	use_my( relative_to, p ):
+	where = os.path.abspath(
+		os.path.join(
+			relative_to,
+			p
+		)
+	)
+	# print >>sys.stderr, 'Prepending "%s".' % where
+	sys.path.insert(
+		0,
+		where
+	)
+	return
+
+
 try:
-    # This hopscotch lets us run from the development directory
-    # and is ignored if run from an installed place.
-    home = os.getenv( 'HOME' )
-    here = os.path.abspath(
-        os.path.expanduser(
-            __main__.__file__
-        )
-    )
-    if here.startswith( home ):
-        sys.path.insert(
-            0,
-            os.path.abspath(
-                os.path.join(
-                    os.path.dirname( here ),
-                    '..',
-                    'src'
-                )
-            )
-        )
-        import  __init__ as gpp
-    else:
-        import	gpp
+	# This hopscotch lets us run from the development directory
+	# and is ignored if run from an installed place.
+	here = os.path.abspath(
+		os.path.dirname(
+			os.path.join(
+				os.path.expanduser(
+					__main__.__file__
+				),
+				'..',		# This gets us the directory holding script
+				'..'		# This gets us directory above bin/
+			)
+		)
+	)
+	if here.startswith( os.getenv( 'HOME' ) ):
+		use_my(
+			here,
+			'lib/python2.4/site-packages'
+		)
+	try:
+		import	__init__ as gpp
+	except:
+		import	gpp
 except Exception, e:
-    print >>sys.stderr, 'Cannot locate gpp'
-    print >>sys.stderr, 'Module path:'
-    for path in sys.path:
-	print >>sys.stderr, '+-- %s' % path
-    print >>sys.stderr, e
-    raise e
+	print >>sys.stderr, 'Cannot locate gpp'
+	print >>sys.stderr, 'Module path:'
+	for path in sys.path:
+		print >>sys.stderr, '+-- %s' % path
+	print >>sys.stderr, e
+	raise e
 
 pp = gpp.GenericPrettyPrinter()
 exit( pp.main() )
