@@ -1,3 +1,31 @@
+2014-11-06  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* setup.py: Allow compilation by python-2.4
+
+2014-11-06  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* README.html: Allow compilation with python 2.4 :(
+
+2014-11-06  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* src/superclass.py: Regressed syntax.
+
+2014-11-06  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* src/oswbb-heartbeat-plugin.py: Regressed syntax
+
+2014-11-06  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* src/ini-plugin.py: Regressed the syntax
+
+2014-11-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* Docs/Events, src/superclass.py: Try to describe event.
+
+2014-11-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Updated change log
+
 2014-11-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* bin/gpp, src/__init__.py, src/oswts-plugin.py, src/superclass.py: 
