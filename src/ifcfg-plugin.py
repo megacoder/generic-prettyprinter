@@ -62,14 +62,14 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         keys = self.iface.keys()
         herald = '# %s' % iface['NAME']
         for line in self.prolog:
-            self.println( '{}'.format( line ) )
+            self.println( line )
         max_name =  max(
             map(
                 len,
                 keys
             )
         )
-        fmt = '%{}s=%s'.format( max_name )
+        fmt = "%%%ds = '%s'" % max_name
         for key in sorted( keys ):
             self.println( fmt % (key, self.iface[key]) )
         self.println()
@@ -96,7 +96,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                     empty = False
                     bname = iface[ 'NAME' ]
                     self.println(
-                        'Bridge {}'.format( bname )
+                        'Bridge %s' % bname
                     )
                     for sno in range( Nifaces ):
                         slave = self.ifaces[ sno ]
@@ -107,7 +107,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                         if master and master == bname:
                             self.println( '  |' )
                             self.println(
-                                '  +-- {}'.format( slave['NAME'] )
+                                '  +-- %s' % slave['NAME']
                             )
                     self.println()
             # Pass 2: construct bonded interfaces
@@ -120,16 +120,18 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                     pass
             for bond in sorted( bonds.keys() ):
                 empty = False
-                self.println( 'Bond {}'.format( bond ) )
+                self.println( 'Bond %s' % bond )
                 for i in range( Nifaces ):
                     iface = self.ifaces[ i ]
                     try:
                         if iface[ 'MASTER' ] == bond:
+                            self.println( '  |' )
                             self.println(
-                                '+-- {}'.format( iface[ 'NAME' ] )
+                                '  +-- %s' % iface[ 'NAME' ]
                             )
                     except:
                         pass
+                self.println()
             # Pass 3: TBD
             if empty:
                 self.println()

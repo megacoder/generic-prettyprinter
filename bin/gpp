@@ -34,16 +34,15 @@ try:
 	)
 	# print >>sys.stderr, 'here=%s' % here
 	if here.startswith( os.getenv( 'HOME' ) ):
-		# Picks up non-root installs
-		# print >>sys.stderr, 'Compensating.'
+		# Non-root install
 		use_my(
 			here,
 			'lib/python%d.%d/site-packages' % (
-				sys.version_info.major,
-				sys.version_info.minor,
+				sys.version_info[ 0 ],
+				sys.version_info[ 1 ]
 			)
 		)
-		# Picks up in-situ usage
+		# In-situ usage
 		use_my(
 			here,
 			'src'
