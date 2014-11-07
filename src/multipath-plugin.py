@@ -11,7 +11,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 	NAME = 'multipath-pp'
 	DESCRIPTION="""Display /etc/multipath.conf in conical style."""
 
-	INDENT_WITH = '        '
+	INDENT_WITH = ' ' * 8
 
 	def __init__( self ):
 		super( PrettyPrint, self ).__init__()
@@ -33,7 +33,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				line += ' '*(21-len(noun)) + ' '
 				line += ' '.join(tokens[1:])
 		leadin = ''
-		print line + leadin
+		self.println( '{}{}'.format( line, leadin ) )
 		return
 
 	def	begin_file( self, name ):
@@ -73,9 +73,8 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				self.depth -= 1
 				self._spew( tokens )
 			else:
-				equals = line.find( '=' )
-				if equals > -1:
-					tokens = [ line[:equals], line[equals:] ]
+				tokens = line.split( '=', 1 )
+				if len(tokens) >= 2:
 					tokens = [ ' = '.join(tokens) ]
 				if self.do_capture:
 					self.captured.append( tokens )
