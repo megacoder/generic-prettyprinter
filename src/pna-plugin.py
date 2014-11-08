@@ -32,9 +32,9 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		]
 		self.nTitles = len( self.titles )
 		self.widths = map(len,self.titles)
-		# print 'self.titles={}'.format(self.titles)
-		# print 'self.nTitles={}'.format(self.nTitles)
-		# print 'self.widths={}'.format(self.widths)
+		# print 'self.titles={0}'.format(self.titles)
+		# print 'self.nTitles={0}'.format(self.nTitles)
+		# print 'self.widths={0}'.format(self.widths)
 		return
 
 	def	next_line( self, line ):
@@ -45,7 +45,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			if len(tokens) == self.nTitles:
 				widths = map(len,tokens)
 				self.widths = map( max, self.widths, widths )
-				# print 'appending={}'.format(tokens)
+				# print 'appending={0}'.format(tokens)
 				self.entries.append( tokens )
 		return
 
