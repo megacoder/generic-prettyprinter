@@ -33,7 +33,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				line += ' '*(21-len(noun)) + ' '
 				line += ' '.join(tokens[1:])
 		leadin = ''
-		self.println( '{}{}'.format( line, leadin ) )
+		self.println( '{0}{1}'.format( line, leadin ) )
 		return
 
 	def	begin_file( self, name ):
