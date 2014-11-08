@@ -14,24 +14,14 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def __init__( self ):
 		super( PrettyPrint, self ).__init__()
-		self.reset()
 		return
 
-	def reset( self ):
-		super( PrettyPrint, self ).reset()
-		self._prepare()
-		return
-
-	def _prepare( self ):
+	def pre_begin_file( self ):
 		self.lines = 0
 		self.mem   = {}
 		self.cache = {}
 		self.swap  = {}
-		return
-
-	def begin_file( self, name ):
-		super( PrettyPrint, self ).begin_file( name )
-		self._prepare()
+		self.names = []
 		return
 
 	def next_line( self, line ):
@@ -47,43 +37,45 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			self.swap = dict( zip( self.names, tokens[1:] ) )
 		return
 
-	def print_dict( self, d, title = None ):
+	def _show_dict( self, d, title = None ):
 		if title:
 			self.println()
 			self.println( title )
 			self.println( '=' * len(title) )
-		width = max( map( len, self.names ) )
-		fmt = '\t%%-%ds %%s' % width
+			self.println()
+		width = max(
+			map(
+				len,
+				self.names
+			)
+		)
+		fmt = '\t{0:%d} {1}' % width
 		for key in sorted( d.keys() ):
-			self.println( fmt % ( key, d[key] ) )
+			self.println( fmt.format( key, d[ key ] ) )
 		return
 
 	def report( self, final = False ):
-		try:
-			pressure = int(
-				(
+		if not final:
+			try:
+				pressure = int(
 					(
-					float( self.mem['free'] )	+
-					float( self.mem['buffers'] )	+
-					float( self.mem['cached'] )
-					) / float( self.mem['total'] )
-				) * 100.0
-			)
-		except Exception, e:
-			self.println( 'Memory pressure calculation failed.' )
-			self.println( e )
-			pressure = 0
-		label = '[MemPress%]'
-		self.names.append( label )
-		self.mem[ label ] = pressure
-		self.print_dict( self.mem,		'Memory'	)
-		self.println()
-		self.println( '\tMemory pressure = (free+buffers+cached)/total' )
-		self.print_dict( self.cache,	'Cache'		)
-		self.print_dict( self.swap,		'Swap'		)
-		return
-
-	def end_file( self, name ):
-		self._prepare()
-		super( PrettyPrint, self ).end_file( name )
+						(
+							float( self.mem['free'] )		+
+							float( self.mem['buffers'] )	+
+							float( self.mem['cached'] )
+						) / float( self.mem['total'] )
+					) * 100.0
+				)
+			except Exception, e:
+				self.println( 'Memory pressure calculation failed.' )
+				self.println( e )
+				pressure = 0
+			label = '[MemPress%]'
+			self.names.append( label )
+			self.mem[ label ] = pressure
+			self._show_dict( self.mem,		'Memory'	)
+			self.println()
+			self.println( '\tMemory pressure = (free+buffers+cached)/total' )
+			self._show_dict( self.cache,	'Cache'		)
+			self._show_dict( self.swap,		'Swap'		)
 		return
