@@ -22,29 +22,27 @@ class GenericPrettyPrinter( object ):
                 pattern = '*'
         return glob.glob( pattern )
 
-    def session( self, Obj, names = [] ):
-        o = Obj()
-        o.start()
-        argc = len(sys.argv)
-        n = len(names)
+    def _do_session( self, handler ):
+        handler.pre_begin_file()
+        handler.do_open_file()
+        handler.post_end_file()
+        return
+
+    def session( self, Handler, names = [] ):
+        handler = Handler()
+        argc = len( sys.argv )
+        n = len( names )
         # Allow plugin to figure out where its files are
         if n < 1:
-            names = o.own_glob()
-        if names:
+            names = handler.own_glob()
             n = len( names )
-            if n < 1:
-                # Give plugin a chance to handle its no-file method
-                o.pre_open_file()
-                o.do_open_file()
-            else:
-                # Iterate through the names
-                o.advise( argc = n )
-                for name in names:
-                    if name == '-':
-                        o.do_open_file()
-                    else:
-                        o.do_name( name )
-        o.finish()
+        # Here is the session
+        handler.start()
+        # Iterate through the names
+        handler.advise( argc = n )
+        for name in names:
+            handler.do_name( name )
+        handler.finish()
         return False
 
     def main( self ):
@@ -94,7 +92,7 @@ class GenericPrettyPrinter( object ):
             except Exception, e:
                 print >>sys.stderr, 'Cannot open "%s" for writing.' % opts.ofile
                 return True
-        retval = self.session( Obj = dll.PrettyPrint, names = args )
+        retval = self.session( Handler = dll.PrettyPrint, names = args )
         return retval
 
     def do_one_module( self, kind = 'help', args = [] ):
@@ -106,7 +104,7 @@ class GenericPrettyPrinter( object ):
             print >>sys.stderr, 'No prettyprinter for "%s".' % opts.kind
             print >>sys.stderr, e
             return True
-        retval = self.session( Obj = dll.PrettyPrint, names = args )
+        retval = self.session( Handler = dll.PrettyPrint, names = args )
         return retval
 
 if __name__ == '__main__':
