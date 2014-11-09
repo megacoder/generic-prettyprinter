@@ -15,22 +15,17 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def __init__( self ):
         super( PrettyPrint, self ).__init__()
-        self.reset()
         return
 
-    def reset( self ):
+    def start( self ):
         super( PrettyPrint, self ).reset()
-        self._prepare()
+        self.pre_begin_file()
         return
 
-    def _prepare( self ):
+    def pre_begin_file( self ):
+        super( PrettyPrint, self ).pre_begin_file()
         self.widths = {}
         self.entries = []
-        return
-
-    def begin_file( self, name ):
-        super( PrettyPrint, self ).begin_file( name )
-        self._prepare()
         return
 
     def next_line( self, line ):
@@ -49,23 +44,25 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             self.entries.append( (L, parts) )
         return
 
-    def dump( self ):
-        for (L, parts) in self.entries:
-            sep = ''
-            for i in xrange( 0, L ):
-                fmt = '%%s%%-%ds' % self.widths[i]
-                print fmt % (sep, parts[i]),
-                sep = ' '
-            print
-        return
-
-    def end_file( self, name ):
-        self.dump()
-        self._prepare()
-        super( PrettyPrint, self ).end_file( name )
-        return
-
-    def finish( self ):
-        if len(self.entries) > 0:
-            self.dump()
+    def report( self, final = False ):
+        if not final:
+            for (L, parts) in self.entries:
+                clauses = []
+                for i in xrange( 0, L ):
+                    fmt = '{0:<%d}' % self.widths[ i ]
+                    clauses.append(
+                        fmt.format( parts[ i ] )
+                    )
+                self.println( ' '.join( clauses ) )
+            for (L,parts) in self.entries:
+                try:
+                    if parts[ 3 ] == 'nfs' and parts[ 4 ] == 'defaults':
+                        self.println(
+                            'Mount point {0} uses default options.'.format(
+                                parts[ 0 ]
+                            )
+                        )
+                except:
+                    pass
+            self.println()
         return
