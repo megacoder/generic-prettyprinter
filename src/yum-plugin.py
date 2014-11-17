@@ -6,26 +6,26 @@ import	superclass
 
 class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
-	NAME = 'yum.repo'
+	NAME        = 'yum.repo'
 	DESCRIPTION = """Display /etc/yum.repos.d/*.repo files in style."""
 
 	def	__init__( self ):
 		super( PrettyPrint, self ).__init__()
 		return
 
-	def	reset( self ):
-		super( PrettyPrint, self ).reset()
-		self.prepare_for_new_file()
+	def	start( self ):
+		super( PrettyPrint, self ).start()
+		self.pre_begin_file()
 		return
 
-	def	prepare_for_new_file( self ):
+	def	pre_begin_file( self ):
 		self.feeds    = []
 		self._new_repo()
 		return
 
 	def	_new_repo( self, name = None ):
 		self.feed     = []
-		self.name	  = name
+		self.name     = name
 		self.max_name = 1
 		return
 
@@ -53,17 +53,17 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	report( self, final = False ):
+	    if not final:
 		self.add_repo()
 		self.feeds.sort( key = lambda (n,l,f) : n.lower() )
 		others = False
 		for (name, max_name, entries) in self.feeds:
 			if others:
-				print
+				self.println()
 			others = True
-			print '[%s]' % name
+			self.println( '[{0}]'.format( name ) )
 			print
-			fmt = ' %%%ds = %%s' % max_name
+			fmt = ' {0:>%d} = {1}' % max_name
 			for (id,value) in entries:
-				print fmt % ( id, value )
-		self.prepare_for_new_file()
-		return
+				self.println( fmt.format( id, value ) )
+	    return
