@@ -1,3 +1,63 @@
+2014-11-17  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* README.html, setup.py, src/apache-plugin.py, src/mc-plugin.py,
+	src/yum-plugin.py: Added support for sendmail.mc files.
+
+2014-11-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/fstab-plugin.py: Complain about "/etc/fstab" having "defaults"
+	for NFS mounts; this is usually not what is wanted.
+
+2014-11-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/free: Sample file for "$ free" testing.
+
+2014-11-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/__init__.py: Consolidated handler actions for better command
+	line handling.
+
+2014-11-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/free-plugin.py: Use new assist states.
+
+2014-11-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/pna-plugin.py: Removed zero-length formatter
+
+2014-11-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/multipath-plugin.py: Removed ambiguous '{}' formatter
+
+2014-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bin/gpp, src/ifcfg-plugin.py: 1) Use newer syntax.  2) version.info.{major,minor} is gone, use simple subscripts.  3) Replace s.format(a, a, a.. ) with the 's % ( a, a, ...)' form.
+
+2014-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/multipath-plugin.py: Modernized to avoid duplicate splitting
+	around '=' signs.
+
+2014-11-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Prints out bridges properly
+
+2014-11-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bin/gpp, src/ifcfg-plugin.py: Checkpoint
+
+2014-11-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bin/gpp: Pick up in-situ usage, and non-root installs.
+
+2014-11-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bin/gpp: Locate non-root installs.
+
+2014-11-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Updated changelog for 1.0.18
+
 2014-11-06  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
 	* setup.py: Allow compilation by python-2.4
