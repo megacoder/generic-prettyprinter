@@ -23,7 +23,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         keys = iface.keys()
         if 'DEVICE' in keys or 'NAME' in keys:
             if not 'TYPE' in keys:
-                iface[ 'TYPE' ] = '"Ethernet"'
+                iface[ 'TYPE' ] = 'Ethernet'
             if 'DEVICE' in keys and not 'NAME' in keys:
                 iface[ 'NAME' ] = iface[ 'DEVICE' ]
             if 'NAME' in keys and not 'DEVICE' in keys:
