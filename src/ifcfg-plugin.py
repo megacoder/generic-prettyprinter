@@ -69,7 +69,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                 keys
             )
         )
-        fmt = "%%%ds = '%s'" % max_name
+        fmt = "%%%ds = '%%s'" % max_name
         for key in sorted( keys ):
             self.println( fmt % (key, self.iface[key]) )
         self.println()
