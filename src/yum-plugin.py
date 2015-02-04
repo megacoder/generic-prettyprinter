@@ -1,8 +1,10 @@
 #!/usr/bin/python
+# vim: noet sw=4 ts=4
 
 import	os
 import	sys
 import	superclass
+import	shlex
 
 class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
@@ -13,57 +15,64 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		super( PrettyPrint, self ).__init__()
 		return
 
-	def	start( self ):
-		super( PrettyPrint, self ).start()
-		self.pre_begin_file()
-		return
-
 	def	pre_begin_file( self ):
-		self.feeds    = []
+		self.feeds = []
 		self._new_repo()
 		return
 
 	def	_new_repo( self, name = None ):
-		self.feed     = []
-		self.name     = name
-		self.max_name = 1
+		self.feed = {}
+		self.feed['#name'] = name
 		return
 
 	def	ignore( self, fn ):
 		return not fn.endswith( '.repo' )
 
 	def	add_repo( self ):
-		if self.name is not None:
-			self.feed.sort( key = lambda (x,y): x.lower() )
-			self.feeds.append( (self.name, self.max_name, self.feed) )
+		name = self.feed['#name']
+		if name is not None:
+			self.feeds.append( (name, self.feed) )
 		return
 
 	def	next_line( self, line ):
-		line = line.split( '#', 1 )[0]
 		if line.startswith( '[' ):
 			self.add_repo()
 			self._new_repo( line.strip()[1:-1] )
 		else:
-			tokens = line.split( '=', 1 )
-			if len(tokens) == 2:
-				name = tokens[0].strip()
-				value = tokens[1].strip()
-				self.max_name = max( self.max_name, len(name) )
-				self.feed.append( (name, value) )
+			tokens = [ x for x in shlex.shlex( line ) ]
+			if len(tokens) == 3 and tokens[1] == '=':
+				name = tokens[0]
+				value = tokens[2]
+				self.feed[name] = value
 		return
 
 	def	report( self, final = False ):
-	    if not final:
-		self.add_repo()
-		self.feeds.sort( key = lambda (n,l,f) : n.lower() )
-		others = False
-		for (name, max_name, entries) in self.feeds:
-			if others:
+		if not final:
+			self.add_repo()
+			first = True
+			for (name,feed) in sorted(
+				self.feeds,
+				key = lambda f: f['#name'].lower()
+			):
+				if first:
+					self.println()
+					first = False
+				self.println(
+					'[{0}]'.format(
+						name
+					)
+				)
 				self.println()
-			others = True
-			self.println( '[{0}]'.format( name ) )
-			print
-			fmt = ' {0:>%d} = {1}' % max_name
-			for (id,value) in entries:
-				self.println( fmt.format( id, value ) )
-	    return
+				fmt = ' {0:>%d} = {1}' % max(
+					map(
+						str.len,
+						[ key for key in feed ]
+					)
+				)
+				for key in sorted( feed.keys() ):
+					self.println(
+						fmt,
+						key,
+						feed[key]
+					)
+		return
