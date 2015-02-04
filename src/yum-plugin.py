@@ -4,7 +4,6 @@
 import	os
 import	sys
 import	superclass
-import	shlex
 
 class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
@@ -16,47 +15,44 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	pre_begin_file( self ):
-		self.feeds = []
+		super( PrettyPrint, self ).pre_begin_file()
+		self.repos = []
 		self._new_repo()
 		return
 
 	def	_new_repo( self, name = None ):
-		self.feed = {}
-		self.feed['#name'] = name
+		self.repo = {}
+		self.repo['#name'] = name
 		return
 
 	def	ignore( self, fn ):
 		return not fn.endswith( '.repo' )
 
-	def	add_repo( self ):
-		name = self.feed['#name']
+	def	_add_repo( self ):
+		name = self.repo['#name']
 		if name is not None:
-			self.feeds.append( (name, self.feed) )
+			self.repos.append( (name, self.repo) )
 		return
 
 	def	next_line( self, line ):
 		if line.startswith( '[' ):
-			self.add_repo()
+			self._add_repo()
 			self._new_repo( line.strip()[1:-1] )
 		else:
-			tokens = [ x for x in shlex.shlex( line ) ]
-			if len(tokens) == 3 and tokens[1] == '=':
-				name = tokens[0]
-				value = tokens[2]
-				self.feed[name] = value
+			tokens = line.split( '#', 1 )[0].split( '=', 1 )
+			if len(tokens) == 2:
+				name = tokens[0].strip()
+				value = tokens[1].strip()
+				self.repo[name] = value
 		return
 
 	def	report( self, final = False ):
 		if not final:
-			self.add_repo()
-			first = True
+			self._add_repo()
 			for (name,feed) in sorted(
-				self.feeds,
-				key = lambda f: f['#name'].lower()
+				self.repos,
+				key = lambda (n,f): n.lower()
 			):
-				if first:
-					self.println()
-					first = False
 				self.println(
 					'[{0}]'.format(
 						name
@@ -65,14 +61,17 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				self.println()
 				fmt = ' {0:>%d} = {1}' % max(
 					map(
-						str.len,
+						len,
 						[ key for key in feed ]
 					)
 				)
 				for key in sorted( feed.keys() ):
-					self.println(
-						fmt,
-						key,
-						feed[key]
-					)
+					if not key[0] == '#':
+						self.println(
+							fmt.format(
+								key,
+								feed[key]
+							)
+						)
+				self.println()
 		return
