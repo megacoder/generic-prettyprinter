@@ -1,3 +1,55 @@
+2015-02-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/yum-plugin.py: Get the vertical spacing right.
+
+2015-02-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* README.html: Recomputed.
+
+2015-02-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/superclass.py: If the only command line arg is a directory,
+	pretend we have multiple files and show all the names we've found.
+
+2015-02-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bump rev
+
+2015-02-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* README.html, src/yum-plugin.py: Cleanup code.
+
+2015-02-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bootstrap.sh: Any version of markdown will do.
+
+2015-02-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/asm-plugin.py: Cleanup code for ASMlib processing.
+
+2015-02-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Have as many printed items as you have format
+	specifiers.
+
+2015-01-10  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Remove over-zealous quoting of the "TYPE="
+	entry if we have to supply a default: use simple 'Ethernet' and not
+	'"Ethernet"'.
+
+2014-11-17  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Newer
+
+2014-11-17  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped rev
+
+2014-11-17  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: sendmail.mc file.
+
 2014-11-17  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* README.html, setup.py, src/apache-plugin.py, src/mc-plugin.py,
