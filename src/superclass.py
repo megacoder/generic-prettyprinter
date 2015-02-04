@@ -56,6 +56,7 @@ class   MetaPrettyPrinter( object ):
         if os.path.isfile( name ):
             self.do_file( name )
         elif os.path.isdir( name ):
+            self.sc_multi = 2
             self.do_dir( name )
         elif os.path.islink( name ):
             self.error( 'ignoring symlink "%s".' % name )
