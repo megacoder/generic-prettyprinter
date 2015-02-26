@@ -30,6 +30,21 @@ class   MetaPrettyPrinter( object ):
         self.sc_do_backslash = None
         return
 
+    def get_out( self ):
+        return self.sc_out
+
+    def get_fileno( self ):
+        return self.fc_fileno
+
+    def get_filename( self ):
+        return self.filename
+
+    def get_multi( self ):
+        return self.multi
+
+    def get_backslash( self ):
+        return self.sc_do_backlash
+
     def own_glob( self, pattern = None ):
         if not pattern:
             pattern = self.GLOB
