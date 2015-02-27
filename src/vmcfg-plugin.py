@@ -18,25 +18,7 @@ class	PrettyPrint( MetaPrettyPrinter ):
 		self.filename = None
 		self.stanzas  = []
 		self.stanza   = dict()
-		self.name	  = None		# Name of acive stanza
-		return
-
-	def compile( self, script ):
-		if len( script ) > 0:
-			try:
-				code = compile( script, self.filename, 'exec' )
-			except Exception, e:
-				self.error( 'File "%s" appears to be corrupt.' % self.filename )
-				self.error( e )
-				return None
-			locals = dict()
-			globals = dict()
-			try:
-				eval( code, globals, locals )
-			except Exception, e:
-				self.error( 'Could not evaluate code' )
-				self.error( ' %s' % e )
-				return
+		self.name	  = None		# Name of active stanza
 		return
 
 	def begin_file( self, name ):
@@ -65,35 +47,8 @@ class	PrettyPrint( MetaPrettyPrinter ):
 		return True if self.name else False
 
 	def next_line( self, line ):
-		c = line[0]
-		print 'c ::= "%s"' % c
-		if not c.isspace():
-			# name {
-			if self._in_stanza():
-				self.error(
-					'stanza "{0}" not terminated'.format( self.name )
-				)
-				self._end_stanza()
-			tokens = map(
-				str.strip,
-				line.split()
-			)
-			if len( tokens ) == 2 and tokens[1] == '{':
-				self.name = tokens[0]
-				self.stanza = dict()
-				# print 'Beginning section %s' % self.name
-		elif c == '}':
-			# }
-			try:
-				if not self._in_stanza():
-					self.error( 'misplaced "}"' )
-				else:
-					# print 'Ending section %s' % self.name
-					self.println( self.stanza )
-					self._end_stanza()
-			except Exception, e:
-				self.error( e )
-		elif c.isspace():
+		if line.find( '=' ) > -1:
+			# name = value
 			if not self._in_stanza():
 				self.error( 'orphan name' )
 			else:
@@ -101,26 +56,42 @@ class	PrettyPrint( MetaPrettyPrinter ):
 					str.strip,
 					line.split( '=', 1 )
 				)
-				print 'tokens = %s' % tokens
 				if len( tokens ) == 2 and len(tokens[0]) > 0:
-					try:
-						code = eval( tokens[1] )
-						self._add_entry( tokens[0], code )
-					except Exception, e:
-						self.error(
-							'syntax error in value "{}"',format(
-								tokens[1]
-							)
-						)
+					self._add_entry( tokens[0], tokens[1] )
+				else:
+					self.error( 'strangely formatted line' )
 		else:
-			self.error( '# {0}'.format( line ) )
+			tokens = map(
+				str.strip,
+				line.split()
+			)
+			if tokens[-1] == '}':
+				# }
+				try:
+					if not self._in_stanza():
+						self.error( 'misplaced "}"' )
+					else:
+						self._end_stanza()
+				except Exception, e:
+					self.error( e )
+			else:
+				# name {
+				if self._in_stanza():
+					self.error(
+						'stanza "{0}" not terminated'.format( self.name )
+					)
+					self._end_stanza()
+				if len( tokens ) == 2 and tokens[1] == '{':
+					self.name = tokens[0]
+					self.stanza = dict()
+				else:
+					self.error( '# {0}'.format( line ) )
 		return
 
 	def report( self, final = False ):
 		if not final and len( self.stanzas ) > 0:
-			for [name,stanza] in sorted(
-				self.stanzas
-			):
+			pp = pprint.PrettyPrinter()
+			for [name,stanza] in sorted( self.stanzas ):
 				self.println( "%s\t{" % name )
 				width = max(
 					map(
@@ -132,11 +103,8 @@ class	PrettyPrint( MetaPrettyPrinter ):
 					width,
 					width
 				)
-				for key in sorted(
-					stanza.keys(),
-					key = lambda s : s.upper()
-				):
-					s    = pprint.PrettyPrinter().pformat( stanza[key] )
+				for key in sorted( stanza.keys() ):
+					s    = pp.pformat( stanza[key] )
 					name = key
 					op   = '='
 					for line in s.split( '\n' ):
@@ -150,4 +118,5 @@ class	PrettyPrint( MetaPrettyPrinter ):
 						name = ''
 						op = ''
 				self.println( '}' )
+				self.println()
 		return
