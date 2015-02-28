@@ -1,8 +1,10 @@
 #!/usr/bin/python
 # vim: noet sw=4 ts=4
 
-import	pprint
 import	sys
+import	ast
+import	codegen
+
 from	superclass	import	MetaPrettyPrinter
 
 class	PrettyPrint( MetaPrettyPrinter ):
@@ -46,6 +48,21 @@ class	PrettyPrint( MetaPrettyPrinter ):
 	def	_in_stanza( self ):
 		return True if self.name else False
 
+	def	_reformat( self, s ):
+		try:
+			p = ast.parse( s )
+		except Exception, e:
+			self.error( 'could not parse' )
+			self.error( e )
+			return s
+		try:
+			retval = codegen.to_source( p )
+		except Exception, e:
+			self.error( 'could not generate source' )
+			self.error( e )
+			retval = s
+		return retval
+
 	def next_line( self, line ):
 		if line.find( '=' ) > -1:
 			# name = value
@@ -57,7 +74,8 @@ class	PrettyPrint( MetaPrettyPrinter ):
 					line.split( '=', 1 )
 				)
 				if len( tokens ) == 2 and len(tokens[0]) > 0:
-					self._add_entry( tokens[0], tokens[1] )
+					recode = self._reformat( tokens[1] )
+					self._add_entry( tokens[0], recode )
 				else:
 					self.error( 'strangely formatted line' )
 		else:
@@ -90,7 +108,6 @@ class	PrettyPrint( MetaPrettyPrinter ):
 
 	def report( self, final = False ):
 		if not final and len( self.stanzas ) > 0:
-			pp = pprint.PrettyPrinter()
 			for [name,stanza] in sorted( self.stanzas ):
 				self.println( "%s\t{" % name )
 				width = max(
@@ -104,7 +121,7 @@ class	PrettyPrint( MetaPrettyPrinter ):
 					width
 				)
 				for key in sorted( stanza.keys() ):
-					s    = pp.pformat( stanza[key] )
+					s	 = stanza[key]
 					name = key
 					op   = '='
 					for line in s.split( '\n' ):
