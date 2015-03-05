@@ -1,3 +1,56 @@
+2015-03-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/sssd-plugin.py: Final sssd version.
+
+2015-03-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : commit cb81b96688fbe88636b183928abe5e98e87bd9a0 Author: Tommy
+	Reynolds <Tommy.Reynolds@Oracle.com> Date:   Thu Mar 5 14:07:36 2015
+	-0600
+
+2015-03-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/sssd-plugin.py: Catch EOF event to close stanza
+
+2015-03-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/sssd-plugin.py: "/etc/sssd/sssd.conf" handler
+
+2015-03-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Adding SSSD support
+
+2015-02-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/vmcfg-plugin.py: Oh, generate AST by invoking AST wrapper.
+	Wowzah.
+
+2015-02-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/codegen.py: https://pypi.python.org/pypi/codegen/1.0
+
+2015-02-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* README.html, setup.py: Bumped version.
+
+2015-02-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/vmcfg-plugin.py: Reasonable output, prettyprinting not
+	impressive.
+
+2015-02-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* README.html, src/superclass.py, src/vmcfg-plugin.py: Cleaning
+	"vm.cfg" processing, not complete.
+
+2015-02-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/vm.cfg: Sample (possiby bogus) vm.cfg file.
+
+2015-02-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: 1.0.20
+
 2015-02-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* src/yum-plugin.py: Get the vertical spacing right.
