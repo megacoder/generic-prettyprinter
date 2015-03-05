@@ -63,6 +63,12 @@ class	PrettyPrint( MetaPrettyPrinter ):
 				self._add_entry( tokens[0], tokens[1] )
 		return
 
+	def	post_end_file( self ):
+		if self._in_stanza():
+			self._end_stanza()
+		self.report()
+		return
+
 	def report( self, final = False ):
 		if not final and len( self.stanzas ) > 0:
 			for [name,stanza] in sorted( self.stanzas ):
