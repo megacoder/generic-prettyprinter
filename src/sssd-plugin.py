@@ -28,6 +28,8 @@ class	PrettyPrint( MetaPrettyPrinter ):
 		return
 
 	def	_start_stanza( self, name ):
+		if self._in_stanza():
+			self._end_stanza()
 		self.name = name
 		self.stanza = dict()
 		return
@@ -39,9 +41,10 @@ class	PrettyPrint( MetaPrettyPrinter ):
 		return
 
 	def	_end_stanza( self ):
-		self.stanzas.append(
-			[ self.name, self.stanza ]
-		)
+		if self._in_stanza():
+			self.stanzas.append(
+				[ self.name, self.stanza ]
+			)
 		self.name	= None
 		self.stanza = None
 		return
@@ -51,12 +54,10 @@ class	PrettyPrint( MetaPrettyPrinter ):
 
 	def next_line( self, line ):
 		if line.startswith( '[' ):
-			if self._in_stanza():
-				self._end_stanza()
-			self._start_stanza( line )
+			self._start_stanza( line.rstrip() )
 		else:
 			tokens = map(
-				str.strip(),
+				str.strip,
 				line.split( '#', 1 )[0].split( '=', 1 )
 			)
 			if len(tokens) == 2:
@@ -64,8 +65,7 @@ class	PrettyPrint( MetaPrettyPrinter ):
 		return
 
 	def	post_end_file( self ):
-		if self._in_stanza():
-			self._end_stanza()
+		self._end_stanza()
 		self.report()
 		return
 
@@ -73,22 +73,24 @@ class	PrettyPrint( MetaPrettyPrinter ):
 		if not final and len( self.stanzas ) > 0:
 			for [name,stanza] in sorted( self.stanzas ):
 				self.println( "{0}\n".format( name ) )
-				width = max(
-					map(
-						len,
-						stanza.keys()
-					)
-				)
-				fmt = ' {0:%d.%ds} = {1}' % (
-					width,
-					width
-				)
-				for key in sorted( stanza.keys() ):
-					self.println(
-						fmt.format(
-							key,
-							stanza[key]
+				keys = stanza.keys()
+				if len( keys ) > 0:
+					width = max(
+						map(
+							len,
+							keys
 						)
 					)
-				self.println()
+					fmt = ' {0:%d.%ds} = {1}' % (
+						width,
+						width
+					)
+					for key in sorted( keys ):
+						self.println(
+							fmt.format(
+								key,
+								stanza[key]
+							)
+						)
+					self.println()
 		return
