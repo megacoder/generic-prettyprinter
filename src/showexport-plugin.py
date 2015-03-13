@@ -44,7 +44,7 @@ class	PrettyPrint( MetaPrettyPrinter ):
 				self.println(
 					fmt.format(
 						share,
-						' '.join( self.shares[ share ] )
+						'  '.join( self.shares[ share ] )
 					)
 				)
 				subdir = share + '/'
