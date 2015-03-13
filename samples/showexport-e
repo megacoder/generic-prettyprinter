@@ -1,0 +1,122 @@
+/export/ACSService/eldr-ec1-vm              @192.168.21.0/24
+/export/ACSService/eldr-ovmm                @192.168.21.7/32
+/export/ACSService/eldr-pc1-vm              @192.168.21.8/32
+/export/ACSService/eldr-pc2-vm              @192.168.21.9/32
+/export/common/exalogic-lcdata              (everyone)
+/export/common/exalogic-lctools             (everyone)
+/export/common/general                      (everyone)
+/export/common/images                       (everyone)
+/export/common/patches                      (everyone)
+/export/base_image                          (everyone)
+/export/el_adfd1/u01                        @192.168.22.0/24 @192.168.0.0/24 @172.17.0.0/16
+/export/el_adfd1/u02                        @192.168.22.0/24 @192.168.0.0/24 @172.17.0.0/16
+/export/el_adft1/u01                        @192.168.22.0/24 @192.168.0.0/24 @172.17.0.0/16
+/export/el_adft1/u02                        @192.168.22.0/24 @192.168.0.0/24 @172.17.0.0/16
+/export/el_bkp/edu01                        @192.168.22.0/24 @172.17.0.0/16 @192.168.0.0/24
+/export/el_bkp/elu01                        @192.168.22.0/24 @172.17.0.0/16 @192.168.0.0/24
+/export/el_ebsappll1/appl                   @192.168.22.0/24 @172.17.0.0/16 @192.168.0.0/24
+/export/el_ebsappll1/inst                   @192.168.22.0/24 @172.17.0.0/16 @192.168.0.0/24
+/export/el_ebsapplu/appl                    @192.168.0.0/24 @172.17.0.0/16 @192.168.22.0/24
+/export/el_ebsapplu/inst                    @192.168.0.0/24 @172.17.0.0/16 @192.168.22.0/24
+/export/el_ebsc1/u02                        @192.168.22.0/24 @172.17.0.0/16 @192.168.0.0/24
+/export/el_ebsd1/u01                        @192.168.0.0/24 @172.17.0.0/16 @192.168.22.0/24
+/export/el_ebsd1/u02                        @192.168.0.0/24 @172.17.0.0/16 @192.168.22.0/24
+/export/el_ebsd3/u01                        @192.168.0.0/24 @172.17.0.0/16 @192.168.22.0/24
+/export/el_ebsd3/u02                        @172.17.0.0/16 @192.168.0.0/24 @192.168.22.0/24
+/export/el_ebsl1/u01                        @192.168.22.0/24 @172.17.0.0/16 @192.168.0.0/24
+/export/el_ebsl1/u02                        @192.168.22.0/24 @172.17.0.0/16 @192.168.0.0/24
+/export/el_ebsp_clone/u01                   @192.168.0.0/24 @172.17.0.0/16 @192.168.22.0/24
+/export/el_ebsp_clone/u02                   @192.168.0.0/24 @172.17.0.0/16 @192.168.22.0/24
+/export/el_ebsr1_clone/u01                  @192.168.22.0/24 @172.17.0.0/16 @192.168.0.0/24
+/export/el_ebsr1_clone/u02                  @192.168.22.0/24 @172.17.0.0/16 @192.168.0.0/24
+/export/el_ebst2/u02                        @192.168.22.0/24 @172.17.0.0/16 @192.168.0.0/24
+/export/el_ebst3/u02                        @192.168.0.0/24 @172.17.0.0/16 @192.168.22.0/24
+/export/el_ebsu2/u02                        @192.168.22.0/24 @172.17.0.0/16 @192.168.0.0/24
+/export/el_ebsutlmount/utl                  @192.168.22.0/24 @172.17.0.0/16 @192.168.0.0/24
+/export/el_erpapplinstqa/inst               @192.168.0.0/24 @172.17.0.0/16 @192.168.22.0/24
+/export/el_erpappltopqa/apps                @192.168.0.0/24 @172.17.0.0/16 @192.168.22.0/24
+/export/el_erpapplutlqa/utl                 (everyone)
+/export/el_frmd1/u01                        @192.168.22.0/24 @192.168.0.0/24 @172.17.0.0/16
+/export/el_frmd1/u02                        @192.168.22.0/24 @192.168.0.0/24 @172.17.0.0/16
+/export/el_frmdu1/u01                       @172.17.0.0/16 @192.168.22.0/24 @192.168.0.0/24
+/export/el_frmdu1/u02node1                  @172.17.0.0/16 @192.168.22.0/24 @192.168.0.0/24
+/export/el_frmdu1/u02node2                  @172.17.0.0/16 @192.168.22.0/24 @192.168.0.0/24
+/export/el_idmd1/admin                      @192.168.0.0/24 @192.168.22.0/24 @172.17.0.0/16
+/export/el_idmdu1/ednoelidmap101u           @192.168.0.0/24 @192.168.22.0/24 @172.17.0.0/16
+/export/el_idmdu1/ednoelidmap102u           @192.168.0.0/24 @192.168.22.0/24 @172.17.0.0/16
+/export/el_idmdu1/u01                       @192.168.0.0/24 @192.168.22.0/24 @172.17.0.0/16
+/export/el_idmdu1/u02                       @192.168.0.0/24 @192.168.22.0/24 @172.17.0.0/16
+/export/el_idmqa_domain/admin               @172.17.0.0/16 @192.168.0.0/24 @192.168.22.0/24
+/export/el_idmqa_domain/domains             @172.17.0.0/16 @192.168.0.0/24 @192.168.22.0/24
+/export/el_idmqa/product                    @192.168.22.0/24 @192.168.0.0/24 @172.17.0.0/16
+/export/el_idmu1/admin                      @172.17.0.0/16 @192.168.22.0/24 @192.168.0.0/24
+/export/el_idmu1/ednoelidmap101u            @172.17.0.0/16 @192.168.22.0/24 @192.168.0.0/24
+/export/el_idmu1/ednoelidmap102u            @172.17.0.0/16 @192.168.22.0/24 @192.168.0.0/24
+/export/el_idmu1/u01                        @172.17.0.0/16 @192.168.22.0/24 @192.168.0.0/24
+/export/el_idmu1/u02                        @172.17.0.0/16 @192.168.22.0/24 @192.168.0.0/24
+/export/el_mdmp_clone/u02                   @192.168.22.0/24 @172.17.0.0/16 @192.168.0.0/24
+/export/el_mdmt2/u02                        @192.168.22.0/24 @172.17.0.0/16 @192.168.0.0/24
+/export/el_mdmu2/u02                        @192.168.0.0/24 @172.17.0.0/16 @192.168.22.0/24
+/export/el_msidmt1/u02                      @192.168.0.0/24 @172.17.0.0/16 @192.168.22.0/24
+/export/el_msidmu1/idm_u02                  @192.168.22.0/24 @172.17.0.0/16 @192.168.0.0/24
+/export/el_msidmu1/oid_u02                  @192.168.22.0/24 @172.17.0.0/16 @192.168.0.0/24
+/export/el_oidu1/ednoelidmap201u            @192.168.0.0/24 @192.168.22.0/24 @172.17.0.0/16
+/export/el_oidu1/ednoelidmap202u            @192.168.0.0/24 @192.168.22.0/24 @172.17.0.0/16
+/export/el_osbdev_domain/admin              @172.17.0.0/16 @192.168.0.0/24 @192.168.22.0/24
+/export/el_osbdev_domain/domains            @172.17.0.0/16 @192.168.0.0/24 @192.168.22.0/24
+/export/el_osbdev_domain/utl                @172.17.0.0/16 @192.168.0.0/24 @192.168.22.0/24
+/export/el_osbdev/product                   @172.17.0.0/16 @192.168.0.0/24 @192.168.22.0/24
+/export/el_sbox1/u01                        @172.17.0.0/16 @192.168.0.0/24 @192.168.22.0/24
+/export/el_sbox1/u02                        @172.17.0.0/16 @192.168.0.0/24 @192.168.22.0/24
+/export/el_sbxp/u01                         @192.168.22.0/24 @192.168.0.0/24 @172.17.0.0/16
+/export/el_sbxp/u02                         @192.168.22.0/24 @192.168.0.0/24 @172.17.0.0/16
+/export/el_sbxu1/u01                        @192.168.22.0/24 @192.168.0.0/24 @172.17.0.0/16
+/export/el_sbxu1/u02                        @192.168.22.0/24 @192.168.0.0/24 @172.17.0.0/16
+/export/el_sbxuat_domain/admin              @192.168.22.0/24 @192.168.0.0/24 @172.17.0.0/16
+/export/el_sbxuat_domain/domains            @192.168.22.0/24 @192.168.0.0/24 @172.17.0.0/16
+/export/el_sbxuat/product                   @172.17.0.0/16 @192.168.0.0/24 @192.168.22.0/24
+/export/el_soadev_domain/admin              @172.17.0.0/16 @192.168.0.0/24 @192.168.22.0/24
+/export/el_soadev_domain/domains            @172.17.0.0/16 @192.168.0.0/24 @192.168.22.0/24
+/export/el_soadev_domain/utl                @172.17.0.0/16 @192.168.0.0/24 @192.168.22.0/24
+/export/el_soadev/Middleware                @192.168.22.0/24 @172.17.0.0/16 @192.168.0.0/24
+/export/el_test_domain/admin                (everyone)
+/export/el_test_domain/domains              (everyone)
+/export/el_test_domain/jmsjta               (everyone)
+/export/el_test/emagent                     (everyone)
+/export/el_test/wlserver_1036               (everyone)
+/export/el_wccd1/admin                      @172.17.0.0/16 @192.168.22.0/24 @192.168.0.0/24
+/export/el_wccd1/domain                     @172.17.0.0/16 @192.168.22.0/24 @192.168.0.0/24
+/export/el_wccd1_test/u02                   (everyone)
+/export/el_wccd1/u02                        @172.17.0.0/16 @192.168.22.0/24 @192.168.0.0/24
+/export/el_wcpd1/admin                      @192.168.22.0/24 @192.168.0.0/24 @172.17.0.0/16
+/export/el_wcpd1/product                    @192.168.22.0/24 @192.168.0.0/24 @172.17.0.0/16
+/export/el_wcpt1/admin                      @192.168.22.0/24 @192.168.0.0/24 @172.17.0.0/16
+/export/el_wcpt1/product                    @192.168.22.0/24 @192.168.0.0/24 @172.17.0.0/16
+/export/el_wcpu1/wcpu1wcc                   @192.168.22.0/24 @192.168.0.0/24 @172.17.0.0/16
+/export/Exalogic_Backup/compute_nodes       (everyone)
+/export/Exalogic_Backup/control_metadata    (everyone)
+/export/Exalogic_Backup/control_vserver     (everyone)
+/export/Exalogic_Backup/cust_vserver        (everyone)
+/export/Exalogic_Backup/ecu                 (everyone)
+/export/Exalogic_Backup                     (everyone)    ******************************
+/export/Exalogic_Backup/ib_gw_switches      (everyone)
+/export/Exalogic_Backup/management_switches (everyone)
+/export/Exalogic_EnterpriseController       (everyone)
+/export/Exalogic_OVAB                       (everyone)
+/export/Exalogic_ProxyController            (everyone)
+/export/Exalogic_RDBMS                      (everyone)
+/export/ExalogicControl                     (everyone)
+/export/ExalogicPool1                       (everyone)
+/export/ExalogicPool2                       (everyone)
+/export/ExalogicPool3                       (everyone)
+/export/ExalogicPool4                       (everyone)
+/export/ExalogicRepo                        (everyone)
+/export/NODE_1/dumps                        @192.168.10.0/24
+/export/NODE_1/general                      @192.168.10.0/24
+/export/NODE_2/dumps                        @192.168.10.0/24
+/export/NODE_2/general                      @192.168.10.0/24
+/export/NODE_3/dumps                        @192.168.10.0/24
+/export/NODE_3/general                      @192.168.10.0/24
+/export/NODE_4/dumps                        @192.168.10.0/24
+/export/NODE_4/general                      @192.168.10.0/24
+/export/userhome/home                       @172.17.0.0/16 @192.168.0.0/24 @192.168.22.0/24
