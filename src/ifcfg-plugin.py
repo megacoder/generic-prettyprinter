@@ -19,6 +19,9 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         self.iface  = {}
         return
 
+    def ignore( self, name ):
+        return False if name.endswith( '.conf' ) else True
+
     def _normalize( self, iface ):
         keys = iface.keys()
         if 'DEVICE' in keys or 'NAME' in keys:
