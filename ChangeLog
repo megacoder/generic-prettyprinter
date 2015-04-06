@@ -1,3 +1,26 @@
+2015-04-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/multipath.conf, setup.py, src/multipath-plugin.py: Align
+	multipath content fields.
+
+2015-03-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/audit.log: Audit sample
+
+2015-03-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: When searching /etc/modprobe.d, inspect only
+	".conf" files.
+
+2015-03-13  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/showexport-plugin.py: Increase visual separation on export
+	access definition.
+
+2015-03-13  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: 1.0.23
+
 2015-03-13  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* samples/showexport-e, samples/showmount-e,
