@@ -1,0 +1,18 @@
+#!/bin/python
+import	os
+import	sys
+import	shlex
+import	readline
+
+while True:
+    try:
+	line = raw_input( '> ' )
+    except Exception, e:
+	break
+    tokens = [x for x in shlex.shlex( line )]
+    print '|{0}|{1}|{2}'.format(
+	line.strip(),
+	len(tokens),
+	tokens
+    )
+exit( 0 )
