@@ -15,7 +15,7 @@ setup(
 	author_email     =	'Tommy.Reynolds@MegaCoder.com',
 	license          =	'GPL',
 	url              =	'http://www.MegaCoder.com',
-	long_description =	open('README').read(),
+	long_description =	open('README.md').read(),
 	packages         =	[ 'gpp' ],
 	package_dir      =	{ 'gpp' : 'src' },
 	scripts          =	[ 'bin/gpp' ],
