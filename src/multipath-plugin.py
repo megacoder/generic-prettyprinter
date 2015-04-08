@@ -5,6 +5,7 @@ import	os
 import	sys
 import	string
 import	superclass
+import	shlex
 
 class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
@@ -24,16 +25,11 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		self.captured = []
 		return
 
-	def _spew( self, tokens ):
-		line = PrettyPrint.INDENT_WITH * self.depth
-		if len(tokens) > 0:
-			noun = tokens[0]
-			line += noun
-			if len(tokens) > 1:
-				line += ' '*(21-len(noun)) + ' '
-				line += ' '.join(tokens[1:])
-		leadin = ''
-		self.println( '{0}{1}'.format( line, leadin ) )
+	def _print_tokens( self, tokens, fmt = '{0} {1}'  ):
+		if len( tokens ) > 0:
+			leadin = PrettyPrint.INDENT_WITH * self.depth
+			content = fmt.format( tokens[0], ' '.join( tokens[1:] ) )
+			self.println( '{0}{1}'.format( leadin, content ) )
 		return
 
 	def	begin_file( self, name ):
@@ -41,43 +37,46 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		self.depth = 0
 		return
 
-	def	_end_block( self ):
-		self.captured.sort( key = lambda t : t[0].lower() )
-		for tokens in self.captured:
-			self._spew( tokens )
+	def	_dump_captured_content( self ):
+		fmt = '{0:<%ds} {1}' % self.width
+		for tokens in sorted( self.captured, key = lambda t: t[0].lower() ):
+			self._print_tokens( tokens, fmt = fmt )
 		self.captured = []
 		return
 
 	def	next_line( self, line ):
-		line = line.strip()
-		octothorpe = line.find( '#' )
-		if octothorpe > -1:
-			line = line[:octothorpe]
-		line = line.strip()
-		# Ensure that magic tokens are whitespace-delimited
-		line = line.replace( '{', ' { ' )
-		line = line.replace( '}', ' } ' )
-		tokens = line.split()
+		tokens = [x for x in shlex.shlex( line )]
 		if len(tokens) > 0:
 			keyword = tokens[0]
 			final = tokens[-1]
 			if final == '{':
-				self._spew( tokens )
+				self._print_tokens( tokens )
 				self.depth += 1
-				if keyword in [ 'device' ]:
+				if keyword in [
+					'blacklist',
+					'device',
+					'multipath',
+					'defaults'
+				]:
 					self.captured = []
 					self.do_capture = True
+					self.width = 7
 			elif final == '}':
-				self._end_block()
+				self._dump_captured_content()
 				self.do_capture = False
 				self.depth -= 1
-				self._spew( tokens )
-			else:
-				tokens = line.split( '=', 1 )
-				if len(tokens) >= 2:
-					tokens = [ ' = '.join(tokens) ]
-				if self.do_capture:
-					self.captured.append( tokens )
+				self._print_tokens( tokens )
+			elif tokens[1] == '=':
+				self._print_tokens( tokens )
+			elif self.do_capture:
+				self.width = max( self.width, len( keyword ) )
+				if keyword in [ 'udev_dir' ]:
+					args = ''.join( tokens[1:] )
 				else:
-					self._spew( tokens )
+					args = ' '.join( tokens[1:] )
+				self.captured.append( [ keyword, args ] )
+			else:
+				# Silently discard
+				print 'ignoring {0}'.format( tokens )
+				pass
 		return

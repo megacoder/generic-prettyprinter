@@ -1,0 +1,12 @@
+type=CRED_DISP msg=audit(1427084117.809:131470): pid=19023 uid=0 auid=0 ses=3784 msg='op=PAM:setcred acct="root" exe="/usr/sbin/crond" hostname=? addr=? terminal=cron res=success'
+type=USER_END msg=audit(1427084117.812:131471): pid=19023 uid=0 auid=0 ses=3784 msg='op=PAM:session_close acct="root" exe="/usr/sbin/crond" hostname=? addr=? terminal=cron res=success'
+type=USER_ACCT msg=audit(1427084401.818:131472): pid=24032 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:accounting acct="root" exe="/usr/sbin/crond" hostname=? addr=? terminal=cron res=success'
+type=CRED_ACQ msg=audit(1427084401.818:131473): pid=24032 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:setcred acct="root" exe="/usr/sbin/crond" hostname=? addr=? terminal=cron res=success'
+type=LOGIN msg=audit(1427084401.818:131474): pid=24032 uid=0 old-auid=4294967295 auid=0 old-ses=4294967295 ses=3787 res=1
+type=USER_START msg=audit(1427084401.833:131475): pid=24032 uid=0 auid=0 ses=3787 msg='op=PAM:session_open acct="root" exe="/usr/sbin/crond" hostname=? addr=? terminal=cron res=success'
+type=CRED_REFR msg=audit(1427084401.833:131476): pid=24032 uid=0 auid=0 ses=3787 msg='op=PAM:setcred acct="root" exe="/usr/sbin/crond" hostname=? addr=? terminal=cron res=success'
+type=CRED_DISP msg=audit(1427084401.848:131477): pid=24032 uid=0 auid=0 ses=3787 msg='op=PAM:setcred acct="root" exe="/usr/sbin/crond" hostname=? addr=? terminal=cron res=success'
+type=USER_END msg=audit(1427084401.851:131478): pid=24032 uid=0 auid=0 ses=3787 msg='op=PAM:session_close acct="root" exe="/usr/sbin/crond" hostname=? addr=? terminal=cron res=success'
+type=SECCOMP msg=audit(1427084882.284:131479): auid=1000 uid=1000 gid=1000 ses=1746 pid=26131 comm="chrome" exe="/opt/google/chrome/chrome" sig=0 arch=c000003e syscall=273 compat=0 ip=0x7fd8110a1e84 code=0x50000
+type=SECCOMP msg=audit(1427084882.284:131480): auid=1000 uid=1000 gid=1000 ses=1746 pid=26132 comm="chrome" exe="/opt/google/chrome/chrome" sig=0 arch=c000003e syscall=273 compat=0 ip=0x7fd8110a1e84 code=0x50000
+type=USER_ACCT msg=audit(1427085001.862:131481): pid=26624 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:accounting acct="root" exe="/usr/sbin/crond" hostname=? addr=? terminal=cron res=success'
