@@ -1,3 +1,52 @@
+2015-04-11  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bootstrap.sh, samples/network/ifcfg-p7p1, src/ifcfg-plugin.py: 
+	Ensure bonds and bridges have the same MTU
+
+2015-04-11  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : commit 1ea67ddc3020ae91cc6d864b0e4348831b84a5e3 Merge: 2c3c354
+	4229d19 Author: Tommy Reynolds <Tommy.Reynolds@MegaCoder.com> Date:
+	Sat Apr 11 10:33:59 2015 -0500
+
+2015-04-11  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/network/ifcfg-br0, samples/network/ifcfg-br1,
+	samples/network/ifcfg-lo, samples/network/ifcfg-p10p1,
+	samples/network/ifcfg-p7p1: Examples of bridged NIC's.
+
+2015-04-11  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bump version
+
+2015-04-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : commit 8896588a615860d9265f34dc9da2120a519dfce3 Merge: e2d6d55
+	652d868 Author: Tommy Reynolds <Tommy.Reynolds@MegaCoder.com> Date:
+	Wed Apr 8 14:13:12 2015 -0500
+
+2015-04-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* MANIFEST.in: What to leave in, what to leave out.
+
+2015-04-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* README.html: Don't ship generated files.
+
+2015-04-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : commit a480a957ca9858901f6c96566be08741f6a7fe6c Author: Tommy
+	Reynolds <Tommy.Reynolds@MegaCoder.com> Date:   Wed Apr 8 12:49:45
+	2015 -0500
+
+2015-04-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* toys/shlex: Toy for exploring shlex tokenization.
+
+2015-04-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Changelog
+
 2015-04-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* samples/multipath.conf, setup.py, src/multipath-plugin.py: Align
