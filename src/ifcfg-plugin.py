@@ -91,46 +91,67 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             for i in range( Nifaces ):
                 iface = self.ifaces[ i ]
                 keys = iface.keys()
-                if 'TYPE' in keys:
-                    kind = iface[ 'TYPE' ]
-                else:
-                    kind = None
-                if kind == 'Bridge':
+                if 'TYPE' in keys and iface[ 'TYPE' ] == 'Bridge':
                     empty = False
                     bname = iface[ 'NAME' ]
+                    MTU   = iface[ 'MTU' ]
                     self.println(
-                        'Bridge %s' % bname
+                        'Bridge {0} (MTU={1})'.format(
+                            bname,
+                            MTU
+                        )
                     )
-                    for sno in range( Nifaces ):
-                        slave = self.ifaces[ sno ]
+                    for slave in self.ifaces:
                         try:
                             master = slave[ 'BRIDGE' ]
                         except:
                             master = None
                         if master and master == bname:
                             self.println( '  |' )
+                            if slave[ 'MTU' ] != MTU:
+                                msg = ' *** MTU={0}, not {1}'.format(
+                                    slave[ 'MTU' ],
+                                    MTU
+                                )
+                            else:
+                                msg = ""
                             self.println(
-                                '  +-- %s' % slave['NAME']
+                                '  +-- {0}{1}'.format(
+                                    slave[ 'NAME' ],
+                                    msg
+                                )
                             )
                     self.println()
             # Pass 2: construct bonded interfaces
             bonds = {}
             for iface in self.ifaces:
-                try:
-                    if iface[ 'SLAVE' ]:
-                        bonds[ iface[ 'MASTER' ] ] = 0
-                except:
-                    pass
+                keys = iface.keys()
+                if 'SLAVE' in keys and 'MASTER' in keys:
+                    bonds[ iface[ 'MASTER' ] ] = 1
             for bond in sorted( bonds.keys() ):
                 empty = False
                 self.println( 'Bond %s' % bond )
+                MTU=self.ifaces[bond]['MTU']
                 for i in range( Nifaces ):
                     iface = self.ifaces[ i ]
                     try:
                         if iface[ 'MASTER' ] == bond:
                             self.println( '  |' )
+                            if iface['MTU'] != MTU:
+                                msg = ' *** MTU={0}, not {1} as expected.'.format(
+                                    iface[ 'MTU' ],
+                                    MTU
+                                )
+                            else:
+                                msg = ""
                             self.println(
-                                '  +-- %s' % iface[ 'NAME' ]
+                                '  |'
+                            )
+                            self.println(
+                                '  +-- {0}{1}'.format(
+                                    iface[ 'NAME' ],
+                                    msg
+                                )
                             )
                     except:
                         pass
