@@ -14,9 +14,11 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def reset( self ):
         super( PrettyPrint, self ).reset()
-        self.prolog = []
-        self.ifaces = []
-        self.iface  = {}
+        self.prolog  = []
+        self.ifaces  = []
+        self.iface   = {}
+        self.bonds   = {}
+        self.bridges = {}
         return
 
     def ignore( self, name ):
@@ -58,6 +60,10 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         iface = self._normalize( self.iface )
         if 'NAME' in iface.keys():
             self.ifaces.append( iface )
+            if iface[ 'TYPE' ] == 'Bridge':
+                self.bridges[ iface[ 'DEVICE' ] ] = iface
+            elif iface[ 'TYPE' ] == 'Bonding':
+                self.bonds[ iface[ 'DEVICE' ] ] = iface
         self.report()
         return
 
@@ -72,7 +78,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                 keys
             )
         )
-        fmt = "%%%ds = '%%s'" % max_name
+        fmt = "%%%ds='%%s'" % max_name
         for key in sorted( keys ):
             self.println( fmt % (key, self.iface[key]) )
         self.println()
@@ -80,82 +86,72 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def report( self, final = False ):
         if final:
-            self.ifaces.sort( key = lambda e: e['NAME'] )
-            Nifaces = len( self.ifaces )
-            empty = True
             title = 'S U M M A R Y'
+            self.println()
             self.println( title )
             self.println( '-' * len( title ) )
             self.println()
+            empty = True
+            # Sort interface list once and for all
+            self.ifaces.sort( key = lambda e: e['NAME'] )
             # Pass 1: construct bridged interfaces
-            for i in range( Nifaces ):
-                iface = self.ifaces[ i ]
-                keys = iface.keys()
-                if 'TYPE' in keys and iface[ 'TYPE' ] == 'Bridge':
-                    empty = False
-                    bname = iface[ 'NAME' ]
-                    MTU   = iface[ 'MTU' ]
-                    self.println(
-                        'Bridge {0} (MTU={1})'.format(
-                            bname,
-                            MTU
-                        )
-                    )
-                    for slave in self.ifaces:
-                        try:
-                            master = slave[ 'BRIDGE' ]
-                        except:
-                            master = None
-                        if master and master == bname:
-                            self.println( '  |' )
-                            if slave[ 'MTU' ] != MTU:
-                                msg = ' *** MTU={0}, not {1}'.format(
-                                    slave[ 'MTU' ],
-                                    MTU
-                                )
-                            else:
-                                msg = ""
-                            self.println(
-                                '  +-- {0}{1}'.format(
-                                    slave[ 'NAME' ],
-                                    msg
-                                )
-                            )
+            if self.bridges != {}:
+                if not empty:
                     self.println()
-            # Pass 2: construct bonded interfaces
-            bonds = {}
-            for iface in self.ifaces:
-                keys = iface.keys()
-                if 'SLAVE' in keys and 'MASTER' in keys:
-                    bonds[ iface[ 'MASTER' ] ] = 1
-            for bond in sorted( bonds.keys() ):
                 empty = False
-                self.println( 'Bond %s' % bond )
-                MTU=self.ifaces[bond]['MTU']
-                for i in range( Nifaces ):
-                    iface = self.ifaces[ i ]
-                    try:
-                        if iface[ 'MASTER' ] == bond:
-                            self.println( '  |' )
-                            if iface['MTU'] != MTU:
-                                msg = ' *** MTU={0}, not {1} as expected.'.format(
-                                    iface[ 'MTU' ],
+                for name in sorted( self.bridges.keys() ):
+                    self.println()
+                    self.println( 'Bridge {0}'.format( name ) )
+                    bridge = self.bridges[ name ]
+                    if 'MTU' in bridge.keys():
+                        MTU = bridge[ 'MTU' ]
+                    else:
+                        MTU = '1500'
+                    name = bridge[ 'DEVICE' ]
+                    for iface in self.ifaces:
+                        keys = iface.keys()
+                        if 'BRIDGE' in keys and iface[ 'BRIDGE' ] == name:
+                            if 'MTU' in keys:
+                                PMTU = iface[ 'MTU' ]
+                            else:
+                                PMTU = '1500'
+                            if PMTU == MTU:
+                                msg = ''
+                            else:
+                                msg = ' *** MTU={0}, expected {1}.'.format(
+                                    PMTU,
                                     MTU
                                 )
-                            else:
-                                msg = ""
+                            self.println( ' |' )
                             self.println(
-                                '  |'
-                            )
-                            self.println(
-                                '  +-- {0}{1}'.format(
-                                    iface[ 'NAME' ],
+                                ' +-- {0}{1}'.format(
+                                    iface[ 'DEVICE' ],
                                     msg
                                 )
                             )
-                    except:
-                        pass
-                self.println()
+            # Pass 2: Bonds
+            if self.bonds != {}:
+                if not empty:
+                    self.println( '\n' )
+                empty = False
+                for name in sorted( self.bonds.keys() ):
+                    bond = self.ifaces[ name ]
+                    self.println()
+                    self.println( name )
+                    for iface in self.ifaces:
+                        keys = iface.keys()
+                        if 'MASTER' in keys and iface[ 'MASTER' ] == bond:
+                            if 'SLAVE' in keys and iface[ 'SLAVE' ] == 'yes':
+                                msg = ''
+                            else:
+                                msg = ' *** slave with no MASTER'
+                            self.println( ' |' )
+                            self.println(
+                                ' +-- {0}{1}'.format(
+                                    iface[ 'DEVICE' ],
+                                    msg
+                                )
+                            )
             # Pass 3: TBD
             if empty:
                 self.println()
