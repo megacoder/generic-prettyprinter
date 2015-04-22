@@ -1,3 +1,16 @@
+2015-04-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Cleaned up logic for displaying bridges and
+	bonds.
+
+2015-04-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped version
+
+2015-04-11  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Changes
+
 2015-04-11  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* bootstrap.sh, samples/network/ifcfg-p7p1, src/ifcfg-plugin.py: 
