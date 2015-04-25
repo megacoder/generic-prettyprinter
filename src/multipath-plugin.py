@@ -54,6 +54,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				self.depth += 1
 				if keyword in [
 					'blacklist',
+					'blacklist_exceptions',
 					'device',
 					'multipath',
 					'defaults'
