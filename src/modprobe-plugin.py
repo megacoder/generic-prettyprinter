@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# vim: noet sw=4 ts=4
 
 import	os
 import	sys
@@ -47,5 +48,6 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		self.tokens.sort( key = lambda (v,n,o) : (v.lower(),n.lower()) )
 		for verb,name,rest in self.tokens:
 			self.println( fmt % (verb, name, rest) )
+		self.println()
 		self._prepare()
 		return
