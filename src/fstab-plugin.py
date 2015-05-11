@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# Print /etf/fstab getting the fields as close to their intended columns as may
+# Print /etc/fstab getting the fields as close to their intended columns as may
 # be.  Long fields push the remainder of the line over as little as is possible
 # so that the columns come nearer to alignment.
 
@@ -29,40 +29,64 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         return
 
     def next_line( self, line ):
-        parts = line.split( '#', 1 )[0].strip().split()
-        L = len( parts )
-        if (L == 4) or (L == 6):
-            for i in xrange( 0, L ):
-                # Reformat only regular, or bind-mount, lines
-                if L == 4 or L == 6:
-                    k = len( parts[i] )
-                    try:
-                        w = self.widths[i]
-                    except:
-                        w = k
-                    self.widths[i] = max( k, w )
-            self.entries.append( (L, parts) )
+        parts = map(
+            str.strip,
+            line.split( '#', 1 )[0].split()
+        )
+        nParts = len( parts )
+        # Discard all but regular or bind-mount, lines
+        try:
+            if (nParts == 4) or (nParts == 6):
+                for i in range( nParts ):
+                    key = str( i )
+                    if key in self.widths.keys():
+                        self.widths[ key ] = max(
+                            self.widths[ key ],
+                            len( parts[ i ] )
+                        )
+                    else:
+                        self.widths[ key ] = len( parts[ i ] )
+                # Make sure mount options are in canonical order
+                options = parts[ 3 ].split( ',' )
+                options.sort()
+                parts[ 3 ] = ','.join(
+                    options
+                )
+                self.entries.append( (nParts, parts) )
+        except Exception, e:
+            print >>sys.stderr, 'Error handling "{0}"'.format( line )
+            print >>sys.stderr, e
         return
 
     def report( self, final = False ):
         if not final:
-            for (L, parts) in self.entries:
+            # Build formats for each column
+            fmt = {}
+            for key in self.widths.keys():
+                fmt[ key ] = '{0:<%d}' % self.widths[ key ]
+            # Output each line with columns according to formats
+            for (nParts, parts) in self.entries:
                 clauses = []
-                for i in xrange( 0, L ):
-                    fmt = '{0:<%d}' % self.widths[ i ]
+                for i in range( nParts ):
+                    key = str( i )
                     clauses.append(
-                        fmt.format( parts[ i ] )
-                    )
-                self.println( ' '.join( clauses ) )
-            for (L,parts) in self.entries:
-                try:
-                    if parts[ 3 ] == 'nfs' and parts[ 4 ] == 'defaults':
-                        self.println(
-                            'Mount point {0} uses default options.'.format(
-                                parts[ 0 ]
-                            )
+                        fmt[ key ].format(
+                            parts[ i ]
                         )
-                except:
-                    pass
-            self.println()
+                    )
+                self.println(
+                    ' '.join( clauses )
+                )
+            # Final passes check for bad combinations
+            first = True
+            for (nParts,parts) in self.entries:
+                if parts[ 3 ] == 'nfs' and parts[ 4 ] == 'defaults':
+                    if first:
+                        self.println()
+                        first = False
+                    self.println(
+                        'Mount point {0} uses default options.'.format(
+                            parts[ 0 ]
+                        )
+                    )
         return
