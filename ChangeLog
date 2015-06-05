@@ -1,3 +1,38 @@
+2015-06-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Detect and display both bonded and bridged
+	interfaces properly.
+
+2015-05-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped revision number.
+
+2015-05-11  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/fstab-plugin.py: Mount options are always sorted.
+
+2015-05-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* TODO: Bonding slaves missing
+
+2015-05-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* TODO: Poor man's memory aid
+
+2015-05-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/modprobe-plugin.py: Added extra blank line after modprobe
+	report.
+
+2015-04-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/multipath-plugin.py: Recognize "blacklist_exceptions {}"
+	stanza.
+
+2015-04-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Changes
+
 2015-04-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* src/ifcfg-plugin.py: Cleaned up logic for displaying bridges and
