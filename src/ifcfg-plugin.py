@@ -27,12 +27,16 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
     def _normalize( self, iface ):
         keys = iface.keys()
         if 'DEVICE' in keys or 'NAME' in keys:
+            if 'MASTER' in keys and not 'TYPE' in keys:
+                iface[ 'TYPE' ] = 'Bonding'
             if not 'TYPE' in keys:
                 iface[ 'TYPE' ] = 'Ethernet'
             if 'DEVICE' in keys and not 'NAME' in keys:
                 iface[ 'NAME' ] = iface[ 'DEVICE' ]
             if 'NAME' in keys and not 'DEVICE' in keys:
                 iface[ 'DEVICE' ] = iface[ 'NAME' ]
+            if not 'MTU' in keys:
+                iface[ 'MTU' ] = '1500'
         # print >>sys.stderr, iface
         return iface
 
@@ -58,12 +62,15 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def post_end_file( self ):
         iface = self._normalize( self.iface )
-        if 'NAME' in iface.keys():
+        keys = iface.keys()
+        if 'NAME' in keys:
             self.ifaces.append( iface )
             if iface[ 'TYPE' ] == 'Bridge':
                 self.bridges[ iface[ 'DEVICE' ] ] = iface
             elif iface[ 'TYPE' ] == 'Bonding':
                 self.bonds[ iface[ 'DEVICE' ] ] = iface
+            if 'MASTER' in keys:
+                self.bonds[ iface[ 'MASTER' ] ] = 0
         self.report()
         return
 
@@ -84,76 +91,88 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         self.println()
         return
 
+    def _report_bridges( self, others = False ):
+        bridges = [
+            iface for iface in self.ifaces if iface['TYPE'] == 'Bridge'
+        ]
+        if len( bridges ) > 0:
+            if others:
+                self.println()
+            others = True
+            title = 'BRIDGE'
+            self.println( title )
+            self.println( '-' * len( title ) )
+            for bridge in bridges:
+                self.println()
+                name = bridge[ 'NAME' ]
+                bridge_mtu = bridge[ 'MTU' ]
+                title = '{0}'.format( name )
+                self.println( title )
+                self.println( '-' * len( title ) )
+                members = [
+                    iface for iface in self.ifaces if 'BRIDGE' in iface.keys()
+                    and iface['BRIDGE'] == name
+                ]
+                for member in members:
+                    member_mtu = member[ 'MTU' ]
+                    if bridge_mtu != member_mtu:
+                        msg = ' *** Bridge MTU {0}, not {1} as member.'.format(
+                            bridge_mtu,
+                            member_mtu
+                        )
+                    else:
+                        msg = ''
+                    self.println( '  |' )
+                    self.println( '  +-- {0}{1}'.format(member['NAME'], msg ))
+        return others
+
+    def _report_bonds( self, others = False ):
+        if others:
+            self.println( '\n' )
+        # Some bonds are explicity declared
+        bonds = {}
+        for iface in self.ifaces:
+            if 'TYPE' in iface.keys() and iface['TYPE'] == 'Bond':
+                bonds[iface['NAME']] = iface
+        # Some bonds are inferred by being mentioned as a 'MASTER'
+        for iface in self.ifaces:
+            if 'MASTER' in iface.keys():
+                bonds[iface['MASTER']] = iface
+        keys = bonds.keys()
+        if len(keys) > 0:
+            if others:
+                self.println()
+            others = True
+            title = 'BONDING'
+            self.println( title )
+            self.println( '-' * len(title))
+            for bond in sorted( bonds ):
+                self.println()
+                self.println( bond )
+                paths = [
+                    iface for iface in self.ifaces if 'MASTER' in iface.keys()
+                    and iface['MASTER'] == bond
+                ]
+                for path in paths:
+                    self.println( '  |' )
+                    self.println( '  +-- {0}'.format( path['NAME'] ) )
+        return others
+
     def report( self, final = False ):
         if final:
             title = 'S U M M A R Y'
             self.println()
             self.println( title )
             self.println( '-' * len( title ) )
-            self.println()
-            empty = True
+            others = False
             # Sort interface list once and for all
             self.ifaces.sort( key = lambda e: e['NAME'] )
             # Pass 1: construct bridged interfaces
-            if self.bridges != {}:
-                if not empty:
-                    self.println()
-                empty = False
-                for name in sorted( self.bridges.keys() ):
-                    self.println()
-                    self.println( 'Bridge {0}'.format( name ) )
-                    bridge = self.bridges[ name ]
-                    if 'MTU' in bridge.keys():
-                        MTU = bridge[ 'MTU' ]
-                    else:
-                        MTU = '1500'
-                    name = bridge[ 'DEVICE' ]
-                    for iface in self.ifaces:
-                        keys = iface.keys()
-                        if 'BRIDGE' in keys and iface[ 'BRIDGE' ] == name:
-                            if 'MTU' in keys:
-                                PMTU = iface[ 'MTU' ]
-                            else:
-                                PMTU = '1500'
-                            if PMTU == MTU:
-                                msg = ''
-                            else:
-                                msg = ' *** MTU={0}, expected {1}.'.format(
-                                    PMTU,
-                                    MTU
-                                )
-                            self.println( ' |' )
-                            self.println(
-                                ' +-- {0}{1}'.format(
-                                    iface[ 'DEVICE' ],
-                                    msg
-                                )
-                            )
+            others = self._report_bridges( others )
             # Pass 2: Bonds
-            if self.bonds != {}:
-                if not empty:
-                    self.println( '\n' )
-                empty = False
-                for name in sorted( self.bonds.keys() ):
-                    bond = self.ifaces[ name ]
-                    self.println()
-                    self.println( name )
-                    for iface in self.ifaces:
-                        keys = iface.keys()
-                        if 'MASTER' in keys and iface[ 'MASTER' ] == bond:
-                            if 'SLAVE' in keys and iface[ 'SLAVE' ] == 'yes':
-                                msg = ''
-                            else:
-                                msg = ' *** slave with no MASTER'
-                            self.println( ' |' )
-                            self.println(
-                                ' +-- {0}{1}'.format(
-                                    iface[ 'DEVICE' ],
-                                    msg
-                                )
-                            )
+            others = self._report_bonds( others )
             # Pass 3: TBD
-            if empty:
+            if not others:
                 self.println()
                 self.println( 'No bonding or bridges found.' )
         elif 'NAME' in self.iface.keys():
