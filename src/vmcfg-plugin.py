@@ -1,11 +1,80 @@
 #!/usr/bin/python
 # vim: noet sw=4 ts=4
 
-import	sys
 import	ast
-import	codegen
+import	os
+import	sys
+import	sys
+import	tokenize
+import	StringIO
+import	compiler
 
 from	superclass	import	MetaPrettyPrinter
+
+class	PythonPrettyPrint( object ):
+
+	def __init__( self ):
+		self.level	= 0
+		self.was_op = False
+		return
+
+	def validate( self, s ):
+		try:
+			compiler.compile( s, s, 'exec' )
+		except Exception, e:
+			raise e
+		return
+
+	def run( self, spelling, rule = 'p' ):
+		for action in rule:
+			# print '[{0}]'.format( action ),
+			if action == 'i':
+				self.level += 1
+			elif action == 'd':
+				self.level -= 1
+			elif action == 'n':
+				yield '\n'
+			elif action == 'r':
+				yield '{0}'.format( '  ' * self.level )
+			elif action == 'p':
+				yield '{0}'.format( spelling )
+			else:
+				print >>self.stdout, 'Internal error: action %s' % action
+		return
+
+	def parse( self, s ):
+		default_rule = 'rp'
+		for toknum,spelling,(srow,scol),(erow,ecol),logicalline in tokenize.generate_tokens( StringIO.StringIO(s).readline):
+			rule = default_rule
+			default_rule = None
+			# What do we have?
+			if toknum == tokenize.OP:
+				if spelling == '[':
+					rule = 'pin'
+					default_rule = 'rp'
+				elif spelling == ']':
+					rule = 'dnp'
+				elif spelling == ',' or spelling == ';':
+					rule = 'p'
+					default_rule = 'nrp'
+				else:
+					if self.was_op:
+						spelling = '{0} '.format( spelling )
+					else:
+						spelling = ' {0} '.format( spelling )
+					rule = 'p'
+					default_rule = 'p'
+				self.was_op = True
+			else:
+				self.was_op = False
+				default_rule = 'p'
+			# Take the actions for this token
+			for line in self.run( spelling, rule  ):
+				yield line
+			if not default_rule:
+				default_rule = 'rp'
+		yield '\n'
+		return
 
 class	PrettyPrint( MetaPrettyPrinter ):
 
@@ -14,126 +83,54 @@ class	PrettyPrint( MetaPrettyPrinter ):
 
 	def __init__( self ):
 		super( PrettyPrint, self ).__init__()
+		self.pp = PythonPrettyPrint()
+		self.pre_begin_file()
 		return
 
-	def pre_begin_file( self ):
-		self.filename = None
-		self.stanzas  = []
-		self.stanza   = dict()
-		self.name	  = None		# Name of active stanza
+	def	pre_begin_file( self ):
+		self.lines = []
+		self.width = 7
 		return
-
-	def begin_file( self, name ):
-		super( PrettyPrint, self ).begin_file( name )
-		self.filename = name
-		return
-
-	def	_start_stanza( self, name ):
-		self.name = name
-		self.stanza = dict()
-		return
-
-	def	_add_entry( self, name, value ):
-		self.stanza[name] = value
-		return
-
-	def	_end_stanza( self ):
-		self.stanzas.append(
-			[ self.name, self.stanza ]
-		)
-		self.name	= None
-		self.stanza = None
-		return
-
-	def	_in_stanza( self ):
-		return True if self.name else False
-
-	def	_reformat( self, s ):
-		try:
-			p = ast.parse( s )
-		except Exception, e:
-			self.error( 'could not parse' )
-			self.error( e )
-			return s
-		try:
-			retval = codegen.to_source( p )
-		except Exception, e:
-			self.error( 'could not generate source' )
-			self.error( e )
-			retval = s
-		return retval
 
 	def next_line( self, line ):
-		if line.find( '=' ) > -1:
-			# name = value
-			if not self._in_stanza():
-				self.error( 'orphan name' )
-			else:
-				tokens = map(
-					str.strip,
-					line.split( '=', 1 )
-				)
-				if len( tokens ) == 2 and len(tokens[0]) > 0:
-					recode = self._reformat( tokens[1] )
-					self._add_entry( tokens[0], recode )
-				else:
-					self.error( 'strangely formatted line' )
-		else:
-			tokens = map(
-				str.strip,
-				line.split()
+		tokens = map(
+			str.strip,
+			line.split( '#', 1 )[0].split( '=', 1 )
+		)
+		if len(tokens) == 2:
+			try:
+				name = tokens[0]
+				value = tokens[1]
+				# print '|%s|%s|' % (name,value)
+				self.pp.validate( value )
+				# print 'Looks good'
+			except Exception, e:
+				self.error( 'syntax error: %s' % line )
+				return
+			self.width = max( self.width, len( name ) )
+			self.lines.append(
+				[ name, value ]
 			)
-			if tokens[-1] == '}':
-				# }
-				try:
-					if not self._in_stanza():
-						self.error( 'misplaced "}"' )
-					else:
-						self._end_stanza()
-				except Exception, e:
-					self.error( e )
-			else:
-				# name {
-				if self._in_stanza():
-					self.error(
-						'stanza "{0}" not terminated'.format( self.name )
-					)
-					self._end_stanza()
-				if len( tokens ) == 2 and tokens[1] == '{':
-					self.name = tokens[0]
-					self.stanza = dict()
-				else:
-					self.error( '# {0}'.format( line ) )
 		return
 
 	def report( self, final = False ):
-		if not final and len( self.stanzas ) > 0:
-			for [name,stanza] in sorted( self.stanzas ):
-				self.println( "%s\t{" % name )
-				width = max(
-					map(
-						len,
-						stanza.keys()
-					)
-				)
-				fmt = '  {0:<%d.%ds} {1} {2}' % (
-					width,
-					width
-				)
-				for key in sorted( stanza.keys() ):
-					s	 = stanza[key]
-					name = key
-					op   = '='
-					for line in s.split( '\n' ):
-						self.println(
-							fmt.format(
-								name,
-								op,
-								line
-							)
-						)
-						name = ''
-						op = ''
-				self.println( '}' )
-				self.println()
+		if not final:
+			fmt = '{0:%ds} = {1}' % self.width
+			indent = '\n' + (' ' * (self.width + 3))
+			first = True
+			for [name, value] in sorted(
+				self.lines,
+				key = lambda a : a[0].lower()
+			):
+				first = True
+				layout = fmt
+				for text in self.pp.parse( value ):
+					if first:
+						line = fmt.format( name, text )
+						first = False
+					else:
+						line += text
+				lines = line.split( '\n' )
+				lines = indent.join( lines )
+				self.println( lines.rstrip() )
 		return
