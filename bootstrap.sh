@@ -6,5 +6,6 @@ if [ $# -eq 0 ]; then
 fi
 (
 	set +x
+	rm -rf build dist
 	python ./setup.py "${@}"
 ) 2>&1 | tee bootstrap.log
