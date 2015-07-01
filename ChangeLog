@@ -1,3 +1,36 @@
+2015-07-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bump version level.
+
+2015-07-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* test: Goners
+
+2015-07-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/vmcfg-plugin.py: Handle what a vm.cfg looks like.
+
+2015-07-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bootstrap.sh: Clean cruft from build/ and dist/ directory so we
+	don't mistake detritusfor the good stuff.
+
+2015-06-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* test: Pretty printer as I like it.
+
+2015-06-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/vm.cfg: XEN guest definition
+
+2015-06-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/lvm.conf, samples/vm.cfg: Oops, wrong file type.
+
+2015-06-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Updated changelog
+
 2015-06-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* src/ifcfg-plugin.py: Detect and display both bonded and bridged
