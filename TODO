@@ -1,2 +1,2 @@
 o	multipath.conf parsing incorrectly ignores 2-token lines.
-o	ifcfg bond not populated with any slaves.
+o	Reorder ifcfg::BONDING_OPTS settings into a canonical mode.
