@@ -24,6 +24,29 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
     def ignore( self, name ):
         return False if name.endswith( '.conf' ) else True
 
+    def moder( self, mode ):
+        if mode.startswith( 'mode=' ):
+            self.footnote(
+                'The mode is actually given as "{0}" in the file.'.format(
+                    mode
+                )
+            )
+            spelling = {
+                '0': 'balance-rr',
+                '1': 'active-backup',
+                '2': 'balance-xor',
+                '3': 'broadcast',
+                '4': '802.3ad',
+                '5': 'balance-tlb',
+                '6': 'balance-alb',
+            }
+            code = mode[ len('mode=') ]
+            if code in spelling.keys():
+                mode = 'mode={0}'.format(
+                    spelling[ code ]
+                )
+        return mode
+
     def _normalize( self, iface ):
         keys = iface.keys()
         if 'DEVICE' in keys or 'NAME' in keys:
@@ -37,6 +60,14 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                 iface[ 'DEVICE' ] = iface[ 'NAME' ]
             if not 'MTU' in keys:
                 iface[ 'MTU' ] = '1500'
+            # Sort parameters if needed
+            if 'BONDING_OPTS' in keys:
+                tokens = iface['BONDING_OPTS'].split()
+                tokens.sort()
+                tokens = [
+                    self.moder(s) for s in tokens
+                ]
+                iface['BONDING_OPTS'] = ' '.join( tokens )
         # print >>sys.stderr, iface
         return iface
 
