@@ -26,58 +26,56 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 	def	_prepare( self ):
 		self.lines = []
 		self.max_name = 15
-		self.max_kinds = {}
+		self.attrlens = {}
 		return
 
 	def	next_line( self, line ):
-		tokens = line.rstrip().split( ':', 1 )
-		if len(tokens) == 2:
-			self.max_name = max( self.max_name, len( tokens[0] ) )
-			args = {}
-			for arg in shlex.split( tokens[1] ):
-				kind, value = arg.split( '=', 1 )
-				nv = '%s="%s"' % (kind.strip(), value.strip())
-				args[kind] = nv
-				try:
-					self.max_kinds[kind] = max( self.max_kinds[kind], len(nv) )
-				except:
-					self.max_kinds[kind] = len(nv)
-			self.lines.append( (tokens[0], args) )
+		try:
+			name, tokens = line.rstrip().split( ':', 1 )
+			attrs = {}
+			for arg in shlex.split( tokens ):
+				key, value = map(
+					str.strip,
+					arg.split( '=', 1 )
+				)
+				arg = '{0}="{1}"'.format( key, value )
+				self.attrlens[key] = max(
+					len(key),
+					self.attrlens[key] if key in self.attrlens.keys() else 0
+				)
+				attrs[key] = arg
+				self.attrlens[key] = max(
+					len(arg),
+					self.attrlens[key] if key in self.attrlens.keys() else 0
+				)
+			self.lines.append( [ name, attrs ] )
+			self.max_name = max( self.max_name, len(name) )
+		except Exception, e:
+			return
 		return
 
-	def	begin_file( self, name ):
-		super( PrettyPrint, self ).begin_file( name )
-		self._prepare()
-		return
-
-	def	_report( self ):
-		self.lines.sort( key = lambda (n,a): string.lower(n) )
-		kinds = []
-		kind_fmts = {}
-		for kind in self.max_kinds.keys():
-			kinds.append( kind )
-			kind_fmts[kind] = '%%-%ds' % self.max_kinds[kind]
-		kinds.sort()
-		for (name, args) in self.lines:
-			options = ''
-			keys = args.keys()
-			for kind in kinds:
-				if kind in keys:
-					s = kind_fmts[kind] % args[kind]
-				else:
-					s = kind_fmts[kind] % ""
-				options = options + ' ' + s
-			fmt = '%%%ds :%%s' % self.max_name
-			print fmt % ( name, options )
-		self._prepare()
-		return
-
-	def	end_file( self, name ):
-		self._report()
-		super( PrettyPrint, self ).end_file( name )
-		return
-
-	def	finish( self ):
-		if len(self.lines) > 0:
-			self._report()
+	def	report( self, final = False ):
+		if final: return
+		nfmt = '{0:<%d}' % ( self.max_name + 1 )
+		keys = self.attrlens.keys()
+		keys.sort()
+		fmts = {}
+		for key in keys:
+			fmts[key] = ' {0:<%d.%d}' % (
+				self.attrlens[key],
+				self.attrlens[key]
+			)
+		for name, attrs in sorted(
+			self.lines,
+			key = lambda (n,a) : n.lower()
+		):
+			line = nfmt.format( ( name + ':' ) )
+			attrkeys = attrs.keys()
+			options = []
+			for key in keys:
+				options.append( fmts[key].format(
+					attrs[key] if key in attrkeys else ""
+				))
+			line += ( ' '.join( options ) )
+			self.println( line.rstrip() )
 		return
