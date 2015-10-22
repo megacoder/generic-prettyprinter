@@ -60,6 +60,11 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                 iface[ 'DEVICE' ] = iface[ 'NAME' ]
             if not 'MTU' in keys:
                 iface[ 'MTU' ] = '1500'
+                self.footnote(
+                    '{0} did not supply an MTU, 1500 assumed.'.format(
+                        iface['NAME']
+                    )
+                )
             # Sort parameters if needed
             if 'BONDING_OPTS' in keys:
                 tokens = iface['BONDING_OPTS'].split()
