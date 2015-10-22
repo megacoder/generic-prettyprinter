@@ -1,3 +1,4 @@
 o	multipath.conf parsing incorrectly ignores 2-token lines.
 o	Reorder ifcfg::BONDING_OPTS settings into a canonical mode.
 o	UDEV rules
+o	Add footnote whenever we intuit ifcfg attributes.
