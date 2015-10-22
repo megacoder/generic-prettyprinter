@@ -1,6 +1,6 @@
 2015-10-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* setup.py, src/ifcfg-plugin.py: Added footnote when we all a
+	* setup.py, src/ifcfg-plugin.py: Added footnote when we add a
 	missing MTU attribute.
 
 2015-09-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
