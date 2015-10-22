@@ -1,3 +1,12 @@
+2015-10-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/ifcfg-plugin.py: Added footnote when we all a
+	missing MTU attribute.
+
+2015-09-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Bumped version
+
 2015-09-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* setup.py, src/blkid-plugin.py: Rewrote logic, now drops trailing
