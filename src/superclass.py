@@ -112,14 +112,10 @@ class   MetaPrettyPrinter( object ):
         self.pre_begin_file()
         self.begin_file( fn )
         try:
-            f = open( fn, 'rt' )
+            with open( fn, 'rt' ) as f:
+                self.do_open_file( f )
         except Exception, e:
             raise e
-        try:
-            self.do_open_file( f )
-        except Exception, e:
-            pass
-        f.close()
         self.end_file( fn )
         self.post_end_file()
         self.show_footnotes()
