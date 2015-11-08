@@ -29,9 +29,9 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def report( self, final = False ):
         if not final:
-            self.lines.sort( key = lambda key: key )
+            self.lines.sort()
             a = align.align()
-            for parts in self.items:
+            for parts in self.lines:
                 a.add( parts )
             for parts in a.get_items():
                 self.println( ' '.join( parts ) )
