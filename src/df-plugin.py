@@ -3,6 +3,7 @@
 import	os
 import	sys
 import  superclass
+import  align
 
 class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
@@ -11,47 +12,25 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def __init__( self ):
         super( PrettyPrint, self ).__init__()
-        self.reset()
+        self.pre_open_file()
         return
 
-    def reset( self ):
-        super( PrettyPrint, self ).reset()
-        self._prepare()
-        return
-
-    def _prepare( self ):
-        self.widths = {}
-        self.entries = []
-        self.first = True
+    def pre_open_file( self ):
+        self.items   = []
         self.headers = None
-        return
-
-    def begin_file( self, name ):
-        super( PrettyPrint, self ).begin_file( name )
-        self._prepare()
-        return
-
-    def _get_widths( self, parts ):
-        for i in xrange( 0, len(parts) ):
-            w = len(parts[i])
-            try:
-                self.widths[i] = max( self.widths[i], w )
-            except:
-                self.widths[i] = w
         return
 
     def next_line( self, line ):
         parts = line.split( '#', 1 )[0].strip().split()
-        if self.first:
+        if self.headers:
+            if len( parts ) > 0:
+                self.items.append( parts )
+        else:
             if line.startswith( 'Filesystem' ):
+                # Coalesce 'Mounted' 'on' into 'Mounted on'
                 parts[-2] = ' '.join( parts[-2:] )
-                parts = parts[:-1]
-                self.headers = parts
-                self._get_widths( parts )
-            self.first = False
-        elif len(parts) > 0:
-            self._get_widths( parts )
-            self.entries.append( parts )
+                # Save all but isolated 'on', which is the final arg
+                self.headers = parts[ : -1 ]
         return
 
     def _print_tuples( self, tuples ):
@@ -65,9 +44,13 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         return
 
     def report( self, final = False ):
-        if self.headers:
-            self._print_tuples( self.headers )
-        for tuples in sorted( self.entries ):
-            self._print_tuples( tuples )
-        self._prepare()
+        if not final:
+            a = align.align()
+            if self.headers:
+                a.add( self.headers )
+            self.items.sort( key = lambda p: p[-1] )
+            for parts in self.items:
+                a.add( parts )
+            for parts in a.get_items():
+                self.println( ' '.join( parts ) )
         return
