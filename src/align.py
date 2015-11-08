@@ -13,15 +13,13 @@ class	align( object ):
 
 	def	add( self, l ):
 		for k,v in enumerate( l ):
-			if k in self.widths:
-				self.widths[ k ] = max( self.widths[ k ], len( str( v ) ) )
-			else:
-				self.widths[ k ] = len( str( v ) )
+			width = len( str( v ) )
+			self.widths[ k ] = max(
+				self.widths[ k ] if k in self.widths else 0,
+				width
+			)
 		self.items.append( l )
 		return
-
-	def	get( self ):
-		pass
 
 	def	get_items( self ):
 		for items in self.items:

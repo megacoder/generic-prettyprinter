@@ -57,6 +57,15 @@ class GenericPrettyPrinter( object ):
             prog        = 'gpp'
         )
         p.add_option(
+            '-D',
+            '--debug',
+            action  = 'store',
+            type    = 'string',
+            dest    = 'debug_level',
+            default =  0,
+            help    = 'Increase debug verbosity.'
+        )
+        p.add_option(
             '-o',
             '--out',
             action  = 'store',
@@ -81,6 +90,10 @@ class GenericPrettyPrinter( object ):
         dll_name = '%s-plugin' % opts.kind
         # DEBUG print >>sys.stderr, 'Loading module %s' % dll_name
         try:
+            if opts.debug_level > 0:
+                print >>sys.stderr, 'Loading module {0}'.format(
+                    dll_name
+                )
             dll = __import__(dll_name)
         except Exception, e:
             print >>sys.stderr, 'No prettyprinter for "%s".' % opts.kind
@@ -88,6 +101,9 @@ class GenericPrettyPrinter( object ):
             return True
         if opts.ofile is not None:
             try:
+                print >>sys.stderr, 'Redirecting output to {0}'.format(
+                    opts.ofile
+                )
                 sys.stdout = open( opts.ofile, 'wt' )
             except Exception, e:
                 print >>sys.stderr, 'Cannot open "%s" for writing.' % opts.ofile

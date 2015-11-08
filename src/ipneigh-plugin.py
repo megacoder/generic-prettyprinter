@@ -6,7 +6,7 @@ import	sys
 import	string
 import	superclass
 import	re
-import	aligned
+from	align	import	*
 
 class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
@@ -37,13 +37,13 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			if len(self.items) > 0:
 				self.items.sort( key = lambda (a,ip,mid,state): a )
 				a = align()
-				for (a,ip,mid,state) in self.items:
+				for (tcpip,ip,mid,state) in self.items:
 					fields = [ ip ]
 					while len( mid ) < 4:
 						mid.append( "" )
-					fields.append( mid )
+					fields.append( ' '.join( mid ) )
 					fields.append( state )
-				a.add( fields )
+					a.add( fields )
 				for fields in a.get_items():
 					print ' '.join( fields )
 		return
