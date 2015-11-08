@@ -1,6 +1,52 @@
+2015-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped revision
+
+2015-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/__init__.py, src/align.py, src/arp-plugin.py,
+	src/ipneigh-plugin.py: Added processing for 'ip neigh -n'
+
+2015-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ipneigh-plugin.py: Handle 'ip neigh -n'
+
+2015-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/ip-neigh: ip neigh sample
+
+2015-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Generic column aligner
+
+2015-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/20-nproc.conf: Example from /etc/security/limits.*
+
+2015-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/superclass.py: Replace wonky file opening with more elegant
+	with..as.. construct.
+
+2015-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bin/gpp: Defer calculating path to in-situ lib/ until we need it.
+
 2015-10-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* setup.py, src/ifcfg-plugin.py: Added footnote when we add a
+	* ChangeLog: Updated ChangeLog
+
+2015-10-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* TODO: Add reminder to footnote anytime we intuit something.
+
+2015-10-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Bumped version
+
+2015-10-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/ifcfg-plugin.py: Added footnote when we all a
 	missing MTU attribute.
 
 2015-09-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
