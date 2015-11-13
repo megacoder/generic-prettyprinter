@@ -26,11 +26,6 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def moder( self, mode ):
         if mode.startswith( 'mode=' ):
-            self.footnote(
-                'The mode is actually given as "{0}" in the file.'.format(
-                    mode
-                )
-            )
             spelling = {
                 '0': 'balance-rr',
                 '1': 'active-backup',
@@ -42,6 +37,11 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             }
             code = mode[ len('mode=') ]
             if code in spelling.keys():
+                self.footnote(
+                    'The mode is actually given as "{0}" in the file.'.format(
+                        mode
+                    )
+                )
                 mode = 'mode={0}'.format(
                     spelling[ code ]
                 )
