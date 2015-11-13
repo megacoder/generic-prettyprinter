@@ -212,3 +212,4 @@ class   MetaPrettyPrinter( object ):
                         s
                     )
                 )
+            self.sc_footnotes = None
