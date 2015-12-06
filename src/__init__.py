@@ -101,9 +101,6 @@ class GenericPrettyPrinter( object ):
             return True
         if opts.ofile is not None:
             try:
-                print >>sys.stderr, 'Redirecting output to {0}'.format(
-                    opts.ofile
-                )
                 sys.stdout = open( opts.ofile, 'wt' )
             except Exception, e:
                 print >>sys.stderr, 'Cannot open "%s" for writing.' % opts.ofile
