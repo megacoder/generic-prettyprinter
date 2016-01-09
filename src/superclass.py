@@ -118,7 +118,6 @@ class   MetaPrettyPrinter( object ):
             raise e
         self.end_file( fn )
         self.post_end_file()
-        self.show_footnotes()
         return
 
     def do_open_file( self, f = sys.stdin ):
@@ -157,6 +156,7 @@ class   MetaPrettyPrinter( object ):
 
     def finish( self ):
         self.report( final = True )
+        self.show_footnotes()
         return
 
     def error( self, msg, e = None ):
@@ -195,8 +195,10 @@ class   MetaPrettyPrinter( object ):
     def footnote( self, s ):
         if not self.sc_footnotes:
             self.sc_footnotes = []
+            self.sc_nFootnotes = 0
         self.sc_footnotes.append( s )
-        return
+        self.sc_nFootnotes += 1
+        return self.sc_nFootnotes
 
     def show_footnotes( self ):
         if self.sc_footnotes:
