@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# vim: sw=4 ts=4 noet
 
 import	os
 import	sys
@@ -11,45 +12,57 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	__init__( self ):
 		super( PrettyPrint, self ).__init__()
+		self.kinds = [
+			'options',
+			'sortlist',
+			'domain',
+			'search',
+			'nameserver',
+		]
 		return
 
-	def	reset( self ):
-		super( PrettyPrint, self ).reset()
-		self._prepare()
-		return
-
-	def	_prepare( self ):
-		self.entries = []
-		self.widths  = {}
-		return
-
-	def	begin_file( self, name ):
-		super( PrettyPrint, self ).begin_file( name )
-		self._prepare()
+	def	pre_begin_file( self ):
+		self.entries = {}
 		return
 
 	def	next_line( self, line ):
-		tokens = line.split( '#', 1 )[0].split()
-		n = len(tokens)
-		if n > 0:
-			for i in xrange( 0, n ):
-				L = len(tokens[i])
-				try:
-					self.widths[i] = max( self.widths[i], L )
-				except:
-					self.widths[i] = L
-			self.entries.append( tokens )
+		code = line.split( '#', 1 )[0].strip()
+		if len(code) > 0:
+			tokens = map(
+				str.strip,
+				code.split()
+			)
+			directive = tokens[0]
+			if directive not in self.kinds:
+				n = self.footnote(
+					"Directive '{0}' may be mispelled.".format( directive )
+				)
+				self.println( '{0}\t### Footnote {1}'.format(
+						line,
+						n
+					)
+				)
+			if directive not in self.entries:
+				self.entries[ directive ] = []
+			self.entries[ directive ].append( tokens[ 1: ] )
 		return
 
 	def	report( self, final = False ):
-		if len(self.entries) > 0:
-			for tokens in sorted( self.entries ):
-				line = ''
-				sep = ''
-				for i in xrange( len(tokens) ):
-					fmt = '%%-%ds' % self.widths[i]
-					line += sep + (fmt % tokens[i])
-					sep = ' '
-				self.println( line )
-		self._prepare()
+		if not final:
+			widest = max(
+				map(
+					len,
+					self.entries.keys()
+				)
+			)
+			fmt = '{0:%ds} {1}' % widest
+			for kind in self.kinds:
+				if kind in self.entries.keys():
+					for entry in self.entries[ kind ]:
+						self.println(
+							fmt.format(
+								kind,
+								' '.join( entry )
+							)
+						)
 		return
