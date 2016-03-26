@@ -20,15 +20,20 @@ class	OswTicker( object ):
 		)
 		if self.last is None:
 			self.last = dt
-		delta = dt - self.last
-		if self.old_delta is None:
-			self.old_delta = delta
-		if delta < self.old_delta:
-			mark = '-'
-		elif delta > self.old_delta:
-			mark = '+'
+			delta     = datetime.timedelta()
+			mark      = ' '
 		else:
-			mark = ' '
+			delta = dt - self.last
+			if self.old_delta is None:
+				mark = ' '
+				self.old_delta = delta
+			else:
+				if delta < self.old_delta:
+					mark = '-'
+				elif delta > self.old_delta:
+					mark = '+'
+				else:
+					mark = ' '
 		self.last      = dt
 		self.old_delta = delta
 		s = '{0} {1} {2}'.format(
