@@ -2,7 +2,7 @@
 # vim: noet sw=4 ts=4
 #
 # FYI: Currently, the OSWbb heartbeat file is generated like this:
-#	$ date '+oswbb hearbeat %a %b %d %H:%M:%S %Y'
+#	$ date '+zzz ***%a %b %d %H:%M:%S %Y'
 # But this is subject to change at any time.
 
 import	datetime
@@ -21,24 +21,29 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	begin_file( self, fn ):
-		super( PrettyPrint, self ).begin_file()
+		super( PrettyPrint, self ).begin_file( fn )
 		self.ot = oswticker.OswTicker( '%a %b %d %H:%M:%S %Y' )
 		self.println(
-			'#  Day Mon Dy HH:MM:SS YYYY  Delta'
+			'# Day Mon Dy HH:MM:SS YYYY  Delta'
 		)
 		self.println(
-			'#  --- --- -- -------- ---- -------'
+			'# --- --- -- -------- ---- -------'
 		)
 		return
 
-	def	next_line( s ):
+	def	next_line( self, line ):
 		if line.startswith( 'zzz ***' ):
-			tokens = line.split( ':', 1 )
-			if len( tokens ) == 2:
-				parts = tokens[1].split()
-				if len(parts[2]) != 2:
+			parts = line[7:].split()
+			# parts[0] == Day name
+			# parts[1] == Month name
+			# parts[2] == Day of month
+			# parts[3] == HH:MM:SS
+			# parts[4] == TZ
+			# parts[5] == YEAR
+			if len( parts ) == 6:
+				if len(parts[2]) == 1:
 					parts[2] = '0' + parts[2]
-				when = ' '.join( parts[0:4] + [parts[-1]] )
+				when = ' '.join( parts[0:4] + parts[5:] )
 				self.println(
 					self.ot.tick( when )
 				)

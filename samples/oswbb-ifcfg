@@ -1,0 +1,18 @@
+Linux OSWbb v7.3.3
+zzz ***Fri Mar 25 18:43:11 VET 2016
+bond0     Link encap:Ethernet  HWaddr 14:58:D0:59:26:B0
+	inet addr:10.161.77.83  Bcast:10.161.77.255  Mask:255.255.255.0
+	inet6 addr: fe80::1658:d0ff:fe59:26b0/64 Scope:Link
+	UP BROADCAST RUNNING MASTER MULTICAST  MTU:1500  Metric:1
+	RX packets:640457467 errors:0 dropped:0 overruns:0 frame:0
+	TX packets:88779760 errors:0 dropped:0 overruns:0 carrier:0
+	collisions:0 txqueuelen:0
+	RX bytes:901218024969 (839.3 GiB)  TX bytes:101352789758 (94.3 GiB)
+
+bond1     Link encap:Ethernet  HWaddr 14:58:D0:59:26:B2
+	inet6 addr: fe80::1658:d0ff:fe59:26b2/64 Scope:Link
+	UP BROADCAST RUNNING MASTER MULTICAST  MTU:1500  Metric:1
+	RX packets:6494367 errors:0 dropped:0 overruns:0 frame:0
+	TX packets:600548 errors:0 dropped:0 overruns:0 carrier:0
+	collisions:0 txqueuelen:0
+	RX bytes:387275520 (369.3 MiB)  TX bytes:398750522 (380.2 MiB
