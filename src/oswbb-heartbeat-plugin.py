@@ -9,6 +9,7 @@ import	datetime
 import	os
 import	sys
 import	superclass
+import	oswticker
 
 class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
@@ -21,8 +22,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	begin_file( self, fn ):
 		super( PrettyPrint, self ).begin_file()
-		self.old_delta = None
-		self.last      = None
+		self.ot = oswticker.OswTicker( '%a %b %d %H:%M:%S %Y' )
 		self.println(
 			'#  Day Mon Dy HH:MM:SS YYYY  Delta'
 		)
@@ -39,28 +39,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				if len(parts[2]) != 2:
 					parts[2] = '0' + parts[2]
 				when = ' '.join( parts[0:4] + [parts[-1]] )
-				try:
-					dt = datetime.datetime.strptime(
-						when,
-						'%a %b %d %H:%M:%S %Y'
-					)
-				except Exception, e:
-					self.println( e )
-					return
-				if self.last is None:
-					self.last = dt
-				delta = dt - self.last
-				if old_delta is None:
-					old_delta = delta
-				if flag:
-					mark = '-'
-				else:
-					mark = ' '
-				print '%s %s %s' % (
-					mark,
-					tokens[1],
-					delta
+				self.println(
+					self.ot.tick( when )
 				)
-				self.last = dt
-				self.old_delta = delta
 		return
