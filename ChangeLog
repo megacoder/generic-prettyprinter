@@ -1,3 +1,83 @@
+2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped revision number.
+
+2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/oswbb-ifcfg, src/oswtick-plugin.py, src/oswticker.py: 
+	Implement and use common 'OswTicker' class.
+
+2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/resolv.conf: Test "/etc/resolv.conf" with an error.
+
+2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/oswbb-heartbeat-plugin.py: Use tick-handling class.
+
+2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/oswtick-plugin.py: Check time ticks in an OSWBB "*.dat" file
+	for jitter or missed samples.
+
+2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/oswticker.py: Portable tick and jitter checker.
+
+2016-01-19  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/resolv-plugin.py: Output entries in canonical order
+	[nameservers last]
+
+2016-01-19  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped rev to  add resolv.conf handling
+
+2016-01-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/sem-plugin.py: Handle "/proc/sys/kernel/sem"
+
+2016-01-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/superclass.py: Return footnote number when adding a footnote.
+
+2015-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/__init__.py: Remove the "redirect" notice.
+
+2015-11-13  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped version.
+
+2015-11-13  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Only add footnote if we'e had to decode a
+	numeric bonding mode.
+
+2015-11-13  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/superclass.py: Flush accumulated footnotes after showing them.
+
+2015-11-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/nsswitch-plugin.py: Better, by far.
+
+2015-11-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/nsswitch-plugin.py: Process /etc/nsswitch.* content
+
+2015-11-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/df-plugin.py: Simplify by using 'align' class
+
+2015-11-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/df: Sample df(1) output
+
+2015-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Updated history
+
 2015-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* setup.py: Bumped revision
