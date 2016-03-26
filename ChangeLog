@@ -1,5 +1,14 @@
 2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
+	* setup.py, src/oswticker.py: Output '-' if timetick was too soon,
+	'+' if too late, and ' ' if OK.
+
+2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Updated change history.
+
+2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
 	* setup.py: Bumped revision number.
 
 2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
