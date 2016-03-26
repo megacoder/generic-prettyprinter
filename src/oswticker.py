@@ -23,8 +23,10 @@ class	OswTicker( object ):
 		delta = dt - self.last
 		if self.old_delta is None:
 			self.old_delta = delta
-		if delta < self.old_delta or delta > self.old_delta:
+		if delta < self.old_delta:
 			mark = '-'
+		elif delta > self.old_delta:
+			mark = '+'
 		else:
 			mark = ' '
 		self.last      = dt
