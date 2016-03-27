@@ -1,3 +1,16 @@
+2016-03-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/oswbb-heartbeat-plugin.py, src/oswtick-plugin.py,
+	src/oswticker.py: Collect jitter statistics
+
+2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/oswticker.py: Avoid spurious delta comparision.
+
+2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Revision history.
+
 2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* setup.py, src/oswticker.py: Output '-' if timetick was too soon,
