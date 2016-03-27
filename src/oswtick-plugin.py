@@ -48,3 +48,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 					self.ot.tick( when )
 				)
 		return
+
+	def	post_end_file( self ):
+		self.ot.report()
+		return

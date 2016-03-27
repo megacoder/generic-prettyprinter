@@ -11,6 +11,11 @@ class	OswTicker( object ):
 		self.fmt       = fmt
 		self.old_delta = None
 		self.last      = None
+		self.status    = dict(
+			good  = 0,
+			early = 0,
+			late  = 0
+		)
 		return
 
 	def	tick( self, tick ):
@@ -22,18 +27,24 @@ class	OswTicker( object ):
 			self.last = dt
 			delta     = datetime.timedelta()
 			mark      = ' '
+			self.stats['good'] += 1
 		else:
 			delta = dt - self.last
 			if self.old_delta is None:
 				mark = ' '
 				self.old_delta = delta
+				self.stats['good'] += 1
 			else:
 				if delta < self.old_delta:
+					self.stats['early'] += 1
 					mark = '-'
 				elif delta > self.old_delta:
+			self.stats['good'] += 1
 					mark = '+'
+					self.stats['late'] += 1
 				else:
 					mark = ' '
+					self.stats['good'] += 1
 		self.last      = dt
 		self.old_delta = delta
 		s = '{0} {1} {2}'.format(
@@ -42,3 +53,23 @@ class	OswTicker( object ):
 			delta
 		)
 		return s
+
+	def	report( self, out = sys.stdout ):
+		if out:
+			header = 'Jitter Statistics'
+			print >>out
+			print >>out, '{0}'.format( header )
+			print >>out, '{0}'.format( '-' * len(header) )
+			print >>out, '{0:4} {1}'.format(
+				'Good',
+				self.stats['good']
+			)
+			print >>out, '{0:4} {1}'.format(
+				'Early',
+				self.stats['early']
+			)
+			print >>out, '{0:4} {1}'.format(
+				'Late',
+				self.stats['late']
+			)
+		return
