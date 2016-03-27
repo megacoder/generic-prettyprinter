@@ -11,7 +11,7 @@ class	OswTicker( object ):
 		self.fmt       = fmt
 		self.old_delta = None
 		self.last      = None
-		self.status    = dict(
+		self.stats     = dict(
 			good  = 0,
 			early = 0,
 			late  = 0
@@ -39,7 +39,6 @@ class	OswTicker( object ):
 					self.stats['early'] += 1
 					mark = '-'
 				elif delta > self.old_delta:
-			self.stats['good'] += 1
 					mark = '+'
 					self.stats['late'] += 1
 				else:
@@ -60,15 +59,16 @@ class	OswTicker( object ):
 			print >>out
 			print >>out, '{0}'.format( header )
 			print >>out, '{0}'.format( '-' * len(header) )
-			print >>out, '{0:4} {1}'.format(
+			fmt = '{0:5} {1}'
+			print >>out, fmt.format(
 				'Good',
 				self.stats['good']
 			)
-			print >>out, '{0:4} {1}'.format(
+			print >>out, fmt.format(
 				'Early',
 				self.stats['early']
 			)
-			print >>out, '{0:4} {1}'.format(
+			print >>out, fmt.format(
 				'Late',
 				self.stats['late']
 			)
