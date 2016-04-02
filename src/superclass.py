@@ -109,7 +109,7 @@ class   MetaPrettyPrinter( object ):
         self.sc_fileno += 1
         self.sc_filename = fn
         self.sc_lineno = 0
-        self.pre_begin_file()
+        self.pre_begin_file( fn )
         self.begin_file( fn )
         try:
             with open( fn, 'rt' ) as f:
