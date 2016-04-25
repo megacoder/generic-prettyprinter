@@ -11,39 +11,33 @@ class GenericPrettyPrinter( object ):
     USAGE = '%prog [-o file] [-t type] [file..]'
     DESCRIPTION = """Generic pretty-printer with loadable modules."""
 
+    GLOB = '*'
+
     def __init__( self ):
         return
 
     def own_glob( self, pattern = None ):
         if not pattern:
-            try:
-                pattern = self.GLOB
-            except Exception, e:
-                pattern = '*'
+            pattern = self.GLOB
         return glob.glob( pattern )
 
-    def _do_session( self, handler ):
-        handler.pre_begin_file()
-        handler.do_open_file()
-        handler.post_end_file()
-        return
-
-    def session( self, Handler, names = [] ):
+    def _session( self, Handler, names = [] ):
         handler = Handler()
-        argc = len( sys.argv )
-        n = len( names )
         # Allow plugin to figure out where its files are
-        if n < 1:
+        if len( names ) == 0:
             names = handler.own_glob()
-            n = len( names )
         # Here is the session
         handler.start()
-        # Iterate through the names
-        handler.advise( argc = n )
+        handler.advise( names )
         for name in names:
-            handler.do_name( name )
+            handler.process( name )
         handler.finish()
         return False
+
+    def process( self, f = sys.stdin ):
+        for line in f:
+            self.println( line.rstrip() )
+        return
 
     def main( self ):
         sys.path.insert( 0, os.path.dirname( __file__ ) )
@@ -99,25 +93,13 @@ class GenericPrettyPrinter( object ):
             print >>sys.stderr, 'No prettyprinter for "%s".' % opts.kind
             print >>sys.stderr, e
             return True
-        if opts.ofile is not None:
+        if opts.ofile:
             try:
                 sys.stdout = open( opts.ofile, 'wt' )
             except Exception, e:
                 print >>sys.stderr, 'Cannot open "%s" for writing.' % opts.ofile
                 return True
-        retval = self.session( Handler = dll.PrettyPrint, names = args )
-        return retval
-
-    def do_one_module( self, kind = 'help', args = [] ):
-        dll_name = '%s-plugin' % kind
-        # DEBUG print >>sys.stderr, 'Loading module %s' % dll_name
-        try:
-            dll = __import__(dll_name)
-        except Exception, e:
-            print >>sys.stderr, 'No prettyprinter for "%s".' % opts.kind
-            print >>sys.stderr, e
-            return True
-        retval = self.session( Handler = dll.PrettyPrint, names = args )
+        retval = self._session( dll.PrettyPrint, args )
         return retval
 
 if __name__ == '__main__':

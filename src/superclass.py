@@ -46,19 +46,19 @@ class   MetaPrettyPrinter( object ):
     def get_backslash( self ):
         return self.sc_do_backlash
 
-    def own_glob( self, pattern = None ):
-        if not pattern:
+    def own_glob( self ):
+        try:
             pattern = self.GLOB
-        if pattern:
-            retval = glob.glob( pattern )
-        else:
-            retval = []
+            if pattern == '-':
+                retval = '-'
+            else:
+                retval = glob.glob( pattern )
+        except Exception, e:
+            retval = [ '-' ]
         return retval
 
-    def advise( self, **kwargs ):
-        for key in kwargs:
-            if key == 'argc':
-                self.sc_multi = kwargs[key]
+    def advise( self, names = [ '-' ] ):
+        self.sc_multi = len( names )
         return
 
     def allow_continuation( self, value = '\\' ):
@@ -66,14 +66,31 @@ class   MetaPrettyPrinter( object ):
         return
 
     def start( self ):
+        # Called before first file is processed.
         return
 
-    def do_name( self, name ):
-        if os.path.isfile( name ):
-            self.do_file( name )
+    def process( self, name ):
+        if name == '-':
+            self.do_open_file( sys.stdin )
+        elif os.path.isfile( name ):
+            self._do_file( name )
         elif os.path.isdir( name ):
-            self.sc_multi = 2
-            self.do_dir( name )
+            try:
+                names = sorted( os.listdir( name ) )
+            except Exception, e:
+                self.error(
+                    'could not read directory "{0}"'.format( name )
+                )
+                raise e
+            self.sc_multi += len( names )
+            for entry in names:
+                if not self.ignore( entry ):
+                    self.process(
+                        os.path.join(
+                            name,
+                            entry
+                        )
+                    )
         elif os.path.islink( name ):
             self.error( 'ignoring symlink "%s".' % name )
         else:
@@ -81,7 +98,7 @@ class   MetaPrettyPrinter( object ):
             raise ValueError
         return
 
-    def pre_begin_file( self ):
+    def pre_begin_file( self, fn = None ):
         return
 
     def begin_file( self, fn ):
@@ -105,46 +122,70 @@ class   MetaPrettyPrinter( object ):
         self.println( s )
         return
 
-    def do_file( self, fn ):
+    def _do_file( self, fn ):
         self.sc_fileno += 1
         self.sc_filename = fn
         self.sc_lineno = 0
         self.pre_begin_file( fn )
         self.begin_file( fn )
-        try:
-            with open( fn, 'rt' ) as f:
-                self.do_open_file( f )
-        except Exception, e:
-            raise e
+        if fn == '-':
+            try:
+                self.do_open_file( sys.stdin )
+            except Exception, e:
+                self.error( 'could not process "{stdin}"' )
+                raise e
+        else:
+            try:
+                with open( fn, 'rt' ) as f:
+                    try:
+                        self.do_open_file( f )
+                    except Exception, e:
+                        self.error( 'processing "{0}" failed.'.format( fn ) )
+                        raise e
+            except Exception, e:
+                self.error( 'could not open "{0}"'.format( fn ) )
+                raise e
         self.end_file( fn )
         self.post_end_file()
         return
 
-    def do_open_file( self, f = sys.stdin ):
-        line = ''
-        for segment in f:
-            self.sc_lineno += 1
-            line += segment.rstrip()
-            if self.sc_do_backslash and line[-1] == self.sc_do_backslash:
-                line[-1] = ' '
-                continue
-            self.next_line( line )
+    def do_open_file( self, f = sys.stdin, name = '{stdin}' ):
+        try:
             line = ''
+            for segment in f:
+                self.sc_lineno += 1
+                line += segment.rstrip()
+                if self.sc_do_backslash and line[-1] == self.sc_do_backslash:
+                    line[-1] = ' '
+                    continue
+                self.next_line( line )
+                line = ''
+        except Exception, e:
+            self.error( 'error processing file "{0}"'.format( name ) )
+            raise e
         return
 
     def ignore( self, name ):
         return False
 
     def do_dir( self, dn ):
-        try:
-            files = os.listdir( dn )
-        except Exception, e:
-            self.error( 'cannot list directory "%s".' % dn, e )
-            raise e
-        files.sort()
-        for fn in files:
-            if not self.ignore( fn ):
-                self.do_name( os.path.join( dn, fn ) )
+        for root,dirs,files in sorted( os.walk( dn ) ):
+            self.sc_multi += len( files )
+            for entry in files:
+                if not self.ignore( entry ):
+                    self.do_file(
+                        os.path.join(
+                            root,
+                            entry
+                        )
+                    )
+        for dir in sorted( dirs ):
+            self.do_dir(
+                os.path.join(
+                    root,
+                    dir
+                )
+            )
         return
 
     def println( self, s = '' ):
@@ -152,6 +193,7 @@ class   MetaPrettyPrinter( object ):
         return
 
     def report( self, final = False ):
+        # Called between file openings and at finish
         return
 
     def finish( self ):

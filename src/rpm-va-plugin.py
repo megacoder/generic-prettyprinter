@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# vim: noet sw=4 ts=4
 
 import	os
 import	sys
@@ -8,6 +9,8 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	NAME = 'rpm-vt-pp'
 	DESCRIPTION = """Display 'rpm -Va' output in canonical style."""
+
+	GLOB = '-'
 
 	STATES = {
 		'S': 'Size',
@@ -30,13 +33,20 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 	}
 
 	def	__init__( self ):
-		super( PrettyPrint, self ).__init__()
-		self.fmt = '%%-%ds  %%-%ds  %%-%ds  %%s' % (
+	    super( PrettyPrint, self ).__init__()
+	    return
+
+	def start( self ):
+	    self.fmt = '%%-%ds  %%-%ds  %%-%ds  %%s' % (
 			len( PrettyPrint.STATES ),
 			1,
 			48
 		)
 		self.lines = []
+		return
+
+	def	begin_file( self, name ):
+		# Avoid printing per-file header
 		return
 
 	def	next_line( self, line ):
