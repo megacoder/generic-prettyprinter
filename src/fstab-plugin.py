@@ -25,7 +25,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         self.pre_begin_file()
         return
 
-    def pre_begin_file( self, name ):
+    def pre_begin_file( self, name = None ):
         super( PrettyPrint, self ).pre_begin_file( name )
         self.widths = {}
         self.entries = []
