@@ -87,7 +87,7 @@ class	PrettyPrint( MetaPrettyPrinter ):
 		self.pre_begin_file()
 		return
 
-	def	pre_begin_file( self ):
+	def	pre_begin_file( self, name = None ):
 		self.lines = []
 		self.width = 7
 		return
