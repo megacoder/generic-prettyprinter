@@ -1,3 +1,45 @@
+2016-07-21  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/ifcfg-plugin.py: Corrected fingerprint of
+	ifcfg::pre_begin_file
+
+2016-07-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/vmcfg-plugin.py: Accomodate optional argument to
+	pre_begin_file()
+
+2016-04-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/fstab-plugin.py: Everywhere
+
+2016-04-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/fstab-plugin.py: Add filename to pre_begin_file()
+
+2016-04-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/__init__.py, src/printcap-plugin.py,
+	src/rpm-va-plugin.py, src/superclass.py, src/udev-plugin.py: Cleaned
+	up superclass and methods to let no files on the command line be
+	equivalent to '-' if needed.
+
+2016-04-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/superclass.py: Fixed but in "superclass::do_file"
+	that aborted "asm" plugin.
+
+2016-04-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/asmlib: Example oracleasm configuration file.
+
+2016-03-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/oswticker.py: Cleaned up jitter statistics listing.
+
+2016-03-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Changes
+
 2016-03-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* setup.py, src/oswbb-heartbeat-plugin.py, src/oswtick-plugin.py,
