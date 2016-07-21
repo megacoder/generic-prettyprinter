@@ -76,7 +76,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         # print >>sys.stderr, iface
         return iface
 
-    def pre_begin_file( self ):
+    def pre_begin_file( self, fn = None ):
         self.iface  = {}
         self.prolog = []
         return
