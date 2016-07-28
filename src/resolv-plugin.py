@@ -21,12 +21,12 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		]
 		return
 
-	def	pre_begin_file( self ):
+	def	pre_begin_file( self, name = None ):
 		self.entries = {}
 		return
 
 	def	next_line( self, line ):
-		code = line.split( '#', 1 )[0].strip()
+		code = line.replace( ';', '#' ).split( '#', 1 )[0].strip()
 		if len(code) > 0:
 			tokens = map(
 				str.strip,
