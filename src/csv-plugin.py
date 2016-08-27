@@ -29,24 +29,23 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	report( self, final = False ):
-		rows = []
-		widths = {}
+		rows   = list()
+		widths = dict()
 		for row in csv.reader( self.lines ):
-			for i in xrange( 0, len(row) ):
-				try:
-					widths[i] = max( widths[i], len(row[i]) )
-				except:
-					widths[i] = len(row[i])
-			rows.append( row )
-		fmts = {}
-		for i in widths.keys():
-			fmts[i] = '%%s%%-%ds' % widths[i]
+		    for i, width in enumerate( row ):
+			if not i in widths:
+			    widths[i] = 0
+			widths[i] = max( widths[i], len(width) )
+		    rows.append( row )
+		fmts = dict()
+		for i, width in enumerate( widths ):
+		    fmts[i] = '%%s%%-%ds' % width
 		for row in rows:
 			sep = ''
 			line = ''
-			for i in xrange( 0, len(row) ):
-				line += (fmts[i] % (sep, row[i]))
-				sep = ' '
+			for i, item in enumerate( row ):
+			    line += (fmts[i] % (sep, item)
+			    sep = ' '
 			self.println( line )
 		self.lines = []
 		return
