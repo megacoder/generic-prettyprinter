@@ -50,12 +50,13 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			)
 		)
 		fmt = '\t{0:%d} {1}' % width
-		for key in sorted( d.keys() ):
+		for key in sorted( d ):
 			self.println( fmt.format( key, d[ key ] ) )
 		return
 
 	def report( self, final = False ):
 		if not final:
+			footnote = None
 			try:
 				pressure = int(
 					(
@@ -67,7 +68,9 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 					) * 100.0
 				)
 			except Exception, e:
-				self.println( 'Memory pressure calculation failed.' )
+				footnote = self.footnote(
+					'Memory pressure calculation failed.'
+				)
 				self.println( e )
 				pressure = 0
 			label = '[MemPress%]'
