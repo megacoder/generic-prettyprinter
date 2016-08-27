@@ -11,15 +11,15 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	NAME = 'asm'
 	DESCRIPTION = """Display /etc/sysconfig/oracleasm files in canonical style."""
-	NAMES = [
-		'ORACLEASM_ENABLED',
-		'ORACLEASM_GID',
-		'ORACLEASM_SCANBOOT',
-		'ORACLEASM_SCANEXCLUDE',
-		'ORACLEASM_SCANORDER',
-		'ORACLEASM_UID',
-		'ORACLEASM_USE_LOGICAL_BLOCK_SIZE',
-	]
+	NAMES = dict(
+		'ORACLEASM_ENABLED'                = None,
+		'ORACLEASM_GID'                    = None,
+		'ORACLEASM_SCANBOOT                = None',
+		'ORACLEASM_SCANEXCLUDE             = None',
+		'ORACLEASM_SCANORDER               = None',
+		'ORACLEASM_UID'                    = None,
+		'ORACLEASM_USE_LOGICAL_BLOCK_SIZE' = None,
+	)
 
 	def __init__( self ):
 		super( PrettyPrint, self ).__init__()
@@ -43,14 +43,19 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def report( self, final = False ):
 		if not final:
-			for key in sorted( self.used.keys() ):
+			for key in sorted( self.used ):
 				if not key in PrettyPrint.NAMES:
-					self.println(
-						'# Potential wrong spelling of name'
+					footnote = self.footnode(
+						'Warning: "{0}" may not be spelled correctly.'.format(
+							key
+						)
 					)
-				self.println( '{0}={1}'.format(
+				else:
+					footnote = None
+				self.println( '{0}={1}{2}'.format(
 						key,
-						self.used[key]
+						self.used[key],
+						'\t*** See footnote {0}'.format(footnote) if footnote else ''
 					)
 				)
 		return
