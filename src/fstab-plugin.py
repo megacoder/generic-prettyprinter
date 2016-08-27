@@ -35,10 +35,10 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                 for i, token in enumerate( parts ):
                     key = str(i)
                     if not key in self.widths:
-                        self.widths[i] = len( token )
+                        self.widths[key] = len( token )
                     else:
-                        self.widths[i] = max(
-                            self.widths[i],
+                        self.widths[key] = max(
+                            self.widths[key],
                             len( token )
                         )
                 # Make sure mount options are in canonical order
@@ -58,12 +58,12 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             # Build formats for each column
             fmt = dict()
             for key in self.widths:
-                fmt[ key ] = '{0:<%d}' % self.widths[ key ]
+                fmt[key] = '{{0:<{0}s}}'.format( self.widths[key] )
             # Output each line with columns according to formats
             for parts in self.entries:
                 clauses = list()
                 for i, token in enumerate(parts ):
-                    key = str( i )
+                    key = str(i)
                     clauses.append(
                         fmt[key].format( token )
                     )
@@ -74,7 +74,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                     )
                 self.println(
                     ' '.join( clauses ) +
-                    '\t*** See footnote %s'.format( footnote ) if footnote
-                    else ''
+                    ('\t*** See footnote %s'.format( footnote ) if footnote
+                    else '')
                 )
         return
