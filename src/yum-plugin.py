@@ -65,7 +65,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 						[ key for key in feed ]
 					)
 				)
-				for key in sorted( feed.keys() ):
+				for key in sorted( feed ):
 					if not key[0] == '#':
 						self.println(
 							fmt.format(
