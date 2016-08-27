@@ -33,11 +33,11 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 	}
 
 	def	__init__( self ):
-	    super( PrettyPrint, self ).__init__()
-	    return
+		super( PrettyPrint, self ).__init__()
+		return
 
 	def start( self ):
-	    self.fmt = '%%-%ds  %%-%ds  %%-%ds  %%s' % (
+		self.fmt = '%%-%ds	%%-%ds	%%-%ds	%%s' % (
 			len( PrettyPrint.STATES ),
 			1,
 			48
