@@ -18,41 +18,35 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		self._prepare()
 		return
 
-	def	_prepare( self ):
-		self.others = False
-		self.info = {}
-		return
-
-	def	begin_file( self, name ):
-		super( PrettyPrint, self ).begin_file( name )
-		self._prepare()
-		return
-
-	def	begin_file( self, fn ):
-		super( PrettyPrint, self ).begin_file( fn )
-		self._prepare()
-		return
-
-	def	report( self, final = False ):
-		if self.info != {}:
-			if self.others:
-				self.println()
-			self.others = True
-			maxkey = 7
-			for key in sorted( self.info.keys() ):
-				maxkey = max( maxkey, len( key ) )
-			fmt = '%%%ds: %%s' % maxkey
-			for key in sorted( self.info.keys() ):
-				self.println( fmt % (key, self.info[key]) )
-			self.info = {}
+	def	pre_begin_file( self ):
+		self.info   = dict()
 		return
 
 	def	next_line( self, line ):
 		tokens = line.split( ':', 1 )
+		tokens = map(
+		    str.strip,
+		    line.split( ':', 1 )
+		)
 		if len(tokens) == 2:
 			field = tokens[0]
 			value = tokens[1]
 			if field == "filename":
-				self.report()
-			self.info[field.strip()] = value.strip()
+			    # Line break
+			    self.report()
+			self.info[ field ] = value
 		return
+
+	def	report( self, final = False ):
+	    if not final:
+		if self.info != {}:
+		    maxkey = max(
+			7,
+			map( ken, self.info )
+		    )
+		    fmt = '{{0:<{0}}}}: {{1}}'.format( maxkey )
+		    for key in sorted( self.info ):
+			self.println(
+			    fmt.format( key, self.info[key] )
+			)
+	    return
