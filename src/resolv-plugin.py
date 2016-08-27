@@ -13,11 +13,11 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 	def	__init__( self ):
 		super( PrettyPrint, self ).__init__()
 		self.kinds = dict(
-			'options'    = None,
-			'sortlist'   = None,
-			'domain'     = None,
-			'search'     = None,
-			'nameserver' = None,
+			options    = None,
+			sortlist   = None,
+			domain     = None,
+			search     = None,
+			nameserver = None,
 		)
 		return
 

@@ -12,13 +12,13 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 	NAME = 'asm'
 	DESCRIPTION = """Display /etc/sysconfig/oracleasm files in canonical style."""
 	NAMES = dict(
-		'ORACLEASM_ENABLED'                = None,
-		'ORACLEASM_GID'                    = None,
-		'ORACLEASM_SCANBOOT                = None',
-		'ORACLEASM_SCANEXCLUDE             = None',
-		'ORACLEASM_SCANORDER               = None',
-		'ORACLEASM_UID'                    = None,
-		'ORACLEASM_USE_LOGICAL_BLOCK_SIZE' = None,
+		ORACLEASM_ENABLED                = None,
+		ORACLEASM_GID                    = None,
+		ORACLEASM_SCANBOOT               = None,
+		ORACLEASM_SCANEXCLUDE            = None,
+		ORACLEASM_SCANORDER              = None,
+		ORACLEASM_UID                    = None,
+		ORACLEASM_USE_LOGICAL_BLOCK_SIZE = None,
 	)
 
 	def __init__( self ):
@@ -36,8 +36,8 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			tokens.append( ' # default' )
 			n += 1
 		if n == 3 and tokens[1] == '=':
-			name            = tokens[0]
-			value           = tokens[2]
+			name			= tokens[0]
+			value			= tokens[2]
 			self.used[name] = value
 		return
 

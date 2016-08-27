@@ -44,8 +44,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			sep = ''
 			line = ''
 			for i, item in enumerate( row ):
-			    line += (fmts[i] % (sep, item)
-			    sep = ' '
+			    line += (fmts[i] % (sep, item))
 			self.println( line )
 		self.lines = []
 		return

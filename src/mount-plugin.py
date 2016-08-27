@@ -13,13 +13,13 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 	DESCRIPTION = """Display /proc/mounts or mount(8) in a canonical form."""
 
 	FIELDS = dict(
-		'name'    = None,
-		'mp'      = None,
-		'type'    = None,
-		'backup'  = None,
-		'fsck'    = None,
-		'attr'    = None,
-		'details' = None
+		name    = None,
+		mp      = None,
+		type    = None,
+		backup  = None,
+		fsck    = None,
+		attr    = None,
+		details = None
 	)
 
 	def	__init__( self ):
@@ -82,7 +82,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		self.content.append( fields )
 		return
 
-	def	report( self final = False ):
+	def	report( self, final = False ):
 		if not final:
 			for fields in sorted(
 				self.content,

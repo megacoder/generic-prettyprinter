@@ -257,3 +257,4 @@ class   MetaPrettyPrinter( object ):
                     )
                 )
             self.sc_footnotes = None
+        return

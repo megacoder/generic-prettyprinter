@@ -68,8 +68,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                         fmt[key].format( token )
                     )
                 footnote = None
-                if len(parts)>=5 and parts[3]=='nfs' and
-                parts[4]=='default":
+                if len(parts)>=5 and parts[3]=='nfs' and parts[4]=='default':
                     footnote = self.footnote(
                         'NFS default options used; probably slow'
                     )

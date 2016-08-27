@@ -12,13 +12,13 @@ class	PrettyPrint( MetaPrettyPrinter ):
 	DESCRIPTION = """Display Oracle OCFS2 O2CB configuration files in canonical format."""
 
 	KEYWORDS = dict(
-		'O2CB_BOOTCLUSTER' = None,
-		'O2CB_ENABLED' = None,
-		'O2CB_HEARTBEAT_THRESHOLD' = None,
-		'O2CB_IDLE_TIMEOUT_MS' = None,
-		'O2CB_KEEPALIVE_DELAY_MS' = None,
-		'O2CB_RECONNECT_DELAY_MS' = None,
-		'O2CB_STACK' = None,
+		O2CB_BOOTCLUSTER         = None,
+		O2CB_ENABLED             = None,
+		O2CB_HEARTBEAT_THRESHOLD = None,
+		O2CB_IDLE_TIMEOUT_MS     = None,
+		O2CB_KEEPALIVE_DELAY_MS  = None,
+		O2CB_RECONNECT_DELAY_MS  = None,
+		O2CB_STACK               = None,
 	)
 
 	def	__init__( self ):
