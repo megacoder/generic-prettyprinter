@@ -103,6 +103,8 @@ class   MetaPrettyPrinter( object ):
 
     def begin_file( self, fn ):
         if self.sc_multi > 1:
+            if self.sc_fileno > 1:
+                self.println()
             self.println( 'File %d of %d: %s' % (self.sc_fileno, self.sc_multi, fn) )
             self.println()
         return

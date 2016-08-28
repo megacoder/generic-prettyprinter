@@ -82,6 +82,9 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         if 'DEVICE' in iface and 'NAME' not in iface:
             self.footnote( 'Intuited NAME from DEVICE' )
             iface['NAME'] = iface['DEVICE']
+        if 'NAME' not in iface:
+            self.footnote( 'No name for ifcfg {0}'.format( iface ) )
+            iface['NAME'] = '***'
         #
         if 'NAME' in iface and 'DEVICE' not in iface:
             self.footnote( 'Intuited DEVICE from NAME' )
@@ -98,7 +101,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         if 'MTU' not in iface:
             mtu = '1500'
             self.footnote( 'MTU missing; assuming {0}'.format( mtu ) )
-            iface['MTU'] = mtr
+            iface['MTU'] = mtu
         # print >>sys.stderr, iface
         return iface
 
@@ -116,7 +119,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             name of the base interface. """
         vname = name + '.'
         vlans = [
-            iface['NAME'] for iface in self.ifcfgs if iface['NAME'].startswith(vname)
+            name for name in self.ifcfgs if name.startswith( vname )
         ]
         return vlans
 
@@ -125,90 +128,22 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             format, aligned around the '=' sign. """
         return
 
-    def _report_bridges( self, others = False ):
-        bridges = [
-            iface for iface in self.ifcfgs if iface['TYPE'] == 'Bridge'
-        ]
-        for bridge in sorted( bridges ):
-            if others:
-                self.println()
-            else:
-                title = 'BRIDGE'
-                self.println( title )
-                self.println( '-' * len( title ) )
-            others = True
-            self.println()
-            name = bridge[ 'NAME' ]
-            bridge_mtu = bridge[ 'MTU' ]
-            title = '{0}'.format( name )
-            self.println( title )
-            self.println( '-' * len( title ) )
-            self._get_vlans_for( name )
-            members = [
-                iface for iface in self.ifcfgs if 'BRIDGE' in iface
-                and iface['BRIDGE'] == name
-            ]
-            for member in members:
-                member_mtu = member[ 'MTU' ]
-                if bridge_mtu != member_mtu:
-                    msg = ' *** Bridge MTU {0}, not {1} as member.'.format(
-                        bridge_mtu,
-                        member_mtu
-                    )
-                else:
-                    msg = ''
-                self.println( '  |' )
-                self.println( '  +-- {0}{1}'.format(member['NAME'], msg ))
-                self._get_vlans_for( member['NAME' ] )
-        return others
-
-    def _report_bonds( self, others = False ):
-        # Fixup: Some bonds are explicity declared
-        bonds = {}
-        for iface in self.ifcfgs:
-            if 'TYPE' in iface and iface['TYPE'] == 'Bond':
-                bonds[iface['NAME']] = iface
-        # Fixup: Some bonds are inferred by being mentioned as a 'MASTER'
-        for iface in self.ifcfgs:
-            if 'MASTER' in iface :
-                bonds[iface['MASTER']] = iface
-        #
-        for bond in sorted( bonds ):
-            if others:
-                self.printlin()
-            else:
-                title = 'BONDING'
-                self.println( title )
-                self.println( '-' * len(title))
-                self.println()
-            others = True
-            self.println( bond )
-            vlans = self._get_vlans_for( bond )
-            for vlan in vlans:
-                self.println( '  |' )
-                self.println( '  +-- {0}'.format( path['NAME'] ) )
-            paths = [
-                iface for iface in self.ifcfgs if 'MASTER' in iface
-                and iface['MASTER'] == bond
-            ]
-            for path in paths:
-                self.println( '  |' )
-                self.println( '  +-- {0}'.format( path['NAME'] ) )
-        return others
-
-    def _get_ifcfgs_for_type( self, kind, seen = False ):
+    def _get_names_for_type( self, theType, seen = False ):
         """ Return a list of interface names of KIND=kind. If none,
             return None. """
-        kinds = [
-            iface['NAME'] for iface in self.ifcfgs if iface['TYPE'] == kind and iface['printed'] == seen
+        names = [
+            name for name in self.ifcfgs if (
+                (self.ifcfgs[name]['TYPE'] == theType) and
+                (self.ifcfgs[name]['printed'] == seen)
+            )
         ]
-        return kinds if len(kinds) else None
+        return names if len(names) else None
 
     def _get_bridge_members( self, name ):
         members = [
             iface['NAME'] for iface in self.ifcfgs if 'BRIDGE' in iface and iface['BRIDGE'] == name
         ]
-        return members if len(members) > 0 else None
+        return members
 
     def _get_bond_members( self, name ):
         """ Find slave interfaces for the named bond. """
@@ -226,16 +161,17 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         title = 'S U M M A R Y'
         self.println( title )
         self.println( '=' * len( title ) )
-        self.printlin()
-        others = False
+        found_any = False
         # Pass 1: construct bridged interfaces
-        bridge_namess = self._names_of_kind( 'Bridge' )
+        bridge_names = self._get_names_for_type( 'Bridge' )
         if bridge_names:
+            found_any = True
             title = 'B R I D G E S'
+            self.println()
             self.println( title )
             self.println( '-' * len(title) )
             self.println()
-            for name in sorted( bridges_names ):
+            for name in sorted( bridge_names ):
                 IP = self._get_ipaddr_for( name )
                 title = '{0}'.format(
                     name,
@@ -246,7 +182,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                 vlans = self._get_vlans_for( name )
                 for vlan in sorted( vlans ):
                     IP = self._get_ipaddr_for( vlan )
-                    self.printon( '  |' )
+                    self.println( '  |' )
                     self.println( '  +-- {0}{1}'.format(
                         self.ifcfgs['NAME']),
                         ' ({0})'.format( IP ) if IP else ''
@@ -266,14 +202,15 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                     self.println( '  |' )
                     self.println( '  +-- {0}{1}'.format(member['NAME'], msg ) )
         # Pass 2: Bonds
-        bonds = self._get_ifcfgs_for_type( 'Bond' )
+        bonds = self._get_names_for_type( 'Bond' )
         if bonds:
+            found_any = True
             title = 'B O N D I N G'
             self.println()
             self.println( title )
             self.println( '=' * len(title) )
-            self.println()
             for name in bonds:
+                self.println()
                 IP = self._get_ipaddr_for( name )
                 self.println( '  |' )
                 self.println( '  +-- {0}'.format(
@@ -301,6 +238,9 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                             slave,
                             ' ({0})'.format( IP ) if IP else ''
                         ))
+        if not found_any:
+            self.println()
+            self.println( 'No bridge or bonded interfaces found.' )
         return
 
     def report( self, final = False ):
@@ -316,12 +256,13 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             max_name =  max(
                 map(
                     len,
-                    iface
+                    self.iface
                 )
             )
             fmt = '{{0:>{0}}}={{1}}'.format( max_name )
-            for key in sorted( iface ):
-                self.println(
-                    fmt.format( key, self.iface[key] )
-                )
+            for key in sorted( self.iface ):
+                if key.isupper():
+                    self.println(
+                        fmt.format( key, self.iface[key] )
+                    )
         return
