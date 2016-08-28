@@ -217,6 +217,10 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         ]
         return members
 
+    def _get_ipaddr_for( self, name ):
+        IP = self.ifcfgs[name]['IPADDR'] if 'IPADDR' in self.ifcfgs[name] else None
+        return IP
+
     def _final_report( self ):
         self.println()
         title = 'S U M M A R Y'
@@ -232,13 +236,21 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             self.println( '-' * len(title) )
             self.println()
             for name in sorted( bridges_names ):
-                title = '{0}'.format( name )
+                IP = self._get_ipaddr_for( name )
+                title = '{0}'.format(
+                    name,
+                    ' ({{0}})'.format( IP ) if IP else ''
+                )
                 self.println( title )
                 self.println( '-' * len( title ) )
                 vlans = self._get_vlans_for( name )
                 for vlan in sorted( vlans ):
+                    IP = self._get_ipaddr_for( vlan )
                     self.printon( '  |' )
-                    self.println( '  +-- {0}'.format(self.ifcfgs['NAME']) )
+                    self.println( '  +-- {0}{1}'.format(
+                        self.ifcfgs['NAME']),
+                        ' ({0})'.format( IP ) if IP else ''
+                    )
                 # Make sure all members of this bridge use a common MTU
                 bridge_mtu = self.ifcfgs[name][ 'MTU' ]
                 members = self._get_bridge_members( name )
@@ -262,20 +274,33 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             self.println( '=' * len(title) )
             self.println()
             for name in bonds:
+                IP = self._get_ipaddr_for( name )
                 self.println( '  |' )
-                self.println( '  +-- {0}'.format( name ) )
+                self.println( '  +-- {0}'.format(
+                        name,
+                        ' ({0})'.format( IP ) if IP else ''
+                    )
+                )
                 # Show any VLANs defined for bond; not sure this is
                 # even valid, but anyway...
                 vlans = self._get_vlans_for( name )
                 for vlan in sorted( vlans ):
+                    IP = self._get_ipaddr_for( vlan )
                     self.println( '  |' )
-                    self.println( '  +-- {0}'.format(self.ifcfgs['NAME']) )
+                    self.println( '  +-- {0}'.format(
+                        self.ifcfgs['NAME'],
+                        ' ({0})'.format( IP ) if IP else ''
+                    ))
                 # Show members of this bond
                 slaves = self._get_bond_members( name )
                 if slaves:
                     for slave in sorted( slaves ):
+                        IP = self._get_ipaddr_for( slave )
                         self.println( '  |' )
-                        self.println( '  +-- {0}'.format( slave ) )
+                        self.println( '  +-- {0}'.format(
+                            slave,
+                            ' ({0})'.format( IP ) if IP else ''
+                        ))
         return
 
     def report( self, final = False ):
