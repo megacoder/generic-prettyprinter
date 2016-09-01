@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# vim: noet ts=4 sw=4
 
 import	os
 import	sys
@@ -54,14 +55,13 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			self.println()
 			self.println( 'Observations about these values.' )
 			self.println( '--------------------------------' )
-		self.println( msg )
 		if val:
 		    if not fmt:
-			fmt = '{0:>48s} = {1}'
+			fmt = '{0:>14s}: {1}'
 		    self.println(
 			fmt.format(
-			    msg,
-			    val
+			    val,
+			    msg
 			)
 		    )
 		else:
@@ -98,13 +98,14 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 						observed['CommitLimit']
 					)
 				)
-		except:
+		except Exception, e:
 			self._addto_notes(
 				'Could not check CommitLimit'
 			)
 			self._addto_notes(
 				str(observed)
 			)
+			self._addto_notes( e )
 		try:
 			managed_memory = float( observed[ 'MemTotal' ] )
 			if 'HugePages_Total' in observed:
@@ -117,18 +118,19 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			)
 			self._addto_notes(
 			    'Default vm.min_free_kbytes',
-			    val = str( int( min_free_kbytes ) )
+			    val = '{0} kB'.format( min_free_kbytes )
 			)
 			self._addto_notes(
-			    'Recommend vm.min_free_kbytes',
+			    'Recommended vm.min_free_kbytes',
 			    val = '{0} kB'.format(
 				recommended_min_free_kbytes
 			    )
 			)
-		except:
+		except Exception, e:
 			self._addto_notes(
 				'Could not calculate default vm.min_free_kbytes'
 			)
+			self._addto_notes( e )
 		try:
 			if 'HugePages_Total' in observed:
 				hp = observed['HugePages_Total']
@@ -143,10 +145,11 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 					    hp
 					)
 				    )
-		except:
+		except Exception, e:
 			self._addto_notes(
 				'Could not calculate wasted hugepages space.'
 			)
+			self._addto_notes( e )
 		try:
 			if 'HugePages_Total' in observed:
 				working_space = (
@@ -158,24 +161,28 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				    'Physical memory not in HugePages',
 				    val = '{0} kB'.format( working_space )
 				)
-		except:
+		except Exception, e:
 			self._addto_notes(
 				'Could not calculate available physical memory.'
 			)
+			self._addto_notes( e )
 		try:
 			dom0mem = (
 				502 + int(
 					(observed['MemTotal'] / 1024.0 * 0.0205) + 0.5
 				)
 			)
-			self_addto_notes(
+			self._addto_notes(
 			    'Recommended memory if dom0',
 			    val = '{0} MB'.format( dom0mem )
 			)
-			self._end_notes()
-		except:
+		except Exception, e:
 			self._addto_notes(
 				'Could not calculate recommended dom0 partition size.'
 			)
+			self._addto_notes(
+				e
+			)
+		self._end_notes()
 		self._prepare()
 		return
