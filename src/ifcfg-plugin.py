@@ -44,8 +44,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def pre_begin_file( self, name = None ):
         self.iface  = dict(
-            printed   = False,
-            footnotes = list()
+            printed   = False
         )
         self.prolog = list()
         return
@@ -79,30 +78,39 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             the interest of clarity, try to intuit the companion
             values if a related setting is used. """
         #
+        footnotes = []
         if 'DEVICE' in iface and 'NAME' not in iface:
-            self.footnote( 'Intuited NAME from DEVICE' )
+            footnotes.append( 'Intuited NAME from DEVICE' )
             iface['NAME'] = iface['DEVICE']
         if 'NAME' not in iface:
-            self.footnote( 'No name for ifcfg {0}'.format( iface ) )
+            footnotes.append( 'No name for ifcfg {0}'.format( iface ) )
             iface['NAME'] = '***'
         #
         if 'NAME' in iface and 'DEVICE' not in iface:
-            self.footnote( 'Intuited DEVICE from NAME' )
+            footnotes.append( 'Intuited DEVICE from NAME' )
             iface['DEVICE'] = iface['NAME']
         #
         if 'MASTER' in iface and 'TYPE' not in iface:
-            self.footnote( 'Interpreted as bonded interface' )
+            footnotes.append( 'Interpreted as bonded interface' )
             iface['TYPE'] = 'Bonding'
         #
         if not 'TYPE' in iface:
-            self.footnote( 'Assuming type is "Ethernet"' )
+            footnotes.append( 'Assuming type is "Ethernet"' )
             iface[ 'TYPE' ] = 'Ethernet'
         #
         if 'MTU' not in iface:
             mtu = '1500'
-            self.footnote( 'MTU missing; assuming {0}'.format( mtu ) )
+            footnotes.append( 'MTU missing; assuming {0}'.format( mtu ) )
             iface['MTU'] = mtu
         # print >>sys.stderr, iface
+        if len(footnotes):
+            title = 'On Second Thought'
+            self.println()
+            self.println( title )
+            self.println( '-' * len(title) )
+            self.println()
+            for footnote in footnotes:
+                self.println( footnote )
         return iface
 
     def post_end_file( self ):
@@ -123,11 +131,6 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         ]
         return vlans
 
-    def _show_iface( self, iface ):
-        """ Output the ifcfg-<name> entries, one to a line in movie-credit
-            format, aligned around the '=' sign. """
-        return
-
     def _get_names_for_type( self, theType, seen = False ):
         """ Return a list of interface names of KIND=kind. If none,
             return None. """
@@ -140,6 +143,8 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         return names if len(names) else None
 
     def _get_bridge_members( self, name ):
+        """ Get names of interfaces which mention the desired bridge name.
+            If there are none, returns the empty set. """
         members = [
             iface['NAME'] for iface in self.ifcfgs if 'BRIDGE' in iface and iface['BRIDGE'] == name
         ]
