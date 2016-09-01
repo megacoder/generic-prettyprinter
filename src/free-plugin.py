@@ -16,25 +16,27 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		super( PrettyPrint, self ).__init__()
 		return
 
-	def pre_begin_file( self ):
+	def pre_begin_file( self, name = None ):
 		self.lines = 0
 		self.mem   = {}
-		self.cache = {}
 		self.swap  = {}
 		self.names = []
 		return
 
 	def next_line( self, line ):
-		self.lines += 1
-		tokens = line.split( '#', 1 )[0].strip().split()
-		if self.lines == 1:
-			self.names = tokens
-		elif line.startswith( 'Mem:' ):
-			self.mem = dict( zip( self.names, tokens[1:] ) )
-		elif line.startswith( '-/+ buffers/cache:' ):
-			self.cache = dict( zip( self.names[1:], tokens[2:] ) )
-		elif line.startswith( 'Swap:' ):
-			self.swap = dict( zip( self.names, tokens[1:] ) )
+		tokens = map(
+			str.strip,
+			line.split( '#', 1 )[0].split()
+		)
+		if len(tokens):
+			self.lines += 1
+			if self.lines == 1:
+				# Take first line as column headers
+				self.names = tokens
+			elif tokens[0] == 'Mem:':
+				self.mem = dict( zip( self.names, tokens[1:] ) )
+			elif tokens[0] == 'Swap:':
+				self.swap = dict( zip( self.names, tokens[1:] ) )
 		return
 
 	def _show_dict( self, d, title = None ):
@@ -49,36 +51,32 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				self.names
 			)
 		)
-		fmt = '\t{0:%d} {1}' % width
+		fmt = '\t{{0:{0}}} {{1:>9}}'.format( width )
 		for key in sorted( d ):
 			self.println( fmt.format( key, d[ key ] ) )
 		return
 
 	def report( self, final = False ):
 		if not final:
-			footnote = None
+			self._show_dict( self.mem,		'Memory'	)
 			try:
 				pressure = int(
 					(
 						(
 							float( self.mem['free'] )		+
-							float( self.mem['buffers'] )	+
-							float( self.mem['cached'] )
+							float( self.mem['buff/cache'] )
 						) / float( self.mem['total'] )
-					) * 100.0
+					) * 100.0 + 0.5
 				)
+				self.println()
+				self.println(
+					'\tMemory pressure is {0}%.'.format( pressure )
+				)
+				self.footnote( '\tMemory pressure = (free+buffers_cache)/total' )
 			except Exception, e:
-				footnote = self.footnote(
+				self.println(
 					'Memory pressure calculation failed.'
 				)
 				self.println( e )
-				pressure = 0
-			label = '[MemPress%]'
-			self.names.append( label )
-			self.mem[ label ] = pressure
-			self._show_dict( self.mem,		'Memory'	)
-			self.println()
-			self.println( '\tMemory pressure = (free+buffers+cached)/total' )
-			self._show_dict( self.cache,	'Cache'		)
 			self._show_dict( self.swap,		'Swap'		)
 		return
