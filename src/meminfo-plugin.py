@@ -48,13 +48,28 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		self.first = True
 		return
 
-	def	_addto_notes( self, msg ):
+	def	_addto_notes( self, msg, val = None, fmt = None ):
 		if self.first:
 			self.first = False
 			self.println()
 			self.println( 'Observations about these values.' )
 			self.println( '--------------------------------' )
 		self.println( msg )
+		if val:
+		    if not fmt:
+			fmt = '{0:>48s} = {1}'
+		    self.println(
+			fmt.format(
+			    msg,
+			    val
+			)
+		    )
+		else:
+		    if not fmt:
+			fmt = '{0}'
+		    self.println(
+			fmt.format( msg )
+		    )
 		return
 
 	def	_end_notes( self ):
@@ -101,10 +116,14 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			    (managed_memory * 0.005) + 0.5
 			)
 			self._addto_notes(
-				'Default vm.min_free_kbytes = %d kB' % min_free_kbytes
+			    'Default vm.min_free_kbytes',
+			    val = str( int( min_free_kbytes ) )
 			)
 			self._addto_notes(
-			    'Recommended vm.min_free_kbytes = %d kB' % recommended_min_free_kbytes
+			    'Recommend vm.min_free_kbytes',
+			    val = '{0} kB'.format(
+				recommended_min_free_kbytes
+			    )
 			)
 		except:
 			self._addto_notes(
@@ -117,12 +136,13 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 					hp -= observed['HugePages_Rsvd']
 				wasted_memory = hp * observed['Hugepagesize']
 				if wasted_memory > 0:
-					self._addto_notes(
-						'Physical memory in unused HugePages = %d kB (%d pages)' % (
-							wasted_memory,
-							hp
-						)
+				    self._addto_notes(
+					'Physical memory in unused HugePages',
+					val = '{0} kB ({1} pages)'.format(
+					    wasted_memory,
+					    hp
 					)
+				    )
 		except:
 			self._addto_notes(
 				'Could not calculate wasted hugepages space.'
@@ -135,7 +155,8 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 					)
 				)
 				self._addto_notes(
-					'Physical memory not in HugePages = %d kB' % working_space
+				    'Physical memory not in HugePages',
+				    val = '{0} kB'.format( working_space )
 				)
 		except:
 			self._addto_notes(
@@ -147,8 +168,9 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 					(observed['MemTotal'] / 1024.0 * 0.0205) + 0.5
 				)
 			)
-			self._addto_notes(
-				'Recommended memory if dom0 = %d MB' % dom0mem
+			self_addto_notes(
+			    'Recommended memory if dom0',
+			    val = '{0} MB'.format( dom0mem )
 			)
 			self._end_notes()
 		except:
