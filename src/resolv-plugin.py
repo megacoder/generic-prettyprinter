@@ -30,7 +30,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			str.strip,
 			# ';' is an alternate comment indicator, drop comment and
 			# tokenize
-			line.replace( ';', '#' ).split( '#', 1 )[0]
+			line.replace( ';', '#' ).split( '#', 1 )[0].split()
 		)
 		if len(tokens):
 			directive = tokens[0]
