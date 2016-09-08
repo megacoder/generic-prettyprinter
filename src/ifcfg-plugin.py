@@ -145,8 +145,13 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
     def _get_bridge_members( self, name ):
         """ Get names of interfaces which mention the desired bridge name.
             If there are none, returns the empty set. """
+        candidates = self._get_names_for_type( 'Bond' )
+        #for iface in self.ifcfgs:
+        #    if self.ifcfgs[iface]['TYPE'] == 'Bond' and self.ifcfgs[iface]['BRIDGE'] == name:
+        #        members.append( iface )
         members = [
-            iface['NAME'] for iface in self.ifcfgs if 'BRIDGE' in iface and iface['BRIDGE'] == name
+            member for member in self.ifcfgs if self.ifcfgs[member]['TYPE']
+            == 'Bond' and self.ifcfgs[member]['BRIDGE'] == name
         ]
         return members
 
@@ -161,6 +166,91 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         IP = self.ifcfgs[name]['IPADDR'] if 'IPADDR' in self.ifcfgs[name] else None
         return IP
 
+    def _iprint( self, lines, indent = 0 ):
+        leadin = '  ' * indent
+        for line in lines.splitlines():
+            self.println( '{0}{1}'.format( leadin, line )
+        return
+
+    def _indented_print( self, indent, msg ):
+        padding = '  ' * indent
+        for line in msg.splitlines():
+            self.println( '{0}{1}'.format( padding, line ) )
+        return
+
+    def _network_tree( self, theType, components = None, indent = 0 ):
+        members = self._get_names_for_type( theType )
+        for name in members:
+            IP = self._get_ipaddr_for( name )
+            title = '{0}{1}'.format(
+                name,
+                ' ({0})'.format( IP ) if IP else ''
+            )
+            self._indented_print( indent, title )
+            self._indented_print( indent, '-' * len(title) )
+            vlans = self._get_vlans_for( name )
+            for vlan in vlans:
+                IP = self._get_ipaddr_for( vlan )
+                title = '{0}{1}'.format(
+                    name,
+                    ' ({0})'.format( IP ) if IP else ''
+                )
+                self._indented_print(
+                    indent,
+                    ' |\n +--- {0}{1}'.format(
+                        vlan,
+                        ' ({0})'.format( IP ) if IP else ''
+                    )
+                )
+            pass
+            # Process possible children, in order provided
+            for child in children:
+                if child == 'Bond':
+                    pass
+                elif child == 'Ethernet':
+                    pass
+                else:
+                    self.println( 'Dunno about "{0}".'.format( child ) )
+        return
+
+    def _find_all( self, t, v = None, n = None ):
+        candidates = [
+            c for x in self.ifcfgs if (
+                self.ifcfgs[c]['TYPE'] == t and not self.ifcfgs[c]['seen']
+            )
+        ]
+        if not v:
+            return candidates
+        members = [
+            c for c in candidates if v in self.ifcfgs[c] and
+            self.ifcfgs[c][v] == n
+        ]
+        return members
+
+    def _tree( self, n, indent = 0 ):
+        for vlan in self.vlans( n ):
+            self.iprint( ' |\n +--- {0}'.format( vlan ), indent )
+            for (t,v) in self.ifcfgs[n]['roster']:
+                members = self._find_all( t, v, n )
+                for member in members:
+                    self._iprint( ' |\n +--- {0}'.format( mamber ), indent )
+                    self._tree( member, indent + 1 )
+        return
+
+
+    def _NIC_tree( self ):
+        for TYPE in [
+            'Bridge',
+            'Bond',
+            'Ethernet'
+        ]:
+            members = self._find_all( TYPE, None, None )
+            for n in sorted( members ):
+                self.println()
+                self._iprint( fmt_nic( n ) )
+                self._tree( n )
+        return
+
     def _final_report( self ):
         self.println()
         title = 'S U M M A R Y'
@@ -168,44 +258,9 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         self.println( '=' * len( title ) )
         found_any = False
         # Pass 1: construct bridged interfaces
-        bridge_names = self._get_names_for_type( 'Bridge' )
-        if bridge_names:
-            found_any = True
-            title = 'B R I D G E S'
-            self.println()
-            self.println( title )
-            self.println( '-' * len(title) )
-            self.println()
-            for name in sorted( bridge_names ):
-                IP = self._get_ipaddr_for( name )
-                title = '{0}'.format(
-                    name,
-                    ' ({{0}})'.format( IP ) if IP else ''
-                )
-                self.println( title )
-                self.println( '-' * len( title ) )
-                vlans = self._get_vlans_for( name )
-                for vlan in sorted( vlans ):
-                    IP = self._get_ipaddr_for( vlan )
-                    self.println( '  |' )
-                    self.println( '  +-- {0}{1}'.format(
-                        self.ifcfgs['NAME']),
-                        ' ({0})'.format( IP ) if IP else ''
-                    )
-                # Make sure all members of this bridge use a common MTU
-                bridge_mtu = self.ifcfgs[name][ 'MTU' ]
-                members = self._get_bridge_members( name )
-                for member in members:
-                    member_mtu = self.ifcfgs[member][ 'MTU' ]
-                    if bridge_mtu != member_mtu:
-                        msg = ' *** Bridge MTU {0}, not {1} as member.'.format(
-                            bridge_mtu,
-                            member_mtu
-                        )
-                    else:
-                        msg = ''
-                    self.println( '  |' )
-                    self.println( '  +-- {0}{1}'.format(member['NAME'], msg ) )
+        self._network_tree( 'Bridge', [ 'Bond', 'Ethernet' ] )
+        if True:
+            return
         # Pass 2: Bonds
         bonds = self._get_names_for_type( 'Bond' )
         if bonds:
@@ -217,19 +272,19 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             for name in bonds:
                 self.println()
                 IP = self._get_ipaddr_for( name )
-                self.println( '  |' )
-                self.println( '  +-- {0}'.format(
-                        name,
-                        ' ({0})'.format( IP ) if IP else ''
-                    )
+                title = '{0}{1}'.format(
+                    name,
+                    ' ({0})'.format( IP ) if IP else ''
                 )
+                self.println( title )
+                self.println( '-' * len(title) )
                 # Show any VLANs defined for bond; not sure this is
                 # even valid, but anyway...
                 vlans = self._get_vlans_for( name )
                 for vlan in sorted( vlans ):
                     IP = self._get_ipaddr_for( vlan )
-                    self.println( '  |' )
-                    self.println( '  +-- {0}'.format(
+                    self.println( ' |' )
+                    self.println( ' +-- {0}'.format(
                         self.ifcfgs['NAME'],
                         ' ({0})'.format( IP ) if IP else ''
                     ))
