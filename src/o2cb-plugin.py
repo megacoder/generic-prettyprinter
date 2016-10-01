@@ -11,57 +11,64 @@ class	PrettyPrint( MetaPrettyPrinter ):
 	NAME = 'o2cb-pp'
 	DESCRIPTION = """Display Oracle OCFS2 O2CB configuration files in canonical format."""
 
-	KEYWORDS = [
-		'O2CB_BOOTCLUSTER',
-		'O2CB_ENABLED',
-		'O2CB_HEARTBEAT_THRESHOLD',
-		'O2CB_IDLE_TIMEOUT_MS',
-		'O2CB_KEEPALIVE_DELAY_MS',
-		'O2CB_RECONNECT_DELAY_MS',
-		'O2CB_STACK',
-	]
+	KEYWORDS = dict(
+		O2CB_BOOTCLUSTER         = None,
+		O2CB_ENABLED             = None,
+		O2CB_HEARTBEAT_THRESHOLD = None,
+		O2CB_IDLE_TIMEOUT_MS     = None,
+		O2CB_KEEPALIVE_DELAY_MS  = None,
+		O2CB_RECONNECT_DELAY_MS  = None,
+		O2CB_STACK               = None,
+	)
 
 	def	__init__( self ):
 		super( PrettyPrint, self ).__init__()
 		return
 
 	def	reset( self ):
+		""" Initialize for this session. """
 		super( PrettyPrint, self ).reset()
-		self._setup()
+		self.pre_begin_file( None )
 		return
 
-	def	_setup( self ):
-		self.settings = {}
+	def	pre_begin_file( self, name  ):
+		self.settings = dict()
 		self.max_name = 7
 		return
 
-	def	next_file( self, name ):
-		super( PrettyPrint, self ).next_file( name )
-		self._setup()
-		return
-
-	def	end_file( self, name ):
-		self.report()
-		self._setup()
-		super( PrettyPrint, self ).end_file( name )
-		return
-
 	def	next_line( self, line ):
-		line = line.split( '#', 1 )[0].strip()
-		tokens = line.split( '=', 1 )
+		tokens = map(
+			str.strip,
+			map(
+				# Drop comments, then split remainder by equal sign
+				line.split( '#', 1 )[0].split( '=', 1 )
+			)
+		)
 		if len(tokens) == 2:
-			name  = tokens[0].strip()
-			value = tokens[1].strip()
+			name  = tokens[0]
+			value = tokens[1]
 			self.max_name = max( self.max_name, len(name) )
 			self.settings[name] = value
 		return
 
 	def	report( self, final = False ):
-		fmt = '%%-%ds = %%s' % self.max_name
-		for key in sorted( self.settings.keys() ):
-			if not key in PrettyPrint.KEYWORDS:
+		if not final:
+			fmt = '{{{0:{0}}} = {{1}}{{2}}'.format( self.max_name )
+			for key in sorted( self.settings ):
+				footnote = None
+				if not key in PrettyPrint.KEYWORDS:
+					footnote = self.footnote(
+						'"{0}" is not known to me; is it new?'.format(
+							key
+						)
+					)
+				self.println( fmt % (key, self.settings[key]) )
 				self.println(
-					'# %S is not known to me; is it new?' % key
+					fmt.format(
+						key,
+						self.settings[key],
+						'\t*** See footnote {0}'.format(footnote) if
+						footnote else ''
+					)
 				)
-			self.println( fmt % (key, self.settings[key]) )
 		return

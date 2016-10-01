@@ -1,0 +1,17 @@
+
+#
+# /etc/fstab
+# Created by anaconda on Tue Jul 19 15:41:57 2016
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+/dev/mapper/fedora_ns3-root /                       xfs     defaults        0 0
+UUID=fdf018f5-73d4-4845-9eea-ae7d658a02ea /boot                   ext4    defaults        1 2
+/dev/mapper/fedora_ns3-swap swap                    swap    defaults        0 0
+UUID="e5cc94fb-a78e-4f35-9b18-f430ce17c4ae"	/home	btrfs	defaults 0 0
+/home/opt	/opt		bind	bind
+/home/go-1.7	/usr/local/go	bind	bind
+/home/docker	/var/lib/docker	bind	bind
+UUID="ccb40cbc-a095-484e-bbd4-9789cbbc7cdf" /archive	btrfs	defaults,noauto,user 0 0
+UUID="44e01e0b-0d57-4cc0-91c4-9f546fca2013" /bulk	btrfs	defaults,noauto,user 0 0

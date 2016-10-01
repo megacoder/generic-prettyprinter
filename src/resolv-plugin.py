@@ -12,34 +12,35 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	__init__( self ):
 		super( PrettyPrint, self ).__init__()
-		self.kinds = [
-			'options',
-			'sortlist',
-			'domain',
-			'search',
-			'nameserver',
-		]
+		self.kinds = dict(
+			options    = None,
+			sortlist   = None,
+			domain     = None,
+			search     = None,
+			nameserver = None,
+		)
 		return
 
 	def	pre_begin_file( self, name = None ):
-		self.entries = {}
+		self.entries = dict()
 		return
 
 	def	next_line( self, line ):
-		code = line.replace( ';', '#' ).split( '#', 1 )[0].strip()
-		if len(code) > 0:
-			tokens = map(
-				str.strip,
-				code.split()
-			)
+		tokens = map(
+			str.strip,
+			# ';' is an alternate comment indicator, drop comment and
+			# tokenize
+			line.replace( ';', '#' ).split( '#', 1 )[0].split()
+		)
+		if len(tokens):
 			directive = tokens[0]
 			if directive not in self.kinds:
-				n = self.footnote(
+				footnote = self.footnote(
 					"Directive '{0}' may be mispelled.".format( directive )
 				)
-				self.println( '{0}\t### Footnote {1}'.format(
+				self.println( '{0}\t### See footnote {1}'.format(
 						line,
-						n
+						footnote
 					)
 				)
 			if directive not in self.entries:
@@ -52,12 +53,12 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			widest = max(
 				map(
 					len,
-					self.entries.keys()
+					self.entries
 				)
 			)
-			fmt = '{0:%ds} {1}' % widest
+			fmt = '{{0:{0}}} {{1}}'.format( widest )
 			for kind in self.kinds:
-				if kind in self.entries.keys():
+				if kind in self.entries:
 					for entry in self.entries[ kind ]:
 						self.println(
 							fmt.format(

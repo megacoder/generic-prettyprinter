@@ -54,38 +54,33 @@ class	PrettyPrint( MetaPrettyPrinter ):
 
 	def next_line( self, line ):
 		if line.startswith( '[' ):
-			self._start_stanza( line.rstrip() )
+			self._start_stanza( line )
 		else:
 			tokens = map(
 				str.strip,
+				# Drop comments, tokenize around '='
 				line.split( '#', 1 )[0].split( '=', 1 )
 			)
 			if len(tokens) == 2:
 				self._add_entry( tokens[0], tokens[1] )
 		return
 
-	def	post_end_file( self ):
-		self._end_stanza()
-		self.report()
-		return
-
 	def report( self, final = False ):
-		if not final and len( self.stanzas ) > 0:
+		self._end_stanza()
+		if not final and len( self.stanzas ):
 			for [name,stanza] in sorted( self.stanzas ):
 				self.println( "{0}\n".format( name ) )
-				keys = stanza.keys()
-				if len( keys ) > 0:
+				if len( stanza ):
 					width = max(
 						map(
 							len,
-							keys
+							stanza
 						)
 					)
-					fmt = ' {0:%d.%ds} = {1}' % (
-						width,
+					fmt = ' {{0:{0}}} = {{1}}'.format(
 						width
 					)
-					for key in sorted( keys ):
+					for key in sorted( stanza ):
 						self.println(
 							fmt.format(
 								key,

@@ -13,26 +13,22 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 	def	__init__( self ):
 		super( PrettyPrint, self ).__init__()
 		self.notes = dict()
-		self.names = []
-		self._add_name( r'SEMMSL', r'Max semaphores per set' )
-		self._add_name( r'SEMMNI', r'Max semaphore sets in system' )
-		self._add_name( r'SEMMNS', r'Total semaphores in system' )
-		self._add_name( r'SEMOPM', r'Max operations per semop(2)' )
-		self.nNames = len( self.names )
-		self.widest = [
-			len( s ) for s in self.names
-		]
-		self.values = []
-		return
-
-	def	_add_name( self, name, desc = 'N/A' ):
-		self.names.append( name )
-		self.notes[name] = desc
+		self.names = dict()
+		self.names['SEMMSL'] = 'Max semaphores per set'
+		self.names['SEMNI' ] = 'Max semaphores in system'
+		self.names['SEMMNS' ] = 'Total semaphores in system'
+		self.names['SEMOPM' ] = 'Max operations per semop(2)'
+		self.widest = [ len( s ) for s in self.names ]
+		self.values = list()
 		return
 
 	def	next_line( self, line ):
 		tokens = line.split()
-		if len(tokens) == self.nNames:
+		tokens = map(
+			str.strip,
+			line.split()
+		)
+		if len(tokens) == len(self.names):
 			self.values.append(
 				tokens
 			)
@@ -40,34 +36,41 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				max(
 					self.widest[i],
 					len( tokens[i] )
-				) for i in range( self.nNames )
+				) for i in range( len(self.names) )
 			]
 		return
 
 	def	report( self, final = False ):
 		if final:
+			N = len(self.names)
 			fmts = [
-				'{0:>%d}' % self.widest[ i ] for i in range( self.nNames )
+				'{{0:>{0}}}'.format(
+					self.widest[i] for i in range( N )
+				)
 			]
 			titles = [
-				fmts[i].format( self.names[i] ) for i in range( self.nNames )
+				fmts[i].format( self.names[i] ) for i in range( N )
 			]
 			bars = [
-				'-' * self.widest[ i ] for i in range( self.nNames )
+				'-' * self.widest[i] for i in range( N )
 			]
 			self.println( ' '.join( titles ) )
 			self.println( ' '.join( bars ) )
 			for sample in self.values:
 				v = [
-					fmts[ i ].format( sample[ i ] ) for i in range( self.nNames )
+					fmts[i].format( sample[i] ) for i in range( N )
 				]
 				self.println( ' '.join( v ) )
-			for key in sorted( self.notes.keys() ):
-				note = '{0} - {1}'.format(
-					key,
-					self.notes[ key ]
-				)
-				self.footnote(
-					note
+			self.println()
+			title = 'Legend'
+			self.println( title )
+			self.println( '-' * len(title) )
+			self.println()
+			for key in sorted( self.notes ):
+				self.println(
+					'{0}: {1}'.format(
+						key,
+						self.notes[ key ]
+					)
 				)
 		return

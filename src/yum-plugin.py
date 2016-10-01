@@ -12,66 +12,75 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	__init__( self ):
 		super( PrettyPrint, self ).__init__()
-		return
-
-	def	pre_begin_file( self ):
-		super( PrettyPrint, self ).pre_begin_file()
-		self.repos = []
-		self._new_repo()
-		return
-
-	def	_new_repo( self, name = None ):
-		self.repo = {}
-		self.repo['#name'] = name
+		self.pre_begin_file( None )
 		return
 
 	def	ignore( self, fn ):
 		return not fn.endswith( '.repo' )
 
-	def	_add_repo( self ):
-		name = self.repo['#name']
-		if name is not None:
-			self.repos.append( (name, self.repo) )
+	def	pre_begin_file( self, name = None ):
+		super( PrettyPrint, self ).pre_begin_file( name )
+		self.repos = list()
+		self._new_repo()
+		return
+
+	def	_new_repo( self, name = None ):
+		self.repo = dict( _name = name )
+		return
+
+	def	_end_repo( self ):
+		if '_name' in self.repo and self.repo['_name']:
+			self.repos.append( self.repo )
 		return
 
 	def	next_line( self, line ):
 		if line.startswith( '[' ):
-			self._add_repo()
+			self._end_repo()
 			self._new_repo( line.strip()[1:-1] )
 		else:
-			tokens = line.split( '#', 1 )[0].split( '=', 1 )
+			tokens = map(
+				str.strip,
+				line.split( '#', 1 )[0].split( '=', 1 )
+			)
 			if len(tokens) == 2:
-				name = tokens[0].strip()
-				value = tokens[1].strip()
+				name  = tokens[0]
+				value = tokens[1]
 				self.repo[name] = value
 		return
 
+	def	post_end_file( self, name = None ):
+		self._end_repo()
+		self.report()
+		return
+
 	def	report( self, final = False ):
-		if not final:
-			self._add_repo()
-			for (name,feed) in sorted(
-				self.repos,
-				key = lambda (n,f): n.lower()
-			):
-				self.println(
-					'[{0}]'.format(
-						name
-					)
-				)
+		if final: return
+		others = False
+		for feed in sorted(
+			self.repos,
+			key = lambda f: f['_name'].lower()
+		):
+			if others:
 				self.println()
-				fmt = ' {0:>%d} = {1}' % max(
-					map(
-						len,
-						[ key for key in feed ]
-					)
+			others = True
+			self.println(
+				'[{0}]'.format(
+					feed['_name']
 				)
-				for key in sorted( feed.keys() ):
-					if not key[0] == '#':
-						self.println(
-							fmt.format(
-								key,
-								feed[key]
-							)
+			)
+			self.println()
+			fmt = ' {0:>%d} = {1}' % max(
+				map(
+					len,
+					[ key for key in feed ]
+				)
+			)
+			for key in sorted( feed ):
+				if key[0] != '_':
+					self.println(
+						fmt.format(
+							key,
+							feed[key]
 						)
-				self.println()
+					)
 		return

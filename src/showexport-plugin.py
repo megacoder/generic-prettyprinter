@@ -36,11 +36,14 @@ class	PrettyPrint( MetaPrettyPrinter ):
 			width = max(
 				map(
 					len,
-					self.shares.keys()
+					self.shares
 				)
 			)
-			fmt = '{0:<%ds}  {1}' % width
-			for share in sorted( self.shares.keys() ):
+			fmt = '{{{0:<%ds}}}  {{1}}'.format( width )
+			# Not 100% sure that sorting the share information is kosher.
+			# The NFS selection criteria may be first left-most match
+			# wins.  If so, just don't sort here.
+			for share in sorted( self.shares ):
 				self.println(
 					fmt.format(
 						share,
@@ -48,7 +51,7 @@ class	PrettyPrint( MetaPrettyPrinter ):
 					)
 				)
 				subdir = share + '/'
-				for key in self.shares.keys():
+				for key in self.shares:
 					if key.startswith( subdir ):
 						if share in self.overlaps:
 							self.overlaps[ share ].append( key )
@@ -58,7 +61,7 @@ class	PrettyPrint( MetaPrettyPrinter ):
 				self.println()
 				self.println( '*** Found Overlapping Shares ***' )
 				self.println()
-				for share in sorted( self.overlaps.keys() ):
+				for share in sorted( self.overlaps ):
 					self.println( share )
 					for key in sorted( self.overlaps[ share ] ):
 						self.println( ' |' )

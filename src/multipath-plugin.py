@@ -32,6 +32,12 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			self.println( '{0}{1}'.format( leadin, content ) )
 		return
 
+	def	ignore( self, name ):
+		ignore_it = False
+		if os.path.isfile( name ) and not name.endswith( '.conf' ):
+			ignore_it = True
+		return
+
 	def	begin_file( self, name ):
 		super( PrettyPrint, self ).begin_file( name )
 		self.depth = 0
