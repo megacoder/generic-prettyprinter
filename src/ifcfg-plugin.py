@@ -169,7 +169,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
     def _iprint( self, lines, indent = 0 ):
         leadin = '  ' * indent
         for line in lines.splitlines():
-            self.println( '{0}{1}'.format( leadin, line )
+            self.println( '{0}{1}'.format( leadin, line ) )
         return
 
     def _indented_print( self, indent, msg ):
