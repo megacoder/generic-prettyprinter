@@ -1,3 +1,174 @@
+2016-10-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped revision
+
+2016-10-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Fixed syntax error
+
+2016-10-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : commit f3e07b83bc2c3bd86d7a9788dcdddc1f9aadab03 Author: Tommy
+	Reynolds <Tommy.Reynolds@MegaCoder.com> Date:   Sat Oct 1 16:12:02
+	2016 -0500
+
+2016-10-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/rpm-va-plugin.py: Tabized more properly
+
+2016-10-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/df-plugin.py: Handle folded input lines better
+
+2016-10-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Left-justify numeric fields and optionally string
+	fields too.
+
+2016-09-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Checkpoint
+
+2016-09-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped version
+
+2016-09-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Trying to incorporate VLAN's
+
+2016-09-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/yum-plugin.py: Cleanup code.
+
+2016-09-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/mount-plugin.py: pre_open_file() takes a filename argument
+
+2016-09-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/free-plugin.py: Recognize newer-format free(1) output.
+
+2016-09-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/resolv-plugin.py: Oops, forgot to actually split the line
+	further into tokens
+
+2016-09-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/meminfo-plugin.py: Cleaned up the notes format
+
+2016-09-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/meminfo-plugin.py: Better notes formatting.
+
+2016-08-29  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/fstab: Use my /etc/fstab as a sample
+
+2016-08-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py, src/superclass.py: Checkpoint
+
+2016-08-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Display IP addresses if they are hardwired
+	in.
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/fstab-plugin.py: Got the str(key) stuff straightened out here.
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/asm-plugin.py, src/csv-plugin.py, src/fstab-plugin.py,
+	src/ifcfg-plugin.py, src/mount-plugin.py, src/o2cb-plugin.py,
+	src/resolv-plugin.py, src/superclass.py: Fixed syntax errors which
+	crept in.
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/sssd-plugin.py: Removed superflous ".keys()" and use
+	str.format()
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/sem-plugin.py: Removed superflous ".keys()" and use
+	str.format()
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/resolv-plugin.py: Removed superflous ".keys()" and use
+	str.format()
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/mount-plugin.py: Removed superflous ".keys()" and use
+	str.format()
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/o2cb-plugin.py: Removed superflouw ".keys()" and added
+	footnotes
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/modinfo-plugin.py: Removed superflous ".keys()"
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/fstab-plugin.py: Removed superflous ".keys()" and use
+	footnotes
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/csv-plugin.py: Removed superflous ".keys()"
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/free-plugin.py: Remove superflous ".keys()"
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/asm-plugin.py: Use a footnote to report potential spelling
+	errors
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/showexport-plugin.py: Removed reduntant '.keys()' from
+	dictionaries.
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/yum-plugin.py: Correct idiom for keys()
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/rpm-va-plugin.py: Correct reported indent problem.
+
+2016-08-20  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/multipath-plugin.py: Filter multipath files and ignore files
+	not ending in ".conf"
+
+2016-08-20  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* TODO: Thought of VLAN handling.
+
+2016-08-18  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/misc.py: Multi-assign first N items of indeterminate-length
+	list
+
+2016-07-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/resolv-plugin.py: Who knew?  Comments can begin with a ';' in
+	/etc/resolv.conf too.
+
+2016-07-21  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Rebuilt ChangeLog
+
 2016-07-21  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* setup.py, src/ifcfg-plugin.py: Corrected fingerprint of
