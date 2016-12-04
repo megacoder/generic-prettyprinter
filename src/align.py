@@ -5,7 +5,7 @@ import	sys
 import	os
 import	re
 
-class	align( object ):
+class	Align( object ):
 
 	def	__init__( self, lj = False ):
 		self.want_lj = lj
@@ -17,6 +17,9 @@ class	align( object ):
 		)
 		self.items   = []
 		return
+
+	def	field_count( self ):
+		return self.widths.keys()
 
 	def	add( self, l ):
 		L = len( l )
@@ -42,7 +45,11 @@ class	align( object ):
 			return '>'
 		return '<'
 
-	def	get_items( self ):
+	def	get_items( self, sort = None ):
+		if sort == True:
+			self.items.sort()
+		elif sort != None:
+			self.items.sort( key = sort )
 		# Construct the format strings
 		for N,items in enumerate( self.items ):
 			fields = []
@@ -59,9 +66,16 @@ class	align( object ):
 		return
 
 if __name__ == '__main__':
-	a = align( lj = True )
+	a = Align( lj = True )
 	a.add( [ 1,22,333, 'astro' ] )
 	a.add( [ 44,5,6, 'rubble' ] )
 	a.add( [ 321,'abc',123 ] )
+	print 'Plain'
 	for i,items in a.get_items():
+		print 'Line {0}->|{1}|'.format( i+1, '|'.join( items ) )
+	print 'Sorted'
+	for i,items in a.get_items( sort = True ):
+		print 'Line {0}->|{1}|'.format( i+1, '|'.join( items ) )
+	print 'Custom'
+	for i,items in a.get_items( sort = lambda f : f[2] ):
 		print 'Line {0}->|{1}|'.format( i+1, '|'.join( items ) )
