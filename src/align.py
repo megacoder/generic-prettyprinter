@@ -9,9 +9,8 @@ class	align( object ):
 
 	def	__init__( self, lj = False ):
 		self.want_lj = lj
-		self.widths  = []
-		self.Nwidths = len(self.widths)
-		self.numeric = [ False ] * self.Nwidths
+		self.widths  = dict()
+		self.numeric = dict()
 		self.re      = re.compile(
 			# Signed/unsigned integer|floating|scientific
 			r'(^[-+]?[0-9]{1,}([.][0-9]{1,})?([Ee][-+]?[0-9]{1,})?)$'
@@ -22,56 +21,47 @@ class	align( object ):
 	def	add( self, l ):
 		L = len( l )
 		# Save to list of items in string format
-		F = [
-			str(a) for a in l
-		]
-		self.items.append( F )
-		# Get field widths
-		widths = [
-			len(f) for f in F
-		]
-		# Grow saved widths if requred
-		wider = max( L - self.Nwidths, 0 )
-		self.widths += [0] * wider
-		# Update widths
-		pending = [
-			max(
-				self.widths[i],
-				widths[i]
-			) for i in range(L)
-		] + self.widths[L:]
-		self.widths = pending
-		self.Nwidths += wider
-		# Detect numeric .vs. string fields
-		numeric = map(
-			lambda s: self.want_lj and not self.re.match(s),
-			F
+		F = map(
+			str,
+			l
 		)
-		self.numeric += [ self.want_lj ] * wider
-		pending = [
-			self.numeric[i] and numeric[i] for i in range( L )
-		] + self.numeric[L:]
-		self.numeric = pending
+		self.items.append( F )
+		# Grow saved widths if requred
+		for i,v in enumerate( F ):
+			key = str(i)
+			self.widths[key] = max(
+				len(v),
+				self.widths.get( key, 7 )
+			)
+			mo = self.re.match( v ) and self.want_lj
+			self.numeric[key] = self.numeric.get(key, True) and mo is not None
 		return
 
+	def	_justify( self, v ):
+		if not self.want_lj or self.re.match( v ):
+			return '>'
+		return '<'
+
 	def	get_items( self ):
-		fmts = [
-			'{{0:{0}{1}}}'. format(
-				'<' if self.numeric[i] else '>',
-				self.widths[i]
-			) for i in range( len(self.widths) )
-		]
-		for items in self.items:
-			L = len(items)
-			fields = [
-				fmts[i].format(items[i]) for i in range( L )
-			]
-			yield fields
+		# Construct the format strings
+		for N,items in enumerate( self.items ):
+			fields = []
+			for i,item in enumerate( items ):
+				key = str( i )
+				fmt = '{{0:{0}{1}}}'.format(
+					self._justify( item ),
+					self.widths[key]
+				)
+				fields.append(
+					fmt.format( item )
+				)
+			yield N,fields
 		return
 
 if __name__ == '__main__':
-	a = align()
+	a = align( lj = True )
 	a.add( [ 1,22,333, 'astro' ] )
 	a.add( [ 44,5,6, 'rubble' ] )
-	for items in a.get_items():
-		print ' '.join( items )
+	a.add( [ 321,'abc',123 ] )
+	for i,items in a.get_items():
+		print 'Line {0}->|{1}|'.format( i+1, '|'.join( items ) )
