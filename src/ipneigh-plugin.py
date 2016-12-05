@@ -6,7 +6,7 @@ import	sys
 import	string
 import	superclass
 import	re
-from	align	import	*
+import	align
 
 class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
@@ -19,31 +19,33 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	pre_begin_file( self ):
-		self.items = []
+		self.items = align.Align()
 		return
 
 	def	next_line( self, line ):
-		line = line.strip()
-		if len(line) > 0:
-			parts = line.split()
-			ip = parts[0].split( '.', 4 )
-			self.items.append(
-				([ int(x) for x in ip], parts[0], parts[1:-1], parts[-1])
-			)
+		tokens = map(
+			str.strip,
+			line.split()
+		)
+		N = len( tokens )
+		if N > 0:
+			proper = 6
+			if N < proper:
+				tokens = tokens[:-1] + ([ ' ' ] * (proper - N) ) + tokens[-1:]
+			self.items.add( tokens )
 		return
 
 	def	report( self, final = False ):
 		if not final:
-			if len(self.items) > 0:
-				self.items.sort( key = lambda (a,ip,mid,state): a )
-				a = align()
-				for (tcpip,ip,mid,state) in self.items:
-					fields = [ ip ]
-					while len( mid ) < 4:
-						mid.append( "" )
-					fields.append( ' '.join( mid ) )
-					fields.append( state )
-					a.add( fields )
-				for fields in a.get_items():
-					print ' '.join( fields )
+			for _,tokens in self.items.get_items():
+				print ' '.join( tokens )
 		return
+
+if __name__ == '__main__':
+	pp = PrettyPrint()
+	pp.pre_begin_file()
+	pp.next_line( '192.168.1.166 dev br0 lladdr cc:6d:a0:2b:6d:d1 REACHABLE'
+			  );
+	pp.next_line( '192.168.1.254 dev br0  FAILED' )
+	pp.next_line( ' 192.168.1.155 dev br0 lladdr b8:5a:f7:83:30:f0 STALE' )
+	pp.report()
