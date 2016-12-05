@@ -46,39 +46,51 @@ class	Align( object ):
 		self.nItems += 1
 		return
 
-	def	get_items( self, titles = 0, sort = False ):
-		if sort != False:
-			if sorted == True:
-				how = lambda x : x
-			else:
-				how = sorted
-			self.items = self.items[:self.titles] + [
-				x for x in sorted( self.items[self.titles:], key = how )
-			]
-		for N,items in enumerate( self.items ):
-			fields = []
-			for i,item in enumerate( items ):
+	def	get_items( self, titles = 0, sort = lambda x : 0 ):
+		# Titles are first
+		for H,tokens in enumerate( self.items[:self.titles] ):
+			columns = []
+			for i,token in enumerate( tokens ):
+				fmt = '{{0:>{0}}}'.format( self.widths[ str(i) ] )
+				columns.append( fmt.format( token ) )
+			yield H,columns
+		if sort == True:
+			sort = lambda x : x
+		H += 1
+		for N,tokens in enumerate(
+			sorted( self.items[self.titles:], key = sort )
+		):
+			columns = []
+			for i,token in enumerate( tokens ):
 				key = str( i )
 				max_width = self.widths[ key ]
 				justification = '>'
-				if N >= self.titles:
-					if self.numeric[ key ]:
-						justification = '>'
-					else:
-						if self.want_lj:
-							justification = '<'
+				if self.numeric[ key ]:
+					justification = '>'
+				else:
+					if self.want_lj:
+						justification = '<'
 				# Add formatted item
 				fmt = r'{{0:{0}{1}}}'.format( justification, max_width )
-				fields.append( fmt.format( item ) )
-			yield N,fields
+				columns.append( fmt.format( token ) )
+			yield H+N,columns
 		return
 
 if __name__ == '__main__':
 	a = Align( lj = True, titles = 1 )
 	a.add( [ 'First', 'Second', 'Third', 'Fourth' ] )
 	a.add( [ 1.2,22,3.33, 'astro' ] )
-	a.add( [ 1,22,333, 'astro' ] )
+	a.add( [ 1,22,333, 'aSTRo' ] )
 	a.add( [ -44,5,6, 'rubble' ] )
 	a.add( [ 321,'abc','def', 123 ] )
+	print 'Plain:'
+	for i,items in a.get_items():
+		print 'Line {0}->|{1}|'.format( i+1, '|'.join( items ) )
+	print 'Sorted'
 	for i,items in a.get_items( sort = True):
+		print 'Line {0}->|{1}|'.format( i+1, '|'.join( items ) )
+	print 'Weird'
+	import random
+	how = lambda x : random.random()
+	for i,items in a.get_items( sort = how ):
 		print 'Line {0}->|{1}|'.format( i+1, '|'.join( items ) )
