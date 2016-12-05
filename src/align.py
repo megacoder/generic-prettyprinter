@@ -46,18 +46,27 @@ class	Align( object ):
 		self.nItems += 1
 		return
 
-	def	get_items( self, titles = 0, sorted = None ):
+	def	get_items( self, titles = 0, sort = False ):
+		if sort != False:
+			if sorted == True:
+				how = lambda x : x
+			else:
+				how = sorted
+			self.items = self.items[:self.titles] + [
+				x for x in sorted( self.items[self.titles:], key = how )
+			]
 		for N,items in enumerate( self.items ):
 			fields = []
 			for i,item in enumerate( items ):
 				key = str( i )
 				max_width = self.widths[ key ]
 				justification = '>'
-				if self.numeric[ key ]:
-					justification = '>'
-				else:
-					if self.want_lj:
-						justification = '<'
+				if N >= self.titles:
+					if self.numeric[ key ]:
+						justification = '>'
+					else:
+						if self.want_lj:
+							justification = '<'
 				# Add formatted item
 				fmt = r'{{0:{0}{1}}}'.format( justification, max_width )
 				fields.append( fmt.format( item ) )
@@ -71,5 +80,5 @@ if __name__ == '__main__':
 	a.add( [ 1,22,333, 'astro' ] )
 	a.add( [ -44,5,6, 'rubble' ] )
 	a.add( [ 321,'abc','def', 123 ] )
-	for i,items in a.get_items():
+	for i,items in a.get_items( sort = True):
 		print 'Line {0}->|{1}|'.format( i+1, '|'.join( items ) )
