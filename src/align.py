@@ -7,7 +7,8 @@ import	re
 
 class	Align( object ):
 
-	def	__init__( self, lj = False ):
+	def	__init__( self, lj = False, titles = 0 ):
+		self.titles  = titles
 		self.want_lj = lj
 		self.widths  = dict()
 		self.numeric = dict()
@@ -16,10 +17,11 @@ class	Align( object ):
 			r'(^[-+]?[0-9]{1,}([.][0-9]{1,})?([Ee][-+]?[0-9]{1,})?)$'
 		)
 		self.items   = []
+		self.nItems  = 0
 		return
 
-	def	field_count( self ):
-		return self.widths.keys()
+	def	get_widths( self ):
+		return self.widths
 
 	def	add( self, l ):
 		L = len( l )
@@ -28,7 +30,6 @@ class	Align( object ):
 			str,
 			l
 		)
-		self.items.append( F )
 		# Grow saved widths if requred
 		for i,v in enumerate( F ):
 			key = str(i)
@@ -36,46 +37,39 @@ class	Align( object ):
 				len(v),
 				self.widths.get( key, 7 )
 			)
-			mo = self.re.match( v ) and self.want_lj
-			self.numeric[key] = self.numeric.get(key, True) and mo is not None
+			# Note numberic columns once titles have been read
+			if self.nItems >= self.titles:
+				mo = self.re.match( v ) and self.want_lj
+				self.numeric[key] = self.numeric.get(key, True) and mo is not None
+		# Now, remember the facts
+		self.items.append( F )
+		self.nItems += 1
 		return
 
-	def	_justify( self, v ):
-		if not self.want_lj or self.re.match( v ):
-			return '>'
-		return '<'
-
-	def	get_items( self, sort = None ):
-		if sort == True:
-			self.items.sort()
-		elif sort != None:
-			self.items.sort( key = sort )
-		# Construct the format strings
+	def	get_items( self, titles = 0, sorted = None ):
 		for N,items in enumerate( self.items ):
 			fields = []
 			for i,item in enumerate( items ):
 				key = str( i )
-				fmt = '{{0:{0}{1}}}'.format(
-					self._justify( item ),
-					self.widths[key]
-				)
-				fields.append(
-					fmt.format( item )
-				)
+				max_width = self.widths[ key ]
+				justification = '>'
+				if self.numeric[ key ]:
+					justification = '>'
+				else:
+					if self.want_lj:
+						justification = '<'
+				# Add formatted item
+				fmt = r'{{0:{0}{1}}}'.format( justification, max_width )
+				fields.append( fmt.format( item ) )
 			yield N,fields
 		return
 
 if __name__ == '__main__':
-	a = Align( lj = True )
+	a = Align( lj = True, titles = 1 )
+	a.add( [ 'First', 'Second', 'Third', 'Fourth' ] )
+	a.add( [ 1.2,22,3.33, 'astro' ] )
 	a.add( [ 1,22,333, 'astro' ] )
-	a.add( [ 44,5,6, 'rubble' ] )
-	a.add( [ 321,'abc',123 ] )
-	print 'Plain'
+	a.add( [ -44,5,6, 'rubble' ] )
+	a.add( [ 321,'abc','def', 123 ] )
 	for i,items in a.get_items():
-		print 'Line {0}->|{1}|'.format( i+1, '|'.join( items ) )
-	print 'Sorted'
-	for i,items in a.get_items( sort = True ):
-		print 'Line {0}->|{1}|'.format( i+1, '|'.join( items ) )
-	print 'Custom'
-	for i,items in a.get_items( sort = lambda f : f[2] ):
 		print 'Line {0}->|{1}|'.format( i+1, '|'.join( items ) )
