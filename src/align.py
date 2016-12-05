@@ -56,7 +56,6 @@ class	Align( object ):
 			yield H,columns
 		if sort == True:
 			sort = lambda x : x
-		H += 1
 		for N,tokens in enumerate(
 			sorted( self.items[self.titles:], key = sort )
 		):
@@ -73,7 +72,7 @@ class	Align( object ):
 				# Add formatted item
 				fmt = r'{{0:{0}{1}}}'.format( justification, max_width )
 				columns.append( fmt.format( token ) )
-			yield H+N,columns
+			yield self.titles+N,columns
 		return
 
 if __name__ == '__main__':
