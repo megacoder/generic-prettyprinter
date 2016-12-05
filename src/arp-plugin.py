@@ -36,6 +36,22 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	report( self, final = False ):
-		for _,items = self.items.get_items():
+		self.items.set_title_alignment( 'laaaaa' )
+		self.items.set_alignment( 'lccccc' )
+		for _,items in self.items.get_items():
 			print ' '.join( items )
 		return
+
+if __name__ == '__main__':
+	pp = PrettyPrint()
+	pp.pre_begin_file()
+	for line in [
+		'Address HWtype  HWaddress Flags Mask Iface',
+		'192.168.1.155 ether   b8:5a:f7:83:30:f0   C br0',
+		'192.168.1.237 (incomplete) br0',
+		'192.168.1.37  ether   52:54:00:7d:21:ed   C br0',
+		'192.168.1.218 ether   00:22:64:ad:90:ed   C br0',
+	]:
+		pp.next_line( line )
+	pp.report()
+
