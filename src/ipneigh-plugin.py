@@ -37,7 +37,9 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	report( self, final = False ):
 		if not final:
-			for _,tokens in self.items.get_items():
+			for _,tokens in self.items.get_items(
+				sort = lambda t : map( int, t[0].split('.') )
+			):
 				print ' '.join( tokens )
 		return
 
