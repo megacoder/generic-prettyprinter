@@ -1,0 +1,22 @@
+#!/usr/bin/python
+# vim: noet sw=4 ts=4 filetype=python
+#
+# Minimal skeleton for testing individual modules
+
+if __name__ == '__main__':
+	fn = '<selftest>'
+	pp = PrettyPrint()
+	pp.pre_begin_file()
+	pp.begin_file( fn )
+	for line in [
+		'Address HWtype  HWaddress Flags Mask Iface',
+		'192.168.1.155 ether   b8:5a:f7:83:30:f0   C br0',
+		'192.168.1.237 (incomplete) br0',
+		'192.168.1.37  ether   52:54:00:7d:21:ed   C br0',
+		'192.168.1.218 ether   00:22:64:ad:90:ed   C br0',
+	]:
+		pp.next_line( line )
+	pp.end_file( fn )
+	pp.post_end_file()
+	pp.report()
+
