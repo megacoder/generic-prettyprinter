@@ -16,44 +16,56 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         return
 
     def pre_open_file( self ):
-        self.items   = []
-        self.headers = None
-        self.pending = None
+        self.items   = align.Align( titles = 1 )
         return
 
     def next_line( self, line ):
-        parts = map(
+        tokens = map(
             str.strip,
             line.split( '#', 1 )[0].split()
         )
-        # If the partition name was very, very long, its
-        # line was folded, so unfold it here
-        if self.pending:
-            parts += self.pending
-            self.pending = None
-        if self.headers:
-            N = len( parts )
-            if N:
-                if N < 6:
-                    self.pending = parts
-                else:
-                    self.items.append( parts )
-        else:
-            if line.startswith( 'Filesystem' ):
+        if len( tokens ) > 0:
+            if tokens[0] == 'Filesystem':
                 # Coalesce 'Mounted' 'on' into 'Mounted on'
-                parts[-2] = ' '.join( parts[-2:] )
+                tokens[-2] = ' '.join( tokens[-2:] )
                 # Save all but isolated 'on', which is the final arg
-                self.headers = parts[ : -1 ]
+                tokens = tokens[:-1]
+            self.items.add( tokens )
         return
 
     def report( self, final = False ):
         if not final:
-            a = align.align()
-            if self.headers:
-                a.add( self.headers )
-            self.items.sort( key = lambda p: p[-1] )
-            for parts in self.items:
-                a.add( parts )
-            for parts in a.get_items():
-                self.println( ' '.join( parts ) )
+            self.items.set_title_alignment( 'aaaaal' )
+            self.items.set_alignment( 'laaaal' )
+            for _,tokens in self.items.get_items():
+                self.println( ' '.join( tokens ) )
         return
+
+if __name__ == '__main__':
+    fn = '<selftest>'
+    pp = PrettyPrint()
+    pp.pre_begin_file()
+    pp.begin_file( fn )
+    for line in [
+
+'Filesystem     1K-blocks Used Available Use% Mounted on',
+'devtmpfs         8074184 0   8074184   0% /dev',
+'tmpfs            8087180 77472   8009708   1% /dev/shm',
+'tmpfs            8087180 1596   8085584   1% /run',
+'tmpfs            8087180 0   8087180   0% /sys/fs/cgroup',
+'/dev/sda3      973615104 16010288 955722896   2% /',
+'tmpfs            8087180 1464   8085716   1% /tmp',
+'/dev/sda1         999320 179612    750896  20% /boot',
+'/dev/sdc1      976760000 917364256  53972544  95% /home',
+'/dev/sdc1      976760000 917364256  53972544  95% /opt',
+'tmpfs            1617440 16   1617424   1% /run/user/42',
+'tmpfs            1617440 40   1617400   1% /run/user/1000',
+'ACDFuse         10485760 -9444732965739215659520 -64282112 100% /home/reynolds/cloud/acd',
+
+
+    ]:
+        pp.next_line( line )
+    pp.end_file( fn )
+    pp.post_end_file()
+    pp.report( final = True )
+
