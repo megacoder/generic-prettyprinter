@@ -5,6 +5,7 @@ import  os
 import  sys
 import  csv
 import  superclass
+import  align
 
 class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
@@ -22,9 +23,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def _prepare( self ):
         self.timestamp = None
-        self.titles    = None
-        self.widths    = {}
-        self.entries   = []
+        self.entries   = align.Align( titles = 1 )
         return
 
     def begin_file( self, name ):
@@ -38,13 +37,13 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def next_line( self, line ):
         if line.startswith( 'Linux OSW' ):
-            self.report()
+            pass
         elif line.startswith( 'zzz ***' ):
             self.timestamp = line[7:]
         elif line.startswith( 'procs' ):
             pass
         elif line.startswith( ' r ' ):
-            self.titles = line.split()
+            self.entries.add( line.split() )
         elif line.startswith( 'SNAP_INTERVAL' ):
             pass
         elif line.startswith( 'CPU_COUNT' ):
@@ -52,20 +51,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         elif line.startswith( 'OSWBB_ARCHIVE_DEST' ):
             pass
         else:
-            self.entries.append( line.split() )
-        return
-
-    def _calc_widths( self ):
-        self.widths = {}
-        if self.titles:
-            for i in xrange( 0, len(self.titles) ):
-                self.widths[i] = len( self.titles[i] )
-            for entry in self.entries:
-                for i in xrange( 0, len(entry) ):
-                    try:
-                        self.widths[i] = max( self.widths[i], len( entry[i] ) )
-                    except:
-                        self.widths[i] = len( entry[i] )
+            self.entries.add( line.split() )
         return
 
     def _show( self, tokens ):
@@ -79,18 +65,30 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         return
 
     def report( self, final = False ):
-        if self.titles:
-            if self.timestamp:
-                self.println( self.timestamp )
-                self.println( '' )
-            self._calc_widths()
-            self._show( self.titles )
-            underbars = []
-            for i in xrange( 0, len(self.titles) ):
-                underbars.append( '-' * self.widths[i] )
-            self._show( underbars )
-            for entry in self.entries:
-                self._show( entry )
         if not final:
+            for _,tokens in self.entries.get_items():
+                self.println( ' '.join( tokens ) )
             self._prepare()
         return
+
+if __name__ == '__main__':
+	fn = '<selftest>'
+	pp = PrettyPrint()
+	pp.pre_begin_file()
+	pp.begin_file( fn )
+	for line in [
+
+        'procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----',
+         'r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st',
+         '1  0  52016 1444604   1192 11392964    0    0    12    84    2   20 20 11 68  1  0',
+         '0  0  52016 1443588   1192 11393000    0    0     0    71 1833 2378  8  5 86  1  0',
+         '1  0  52016 1444628   1192 11393024    0    0     0     1 1725 2283  7  5 88  0  0',
+         '1  0  52016 1445008   1192 11393020    0    0     0     0 1709 2257  7  5 88  0  0',
+         '0  0  52016 1443904   1192 11392952    0    0     0     0 1867 2427  9  5 86  0  0',
+
+	]:
+		pp.next_line( line )
+	pp.end_file( fn )
+	pp.post_end_file()
+	pp.report( final = True )
+
