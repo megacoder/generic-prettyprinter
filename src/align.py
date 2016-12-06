@@ -24,7 +24,7 @@ class	Align( object ):
 		return fmt.format( value + (pad * extra) )
 
 	def	_auto( self, key, value ):
-		if self.numeric[ key ]:
+		if self.numeric.get( key, False ):
 			return self._right( key, value )
 		if self.want_lj:
 			return self._left( key, value )
@@ -111,7 +111,7 @@ class	Align( object ):
 		self.nItems += 1
 		return
 
-	def	get_items( self, titles = 0, sort = lambda x : 0 ):
+	def	get_items( self, titles = 0, sort = False ):
 		# Let auto columns inherit the justification of their column data
 		for key in self.align_title.keys():
 			if self.align_title[key] == self._auto:
@@ -128,7 +128,9 @@ class	Align( object ):
 					self.align_title.get( key, self._auto )( key, token )
 				)
 			yield H,columns
-		if sort == True:
+		if sort == False:
+			sort = lambda x : 0
+		elif sort == True:
 			sort = lambda x : x
 		for N,tokens in enumerate(
 			sorted( self.items[self.titles:], key = sort )
