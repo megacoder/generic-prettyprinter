@@ -6,6 +6,7 @@
 import	os
 import	sys
 import  superclass
+import  align
 
 class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
@@ -19,35 +20,22 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def pre_begin_file( self, name = None ):
         super( PrettyPrint, self ).pre_begin_file( name )
-        self.widths  = dict()
-        self.entries = list()
+        self.entries = align.Align( lj = True )
         return
 
     def next_line( self, line ):
-        parts = map(
-            str.strip,
-            line.split( '#', 1 )[0].split()
-        )
-        nParts = len( parts )
+        items = line.split( '#', 1 )[0].split()
+        nItems = len( items )
         # Discard all but regular or bind-mount, lines
         try:
-            if (nParts == 4) or (nParts == 6):
-                for i, token in enumerate( parts ):
-                    key = str(i)
-                    if not key in self.widths:
-                        self.widths[key] = len( token )
-                    else:
-                        self.widths[key] = max(
-                            self.widths[key],
-                            len( token )
-                        )
+            if (nItems == 4) or (nItems == 6):
                 # Make sure mount options are in canonical order
-                options = parts[ 3 ].split( ',' )
+                options = items[ 3 ].split( ',' )
                 options.sort()
-                parts[ 3 ] = ','.join(
+                items[ 3 ] = ','.join(
                     options
                 )
-                self.entries.append( parts )
+                self.entries.add( items )
         except Exception, e:
             print >>sys.stderr, 'Error handling "{0}"'.format( line )
             print >>sys.stderr, e
@@ -55,26 +43,37 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def report( self, final = False ):
         if not final:
-            # Build formats for each column
-            fmt = dict()
-            for key in self.widths:
-                fmt[key] = '{{0:<{0}s}}'.format( self.widths[key] )
             # Output each line with columns according to formats
-            for parts in self.entries:
-                clauses = list()
-                for i, token in enumerate(parts ):
-                    key = str(i)
-                    clauses.append(
-                        fmt[key].format( token )
-                    )
+            for _,items in self.entries.get_items():
                 footnote = None
-                if len(parts)>=5 and parts[3]=='nfs' and parts[4]=='default':
+                if len(items)>=5 and items[3]=='nfs' and items[4]=='default':
                     footnote = self.footnote(
                         'NFS default options used; probably slow'
                     )
                 self.println(
-                    ' '.join( clauses ) +
+                    ' '.join( items ) +
                     ('\t*** See footnote %s'.format( footnote ) if footnote
                     else '')
                 )
         return
+
+if __name__ == '__main__':
+    fn = '<selftest>'
+    pp = PrettyPrint()
+    pp.pre_begin_file()
+    pp.begin_file( fn )
+    for line in [
+        'UUID=77aa3f76-8f52-49eb-a96b-0c9d72524164 / btrfs subvol=root  0 0',
+        'UUID=461d0ef4-1fa3-4c82-854e-3967610f30f1 /boot  ext4 defaults 1 2',
+        'UUID=9107d4e3-1572-42dd-bae6-2693f2481cc5 swap swap defaults 0 0',
+        'UUID="e5cc94fb-a78e-4f35-9b18-f430ce17c4ae" /home btrfs  defaults 0 0',
+        'UUID="ccb40cbc-a095-484e-bbd4-9789cbbc7cdf" /archive btrfs noauto,user 0 0',
+        '/home/opt	/opt	 none 	bind',
+        '/home/docker	/var/lib/docker none bind',
+        '/home/go	/go		none bind',
+    ]:
+            pp.next_line( line )
+    pp.end_file( fn )
+    pp.post_end_file()
+    pp.report( final = True )
+
