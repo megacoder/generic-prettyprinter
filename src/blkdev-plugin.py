@@ -5,6 +5,7 @@ import	os
 import	sys
 import	superclass
 import	math
+import	align
 
 class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
@@ -14,57 +15,54 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	__init__( self ):
 		super( PrettyPrint, self ).__init__()
-		return
-
-	def	reset( self ):
-		super( PrettyPrint, self ).reset()
-		self._prepare()
-		return
-
-	def	_prepare( self ):
-		self.devices = []
-		self.attributes = {}
-		self.widths = {}
+		self.items = align.Align( lj = True, titles = 1 )
+		self.items.add([
+			'Type', 'Name', 'Major', 'Minor'
+		])
 		return
 
 	def	begin_file( self, name ):
-		self.attributes = {}
-		return
-
-	def	_keep_width( self, s ):
-		n = len( s )
-		try:
-			self.widths[ s ] = max( self.widths[ s ], n )
-		except Exception, e:
-			self.widths[ s ] = n
+		self.attributes = dict()
 		return
 
 	def	next_line( self, line ):
-		tokens = line.split( '=', 1 )
-		if len(tokens) == 2:
-			field = tokens[0].strip()
-			value = tokens[1].strip()
-			self._keep_width( field )
-			self.attributes[field] = value
+		items = map(
+			str.strip,
+			line.split( '=', 1 )
+		)
+		if len(items) == 2:
+			self.attributes[ items[0] ] = items[1]
 		return
 
 	def	end_file( self, name ):
-		if 'DEVNAME' in self.attributes.keys():
-			self.devices.append( self.attributes )
+		items = [
+			self.attributes.get( 'DEVTYPE', 'N/A' ),
+			self.attributes.get( 'DEVNAME', '?' ),
+			self.attributes.get( 'MAJOR', '0' ),
+			self.attributes.get( 'MINOR', '0' )
+		]
+		self.items.add( items )
 		return
 
 	def	report( self, final = False ):
-		keys = sorted( self.widths.keys() )
-		fmts = {}
-		for key in keys:
-			fmts[ key ] = '%%-%ds' % self.widths[ key ]
-		for device in sorted( self.devices ):
-			line = ''
-			for key in keys:
-				if key in device:
-					s = device[ key ]
-				else:
-					s = ''
-				line += (fmts[key] % s)
-			self.println( line )
+		if final:
+			for _,items in self.items.get_items():
+				self.println( ' '.join( items ) )
 		return
+
+if __name__ == '__main__':
+	fn = '<selftest>'
+	pp = PrettyPrint()
+	pp.pre_begin_file()
+	pp.begin_file( fn )
+	for line in [
+		'MAJOR=8',
+		'MINOR=6',
+		'DEVNAME=vda',
+		'DEVTYPE=disk',
+	]:
+		pp.next_line( line )
+	pp.end_file( fn )
+	pp.post_end_file()
+	pp.report( final = True )
+
