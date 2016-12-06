@@ -30,9 +30,33 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
     def report( self, final = False ):
         if not final:
             self.lines.sort()
-            a = align.align()
+            a = align.Align()
             for parts in self.lines:
                 a.add( parts )
-            for parts in a.get_items():
+            for _,parts in a.get_items():
                 self.println( ' '.join( parts ) )
         return
+
+if __name__ == '__main__':
+	fn = '<selftest>'
+	pp = PrettyPrint()
+	pp.pre_begin_file()
+	pp.begin_file( fn )
+	for line in [
+            'bootparams: nisplus [NOTFOUND=return] files',
+            'ethers:     files',
+            'netmasks:   files',
+            'networks:   files',
+            'protocols:  files',
+            'rpc:        files',
+            'services:   files sss',
+            'netgroup:   files sss',
+            'publickey:  nisplus',
+            'automount:  files sss',
+            'aliases:    files nisplus',
+	]:
+		pp.next_line( line )
+	pp.end_file( fn )
+	pp.post_end_file()
+	pp.report( final = True )
+
