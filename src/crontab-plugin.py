@@ -1,8 +1,10 @@
 #!/usr/bin/python
+# vim: noet sw=4 ts=4
 
 import	os
 import	sys
 import	superclass
+import	align
 
 class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
@@ -13,58 +15,58 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		super( PrettyPrint, self ).__init__()
 		return
 
-	def	reset( self ):
-		super( PrettyPrint, self ).reset()
-		self._prepare()
-		return
-
-	def	_prepare( self ):
-		self.entries = []
-		self.vars    = []
-		self.widths  = {}
-		return
-
-	def	begin_file( self, name ):
-		super( PrettyPrint, self ).begin_file( name )
-		self._prepare()
+	def pre_begin_file( self ):
+		self.vars = []
+		self.items = align.Align( titles = 1 )
+		self.items.add([
+			'# MN',
+			'HR',
+			'DOM',
+			'MON',
+			'DOW',
+			'COMMAND ___'
+		])
+		alignment = 'aaaccl'
+		self.items.set_title_alignment( alignment )
+		self.items.set_alignment( alignment )
 		return
 
 	def	next_line( self, line ):
 		line = line.split( '#', 1 )[0].strip()
 		if line.find( '=' ) > -1:
-			tokens = line.split( '=', 1 )
-			self.vars.append( [ tokens[0].strip(), tokens[1].strip() ] )
+			tokens = map(
+				str.strip,
+				line.split( '=', 1 )
+			)
+			self.vars.append( '='.join( tokens ) )
 		else:
-			tokens = line.split()
-			if len(tokens) >= 6:
-				tokens[5] = tokens[5:]
-				for i in xrange( 0, 6 ):
-					try:
-						self.widths[i] = max( self.widths[i], len(tokens[i]) )
-					except:
-						self.widths[i] = len(tokens[i])
-				self.entries.append( tokens[:6] )
+			tokens = line.split( None, 5 )
+			self.items.add( tokens )
 		return
 
 	def	report( self, final = False ):
-		if len(self.vars) > 0:
-			for (n,v) in sorted(self.vars):
-				print '%s=%s' % (n, v)
-		if len(self.entries) > 0:
-			fmt = ''
-			sep = ''
-			for i in xrange( 0, 6 ):
-				fmt = fmt + ('%s%%%ds' % (sep, self.widths[i]))
-				sep = '  '
-			self.entries.sort()
-			for tokens in self.entries:
-				print fmt % (
-					tokens[0],
-					tokens[1],
-					tokens[2],
-					tokens[3],
-					tokens[4],
-					' '.join(tokens[5])
-				)
-		self._prepare()
+		if not final:
+			for line in self.vars:
+				self.println( line )
+			if len(self.vars) > 0:
+				self.println()
+			for _,items in self.items.get_items():
+				self.println( ' '.join( items ) )
 		return
+
+# Minimal skeleton for testing individual modules
+
+if __name__ == '__main__':
+	fn = '<selftest>'
+	pp = PrettyPrint()
+	pp.pre_begin_file()
+	pp.begin_file( fn )
+	for line in [
+		'MAILTO=mad@you.now',
+		'* * * * * echo can you hear me now'
+	]:
+		pp.next_line( line )
+	pp.end_file( fn )
+	pp.post_end_file()
+	pp.report( final = True )
+
