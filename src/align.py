@@ -8,17 +8,17 @@ import	re
 class	Align( object ):
 
 	def	_left( self, key, value ):
-	   width = self.widths.get( key, 7 )
+	   width = self.widths.get( key, 1 )
 	   fmt = '{{0:<{0}}}'.format( width )
 	   return fmt.format( value )
 
 	def	_right( self, key, value ):
-		width = self.widths.get( key, 7 )
+		width = self.widths.get( key, 1 )
 		fmt = '{{0:>{0}}}'.format( width )
 		return fmt.format( value )
 
 	def	_center( self, key, value, pad = ' ' ):
-		width = self.widths.get( key, 7 )
+		width = self.widths.get( key, 1 )
 		fmt = '{{0:>{0}}}'.format( width )
 		extra = (width - len( value )) / 2
 		return fmt.format( value + (pad * extra) )
@@ -100,7 +100,7 @@ class	Align( object ):
 			key = str(i)
 			self.widths[key] = max(
 				len(v),
-				self.widths.get( key, 7 )
+				self.widths.get( key, 1 )
 			)
 			# Note numberic columns once titles have been read
 			if self.nItems >= self.titles:
