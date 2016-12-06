@@ -18,5 +18,5 @@ if __name__ == '__main__':
 		pp.next_line( line )
 	pp.end_file( fn )
 	pp.post_end_file()
-	pp.report()
+	pp.report( final = True )
 
