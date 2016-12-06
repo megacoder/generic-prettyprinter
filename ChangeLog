@@ -1,3 +1,102 @@
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped revision level
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/slabinfo-plugin.py: Switched to align.Align()
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/crontab-plugin.py: Switched over to align.Align()
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Don't set default field width so large.
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/blkdev-plugin.py: Converted to align.Align()
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/fstab-plugin.py: Switched to align.Align()
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/run-me.skel: Be foer to flag final report
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/nsswitch-plugin.py: Switch to align.Align()
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/vmstat-plugin.py: Seitched to align.Align()
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Better
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/df-plugin.py: Get the report timing correct.
+
+2016-12-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/arp-plugin.py: ALign columns pleasingly
+
+2016-12-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Let auto-align titles inherit justification of their
+	column data
+
+2016-12-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/run-me.skel: Sample driver to test an individual module in
+	standalone fashion.
+
+2016-12-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ipneigh-plugin.py: Print neighborhood in IP order
+
+2016-12-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/arp-plugin.py: Use align.Align() class with custom sorting.
+
+2016-12-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Iteration index variable undefined outside of 'for'
+	scope.
+
+2016-12-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Allows user-defined sorting of non-header lines.
+
+2016-12-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Added sort ability
+
+2016-12-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ipneigh-plugin.py: Switched to align.Align
+
+2016-12-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Cleanup
+
+2016-12-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Added spiffy sorting.
+
+2016-12-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Justify on a per-field basis
+
+2016-10-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Fixed df and pam modules
+
 2016-10-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* setup.py: Bumped revision
