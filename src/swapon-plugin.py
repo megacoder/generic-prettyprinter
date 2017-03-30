@@ -32,7 +32,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                 mountpoint = tokens[0]
                 self.areas[ mountpoint ] = tokens
                 self.widths = map(
-                    labmda i : max(
+                    lambda i : max(
                         self.widths[i],
                         len( tokens[i] )
                     ),
