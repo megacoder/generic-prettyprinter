@@ -236,13 +236,15 @@ class   MetaPrettyPrinter( object ):
             )
         return
 
-    def footnote( self, s ):
+    def next_footnote_pos( self ):
         if not self.sc_footnotes:
             self.sc_footnotes = []
             self.sc_nFootnotes = 0
+        return  self.sc_nFootnotes + 1
+
+    def footnote( self, s ):
         self.sc_footnotes.append( s )
-        self.sc_nFootnotes += 1
-        return self.sc_nFootnotes
+        return self.next_footnote_pos()
 
     def show_footnotes( self, title = 'Footnotes' ):
         if self.sc_footnotes:
