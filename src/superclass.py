@@ -244,19 +244,18 @@ class   MetaPrettyPrinter( object ):
         self.sc_nFootnotes += 1
         return self.sc_nFootnotes
 
-    def show_footnotes( self ):
+    def show_footnotes( self, title = 'Footnotes' ):
         if self.sc_footnotes:
             self.println()
-            title = 'Footnotes'
             self.println( title )
             self.println( '-' * len( title ) )
             self.println()
+            fmt = '{{0:{0}d}}. {{1}}'.format(
+                len( str( self.sc_nFootnotes ) )
+            )
             for n,s in enumerate( self.sc_footnotes ):
                 self.println(
-                    '{0:2d}: {1}'.format(
-                        n+1,
-                        s
-                    )
+                    fmt.format( n+1, s )
                 )
             self.sc_footnotes = None
         return

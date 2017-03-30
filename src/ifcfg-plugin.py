@@ -44,7 +44,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def pre_begin_file( self, name = None ):
         self.iface  = dict(
-            printed   = False
+            used   = False
         )
         self.prolog = list()
         return
@@ -78,39 +78,37 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             the interest of clarity, try to intuit the companion
             values if a related setting is used. """
         #
-        footnotes = []
+        # footnotes = []
         if 'DEVICE' in iface and 'NAME' not in iface:
-            footnotes.append( 'Intuited NAME from DEVICE' )
+            # footnotes.append( 'Intuited NAME from DEVICE' )
+            self.footnote( 'Intuited NAME from DEVICE' )
             iface['NAME'] = iface['DEVICE']
         if 'NAME' not in iface:
-            footnotes.append( 'No name for ifcfg {0}'.format( iface ) )
+            # footnotes.append( 'No name for ifcfg {0}'.format( iface ) )
+            self.footnote( 'No name for ifcfg {0}'.format( iface ) )
             iface['NAME'] = '***'
         #
         if 'NAME' in iface and 'DEVICE' not in iface:
-            footnotes.append( 'Intuited DEVICE from NAME' )
+             #footnotes.append( 'Intuited DEVICE from NAME' )
+             self.footnote( 'Intuited DEVICE from NAME' )
             iface['DEVICE'] = iface['NAME']
         #
         if 'MASTER' in iface and 'TYPE' not in iface:
-            footnotes.append( 'Interpreted as bonded interface' )
+            # footnotes.append( 'Interpreted as bonded interface' )
+            self.footnote( 'Assuming this is a bonded interface' )
             iface['TYPE'] = 'Bonding'
         #
         if not 'TYPE' in iface:
-            footnotes.append( 'Assuming type is "Ethernet"' )
+            # footnotes.append( 'Assuming type is "Ethernet"' )
+            self.footnote( 'Assuming type is "Ethernet"' )
             iface[ 'TYPE' ] = 'Ethernet'
         #
         if 'MTU' not in iface:
             mtu = '1500'
-            footnotes.append( 'MTU missing; assuming {0}'.format( mtu ) )
+            # footnotes.append( 'MTU missing; assuming {0}'.format( mtu ) )
+            self.footnote( 'MTU missing; assuming {0}'.format( mtu ) )
             iface['MTU'] = mtu
         # print >>sys.stderr, iface
-        if len(footnotes):
-            title = 'On Second Thought'
-            self.println()
-            self.println( title )
-            self.println( '-' * len(title) )
-            self.println()
-            for footnote in footnotes:
-                self.println( footnote )
         return iface
 
     def post_end_file( self ):
@@ -118,7 +116,6 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         iface = self._normalize( self.iface )
         name = iface['NAME']
         self.ifcfgs[name] = iface
-        self.report()
         return
 
     def _get_vlans_for( self, name ):
@@ -130,17 +127,6 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             name for name in self.ifcfgs if name.startswith( vname )
         ]
         return vlans
-
-    def _get_names_for_type( self, theType, seen = False ):
-        """ Return a list of interface names of KIND=kind. If none,
-            return None. """
-        names = [
-            name for name in self.ifcfgs if (
-                (self.ifcfgs[name]['TYPE'] == theType) and
-                (self.ifcfgs[name]['printed'] == seen)
-            )
-        ]
-        return names if len(names) else None
 
     def _get_bridge_members( self, name ):
         """ Get names of interfaces which mention the desired bridge name.
@@ -178,9 +164,8 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             self.println( '{0}{1}'.format( padding, line ) )
         return
 
-    def _network_tree( self, theType, components = None, indent = 0 ):
-        members = self._get_names_for_type( theType )
-        for name in members:
+    def _network_tree( self, node, components = None, indent = 0 ):
+        for name in self._get_names_for_type( theType ):
             IP = self._get_ipaddr_for( name )
             title = '{0}{1}'.format(
                 name,
@@ -213,19 +198,9 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                     self.println( 'Dunno about "{0}".'.format( child ) )
         return
 
-    def _find_all( self, t, v = None, n = None ):
-        candidates = [
-            c for x in self.ifcfgs if (
-                self.ifcfgs[c]['TYPE'] == t and not self.ifcfgs[c]['seen']
-            )
-        ]
-        if not v:
-            return candidates
-        members = [
-            c for c in candidates if v in self.ifcfgs[c] and
-            self.ifcfgs[c][v] == n
-        ]
-        return members
+    def _used( self, node, value = True ):
+        node['used'] == value
+        return
 
     def _tree( self, n, indent = 0 ):
         for vlan in self.vlans( n ):
@@ -251,6 +226,37 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                 self._tree( n )
         return
 
+    def _find_all( self, wanted, v = None, n = None ):
+        # Gather all unused nodes of this type
+        candidates = [
+            c for c in self.ifcfgs if (
+                self.ifcfgs[c]['TYPE'] == wanted and not self.ifcfgs[c]['used']
+            )
+        ]
+        if not v:
+            return candidates
+        # Filter candidates by checking value of the named attribute
+        members = [
+            c for c in candidates if v in self.ifcfgs[c] and
+            self.ifcfgs[c][v] == n
+        ]
+        return members
+
+    def _node_names_of_type( self, wanted ):
+        names = [
+            n['NAME'] for n in self.ifcfgs if n['TYPE'] == wanted
+        ]
+        return names
+
+    def _get_names_for_type( self, wanted, used = False ):
+        names = [
+            name for name in self.ifcfgs if (
+                (self.ifcfgs[name]['TYPE'] == wanted) and
+                (self.ifcfgs[name]['used'] == used)
+            )
+        ]
+        return names if len(names) else None
+
     def _final_report( self ):
         self.println()
         title = 'S U M M A R Y'
@@ -258,6 +264,12 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         self.println( '=' * len( title ) )
         found_any = False
         # Pass 1: construct bridged interfaces
+        bridges = self._node_names_of_type( 'Bridge' )
+        if bridges:
+            self._network_tree( node, [ 'Bond', 'Ethernet' ] )
+            pass
+        for key in sorted( self_get_nodes( 'Bridge' ) ):
+            pass
         self._network_tree( 'Bridge', [ 'Bond', 'Ethernet' ] )
         if True:
             return
