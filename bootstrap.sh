@@ -1,6 +1,7 @@
 #!/bin/zsh
 if [ $# -eq 0 ]; then
-	set -- bdist --format=bztar
+	# set -- bdist --format=bztar
+	set -- bdist_egg
 	# set -- bdist --format=gztar
 	# set -- bdist --format=rpm
 fi
