@@ -26,7 +26,10 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		tokens = line.split( '#', 1 )[0].split()
 		if len(tokens) > 0:
 			key = tokens[0].lower()
-			self.groups[key] = self.groups.get(key,list()).append(tokens)
+			if key not in self.groups:
+				self.groups[ key ] = [ tokens ]
+			else:
+				self.groups[ key ].append( tokens )
 		return
 
 	def report( self, final = False ):
@@ -36,10 +39,11 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			# One pass to calculate the widths of this group columns
 			widths = dict()
 			for tokens in self.groups[key]:
-				widths = map(
-					lambda i: max( widths.get(i,0), len(tokens[i])),
-					range( len(tokens) )
-				)
+				for i in range( len( tokens ) ):
+					widths[i] = max(
+						widths.get( i, 0 ),
+						len( tokens[ i ] )
+				 )
 			# Build the column formats
 			fmts = map(
 				lambda i: '{{0:{0}}}'.format( widths[i] ),
@@ -52,5 +56,5 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 					lambda i : fmts[i].format( tokens[i] ),
 					range( len( tokens ) )
 				)
-				self.println( ' '.join( cold ) )
+				self.println( ' '.join( cols ) )
 		return
