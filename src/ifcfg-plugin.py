@@ -89,8 +89,8 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             iface['NAME'] = '***'
         #
         if 'NAME' in iface and 'DEVICE' not in iface:
-             #footnotes.append( 'Intuited DEVICE from NAME' )
-             self.footnote( 'Intuited DEVICE from NAME' )
+            # footnotes.append( 'Intuited DEVICE from NAME' )
+            self.footnote( 'Intuited DEVICE from NAME' )
             iface['DEVICE'] = iface['NAME']
         #
         if 'MASTER' in iface and 'TYPE' not in iface:
