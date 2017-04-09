@@ -26,7 +26,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		tokens = line.split( '#', 1 )[0].split()
 		if len(tokens) > 0:
 			key = tokens[0].lower()
-			self.groups[key] = self.groups(key,list()).append(tokens)
+			self.groups[key] = self.groups.get(key,list()).append(tokens)
 		return
 
 	def report( self, final = False ):
