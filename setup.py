@@ -3,7 +3,7 @@
 
 VERSION	= '1.0.46'
 
-from	distutils.core			import	setup
+from	setuptools				import	setup
 import	glob
 import	os
 
