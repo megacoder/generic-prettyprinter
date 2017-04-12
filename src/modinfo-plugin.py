@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# vim: noet sw=4 ts=4
 
 import	os
 import	sys
@@ -13,40 +14,33 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		super( PrettyPrint, self ).__init__()
 		return
 
-	def	reset( self ):
-		super( PrettyPrint, self ).reset()
-		self._prepare()
-		return
-
-	def	pre_begin_file( self ):
-		self.info   = dict()
+	def	pre_begin_file( self, fn = None ):
+		self.info = dict()
 		return
 
 	def	next_line( self, line ):
-		tokens = line.split( ':', 1 )
 		tokens = map(
-		    str.strip,
-		    line.split( ':', 1 )
+			str.strip,
+			line.split( ':', 1 )
 		)
 		if len(tokens) == 2:
-			field = tokens[0]
-			value = tokens[1]
-			if field == "filename":
-			    # Line break
-			    self.report()
+			field			   = tokens[0]
+			value			   = tokens[1]
 			self.info[ field ] = value
 		return
 
 	def	report( self, final = False ):
-	    if not final:
-		if self.info != {}:
-		    maxkey = max(
-			7,
-			map( ken, self.info )
-		    )
-		    fmt = '{{0:<{0}}}}: {{1}}'.format( maxkey )
-		    for key in sorted( self.info ):
-			self.println(
-			    fmt.format( key, self.info[key] )
+		if final: return
+		width = max(
+			14,
+			map(
+				len,
+				self.info.keys()
 			)
-	    return
+		)
+		fmt = '{{0:<{0}}}: {{1}}'.format( width )
+		for key in sorted( self.info.keys() ):
+			self.println(
+				fmt.format( key, self.info[ key ] )
+			)
+		return
