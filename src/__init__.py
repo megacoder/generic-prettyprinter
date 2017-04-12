@@ -4,6 +4,7 @@
 import  os
 import  sys
 import  optparse
+import  importlib
 
 class GenericPrettyPrinter( object ):
 
@@ -81,14 +82,13 @@ class GenericPrettyPrinter( object ):
         )
         opts, args = p.parse_args()
         # Here we go...
-        dll_name = '%s-plugin' % opts.kind
-        # DEBUG print >>sys.stderr, 'Loading module %s' % dll_name
+        module_name = '{0}-plugin'.format( opts.kind )
         try:
             if opts.debug_level > 0:
                 print >>sys.stderr, 'Loading module {0}'.format(
-                    dll_name
+                    module_name
                 )
-            dll = __import__(dll_name)
+            module = importlib.import_module( module_name )
         except Exception, e:
             print >>sys.stderr, 'No prettyprinter for "%s".' % opts.kind
             print >>sys.stderr, e
@@ -99,7 +99,7 @@ class GenericPrettyPrinter( object ):
             except Exception, e:
                 print >>sys.stderr, 'Cannot open "%s" for writing.' % opts.ofile
                 return True
-        retval = self._session( dll.PrettyPrint, args )
+        retval = self._session( module.PrettyPrint, args )
         return retval
 
 if __name__ == '__main__':
