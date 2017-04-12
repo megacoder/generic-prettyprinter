@@ -1,5 +1,30 @@
 2017-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
+	* setup.py: Bumped revision level
+
+2017-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/help-plugin.py: Show list of defined plugins
+
+2017-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/modinfo-plugin.py: Removed bitrot
+
+2017-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/__init__.py: Cleaned up plugin loading.
+
+2017-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Allow use of either python eggs or tarballs
+
+2017-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Cleaned up footnote ordering, returning the footnote
+	number to the caller.
+
+2017-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
 	* setup.py: Bumped revision for superclass update.
 
 2017-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
