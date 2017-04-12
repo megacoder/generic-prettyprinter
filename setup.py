@@ -3,7 +3,13 @@
 
 VERSION	= '1.0.47'
 
-from	setuptools				import	setup
+try:
+	# If this works, you can use eggs
+	from	setuptools				import	setup
+except:
+	# If this works, you get a tarball
+	from	distutils.core			import	setup
+
 import	glob
 import	os
 
