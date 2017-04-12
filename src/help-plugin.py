@@ -1,13 +1,10 @@
-#/usr/bin/python
+##/usr/bin/python
 # vim: et sw=4 ts=4
-
-########################################################################
-# Basic pretty-printer module just copies lines to stdout.
-########################################################################
 
 import  os
 import  sys
 import  superclass
+import  importlib
 
 class PrettyPrint( superclass.MetaPrettyPrinter ):
     NAME        = 'plugins'
@@ -16,43 +13,51 @@ class PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def __init__( self ):
         super( PrettyPrint, self ).__init__()
-        self.names = []
         return
 
-    def _add_name( self, name ):
-        if not name.endswith( '-plugin.py' ):
-            name += '-plugin.py'
-        self.names.append( name )
-        return
+    # Regardless of what filenames are passed, do none
+    def ignore( self, fn ):
+        return True
+    def pre_begin_file( self, fn = None ):
+        pass
+    def begin_file( self, fn = None ):
+        pass
+    def next_line( self, line ):
+        pass
+    def close_file( self, fn = None ):
+        pass
+    def post_close_file( self, fn = None ):
+        pass
 
-    def do_open_file( self, name = None ):
-        if name:
-            self._add_name( name )
-        return
-
-    def do_name( self, name ):
-        if name:
-            self._add_name( name )
-        return
-
-    def finish( self ):
-        if self.names == []:
-            for name in os.listdir( sys.path[0] ):
-                if name.endswith( '-plugin.py' ):
-                    self._add_name( name )
-        for name in sorted( self.names ):
-            modname = name[:-3]
+    def report( self, final = False ):
+        if not final: return
+        plugin_dir = os.path.dirname(
+            os.path.realpath( __file__ )
+        )
+        TAIL = '-plugin.py'
+        L_TAIL = len( TAIL )
+        names = [
+            # Take 'FOO-plugin.py' and record 'FOO'
+            f[:-L_TAIL] for f in os.listdir(plugin_dir) if f.endswith(
+                TAIL
+            )
+        ]
+        width = max(
+            [ 6 ] + map( len, names )
+        )
+        fmt = '{{0:{0}s}} {{1}}'.format( width )
+        for name in sorted( names ):
             try:
-                dll = __import__( modname )
+                module_name = '{0}-plugin'.format( name )
+                module = importlib.import_module( module_name )
             except Exception, e:
-                print >>sys.stderr, 'help: cannot import "%s".' % (
-                    modname
-                )
-                print >>sys.stderr, e
+                print >>sys.stderr, 'Cannot import module "{0}"'.format( module_name )
                 raise e
-            try:
-                o = dll.PrettyPrint()
-                o.help()
-            except Exception, e:
-                pass
+            pp = module.PrettyPrint()
+            self.println(
+                fmt.format(
+                    name,
+                    ' '.join( pp.DESCRIPTION.splitlines() )
+                )
+            )
         return
