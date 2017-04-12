@@ -28,7 +28,7 @@ class   MetaPrettyPrinter( object ):
         self.sc_filename     = '{stdin}'
         self.sc_multi        = 0
         self.sc_do_backslash = None
-        self.sc_footnotes    = None
+        self.sc_footnotes    = []
         return
 
     def get_out( self ):
@@ -237,14 +237,12 @@ class   MetaPrettyPrinter( object ):
         return
 
     def next_footnote_pos( self ):
-        if not self.sc_footnotes:
-            self.sc_footnotes = []
-            self.sc_nFootnotes = 0
-        return  self.sc_nFootnotes + 1
+        return len(self.sc_footnotes) + 1
 
     def footnote( self, s ):
+        N = self.next_footnote_pos()
         self.sc_footnotes.append( s )
-        return self.next_footnote_pos()
+        return N
 
     def show_footnotes( self, title = 'Footnotes' ):
         if self.sc_footnotes:
@@ -252,8 +250,9 @@ class   MetaPrettyPrinter( object ):
             self.println( title )
             self.println( '-' * len( title ) )
             self.println()
+            N = len( self.sc_footnotes )
             fmt = '{{0:{0}d}}. {{1}}'.format(
-                len( str( self.sc_nFootnotes ) )
+                len( str(N) )
             )
             for n,s in enumerate( self.sc_footnotes ):
                 self.println(
