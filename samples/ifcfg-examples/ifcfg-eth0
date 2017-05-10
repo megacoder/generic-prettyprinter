@@ -1,0 +1,6 @@
+DEVICE="eth0"
+BOOTPROTO=none
+HWADDR="00:10:E0:8A:6A:74"
+ONBOOT="no"
+MASTER=bond0
+SLAVE=yes

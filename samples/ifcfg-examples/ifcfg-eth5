@@ -1,0 +1,8 @@
+#This file was dynamically created by Oracle VM Manager.           Please do not edit
+DEVICE=eth5
+BOOTPROTO=none
+HWADDR=90:E2:BA:45:61:B1
+ONBOOT=yes
+MASTER=bond1
+SLAVE=yes
+ETHTOOL_OPTS="-K eth5 gro off"

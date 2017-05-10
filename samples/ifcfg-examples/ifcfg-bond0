@@ -1,0 +1,8 @@
+DEVICE=bond0
+BONDING_OPTS="mode=1 miimon=250 use_carrier=1 updelay=500 downdelay=500 primary_reselect=2 primary=eth0"
+BOOTPROTO="static"
+DNS1="172.17.112.3"
+DNS2="172.17.112.5"
+IPADDR="172.17.118.88"
+NETMASK="255.255.255.0"
+ONBOOT=yes

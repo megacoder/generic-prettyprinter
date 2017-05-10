@@ -1,0 +1,9 @@
+#This file was dynamically created by Oracle VM Manager. Please do not edit
+DEVICE=1028241dc6
+TYPE=Bridge
+IPADDR=172.17.117.88
+NETMASK=255.255.255.0
+BOOTPROTO=static
+MACADDR=90:E2:BA:45:61:B0
+ONBOOT=yes
+DELAY=0
