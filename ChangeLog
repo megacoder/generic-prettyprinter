@@ -1,3 +1,29 @@
+2017-05-13  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped revision
+
+2017-05-13  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/superclass.py, src/yum-plugin.py: Detect duplicate yum repo
+	channel definitions
+
+2017-05-10  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/ifcfg-examples/ifcfg-1028241dc6,
+	samples/ifcfg-examples/ifcfg-bond0,
+	samples/ifcfg-examples/ifcfg-bond1,
+	samples/ifcfg-examples/ifcfg-eth0,
+	samples/ifcfg-examples/ifcfg-eth1,
+	samples/ifcfg-examples/ifcfg-eth2,
+	samples/ifcfg-examples/ifcfg-eth3,
+	samples/ifcfg-examples/ifcfg-eth4,
+	samples/ifcfg-examples/ifcfg-eth5, samples/ifcfg-examples/ifcfg-lo: 
+	Representative network layout
+
+2017-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Updated change log.
+
 2017-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* setup.py: Bumped revision level
