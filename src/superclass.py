@@ -116,7 +116,7 @@ class   MetaPrettyPrinter( object ):
         self.sc_lineno = 0
         return
 
-    def post_end_file( self ):
+    def post_end_file( self, name = None ):
         self.report()
         return
 

@@ -12,7 +12,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	__init__( self ):
 		super( PrettyPrint, self ).__init__()
-		self.pre_begin_file( None )
+		self.channel_names = dict()
 		return
 
 	def	ignore( self, fn ):
@@ -20,23 +20,46 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	pre_begin_file( self, name = None ):
 		super( PrettyPrint, self ).pre_begin_file( name )
-		self.repos = list()
-		self._new_repo()
+		self.repo_filename = name if name else '_ORPHAN_'
+		self._channel_start()
+		self.max_width         = 6
+		self.channels      = dict()
 		return
 
-	def	_new_repo( self, name = None ):
-		self.repo = dict( _name = name )
+	def	_channel_start( self, channel_name = None ):
+		if channel_name:
+			if channel_name in self.channel_names:
+				self.footnote(
+					'Channel {0} already defined in "{0}"'.format(
+						self.channel_names[ channel ]
+					)
+				)
+			else:
+				self.channel_names[ channel_name ] = self.repo_filename
+		self.channel_name = channel_name
+		self.channel_attrs = dict()
 		return
 
-	def	_end_repo( self ):
-		if '_name' in self.repo and self.repo['_name']:
-			self.repos.append( self.repo )
+	def	_channel_end( self ):
+		if self.channel_name:
+			# Calculate width of longest attribute seen
+			width = max(
+				map(
+					len,
+					self.channel_attrs
+				)
+			)
+			self.max_width = max( self.max_width, width )
+			#
+			self.channels[ self.channel_name ] = self.channel_attrs
+			#
+			self.channel_name = None
 		return
 
 	def	next_line( self, line ):
 		if line.startswith( '[' ):
-			self._end_repo()
-			self._new_repo( line.strip()[1:-1] )
+			self._channel_end()
+			self._channel_start( line.strip() )
 		else:
 			tokens = map(
 				str.strip,
@@ -45,42 +68,32 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			if len(tokens) == 2:
 				name  = tokens[0]
 				value = tokens[1]
-				self.repo[name] = value
+				self.channel_attrs[ name ] = value
 		return
 
 	def	post_end_file( self, name = None ):
-		self._end_repo()
-		self.report()
+		self._channel_end()
+		super( PrettyPrint, self ).post_end_file( name )
 		return
 
 	def	report( self, final = False ):
 		if final: return
+		# Find the longest repo attribute amongst all those
+		# defined in this file.
+		fmt = ' {{0:>{0}}} = {{1}}'.format( self.max_width )
 		others = False
-		for feed in sorted(
-			self.repos,
-			key = lambda f: f['_name'].lower()
-		):
+		for channel in sorted( self.channels, key = lambda k : k.lower() ):
 			if others:
 				self.println()
 			others = True
-			self.println(
-				'[{0}]'.format(
-					feed['_name']
-				)
-			)
+			self.println( '{0}'.format( channel ) )
 			self.println()
-			fmt = ' {0:>%d} = {1}' % max(
-				map(
-					len,
-					[ key for key in feed ]
-				)
-			)
-			for key in sorted( feed ):
-				if key[0] != '_':
-					self.println(
-						fmt.format(
-							key,
-							feed[key]
-						)
+			attrs = self.channels[ channel ]
+			for key in sorted( attrs, key = lambda k : k.lower() ):
+				self.println(
+					fmt.format(
+						key,
+						attrs[ key ]
 					)
+				)
 		return
