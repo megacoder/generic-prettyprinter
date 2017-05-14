@@ -88,6 +88,9 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             self.footnote( 'No name for ifcfg {0}'.format( iface ) )
             iface['NAME'] = '***'
         #
+        if 'BONDING_OPTS' in iface and 'TYPE' not in iface:
+            iface[ 'TYPE' ] = 'Bond'
+        #
         if 'NAME' in iface and 'DEVICE' not in iface:
             # footnotes.append( 'Intuited DEVICE from NAME' )
             self.footnote( 'Intuited DEVICE from NAME' )
