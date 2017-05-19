@@ -58,14 +58,21 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				fields
 			)
 		)
-		fmt = '{{0:>{0}}} {{1}}'.format(
-			width+1
+		fmt = 'Field {{0}}: {{1:>{0}}} {{2}}'.format(
+			width
 		)
 		#
+		self.println(
+			'Original:  {0}'.format( line )
+		)
+		self.println()
 		values = self.decode( tokens )
-		for i, field in fields:
+		for i, field in enumerate( fields ):
 			self.println(
-				fields[ i ] + ':',
-				values[ i ]
+				fmt.format(
+					i + 1,
+					fields[ i ],
+					values[ i ],
+				)
 			)
 		return
