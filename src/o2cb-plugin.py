@@ -23,12 +23,7 @@ class	PrettyPrint( MetaPrettyPrinter ):
 
 	def	__init__( self ):
 		super( PrettyPrint, self ).__init__()
-		return
-
-	def	reset( self ):
-		""" Initialize for this session. """
-		super( PrettyPrint, self ).reset()
-		self.pre_begin_file( None )
+		self.settings = dict()
 		return
 
 	def	pre_begin_file( self, name  ):
@@ -53,22 +48,20 @@ class	PrettyPrint( MetaPrettyPrinter ):
 
 	def	report( self, final = False ):
 		if not final:
-			fmt = '{{{0:{0}}} = {{1}}{{2}}'.format( self.max_name )
+			fmt = '{{{0:>{0}}} = {{1}}'.format( self.max_name )
 			for key in sorted( self.settings ):
-				footnote = None
+				value = self.settings[ key ]
 				if not key in PrettyPrint.KEYWORDS:
 					footnote = self.footnote(
 						'"{0}" is not known to me; is it new?'.format(
 							key
 						)
 					)
-				self.println( fmt % (key, self.settings[key]) )
+					value += ' # {0}'.format( footnote )
 				self.println(
 					fmt.format(
 						key,
-						self.settings[key],
-						'\t*** See footnote {0}'.format(footnote) if
-						footnote else ''
+						value
 					)
 				)
 		return
