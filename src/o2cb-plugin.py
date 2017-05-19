@@ -34,10 +34,8 @@ class	PrettyPrint( MetaPrettyPrinter ):
 	def	next_line( self, line ):
 		tokens = map(
 			str.strip,
-			map(
-				# Drop comments, then split remainder by equal sign
-				line.split( '#', 1 )[0].split( '=', 1 )
-			)
+			# Drop comments, then split remainder by equal sign
+			line.split( '#', 1 )[0].split( '=', 1 )
 		)
 		if len(tokens) == 2:
 			name  = tokens[0]
@@ -48,9 +46,11 @@ class	PrettyPrint( MetaPrettyPrinter ):
 
 	def	report( self, final = False ):
 		if not final:
-			fmt = '{{{0:>{0}}} = {{1}}'.format( self.max_name )
+			fmt = '{{0:>{0}}} = {{1}}'.format( self.max_name )
 			for key in sorted( self.settings ):
 				value = self.settings[ key ]
+				quote = "'" if "'" not in value else '"'
+				value = quote + value + quote
 				if not key in PrettyPrint.KEYWORDS:
 					footnote = self.footnote(
 						'"{0}" is not known to me; is it new?'.format(
