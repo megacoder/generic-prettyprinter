@@ -1,3 +1,12 @@
+2017-05-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/pam-plugin.py: Don't sort "-<group>" separately from
+	"<group>"
+
+2017-05-21  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: More
+
 2017-05-21  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* setup.py, src/kdump-plugin.py: Learned some python since I wrote
