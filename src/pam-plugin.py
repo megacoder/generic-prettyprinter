@@ -12,17 +12,16 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 	NAME = 'pam'
 	DESCRIPTION="""Display /etc/pam.d in conical style."""
 
+	GUTTER = ' '
+
 	def __init__( self ):
 		super( PrettyPrint, self ).__init__()
 		self.rules = dict()
 		return
 
 	def	pre_begin_file( self, name = None ):
-		self.rules    = dict()
-		self.maxlen_g = 0
-		self.maxlen_v = 0
-		self.maxlen_t = 0
-		self.maxlen_a = 0
+		self.rules  = dict()
+		self.widths = dict()
 		return
 
 	def	next_line( self, line ):
@@ -30,41 +29,44 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			str.strip,
 			line.split( '#', 1 )[0].split()
 		)
-		N = len( tokens )
-		if N >= 3:
+		L = len( tokens )
+		if L >= 3:
 			group  = tokens[0]
-			verb   = tokens[1]
-			target = tokens[2]
-			args   = '' if N == 3 else ' '.join( tokens[3:] )
-			if group not in self.rules:
-				self.rules[group] = []
-			self.rules[group].append( (verb, target, args) )
-			self.maxlen_g = max( self.maxlen_g, len( group  ) )
-			self.maxlen_v = max( self.maxlen_v, len( verb   ) )
-			self.maxlen_t = max( self.maxlen_v, len( target ) )
-			self.maxlen_a = max( self.maxlen_a, len( args   ) )
+			apply  = tokens[1]
+			dll    = tokens[2]
+			if L == 3:
+				args = ''
+			else:
+				args   = ' '.join( tokens[3:] )
+			tokens = [ group, apply, dll, args ]
+			key = group[1:] if group.startswith( '-' ) else group
+			# Want maximum widths of fields
+			for i in range( len( tokens ) ):
+				self.widths[i] = max(
+					self.widths.get( i, 0 ),
+					len( tokens[i] )
+				)
+			# Append this group of tokens to our list
+			if key not in self.rules:
+				self.rules[ key ] = []
+			self.rules[ key ].append( tokens )
 		return
 
 	def	report( self, final = False ):
-		fmt = ' '.join([
-			'{{0:{0}}}'.format( self.maxlen_g ),
-			'{{1:{0}}}'.format( self.maxlen_v ),
-			'{{2:{0}}}'.format( self.maxlen_t ),
-			'{{3:{0}}}'.format( self.maxlen_a ),
-		])
-		last_group = None
-		for group in sorted( self.rules ):
-			for (n,d,a) in self.rules[group]:
-				if group != last_group:
-					self.println()
-					last_group = group
-				self.println(
-					fmt.format(
-						group,
-						n,
-						d,
-						a
+		if not final:
+			fmts = [
+				'{{0:<{0}}}'.format(self.widths[i]) for i in self.widths
+			]
+			for key in sorted(
+				self.rules,
+				key = lambda s : s.lower()
+			):
+				self.println()
+				for tokens in self.rules[ key ]:
+					self.println(
+						PrettyPrint.GUTTER.join([
+							fmts[i].format( tokens[i] )
+								for i in range( len( tokens ) )
+						])
 					)
-				)
-		self.rules = dict()
 		return
