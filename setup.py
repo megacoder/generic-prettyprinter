@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python27
 # vim: noet sw=4 ts=4
 
 VERSION	= '1.0.54'
@@ -6,12 +6,17 @@ VERSION	= '1.0.54'
 try:
 	# If this works, you can use eggs
 	from	setuptools				import	setup
+	print 'Able to use EGG tools.'
 except:
 	# If this works, you get a tarball
 	from	distutils.core			import	setup
+	print 'Falling back to distutils.'
 
 import	glob
 import	os
+
+with open( 'src/version.py', 'w' ) as f:
+	print >>f, 'version="{0}"'.format( VERSION )
 
 setup(
 	name             =	'gpp',
