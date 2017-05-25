@@ -1,3 +1,12 @@
+2017-05-25  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* setup.py, src/superclass.py, src/udev-plugin.py: Intensified
+	syntax checking for UDEV rules.
+
+2017-05-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: History
+
 2017-05-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* setup.py, src/pam-plugin.py: Don't sort "-<group>" separately from
