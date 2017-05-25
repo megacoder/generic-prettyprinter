@@ -16,7 +16,7 @@ import	glob
 import	os
 
 with open( 'src/version.py', 'w' ) as f:
-	print >>f, 'version="{0}"'.format( VERSION )
+	print >>f, 'Version="{0}"'.format( VERSION )
 
 setup(
 	name             =	'gpp',
