@@ -31,6 +31,9 @@ class   MetaPrettyPrinter( object ):
         self.sc_footnotes    = []
         return
 
+    def get_lineno( self ):
+        return self.sc_lineno
+
     def get_out( self ):
         return self.sc_out
 
@@ -71,9 +74,17 @@ class   MetaPrettyPrinter( object ):
 
     def process( self, name ):
         if name == '-':
-            self.do_open_file( sys.stdin )
+            try:
+                self.do_open_file( sys.stdin )
+            except Exception, e:
+                self.error( 'error handling {stdin}' )
+                raise e
         elif os.path.isfile( name ):
-            self._do_file( name )
+            try:
+                self._do_file( name )
+            except Exception, e:
+                self.error( 'processing "{0}"'.format( name ) )
+                raise e
         elif os.path.isdir( name ):
             try:
                 names = sorted( os.listdir( name ) )
@@ -85,12 +96,19 @@ class   MetaPrettyPrinter( object ):
             self.sc_multi += len( names )
             for entry in names:
                 if not self.ignore( entry ):
-                    self.process(
-                        os.path.join(
-                            name,
-                            entry
+                    try:
+                        self.process(
+                            os.path.join(
+                                name,
+                                entry
+                            )
                         )
-                    )
+                    except Exception, e:
+                        self.error(
+                            'could not process derived file "{0}"'.format(
+                                name
+                            )
+                        )
         elif os.path.islink( name ):
             self.error( 'ignoring symlink "%s".' % name )
         else:
