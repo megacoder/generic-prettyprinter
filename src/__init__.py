@@ -5,6 +5,7 @@ import  os
 import  sys
 import  optparse
 import  importlib
+import  version
 
 class GenericPrettyPrinter( object ):
 
@@ -41,6 +42,7 @@ class GenericPrettyPrinter( object ):
         return
 
     def main( self ):
+        print 'Generic prettyprinter (gpp) Version {0}'.format( version.Version )
         sys.path.insert( 0, os.path.dirname( __file__ ) )
         # Intuit the kind of prettyprinter we want to be
         kind = 'text'
@@ -49,7 +51,8 @@ class GenericPrettyPrinter( object ):
         p = optparse.OptionParser(
             description = """Generic pretty-printer""",
             usage       = '%prog [-o ofile] [-t type] [file..]',
-            prog        = 'gpp'
+            prog        = 'gpp',
+            version     = version,
         )
         p.add_option(
             '-D',
