@@ -1,5 +1,18 @@
 2017-05-26  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
+	* src/version.py: Checkpoint
+
+2017-05-26  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* setup.py, src/nocomment-plugin.py: Drop splat comments and blank
+	lines.
+
+2017-05-26  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* ChangeLog: Changes
+
+2017-05-26  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
 	* setup.py, src/__init__.py, src/ifcfg-plugin.py, src/version.py: 
 	Fleshing out network topology display report
 
