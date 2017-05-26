@@ -1,3 +1,40 @@
+2017-05-26  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* setup.py, src/__init__.py, src/ifcfg-plugin.py, src/version.py: 
+	Fleshing out network topology display report
+
+2017-05-25  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* setup.py, src/__init__.py, src/version.py: Switch from optargse to
+	argparse, because argparse is the future.
+
+2017-05-25  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* : commit 4da896e17031ad2440870173c4d7893cdb77dda4 Author: Tommy
+	Reynolds <Tommy.Reynolds@MegaCoder.com> Date:   Thu May 25 15:50:59
+	2017 -0500
+
+2017-05-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Write version to the friendly, neightboorhood python
+	version file.
+
+2017-05-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bootstrap.sh: Generic tarball
+
+2017-05-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/__init__.py: Output version banner
+
+2017-05-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/version.py: Version number
+
+2017-05-25  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* ChangeLog: Stardate
+
 2017-05-25  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
 	* setup.py, src/superclass.py, src/udev-plugin.py: Intensified
