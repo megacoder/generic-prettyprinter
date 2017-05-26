@@ -44,7 +44,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def pre_begin_file( self, name = None ):
         self.iface  = dict(
-            used   = False
+            _seen = False
         )
         self.prolog = list()
         return
@@ -116,228 +116,133 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def post_end_file( self ):
         """ Normalize and save the interface definition. """
-        iface = self._normalize( self.iface )
-        name = iface['NAME']
-        self.ifcfgs[name] = iface
+        self.iface        = self._normalize( self.iface )
+        name              = self.iface['NAME']
+        self.ifcfgs[name] = self.iface
+        super( PrettyPrint, self ).post_end_file()
         return
 
-    def _get_vlans_for( self, name ):
-        """ Return names of VLAN interfaces based on the interface
-            name.  The VLAN naming scheme just adds a ".<n>" to the
-            name of the base interface. """
-        vname = name + '.'
-        vlans = [
-            name for name in self.ifcfgs if name.startswith( vname )
-        ]
-        return vlans
+    def get_seen( self, iface ):
+        return iface.get( '_seen', False )
 
-    def _get_bridge_members( self, name ):
-        """ Get names of interfaces which mention the desired bridge name.
-            If there are none, returns the empty set. """
-        candidates = self._get_names_for_type( 'Bond' )
-        #for iface in self.ifcfgs:
-        #    if self.ifcfgs[iface]['TYPE'] == 'Bond' and self.ifcfgs[iface]['BRIDGE'] == name:
-        #        members.append( iface )
-        members = [
-            member for member in self.ifcfgs if self.ifcfgs[member]['TYPE']
-            == 'Bond' and self.ifcfgs[member]['BRIDGE'] == name
-        ]
-        return members
-
-    def _get_bond_members( self, name ):
-        """ Find slave interfaces for the named bond. """
-        members = [
-            iface['NAME'] for iface in self.ifcfgs if 'SLAVE' in iface and iface['SLAVE'] == 'yes' and 'master' in iface and iface['MASTER'] == name
-        ]
-        return members
-
-    def _get_ipaddr_for( self, name ):
-        IP = self.ifcfgs[name]['IPADDR'] if 'IPADDR' in self.ifcfgs[name] else None
-        return IP
-
-    def _iprint( self, lines, indent = 0 ):
-        leadin = '  ' * indent
-        for line in lines.splitlines():
-            self.println( '{0}{1}'.format( leadin, line ) )
+    def set_seen( self, iface, value = True ):
+        iface['_seen'] = value
         return
 
-    def _indented_print( self, indent, msg ):
-        padding = '  ' * indent
-        for line in msg.splitlines():
-            self.println( '{0}{1}'.format( padding, line ) )
-        return
+    def _iface_is_vlan( self, iface ):
+        return '.' in iface['NAME']
 
-    def _network_tree( self, node, components = None, indent = 0 ):
-        for name in self._get_names_for_type( theType ):
-            IP = self._get_ipaddr_for( name )
-            title = '{0}{1}'.format(
-                name,
-                ' ({0})'.format( IP ) if IP else ''
-            )
-            self._indented_print( indent, title )
-            self._indented_print( indent, '-' * len(title) )
-            vlans = self._get_vlans_for( name )
-            for vlan in vlans:
-                IP = self._get_ipaddr_for( vlan )
-                title = '{0}{1}'.format(
-                    name,
-                    ' ({0})'.format( IP ) if IP else ''
-                )
-                self._indented_print(
-                    indent,
-                    ' |\n +--- {0}{1}'.format(
-                        vlan,
-                        ' ({0})'.format( IP ) if IP else ''
-                    )
-                )
-            pass
-            # Process possible children, in order provided
-            for child in children:
-                if child == 'Bond':
-                    pass
-                elif child == 'Ethernet':
-                    pass
-                else:
-                    self.println( 'Dunno about "{0}".'.format( child ) )
-        return
+    def _iface_is_alias( self, iface ):
+        return ':' in iface['NAME']
 
-    def _used( self, node, value = True ):
-        node['used'] == value
-        return
+    def _filter_bridge_unclaimed( self, iface ):
+        accept  = not self.get_seen( iface )
+        accept &= (iface['TYPE'] == 'Bridge')
+        accept &= not self._iface_is_vlan( iface )
+        accept &= not self._iface_is_alias( iface )
+        return accept
 
-    def _tree( self, n, indent = 0 ):
-        for vlan in self.vlans( n ):
-            self.iprint( ' |\n +--- {0}'.format( vlan ), indent )
-            for (t,v) in self.ifcfgs[n]['roster']:
-                members = self._find_all( t, v, n )
-                for member in members:
-                    self._iprint( ' |\n +--- {0}'.format( mamber ), indent )
-                    self._tree( member, indent + 1 )
-        return
+    def _filter_any_unclaimed( self, iface ):
+        accept = not self.get_seen( iface )
+        return accept
 
+    def _filter_ethernet_unclaimed( self, iface ):
+        accept = not self.get_seen( iface )
+        accept &= (iface['TYPE'] == 'Ethernet')
+        return accept
 
-    def _NIC_tree( self ):
-        for TYPE in [
-            'Bridge',
-            'Bond',
-            'Ethernet'
-        ]:
-            members = self._find_all( TYPE, None, None )
-            for n in sorted( members ):
-                self.println()
-                self._iprint( fmt_nic( n ) )
-                self._tree( n )
-        return
-
-    def _find_all( self, wanted, v = None, n = None ):
-        # Gather all unused nodes of this type
-        candidates = [
-            c for c in self.ifcfgs if (
-                self.ifcfgs[c]['TYPE'] == wanted and not self.ifcfgs[c]['used']
-            )
-        ]
-        if not v:
-            return candidates
-        # Filter candidates by checking value of the named attribute
-        members = [
-            c for c in candidates if v in self.ifcfgs[c] and
-            self.ifcfgs[c][v] == n
-        ]
-        return members
-
-    def _node_names_of_type( self, wanted ):
+    def find_all( self, filter = lambda iface: True ):
         names = [
-            n['NAME'] for n in self.ifcfgs if n['TYPE'] == wanted
+            name for name in self.ifcfgs if filter( self.ifcfgs[name] )
         ]
+        if len(names) == 0:
+            names = None
         return names
 
-    def _get_names_for_type( self, wanted, used = False ):
-        names = [
-            name for name in self.ifcfgs if (
-                (self.ifcfgs[name]['TYPE'] == wanted) and
-                (self.ifcfgs[name]['used'] == used)
+    def _indent_print( self, s, indents = [] ):
+        self.println(
+            '{0}{1}'.format(
+                ''.join( indents ),
+                s
             )
-        ]
-        return names if len(names) else None
+        )
+        return
 
     def _final_report( self ):
         self.println()
         title = 'S U M M A R Y'
         self.println( title )
         self.println( '=' * len( title ) )
-        found_any = False
         # Pass 1: construct bridged interfaces
-        bridges = self._node_names_of_type( 'Bridge' )
+        indents = []
+        bridges = self.find_all(
+            self._filter_bridge_unclaimed
+        )
         if bridges:
-            self._network_tree( node, [ 'Bond', 'Ethernet' ] )
-            pass
-        for key in sorted( self_get_nodes( 'Bridge' ) ):
-            pass
-        self._network_tree( 'Bridge', [ 'Bond', 'Ethernet' ] )
-        if True:
-            return
-        # Pass 2: Bonds
-        bonds = self._get_names_for_type( 'Bond' )
-        if bonds:
-            found_any = True
-            title = 'B O N D I N G'
             self.println()
+            title = 'Bridges'
             self.println( title )
-            self.println( '=' * len(title) )
-            for name in bonds:
-                self.println()
-                IP = self._get_ipaddr_for( name )
-                title = '{0}{1}'.format(
-                    name,
-                    ' ({0})'.format( IP ) if IP else ''
-                )
-                self.println( title )
-                self.println( '-' * len(title) )
-                # Show any VLANs defined for bond; not sure this is
-                # even valid, but anyway...
-                vlans = self._get_vlans_for( name )
-                for vlan in sorted( vlans ):
-                    IP = self._get_ipaddr_for( vlan )
-                    self.println( ' |' )
-                    self.println( ' +-- {0}'.format(
-                        self.ifcfgs['NAME'],
-                        ' ({0})'.format( IP ) if IP else ''
-                    ))
-                # Show members of this bond
-                slaves = self._get_bond_members( name )
-                if slaves:
-                    for slave in sorted( slaves ):
-                        IP = self._get_ipaddr_for( slave )
-                        self.println( '  |' )
-                        self.println( '  +-- {0}'.format(
-                            slave,
-                            ' ({0})'.format( IP ) if IP else ''
-                        ))
-        if not found_any:
+            self.println( '-' * len( title ) )
+            last = len( indents ) - 1
+            for i,name in enumerate( sorted( bridges ) ):
+                iface = self.ifcfgs[ name ]
+                self._indent_print( iface['NAME'], indents )
+                self.set_seen( iface )
+        ethernets = self.find_all(
+            self._filter_ethernet_unclaimed
+        )
+        if ethernets:
             self.println()
-            self.println( 'No bridge or bonded interfaces found.' )
+            title = 'Ethernet'
+            self.println( title )
+            self.println( '-' * len(title) )
+            indents = []
+            for name in ethernets:
+                self._indent_print( name, indents )
+                self.set_seen( self.ifcfgs[name] )
+        resid = self.find_all( self._filter_any_unclaimed )
+        if resid:
+            self.println()
+            title = 'Unprocessed NICs'
+            self.println( title )
+            self.println( '-' * len( title ) )
+            for name in sorted( resid ):
+                self.println( name )
+                self.set_seen( self.ifcfgs[name] )
+        return
+
+    def _nic_report( self ):
+        # Dump any accumulated prolog
+        if len(self.prolog) > 0:
+            for line in self.prolog:
+                self.println( line )
+            self.println()
+        # Output iface lines, sorted in order
+        names = [
+            name for name in self.iface if name[0].isupper()
+        ]
+        max_name =  max(
+            map(
+                len,
+                names
+            )
+        )
+        fmt = '  {{0:>{0}}}={{1}}'.format( max_name )
+        for key in sorted( names ):
+            value = self.iface[ key ]
+            # delim = "'" if '"' in value else '"'
+            delim = '"'
+            self.println(
+                fmt.format(
+                    key,
+                    '{0}{1}{0}'.format( delim, value )
+                )
+            )
         return
 
     def report( self, final = False ):
         if final:
             self._final_report()
-        elif 'NAME' in self.iface:
-            # Dump any accumulated prolog
-            if len(self.prolog) > 0:
-                for line in self.prolog:
-                    self.println( line )
-                self.println()
-            # Output iface lines, sorted in order
-            max_name =  max(
-                map(
-                    len,
-                    self.iface
-                )
-            )
-            fmt = '{{0:>{0}}}={{1}}'.format( max_name )
-            for key in sorted( self.iface ):
-                if key.isupper():
-                    self.println(
-                        fmt.format( key, self.iface[key] )
-                    )
+        else:
+            self._nic_report()
         return

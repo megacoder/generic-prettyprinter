@@ -24,9 +24,6 @@ class GenericPrettyPrinter( object ):
         return glob.glob( pattern )
 
     def _session( self, Handler, names = [[]] ):
-        print 'names={0}'.format( names )
-        for name in names:
-            print 'name={0}'.format( name )
         handler = Handler()
         # Allow plugin to figure out where its files are
         if len( names ) == 0:
@@ -35,11 +32,6 @@ class GenericPrettyPrinter( object ):
         handler.start()
         handler.advise( names )
         for name in names:
-            print 'type(name)={0}, type(names)={1}'.format(
-                type(name),
-                type(names),
-            )
-            print 'filename to process: {0}'.format( name )
             handler.process( name )
         handler.finish()
         return False
