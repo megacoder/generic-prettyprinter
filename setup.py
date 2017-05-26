@@ -1,7 +1,7 @@
 #!/usr/bin/env python27
 # vim: noet sw=4 ts=4
 
-VERSION	= '1.0.57'
+VERSION	= '1.0.58'
 
 try:
 	# If this works, you can use eggs
