@@ -1,0 +1,5 @@
+# Created by anaconda
+NTPSERVERARGS='iburst'
+IPV6INIT='no'
+NISDOMAIN=
+NETWORKDELAY=66
