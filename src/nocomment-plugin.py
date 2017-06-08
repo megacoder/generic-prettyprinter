@@ -15,7 +15,10 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         return
 
     def next_line( self, line ):
-        tokens = line.split( '#', 1 )
+        tokens = map(
+            str.rstrip,
+            line.split( '#', 1 )
+        )
         if len(tokens) and len(tokens[0]):
             self.println( tokens[0] )
         return
