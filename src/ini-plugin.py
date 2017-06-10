@@ -22,6 +22,8 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	next_line( self, line ):
+		# Ignore funky comment lines
+		if line[0] in [ '#', ';' ]: return
 		tokens = [ token for token in shlex.shlex(line) ]
 		if line.startswith( '[' ):
 			if self.section_name and len(self.entries):
