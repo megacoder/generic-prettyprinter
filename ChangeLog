@@ -1,3 +1,21 @@
+2017-06-10  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* setup.py: Recognize INI column 1 comments
+
+2017-06-10  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* samples/ini.conf, src/ini-plugin.py: INI file column 1 comments
+	can start wtih '#' or ';'
+
+2017-06-10  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* src/ini-plugin.py: Resort to shlex parsing because values can have
+	embedded octothorpes
+
+2017-06-08  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* ChangeLog: Changes
+
 2017-06-08  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
 	* samples/network/network, src/network-plugin.py: Parse
