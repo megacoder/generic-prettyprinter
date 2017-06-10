@@ -1,8 +1,10 @@
 #!/usr/bin/python
+# vim: noet sw=4 ts=4
 
 import	os
 import	sys
 import	superclass
+import	shlex
 
 class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
@@ -13,79 +15,58 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		super( PrettyPrint, self ).__init__()
 		return
 
-	def	reset( self ):
-		super( PrettyPrint, self ).reset()
-		self._prepare()
-		return
-
-	def	_prepare( self ):
-		self.name     = None
-		self.entries  = []
-		self.max_name = None
-		self.sections = []
-		return
-
-	def	begin_file( self, name ):
-		super( PrettyPrint, self ).begin_file( name )
-		self._prepare()
-		return
-
-	def	end_file( self, name ):
-		self._close_section()
-		self.report()
-		super( PrettyPrint, self ).end_file( name )
-		return
-
-	def	_in_section( self ):
-		if self.name:
-			retval = True
-		else:
-			retval = False
-		return retval
-
-	def	_open_section( self, name ):
-		self._close_section()
-		self.name     = name
-		self.max_name = max( 14, len(name) )
-		self.entries  = []
-		return
-
-	def	_close_section( self ):
-		if self._in_section():
-			self.entries.sort(
-				key = lambda (n,v) : n.lower()
-			)
-			self.sections.append( [self.name, self.max_name, self.entries] )
-		self.name     = None
-		self.max_name = None
-		self.entries  = None
+	def	pre_begin_file( self, fn = None ):
+		self.section_name = None
+		self.entries      = dict()
+		self.sections     = dict()
 		return
 
 	def	next_line( self, line ):
-		line = line.split( '#', 1 )[0].rstrip()
+		tokens = [ token for token in shlex.shlex(line) ]
 		if line.startswith( '[' ):
-			self._close_section()
-			self._open_section( line )
-		else:
-			line = line.strip()
-			if len(line) > 0 and self._in_section():
-				name,value = line.split( '=', 1 )
-				name = name.strip()
-				value = value.strip()
-				self.max_name = max( self.max_name, len(name) )
-				self.entries.append( [name, value] )
+			if self.section_name and len(self.entries):
+				self.sections[ self.section_name ] = self.entries
+			self.section_name = line
+			self.entries = dict()
+		elif len(tokens):
+			self.entries[ token[0] ] = tokens
+		return
+
+	def	post_end_file( self, name = None ):
+		if self.section_name and len(self.entries):
+			self.sections[ self.section_name ] = self.entries
+		super( PrettyPrint, self ).post_end_file( name )
 		return
 
 	def	report( self, final = False ):
-		others = False
-		for (name,maxlen,settings) in sorted( self.sections, key =
-			lambda (n,m,s) : n.lower() ):
-			if others:
-				self.println()
-			others = True
-			self.println( name )
-			fmt = '%%-%ds = %%s' % maxlen
-			for (n,v) in settings:
-				self.println( fmt % (n,v) )
-		self._prepare()
+		if not final:
+			others = False
+			for key in sorted(
+				self.sections,
+				key = lambda k : k.lower()
+			):
+				name = key
+				if others:
+					self.println()
+				self.println( name )
+				others = True
+				#
+				width = max(
+					map(
+						len,
+						self.sections[ key ]
+					)
+				)
+				fmt = '{{0:>{0}}} {{1}}'.format( width )
+				for item in sorted(
+					self.sections[key],
+					key = lambda k : k.lower()
+				):
+					details = self.sections[key][item]
+					self.println(
+						fmt.format(
+							details[0],
+							' '.join( details[1:] )
+						)
+					)
 		return
