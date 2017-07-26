@@ -1,13 +1,10 @@
-#!/bin/zsh
+#!/bin/sh
 if [ $# -eq 0 ]; then
-	# set -- bdist --format=bztar
-	# set -- bdist --format=egg
-	  set -- bdist
-	# set -- bdist --format=gztar
-	# set -- bdist --format=rpm
+	set -- bztar gztar rpm
 fi
+rm -rf build dist
 (
-	set +x
-	rm -rf build dist
-	python ./setup.py "${@}"
-) 2>&1 | tee bootstrap.log
+	for PKG in "${@}"; do
+		python ./setup.py bdist --format="${PKG}"
+	done
+) 2>&1 | tee build.log

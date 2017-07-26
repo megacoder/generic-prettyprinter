@@ -1,0 +1,16 @@
+Metadata-Version: 1.0
+Name: genpp
+Version: 1.0.2
+Summary: Generic Pretty Printer, using plugins
+Home-page: http://www.MegaCoder.com
+Author: Tommy Reynolds
+Author-email: Tommy.Reynolds@MegaCoder.com
+License: MIT
+Description: genpp
+        =====
+        
+        Displays a variety of files in a canonical form.
+        Trivial prettyprinters for lots of kinds of files.
+        Really easy to extend.
+        
+Platform: UNKNOWN
