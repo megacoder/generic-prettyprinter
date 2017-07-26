@@ -1,161 +1,205 @@
-2017-07-03  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2017-07-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* setup.py: Bumped revision level.
+	* ChangeLog, INSTALL, LICENSE, MANIFEST.in, README.md, bin/gpp,
+	bootstrap.sh, compile-all.py, {src => genpp}/__init__.py, {src =>
+	genpp}/align.py, {src => genpp}/apache-plugin.py, {src =>
+	genpp}/arp-plugin.py, {src => genpp}/asm-plugin.py, {src =>
+	genpp}/bind-plugin.py, {src => genpp}/blkdev-plugin.py, {src =>
+	genpp}/blkid-plugin.py, {src => genpp}/chrony-plugin.py, {src =>
+	genpp}/codegen.py, {src => genpp}/crontab-plugin.py, {src =>
+	genpp}/csv-plugin.py, {src => genpp}/cups-plugin.py, {src =>
+	genpp}/df-plugin.py, {src => genpp}/exports-plugin.py, {src =>
+	genpp}/free-plugin.py, {src => genpp}/fstab-plugin.py,
+	genpp/genpp.egg-info/PKG-INFO, genpp/genpp.egg-info/SOURCES.txt,
+	genpp/genpp.egg-info/dependency_links.txt,
+	genpp/genpp.egg-info/top_level.txt, {src => genpp}/grub-plugin.py,
+	{src => genpp}/help-plugin.py, {src => genpp}/hosts-plugin.py, {src
+	=> genpp}/ifcfg-plugin.py, {src => genpp}/ini-plugin.py, {src =>
+	genpp}/ins-plugin.py, {src => genpp}/ipneigh-plugin.py,
+	genpp/ipsave-plugin.py, {src => genpp}/iptables-plugin.py, {src =>
+	genpp}/iscsi-plugin.py, {src => genpp}/kdump-plugin.py, {src =>
+	genpp}/ldap-plugin.py, {src => genpp}/limits-plugin.py, {src =>
+	genpp}/lvm-plugin.py, {src => genpp}/main-plugin.py, {src =>
+	genpp}/mc-plugin.py, {src => genpp}/meminfo-plugin.py, {src =>
+	genpp}/misc.py, {src => genpp}/modinfo-plugin.py, {src =>
+	genpp}/modprobe-plugin.py, {src => genpp}/mount-plugin.py, {src =>
+	genpp}/mounted-plugin.py, {src => genpp}/multipath-ll-plugin.py,
+	{src => genpp}/multipath-plugin.py, {src =>
+	genpp}/network-plugin.py, {src => genpp}/nocomment-plugin.py, {src
+	=> genpp}/nsswitch-plugin.py, {src => genpp}/ntp-plugin.py, {src =>
+	genpp}/o2cb-plugin.py, {src => genpp}/ocfs2-plugin.py, {src =>
+	genpp}/oswbb-heartbeat-plugin.py, {src => genpp}/oswtick-plugin.py,
+	{src => genpp}/oswticker.py, {src => genpp}/oswts-plugin.py, {src
+	=> genpp}/pam-plugin.py, {src => genpp}/partitions-plugin.py, {src
+	=> genpp}/pna-plugin.py, {src => genpp}/printcap-plugin.py, {src =>
+	genpp}/printk-plugin.py, {src => genpp}/procsys-plugin.py, {src =>
+	genpp}/python.py, {src => genpp}/resolv-plugin.py, {src =>
+	genpp}/route-plugin.py, {src => genpp}/rpm-installed-plugin.py,
+	{src => genpp}/rpm-va-plugin.py, {src => genpp}/run-me.skel, {src
+	=> genpp}/sem-plugin.py, {src => genpp}/showexport-plugin.py, {src
+	=> genpp}/slabinfo-plugin.py, {src => genpp}/smb-plugin.py, {src =>
+	genpp}/snmpd-plugin.py, {src => genpp}/ssh-plugin.py, {src =>
+	genpp}/sssd-plugin.py, {src => genpp}/superclass.py, {src =>
+	genpp}/swapon-plugin.py, {src => genpp}/sysctl-plugin.py, {src =>
+	genpp}/tcpwrapper-plugin.py, {src => genpp}/text-plugin.py, {src =>
+	genpp}/udev-plugin.py, genpp/version.py, {src =>
+	genpp}/vmcfg-plugin.py, {src => genpp}/vmstat-plugin.py, {src =>
+	genpp}/yum-plugin.py, plist.py, samples/audit.log,
+	samples/iptables, samples/smb.conf, scripts/genpp, setup.py,
+	src/version.py: Migrated development from 'genpp' back to here.
+	I'll keep the 'genpp' name, though.
 
-2017-07-03  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2017-06-10  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
-	* plist.py: Moved to new 'src/' directory
+	* ChangeLog: Changes
 
-2017-07-03  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2017-06-10  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
-	* src/ipsave-plugin.py: Process output of iptables-save(8)
+	* setup.py: Recognize INI column 1 comments
 
-2017-07-02  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2017-06-10  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
-	* {genpp => src}/__init__.py, {genpp => src}/align.py, {genpp =>
-	src}/apache-plugin.py, {genpp => src}/arp-plugin.py, {genpp =>
-	src}/asm-plugin.py, {genpp => src}/bind-plugin.py, {genpp =>
-	src}/blkdev-plugin.py, {genpp => src}/blkid-plugin.py, {genpp =>
-	src}/chrony-plugin.py, {genpp => src}/codegen.py, {genpp =>
-	src}/crontab-plugin.py, {genpp => src}/csv-plugin.py, {genpp =>
-	src}/cups-plugin.py, {genpp => src}/df-plugin.py, {genpp =>
-	src}/exports-plugin.py, {genpp => src}/free-plugin.py, {genpp =>
-	src}/fstab-plugin.py, {genpp => src}/grub-plugin.py, {genpp =>
-	src}/help-plugin.py, {genpp => src}/hosts-plugin.py, {genpp =>
-	src}/ifcfg-plugin.py, {genpp => src}/ini-plugin.py, {genpp =>
-	src}/ins-plugin.py, {genpp => src}/ipneigh-plugin.py, {genpp =>
-	src}/iptables-plugin.py, {genpp => src}/iscsi-plugin.py, {genpp =>
-	src}/kdump-plugin.py, {genpp => src}/ldap-plugin.py, {genpp =>
-	src}/limits-plugin.py, {genpp => src}/lvm-plugin.py, {genpp =>
-	src}/main-plugin.py, {genpp => src}/mc-plugin.py, {genpp =>
-	src}/meminfo-plugin.py, {genpp => src}/misc.py, {genpp =>
-	src}/modinfo-plugin.py, {genpp => src}/modprobe-plugin.py, {genpp
-	=> src}/mount-plugin.py, {genpp => src}/mounted-plugin.py, {genpp
-	=> src}/multipath-ll-plugin.py, {genpp => src}/multipath-plugin.py,
-	{genpp => src}/network-plugin.py, {genpp =>
-	src}/nocomment-plugin.py, {genpp => src}/nsswitch-plugin.py, {genpp
-	=> src}/ntp-plugin.py, {genpp => src}/o2cb-plugin.py, {genpp =>
-	src}/ocfs2-plugin.py, {genpp => src}/oswbb-heartbeat-plugin.py,
-	{genpp => src}/oswtick-plugin.py, {genpp => src}/oswticker.py,
-	{genpp => src}/oswts-plugin.py, {genpp => src}/pam-plugin.py,
-	{genpp => src}/partitions-plugin.py, {genpp => src}/pna-plugin.py,
-	{genpp => src}/printcap-plugin.py, {genpp => src}/printk-plugin.py,
-	{genpp => src}/procsys-plugin.py, {genpp => src}/python.py, {genpp
-	=> src}/resolv-plugin.py, {genpp => src}/route-plugin.py, {genpp =>
-	src}/rpm-installed-plugin.py, {genpp => src}/rpm-va-plugin.py,
-	{genpp => src}/run-me.skel, {genpp => src}/sem-plugin.py, {genpp =>
-	src}/showexport-plugin.py, {genpp => src}/slabinfo-plugin.py,
-	{genpp => src}/smb-plugin.py, {genpp => src}/snmpd-plugin.py,
-	{genpp => src}/ssh-plugin.py, {genpp => src}/sssd-plugin.py, {genpp
-	=> src}/superclass.py, {genpp => src}/swapon-plugin.py, {genpp =>
-	src}/sysctl-plugin.py, {genpp => src}/tcpwrapper-plugin.py, {genpp
-	=> src}/text-plugin.py, {genpp => src}/udev-plugin.py, {genpp =>
-	src}/version.py, {genpp => src}/vmcfg-plugin.py, {genpp =>
-	src}/vmstat-plugin.py, {genpp => src}/yum-plugin.py: Old habits die
-	hard
+	* samples/ini.conf, src/ini-plugin.py: INI file column 1 comments
+	can start wtih '#' or ';'
 
-2017-07-02  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2017-06-10  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
-	* samples/iptables: Trivial iptables ruleset
+	* src/ini-plugin.py: Resort to shlex parsing because values can have
+	embedded octothorpes
 
-2017-07-01  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2017-06-08  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
-	* setup.py: Dump stupid helper script glue and make my own.
+	* ChangeLog: Changes
 
-2017-07-01  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2017-06-08  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
-	* bootstrap.sh: Build targets I am interested in.
+	* samples/network/network, src/network-plugin.py: Parse
+	"/etc/config/network as "-t network'
 
-2017-07-01  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2017-06-08  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
-	* scripts/genpp: Linkage
+	* src/nocomment-plugin.py: Truncate trailing whitespace.
 
-2017-07-01  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2017-05-26  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
-	* genpp/__init__.py: Live without "importlib" if we must.
+	* ChangeLog: Added 'nocomment' filter.
 
-2017-06-30  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2017-05-26  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
-	* scripts/{genpp.py => genpp}: Extents are for wimps.
+	* src/version.py: Checkpoint
 
-2017-06-30  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2017-05-26  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
-	* scripts/genpp.py: A pox on all this infrastructure!
+	* setup.py, src/nocomment-plugin.py: Drop splat comments and blank
+	lines.
 
-2017-06-30  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2017-05-26  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
-	* setup.py: Conformal layout
+	* ChangeLog: Changes
 
-2017-06-30  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2017-05-26  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
-	* genpp/__init__.py: Reference resource
+	* setup.py, src/__init__.py, src/ifcfg-plugin.py, src/version.py: 
+	Fleshing out network topology display report
 
-2017-06-30  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2017-05-25  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
-	* .gitignore: Ignore VIM backup files
+	* setup.py, src/__init__.py, src/version.py: Switch from optargse to
+	argparse, because argparse is the future.
 
-2017-06-30  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2017-05-25  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
-	* README.md: Say less.
+	* : commit 4da896e17031ad2440870173c4d7893cdb77dda4 Author: Tommy
+	Reynolds <Tommy.Reynolds@MegaCoder.com> Date:   Thu May 25 15:50:59
+	2017 -0500
 
-2017-06-30  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2017-05-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* genpp/version.py: We recomputed the version info last time
-	"./setup.py" was run.
+	* setup.py: Write version to the friendly, neightboorhood python
+	version file.
 
-2017-06-30  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2017-05-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* Docs/Events: Boilerplate
+	* bootstrap.sh: Generic tarball
 
-2017-06-30  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2017-05-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* genpp/__init__.py, genpp/align.py, genpp/apache-plugin.py,
-	genpp/arp-plugin.py, genpp/asm-plugin.py, genpp/bind-plugin.py,
-	genpp/blkdev-plugin.py, genpp/blkid-plugin.py,
-	genpp/chrony-plugin.py, genpp/codegen.py, genpp/crontab-plugin.py,
-	genpp/csv-plugin.py, genpp/cups-plugin.py, genpp/df-plugin.py,
-	genpp/exports-plugin.py, genpp/free-plugin.py,
-	genpp/fstab-plugin.py, genpp/grub-plugin.py, genpp/help-plugin.py,
-	genpp/hosts-plugin.py, genpp/ifcfg-plugin.py, genpp/ini-plugin.py,
-	genpp/ins-plugin.py, genpp/ipneigh-plugin.py,
-	genpp/iptables-plugin.py, genpp/iscsi-plugin.py,
-	genpp/kdump-plugin.py, genpp/ldap-plugin.py,
-	genpp/limits-plugin.py, genpp/lvm-plugin.py, genpp/main-plugin.py,
-	genpp/mc-plugin.py, genpp/meminfo-plugin.py, genpp/misc.py,
-	genpp/modinfo-plugin.py, genpp/modprobe-plugin.py,
-	genpp/mount-plugin.py, genpp/mounted-plugin.py,
-	genpp/multipath-ll-plugin.py, genpp/multipath-plugin.py,
-	genpp/network-plugin.py, genpp/nocomment-plugin.py,
-	genpp/nsswitch-plugin.py, genpp/ntp-plugin.py,
-	genpp/o2cb-plugin.py, genpp/ocfs2-plugin.py,
-	genpp/oswbb-heartbeat-plugin.py, genpp/oswtick-plugin.py,
-	genpp/oswticker.py, genpp/oswts-plugin.py, genpp/pam-plugin.py,
-	genpp/partitions-plugin.py, genpp/pna-plugin.py,
-	genpp/printcap-plugin.py, genpp/printk-plugin.py,
-	genpp/procsys-plugin.py, genpp/python.py, genpp/resolv-plugin.py,
-	genpp/route-plugin.py, genpp/rpm-installed-plugin.py,
-	genpp/rpm-va-plugin.py, genpp/run-me.skel, genpp/sem-plugin.py,
-	genpp/showexport-plugin.py, genpp/slabinfo-plugin.py,
-	genpp/smb-plugin.py, genpp/snmpd-plugin.py, genpp/ssh-plugin.py,
-	genpp/sssd-plugin.py, genpp/superclass.py, genpp/swapon-plugin.py,
-	genpp/sysctl-plugin.py, genpp/tcpwrapper-plugin.py,
-	genpp/text-plugin.py, genpp/udev-plugin.py, genpp/version.py,
-	genpp/vmcfg-plugin.py, genpp/vmstat-plugin.py, genpp/yum-plugin.py: 
-	All the plugins so far.
+	* src/__init__.py: Output version banner
 
-2017-06-30  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2017-05-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* AUTHORS, COPYING, NEWS, TODO: Boilerplate
+	* src/version.py: Version number
 
-2017-06-30  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2017-05-25  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
-	* setup.py: Package construction script.
+	* ChangeLog: Stardate
 
-2017-06-30  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2017-05-25  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
-	* README.md, samples/20-nproc.conf, samples/asmlib, samples/df,
-	samples/dmidecode, samples/free, samples/fstab,
-	samples/ifcfg-examples/ifcfg-1028241dc6,
+	* setup.py, src/superclass.py, src/udev-plugin.py: Intensified
+	syntax checking for UDEV rules.
+
+2017-05-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: History
+
+2017-05-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/pam-plugin.py: Don't sort "-<group>" separately from
+	"<group>"
+
+2017-05-21  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: More
+
+2017-05-21  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/kdump-plugin.py: Learned some python since I wrote
+	this.
+
+2017-05-19  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/o2cb-plugin.py: Quote displayed values
+
+2017-05-19  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Bumped rev
+
+2017-05-19  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/o2cb-plugin.py: Add footnote as comment on
+	suspicious line.
+
+2017-05-19  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/printk-plugin.py: Captain Midnight decoder ring for
+	"/proc/sys/kernel/printk"
+
+2017-05-19  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/printk-plugin.py: Process /proc/sys/kernel/printk
+
+2017-05-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/ifcfg-plugin.py: Intuit TYPE=Bond iff untyped
+	ifcfg-* has "BONDING_OPTS" attribute.
+
+2017-05-13  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Update the changelog
+
+2017-05-13  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped revision
+
+2017-05-13  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/superclass.py, src/yum-plugin.py: Detect duplicate yum repo
+	channel definitions
+
+2017-05-10  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/ifcfg-examples/ifcfg-1028241dc6,
 	samples/ifcfg-examples/ifcfg-bond0,
 	samples/ifcfg-examples/ifcfg-bond1,
 	samples/ifcfg-examples/ifcfg-eth0,
@@ -163,30 +207,3161 @@
 	samples/ifcfg-examples/ifcfg-eth2,
 	samples/ifcfg-examples/ifcfg-eth3,
 	samples/ifcfg-examples/ifcfg-eth4,
-	samples/ifcfg-examples/ifcfg-eth5, samples/ifcfg-examples/ifcfg-lo,
-	samples/ini.conf, samples/ip-neigh, samples/limits.conf,
-	samples/lvm.conf, samples/multipath.conf,
-	samples/network/ifcfg-br0, samples/network/ifcfg-br1,
+	samples/ifcfg-examples/ifcfg-eth5, samples/ifcfg-examples/ifcfg-lo: 
+	Representative network layout
+
+2017-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Updated change log.
+
+2017-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped revision level
+
+2017-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/help-plugin.py: Show list of defined plugins
+
+2017-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/modinfo-plugin.py: Removed bitrot
+
+2017-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/__init__.py: Cleaned up plugin loading.
+
+2017-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Allow use of either python eggs or tarballs
+
+2017-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Cleaned up footnote ordering, returning the footnote
+	number to the caller.
+
+2017-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped revision for superclass update.
+
+2017-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/meminfo-plugin.py: Save values in a dict() to make doing the
+	math easier.
+
+2017-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/superclass.py: Detangled the footnote sequencing code.
+
+2017-04-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ntp-plugin.py: Tweaked output format
+
+2017-04-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ntp-plugin.py: Can't call a dictionary object, but you can try
+	if you forget an intervening method call.
+
+2017-04-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bootstrap.sh: Build egg by default.
+
+2017-04-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ntp-plugin.py: Typo on pre_begin_file() method argument
+
+2017-04-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Switch to using egg packaging
+
+2017-04-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Corrected indentation
+
+2017-04-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/ntp.conf: Added ntp.conf sample
+
+2017-04-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ntp-plugin.py: Use dictionaries to make dividing into
+	categories easier.
+
+2017-03-30  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/superclass.py: Added next_footnote_pos() so we can look ahead
+	and see index of next footnote that will be added.
+
+2017-03-30  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/swapon-plugin.py: Typo
+
+2017-03-30  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/swapon-plugin.py: Added "swapon -s" handler
+
+2017-03-30  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py, src/superclass.py: Checkpoint
+
+2017-03-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/swapon: $ swapon -s
+
+2016-12-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped revision
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Updated changelog
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped revision level
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/slabinfo-plugin.py: Switched to align.Align()
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/crontab-plugin.py: Switched over to align.Align()
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Don't set default field width so large.
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/blkdev-plugin.py: Converted to align.Align()
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/fstab-plugin.py: Switched to align.Align()
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/run-me.skel: Be foer to flag final report
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/nsswitch-plugin.py: Switch to align.Align()
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/vmstat-plugin.py: Seitched to align.Align()
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Better
+
+2016-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/df-plugin.py: Get the report timing correct.
+
+2016-12-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/arp-plugin.py: ALign columns pleasingly
+
+2016-12-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Let auto-align titles inherit justification of their
+	column data
+
+2016-12-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/run-me.skel: Sample driver to test an individual module in
+	standalone fashion.
+
+2016-12-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ipneigh-plugin.py: Print neighborhood in IP order
+
+2016-12-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/arp-plugin.py: Use align.Align() class with custom sorting.
+
+2016-12-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Iteration index variable undefined outside of 'for'
+	scope.
+
+2016-12-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Allows user-defined sorting of non-header lines.
+
+2016-12-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Added sort ability
+
+2016-12-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ipneigh-plugin.py: Switched to align.Align
+
+2016-12-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Cleanup
+
+2016-12-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Added spiffy sorting.
+
+2016-12-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Justify on a per-field basis
+
+2016-10-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Fixed df and pam modules
+
+2016-10-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped revision
+
+2016-10-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Fixed syntax error
+
+2016-10-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : commit f3e07b83bc2c3bd86d7a9788dcdddc1f9aadab03 Author: Tommy
+	Reynolds <Tommy.Reynolds@MegaCoder.com> Date:   Sat Oct 1 16:12:02
+	2016 -0500
+
+2016-10-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/rpm-va-plugin.py: Tabized more properly
+
+2016-10-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/df-plugin.py: Handle folded input lines better
+
+2016-10-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Left-justify numeric fields and optionally string
+	fields too.
+
+2016-09-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Checkpoint
+
+2016-09-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped version
+
+2016-09-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Trying to incorporate VLAN's
+
+2016-09-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/yum-plugin.py: Cleanup code.
+
+2016-09-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/mount-plugin.py: pre_open_file() takes a filename argument
+
+2016-09-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/free-plugin.py: Recognize newer-format free(1) output.
+
+2016-09-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/resolv-plugin.py: Oops, forgot to actually split the line
+	further into tokens
+
+2016-09-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/meminfo-plugin.py: Cleaned up the notes format
+
+2016-09-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/meminfo-plugin.py: Better notes formatting.
+
+2016-08-29  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/fstab: Use my /etc/fstab as a sample
+
+2016-08-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py, src/superclass.py: Checkpoint
+
+2016-08-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Display IP addresses if they are hardwired
+	in.
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/fstab-plugin.py: Got the str(key) stuff straightened out here.
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/asm-plugin.py, src/csv-plugin.py, src/fstab-plugin.py,
+	src/ifcfg-plugin.py, src/mount-plugin.py, src/o2cb-plugin.py,
+	src/resolv-plugin.py, src/superclass.py: Fixed syntax errors which
+	crept in.
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/sssd-plugin.py: Removed superflous ".keys()" and use
+	str.format()
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/sem-plugin.py: Removed superflous ".keys()" and use
+	str.format()
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/resolv-plugin.py: Removed superflous ".keys()" and use
+	str.format()
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/mount-plugin.py: Removed superflous ".keys()" and use
+	str.format()
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/o2cb-plugin.py: Removed superflouw ".keys()" and added
+	footnotes
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/modinfo-plugin.py: Removed superflous ".keys()"
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/fstab-plugin.py: Removed superflous ".keys()" and use
+	footnotes
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/csv-plugin.py: Removed superflous ".keys()"
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/free-plugin.py: Remove superflous ".keys()"
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/asm-plugin.py: Use a footnote to report potential spelling
+	errors
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/showexport-plugin.py: Removed reduntant '.keys()' from
+	dictionaries.
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/yum-plugin.py: Correct idiom for keys()
+
+2016-08-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/rpm-va-plugin.py: Correct reported indent problem.
+
+2016-08-20  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/multipath-plugin.py: Filter multipath files and ignore files
+	not ending in ".conf"
+
+2016-08-20  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* TODO: Thought of VLAN handling.
+
+2016-08-18  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/misc.py: Multi-assign first N items of indeterminate-length
+	list
+
+2016-07-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/resolv-plugin.py: Who knew?  Comments can begin with a ';' in
+	/etc/resolv.conf too.
+
+2016-07-21  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Rebuilt ChangeLog
+
+2016-07-21  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/ifcfg-plugin.py: Corrected fingerprint of
+	ifcfg::pre_begin_file
+
+2016-07-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/vmcfg-plugin.py: Accomodate optional argument to
+	pre_begin_file()
+
+2016-04-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/fstab-plugin.py: Everywhere
+
+2016-04-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/fstab-plugin.py: Add filename to pre_begin_file()
+
+2016-04-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/__init__.py, src/printcap-plugin.py,
+	src/rpm-va-plugin.py, src/superclass.py, src/udev-plugin.py: Cleaned
+	up superclass and methods to let no files on the command line be
+	equivalent to '-' if needed.
+
+2016-04-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/superclass.py: Fixed but in "superclass::do_file"
+	that aborted "asm" plugin.
+
+2016-04-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/asmlib: Example oracleasm configuration file.
+
+2016-03-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/oswticker.py: Cleaned up jitter statistics listing.
+
+2016-03-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Changes
+
+2016-03-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/oswbb-heartbeat-plugin.py, src/oswtick-plugin.py,
+	src/oswticker.py: Collect jitter statistics
+
+2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/oswticker.py: Avoid spurious delta comparision.
+
+2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Revision history.
+
+2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/oswticker.py: Output '-' if timetick was too soon,
+	'+' if too late, and ' ' if OK.
+
+2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Updated change history.
+
+2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped revision number.
+
+2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/oswbb-ifcfg, src/oswtick-plugin.py, src/oswticker.py: 
+	Implement and use common 'OswTicker' class.
+
+2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/resolv.conf: Test "/etc/resolv.conf" with an error.
+
+2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/oswbb-heartbeat-plugin.py: Use tick-handling class.
+
+2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/oswtick-plugin.py: Check time ticks in an OSWBB "*.dat" file
+	for jitter or missed samples.
+
+2016-03-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/oswticker.py: Portable tick and jitter checker.
+
+2016-01-19  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/resolv-plugin.py: Output entries in canonical order
+	[nameservers last]
+
+2016-01-19  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped rev to  add resolv.conf handling
+
+2016-01-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/sem-plugin.py: Handle "/proc/sys/kernel/sem"
+
+2016-01-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/superclass.py: Return footnote number when adding a footnote.
+
+2015-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/__init__.py: Remove the "redirect" notice.
+
+2015-11-13  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped version.
+
+2015-11-13  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Only add footnote if we'e had to decode a
+	numeric bonding mode.
+
+2015-11-13  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/superclass.py: Flush accumulated footnotes after showing them.
+
+2015-11-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/nsswitch-plugin.py: Better, by far.
+
+2015-11-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/nsswitch-plugin.py: Process /etc/nsswitch.* content
+
+2015-11-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/df-plugin.py: Simplify by using 'align' class
+
+2015-11-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/df: Sample df(1) output
+
+2015-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Updated history
+
+2015-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped revision
+
+2015-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/__init__.py, src/align.py, src/arp-plugin.py,
+	src/ipneigh-plugin.py: Added processing for 'ip neigh -n'
+
+2015-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ipneigh-plugin.py: Handle 'ip neigh -n'
+
+2015-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/ip-neigh: ip neigh sample
+
+2015-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/align.py: Generic column aligner
+
+2015-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/20-nproc.conf: Example from /etc/security/limits.*
+
+2015-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/superclass.py: Replace wonky file opening with more elegant
+	with..as.. construct.
+
+2015-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bin/gpp: Defer calculating path to in-situ lib/ until we need it.
+
+2015-10-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Updated ChangeLog
+
+2015-10-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* TODO: Add reminder to footnote anytime we intuit something.
+
+2015-10-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Bumped version
+
+2015-10-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/ifcfg-plugin.py: Added footnote when we all a
+	missing MTU attribute.
+
+2015-09-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Bumped version
+
+2015-09-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/blkid-plugin.py: Rewrote logic, now drops trailing
+	space on line.
+
+2015-09-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bootstrap.sh: Drop the RPM nonsense because that RPM is locked to
+	a particular python version.
+
+2015-08-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* TODO: UDEV rules
+
+2015-07-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: The whys and wherefores
+
+2015-07-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped revision number.
+
+2015-07-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Decode the mysterious BONDING_OPTS 'mode=<N>'
+	setting.
+
+2015-07-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/superclass.py: Added automatic footnotes
+
+2015-07-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* TODO: Fix BONDING_OPTS display
+
+2015-07-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Ch-ch-ch-changes
+
+2015-07-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bump version level.
+
+2015-07-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* test: Goners
+
+2015-07-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/vmcfg-plugin.py: Handle what a vm.cfg looks like.
+
+2015-07-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bootstrap.sh: Clean cruft from build/ and dist/ directory so we
+	don't mistake detritusfor the good stuff.
+
+2015-06-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* test: Pretty printer as I like it.
+
+2015-06-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/vm.cfg: XEN guest definition
+
+2015-06-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/{vm.cfg => lvm.conf}: Oops, wrong file type.
+
+2015-06-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Updated changelog
+
+2015-06-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Detect and display both bonded and bridged
+	interfaces properly.
+
+2015-05-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped revision number.
+
+2015-05-11  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/fstab-plugin.py: Mount options are always sorted.
+
+2015-05-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* TODO: Bonding slaves missing
+
+2015-05-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* TODO: Poor man's memory aid
+
+2015-05-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/modprobe-plugin.py: Added extra blank line after modprobe
+	report.
+
+2015-04-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/multipath-plugin.py: Recognize "blacklist_exceptions {}"
+	stanza.
+
+2015-04-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Changes
+
+2015-04-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Cleaned up logic for displaying bridges and
+	bonds.
+
+2015-04-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped version
+
+2015-04-11  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Changes
+
+2015-04-11  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bootstrap.sh, samples/network/ifcfg-p7p1, src/ifcfg-plugin.py: 
+	Ensure bonds and bridges have the same MTU
+
+2015-04-11  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : commit 1ea67ddc3020ae91cc6d864b0e4348831b84a5e3 Merge: 2c3c354
+	4229d19 Author: Tommy Reynolds <Tommy.Reynolds@MegaCoder.com> Date:
+	Sat Apr 11 10:33:59 2015 -0500
+
+2015-04-11  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/network/ifcfg-br0, samples/network/ifcfg-br1,
 	samples/network/ifcfg-lo, samples/network/ifcfg-p10p1,
-	samples/network/ifcfg-p7p1, samples/network/network,
-	samples/ntp.conf, samples/o2cb, samples/oswbb-ifcfg, samples/oswts,
-	samples/resolv.conf, samples/showexport-e, samples/sssd.conf,
-	samples/swapon, samples/vm.cfg, toys/shlex: Various test case data
-	and feature toys
+	samples/network/ifcfg-p7p1: Examples of bridged NIC's.
 
-2017-06-30  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2015-04-11  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* plist.py: Helper script to make sure the plugins compile.
+	* setup.py: Bump version
 
-2017-06-30  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2015-04-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* bootstrap.sh: Helper script to build various distribution formats.
+	* : commit 8896588a615860d9265f34dc9da2120a519dfce3 Merge: e2d6d55
+	652d868 Author: Tommy Reynolds <Tommy.Reynolds@MegaCoder.com> Date:
+	Wed Apr 8 14:13:12 2015 -0500
 
-2017-06-30  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+2015-04-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* ChangeLog: Gotta start somewhere.
+	* MANIFEST.in: What to leave in, what to leave out.
 
-2017-06-30  Tommy Reynolds <oldest.software.guy@gmail.com>
+2015-04-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* Initial commit
+	* README.html: Don't ship generated files.
+
+2015-04-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : commit a480a957ca9858901f6c96566be08741f6a7fe6c Author: Tommy
+	Reynolds <Tommy.Reynolds@MegaCoder.com> Date:   Wed Apr 8 12:49:45
+	2015 -0500
+
+2015-04-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* toys/shlex: Toy for exploring shlex tokenization.
+
+2015-04-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Changelog
+
+2015-04-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/multipath.conf, setup.py, src/multipath-plugin.py: Align
+	multipath content fields.
+
+2015-03-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/audit.log: Audit sample
+
+2015-03-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: When searching /etc/modprobe.d, inspect only
+	".conf" files.
+
+2015-03-13  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/showexport-plugin.py: Increase visual separation on export
+	access definition.
+
+2015-03-13  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: 1.0.23
+
+2015-03-13  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/showexport-e, samples/showmount-e,
+	src/showexport-plugin.py: Normalize output of '# showmount -e
+	<hostname>' and mark overlapping exports.
+
+2015-03-13  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/showmount-e: Sample 'showmount -e' output.
+
+2015-03-13  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped version level.
+
+2015-03-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: 1.0.22
+
+2015-03-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/sssd-plugin.py: Final sssd version.
+
+2015-03-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : commit cb81b96688fbe88636b183928abe5e98e87bd9a0 Author: Tommy
+	Reynolds <Tommy.Reynolds@Oracle.com> Date:   Thu Mar 5 14:07:36 2015
+	-0600
+
+2015-03-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/sssd-plugin.py: Catch EOF event to close stanza
+
+2015-03-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/sssd-plugin.py: "/etc/sssd/sssd.conf" handler
+
+2015-03-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Adding SSSD support
+
+2015-02-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/vmcfg-plugin.py: Oh, generate AST by invoking AST wrapper.
+	Wowzah.
+
+2015-02-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/codegen.py: https://pypi.python.org/pypi/codegen/1.0
+
+2015-02-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* README.html, setup.py: Bumped version.
+
+2015-02-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/vmcfg-plugin.py: Reasonable output, prettyprinting not
+	impressive.
+
+2015-02-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* README.html, src/superclass.py, src/vmcfg-plugin.py: Cleaning
+	"vm.cfg" processing, not complete.
+
+2015-02-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/vm.cfg: Sample (possiby bogus) vm.cfg file.
+
+2015-02-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: 1.0.20
+
+2015-02-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/yum-plugin.py: Get the vertical spacing right.
+
+2015-02-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* README.html: Recomputed.
+
+2015-02-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/superclass.py: If the only command line arg is a directory,
+	pretend we have multiple files and show all the names we've found.
+
+2015-02-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bump rev
+
+2015-02-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* README.html, src/yum-plugin.py: Cleanup code.
+
+2015-02-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bootstrap.sh: Any version of markdown will do.
+
+2015-02-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/asm-plugin.py: Cleanup code for ASMlib processing.
+
+2015-02-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Have as many printed items as you have format
+	specifiers.
+
+2015-01-10  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Remove over-zealous quoting of the "TYPE="
+	entry if we have to supply a default: use simple 'Ethernet' and not
+	'"Ethernet"'.
+
+2014-11-17  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Newer
+
+2014-11-17  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped rev
+
+2014-11-17  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: sendmail.mc file.
+
+2014-11-17  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* README.html, setup.py, src/apache-plugin.py, src/mc-plugin.py,
+	src/yum-plugin.py: Added support for sendmail.mc files.
+
+2014-11-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/fstab-plugin.py: Complain about "/etc/fstab" having "defaults"
+	for NFS mounts; this is usually not what is wanted.
+
+2014-11-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/free: Sample file for "$ free" testing.
+
+2014-11-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/__init__.py: Consolidated handler actions for better command
+	line handling.
+
+2014-11-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/free-plugin.py: Use new assist states.
+
+2014-11-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/pna-plugin.py: Removed zero-length formatter
+
+2014-11-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/multipath-plugin.py: Removed ambiguous '{}' formatter
+
+2014-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bin/gpp, src/ifcfg-plugin.py: 1) Use newer syntax.  2) version.info.{major,minor} is gone, use simple subscripts.  3) Replace s.format(a, a, a.. ) with the 's % ( a, a, ...)' form.
+
+2014-11-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/multipath-plugin.py: Modernized to avoid duplicate splitting
+	around '=' signs.
+
+2014-11-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ifcfg-plugin.py: Prints out bridges properly
+
+2014-11-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bin/gpp, src/ifcfg-plugin.py: Checkpoint
+
+2014-11-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bin/gpp: Pick up in-situ usage, and non-root installs.
+
+2014-11-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bin/gpp: Locate non-root installs.
+
+2014-11-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Updated changelog for 1.0.18
+
+2014-11-06  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* setup.py: Allow compilation by python-2.4
+
+2014-11-06  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* README.html: Allow compilation with python 2.4 :(
+
+2014-11-06  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* src/superclass.py: Regressed syntax.
+
+2014-11-06  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* src/oswbb-heartbeat-plugin.py: Regressed syntax
+
+2014-11-06  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* src/ini-plugin.py: Regressed the syntax
+
+2014-11-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* Docs/Events, src/superclass.py: Try to describe event.
+
+2014-11-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Updated change log
+
+2014-11-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bin/gpp, src/__init__.py, src/oswts-plugin.py, src/superclass.py: 
+	Center column headers
+
+2014-11-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/oswts-plugin.py: Added column headers; calculate all column
+	widths.
+
+2014-10-31  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/oswts, src/oswts-plugin.py: Checkpoint
+
+2014-10-31  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bin/gpp, samples/oswts, setup.py, src/__init__.py,
+	src/ifcfg-plugin.py, src/oswts-plugin.py, src/superclass.py: 
+	Checkpoint
+
+2014-07-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/help-plugin.py, src/superclass.py: Allow any file names on
+	command line to display extended help for that module.
+
+2014-07-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Updated ChangeLog
+
+2014-07-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/help-plugin.py, src/rpm-installed-plugin.py: The 'gpp -t help'
+	command now works.
+
+2014-07-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/__init__.py: Turn off debug announcement of the GLOB
+	discovery.
+
+2014-07-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped version number.
+
+2014-07-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/printcap-plugin.py: Class definition did not include
+	'superclass.' discriminator.
+
+2014-07-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/help-plugin.py: Skeleton 'help' method.
+
+2014-07-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/__init__.py: Scaffolding for 'help' event to come.
+
+2014-07-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/superclass.py: 1) Added "start()" event.  2) Added archetypical "help()" event.
+
+2014-07-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bin/gpp: Put our module directory first in path, instead of last.
+
+2014-07-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Bump version number
+
+2014-07-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/superclass.py: Added pre_begin_file and
+	post_end_file methods to superclass.
+
+2014-07-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Updated changelog
+
+2014-07-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: 1.0.14
+
+2014-07-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/__init__.py: Insert the directory where the modules lie at the
+	front of the search path.
+
+2014-07-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* ChangeLog: Updated change log.
+
+2014-07-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bin/gpp, setup.py, src/__init__.py, src/iptables-plugin.py: 
+	Sanitized the module lookup.
+
+2014-06-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : commit f380b4ed46bdc1425c992a211f37cf8f6f75ba32 Author: Tommy
+	Reynolds <Tommy.Reynolds@MegaCoder.com> Date:   Sat Jun 28 19:15:46
+	2014 -0500
+
+2014-06-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bin/gpp, setup.py, src/pna-plugin.py, src/superclass.py: Tighter.
+
+2014-06-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* compile-all.py: Use flattened file setup
+
+2014-06-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Maybe flatter..
+
+2014-06-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/{generic_prettyprinter => }/__init__.py,
+	src/{generic_prettyprinter => }/apache-plugin.py,
+	src/{generic_prettyprinter => }/arp-plugin.py,
+	src/{generic_prettyprinter => }/asm-plugin.py,
+	src/{generic_prettyprinter => }/bind-plugin.py,
+	src/{generic_prettyprinter => }/blkdev-plugin.py,
+	src/{generic_prettyprinter => }/blkid-plugin.py,
+	src/{generic_prettyprinter => }/chrony-plugin.py,
+	src/{generic_prettyprinter => }/crontab-plugin.py,
+	src/{generic_prettyprinter => }/csv-plugin.py,
+	src/{generic_prettyprinter => }/cups-plugin.py,
+	src/{generic_prettyprinter => }/df-plugin.py,
+	src/{generic_prettyprinter => }/exports-plugin.py,
+	src/{generic_prettyprinter => }/free-plugin.py,
+	src/{generic_prettyprinter => }/fstab-plugin.py,
+	src/{generic_prettyprinter => }/grub-plugin.py,
+	src/{generic_prettyprinter => }/help-plugin.py,
+	src/{generic_prettyprinter => }/hosts-plugin.py,
+	src/{generic_prettyprinter => }/ifcfg-plugin.py,
+	src/{generic_prettyprinter => }/ini-plugin.py,
+	src/{generic_prettyprinter => }/ins-plugin.py,
+	src/{generic_prettyprinter => }/iscsi-plugin.py,
+	src/{generic_prettyprinter => }/kdump-plugin.py,
+	src/{generic_prettyprinter => }/ldap-plugin.py,
+	src/{generic_prettyprinter => }/limits-plugin.py,
+	src/{generic_prettyprinter => }/lvm-plugin.py,
+	src/{generic_prettyprinter => }/main-plugin.py,
+	src/{generic_prettyprinter => }/meminfo-plugin.py,
+	src/{generic_prettyprinter => }/modinfo-plugin.py,
+	src/{generic_prettyprinter => }/modprobe-plugin.py,
+	src/{generic_prettyprinter => }/mount-plugin.py,
+	src/{generic_prettyprinter => }/mounted-plugin.py,
+	src/{generic_prettyprinter => }/multipath-ll-plugin.py,
+	src/{generic_prettyprinter => }/multipath-plugin.py,
+	src/{generic_prettyprinter => }/nsswitch-plugin.py,
+	src/{generic_prettyprinter => }/ntp-plugin.py,
+	src/{generic_prettyprinter => }/o2cb-plugin.py,
+	src/{generic_prettyprinter => }/ocfs2-plugin.py,
+	src/{generic_prettyprinter => }/oswbb-heartbeat-plugin.py,
+	src/{generic_prettyprinter => }/pam-plugin.py,
+	src/{generic_prettyprinter => }/partitions-plugin.py,
+	src/{generic_prettyprinter => }/pna-plugin.py,
+	src/{generic_prettyprinter => }/printcap-plugin.py,
+	src/{generic_prettyprinter => }/procsys-plugin.py,
+	src/{generic_prettyprinter => }/python.py,
+	src/{generic_prettyprinter => }/resolv-plugin.py,
+	src/{generic_prettyprinter => }/route-plugin.py,
+	src/{generic_prettyprinter => }/rpm-installed-plugin.py,
+	src/{generic_prettyprinter => }/rpm-va-plugin.py,
+	src/{generic_prettyprinter => }/slabinfo-plugin.py,
+	src/{generic_prettyprinter => }/smb-plugin.py,
+	src/{generic_prettyprinter => }/snmpd-plugin.py,
+	src/{generic_prettyprinter => }/ssh-plugin.py,
+	src/{generic_prettyprinter => }/superclass.py,
+	src/{generic_prettyprinter => }/sysctl-plugin.py,
+	src/{generic_prettyprinter => }/tcpwrapper-plugin.py,
+	src/{generic_prettyprinter => }/text-plugin.py,
+	src/{generic_prettyprinter => }/udev-plugin.py,
+	src/{generic_prettyprinter => }/vmcfg-plugin.py,
+	src/{generic_prettyprinter => }/vmstat-plugin.py,
+	src/{generic_prettyprinter => }/yum-plugin.py: Move everything up
+	one level.
+
+2014-06-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/generic_prettyprinter/pna-plugin.py: /proc/net/arp
+
+2014-06-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* README.txt: Don't archive generated file.
+
+2014-06-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: 1.0.11
+
+2014-06-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* README.txt, bootstrap.sh, compile-all.py, setup.py,
+	{generic_prettyprinter => src/generic_prettyprinter}/__init__.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/apache-plugin.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/arp-plugin.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/asm-plugin.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/bind-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/blkdev-plugin.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/blkid-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/chrony-plugin.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/crontab-plugin.py,
+	{generic_prettyprinter => src/generic_prettyprinter}/csv-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/cups-plugin.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/df-plugin.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/exports-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/free-plugin.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/fstab-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/grub-plugin.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/help-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/hosts-plugin.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/ifcfg-plugin.py,
+	{generic_prettyprinter => src/generic_prettyprinter}/ini-plugin.py,
+	{generic_prettyprinter => src/generic_prettyprinter}/ins-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/iscsi-plugin.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/kdump-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/ldap-plugin.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/limits-plugin.py,
+	{generic_prettyprinter => src/generic_prettyprinter}/lvm-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/main-plugin.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/meminfo-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/modinfo-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/modprobe-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/mount-plugin.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/mounted-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/multipath-ll-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/multipath-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/nsswitch-plugin.py,
+	{generic_prettyprinter => src/generic_prettyprinter}/ntp-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/o2cb-plugin.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/ocfs2-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/oswbb-heartbeat-plugin.py,
+	{generic_prettyprinter => src/generic_prettyprinter}/pam-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/partitions-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/printcap-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/procsys-plugin.py,
+	{generic_prettyprinter => src/generic_prettyprinter}/python.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/resolv-plugin.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/route-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/rpm-installed-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/rpm-va-plugin.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/slabinfo-plugin.py,
+	{generic_prettyprinter => src/generic_prettyprinter}/smb-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/snmpd-plugin.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/ssh-plugin.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/superclass.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/sysctl-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/tcpwrapper-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/text-plugin.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/udev-plugin.py,
+	{generic_prettyprinter =>
+	src/generic_prettyprinter}/vmcfg-plugin.py, {generic_prettyprinter
+	=> src/generic_prettyprinter}/vmstat-plugin.py,
+	{generic_prettyprinter => src/generic_prettyprinter}/yum-plugin.py: 
+	Flailing with setup.py done for now.
+
+2014-06-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bin/gpp, {src => generic_prettyprinter}/__init__.py, {src =>
+	generic_prettyprinter}/apache-plugin.py, {src =>
+	generic_prettyprinter}/arp-plugin.py, {src =>
+	generic_prettyprinter}/asm-plugin.py, {src =>
+	generic_prettyprinter}/bind-plugin.py, {src =>
+	generic_prettyprinter}/blkdev-plugin.py, {src =>
+	generic_prettyprinter}/blkid-plugin.py, {src =>
+	generic_prettyprinter}/chrony-plugin.py, {src =>
+	generic_prettyprinter}/crontab-plugin.py, {src =>
+	generic_prettyprinter}/csv-plugin.py, {src =>
+	generic_prettyprinter}/cups-plugin.py, {src =>
+	generic_prettyprinter}/df-plugin.py, {src =>
+	generic_prettyprinter}/exports-plugin.py, {src =>
+	generic_prettyprinter}/free-plugin.py, {src =>
+	generic_prettyprinter}/fstab-plugin.py, {src =>
+	generic_prettyprinter}/grub-plugin.py, {src =>
+	generic_prettyprinter}/help-plugin.py, {src =>
+	generic_prettyprinter}/hosts-plugin.py, {src =>
+	generic_prettyprinter}/ifcfg-plugin.py, {src =>
+	generic_prettyprinter}/ini-plugin.py, {src =>
+	generic_prettyprinter}/ins-plugin.py, {src =>
+	generic_prettyprinter}/iscsi-plugin.py, {src =>
+	generic_prettyprinter}/kdump-plugin.py, {src =>
+	generic_prettyprinter}/ldap-plugin.py, {src =>
+	generic_prettyprinter}/limits-plugin.py, {src =>
+	generic_prettyprinter}/lvm-plugin.py, {src =>
+	generic_prettyprinter}/main-plugin.py, {src =>
+	generic_prettyprinter}/meminfo-plugin.py, {src =>
+	generic_prettyprinter}/modinfo-plugin.py, {src =>
+	generic_prettyprinter}/modprobe-plugin.py, {src =>
+	generic_prettyprinter}/mount-plugin.py, {src =>
+	generic_prettyprinter}/mounted-plugin.py, {src =>
+	generic_prettyprinter}/multipath-ll-plugin.py, {src =>
+	generic_prettyprinter}/multipath-plugin.py, {src =>
+	generic_prettyprinter}/nsswitch-plugin.py, {src =>
+	generic_prettyprinter}/ntp-plugin.py, {src =>
+	generic_prettyprinter}/o2cb-plugin.py, {src =>
+	generic_prettyprinter}/ocfs2-plugin.py, {src =>
+	generic_prettyprinter}/oswbb-heartbeat-plugin.py, {src =>
+	generic_prettyprinter}/pam-plugin.py, {src =>
+	generic_prettyprinter}/partitions-plugin.py, {src =>
+	generic_prettyprinter}/printcap-plugin.py, {src =>
+	generic_prettyprinter}/procsys-plugin.py, {src =>
+	generic_prettyprinter}/python.py, {src =>
+	generic_prettyprinter}/resolv-plugin.py, {src =>
+	generic_prettyprinter}/route-plugin.py, {src =>
+	generic_prettyprinter}/rpm-installed-plugin.py, {src =>
+	generic_prettyprinter}/rpm-va-plugin.py, {src =>
+	generic_prettyprinter}/slabinfo-plugin.py, {src =>
+	generic_prettyprinter}/smb-plugin.py, {src =>
+	generic_prettyprinter}/snmpd-plugin.py, {src =>
+	generic_prettyprinter}/ssh-plugin.py, {src =>
+	generic_prettyprinter}/superclass.py, {src =>
+	generic_prettyprinter}/sysctl-plugin.py, {src =>
+	generic_prettyprinter}/tcpwrapper-plugin.py, {src =>
+	generic_prettyprinter}/text-plugin.py, {src =>
+	generic_prettyprinter}/udev-plugin.py, {src =>
+	generic_prettyprinter}/vmcfg-plugin.py, {src =>
+	generic_prettyprinter}/vmstat-plugin.py, {src =>
+	generic_prettyprinter}/yum-plugin.py: Maybe not _that_ pleasing.
+
+2014-06-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* {generic_prettyprinter/bin => bin}/gpp, setup.py,
+	{generic_prettyprinter => src}/__init__.py, {generic_prettyprinter
+	=> src}/apache-plugin.py, {generic_prettyprinter =>
+	src}/arp-plugin.py, {generic_prettyprinter => src}/asm-plugin.py,
+	{generic_prettyprinter => src}/bind-plugin.py,
+	{generic_prettyprinter => src}/blkdev-plugin.py,
+	{generic_prettyprinter => src}/blkid-plugin.py,
+	{generic_prettyprinter => src}/chrony-plugin.py,
+	{generic_prettyprinter => src}/crontab-plugin.py,
+	{generic_prettyprinter => src}/csv-plugin.py,
+	{generic_prettyprinter => src}/cups-plugin.py,
+	{generic_prettyprinter => src}/df-plugin.py, {generic_prettyprinter
+	=> src}/exports-plugin.py, {generic_prettyprinter =>
+	src}/free-plugin.py, {generic_prettyprinter =>
+	src}/fstab-plugin.py, {generic_prettyprinter =>
+	src}/grub-plugin.py, {generic_prettyprinter => src}/help-plugin.py,
+	{generic_prettyprinter => src}/hosts-plugin.py,
+	{generic_prettyprinter => src}/ifcfg-plugin.py,
+	{generic_prettyprinter => src}/ini-plugin.py,
+	{generic_prettyprinter => src}/ins-plugin.py,
+	{generic_prettyprinter => src}/iscsi-plugin.py,
+	{generic_prettyprinter => src}/kdump-plugin.py,
+	{generic_prettyprinter => src}/ldap-plugin.py,
+	{generic_prettyprinter => src}/limits-plugin.py,
+	{generic_prettyprinter => src}/lvm-plugin.py,
+	{generic_prettyprinter => src}/main-plugin.py,
+	{generic_prettyprinter => src}/meminfo-plugin.py,
+	{generic_prettyprinter => src}/modinfo-plugin.py,
+	{generic_prettyprinter => src}/modprobe-plugin.py,
+	{generic_prettyprinter => src}/mount-plugin.py,
+	{generic_prettyprinter => src}/mounted-plugin.py,
+	{generic_prettyprinter => src}/multipath-ll-plugin.py,
+	{generic_prettyprinter => src}/multipath-plugin.py,
+	{generic_prettyprinter => src}/nsswitch-plugin.py,
+	{generic_prettyprinter => src}/ntp-plugin.py,
+	{generic_prettyprinter => src}/o2cb-plugin.py,
+	{generic_prettyprinter => src}/ocfs2-plugin.py,
+	{generic_prettyprinter => src}/oswbb-heartbeat-plugin.py,
+	{generic_prettyprinter => src}/pam-plugin.py,
+	{generic_prettyprinter => src}/partitions-plugin.py,
+	{generic_prettyprinter => src}/printcap-plugin.py,
+	{generic_prettyprinter => src}/procsys-plugin.py,
+	{generic_prettyprinter => src}/python.py, {generic_prettyprinter =>
+	src}/resolv-plugin.py, {generic_prettyprinter =>
+	src}/route-plugin.py, {generic_prettyprinter =>
+	src}/rpm-installed-plugin.py, {generic_prettyprinter =>
+	src}/rpm-va-plugin.py, {generic_prettyprinter =>
+	src}/slabinfo-plugin.py, {generic_prettyprinter =>
+	src}/smb-plugin.py, {generic_prettyprinter => src}/snmpd-plugin.py,
+	{generic_prettyprinter => src}/ssh-plugin.py,
+	{generic_prettyprinter => src}/superclass.py,
+	{generic_prettyprinter => src}/sysctl-plugin.py,
+	{generic_prettyprinter => src}/tcpwrapper-plugin.py,
+	{generic_prettyprinter => src}/text-plugin.py,
+	{generic_prettyprinter => src}/udev-plugin.py,
+	{generic_prettyprinter => src}/vmcfg-plugin.py,
+	{generic_prettyprinter => src}/vmstat-plugin.py,
+	{generic_prettyprinter => src}/yum-plugin.py: Moved files around
+	into a more-pleasing arrangement.
+
+2014-06-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* generic_prettyprinter/{plugins => }/apache-plugin.py,
+	generic_prettyprinter/{plugins => }/arp-plugin.py,
+	generic_prettyprinter/{plugins => }/asm-plugin.py,
+	generic_prettyprinter/{plugins => }/bind-plugin.py,
+	generic_prettyprinter/{plugins => }/blkdev-plugin.py,
+	generic_prettyprinter/{plugins => }/blkid-plugin.py,
+	generic_prettyprinter/{plugins => }/chrony-plugin.py,
+	generic_prettyprinter/{plugins => }/crontab-plugin.py,
+	generic_prettyprinter/{plugins => }/csv-plugin.py,
+	generic_prettyprinter/{plugins => }/cups-plugin.py,
+	generic_prettyprinter/{plugins => }/df-plugin.py,
+	generic_prettyprinter/{plugins => }/exports-plugin.py,
+	generic_prettyprinter/{plugins => }/free-plugin.py,
+	generic_prettyprinter/{plugins => }/fstab-plugin.py,
+	generic_prettyprinter/{plugins => }/grub-plugin.py,
+	generic_prettyprinter/{plugins => }/help-plugin.py,
+	generic_prettyprinter/{plugins => }/hosts-plugin.py,
+	generic_prettyprinter/{plugins => }/ifcfg-plugin.py,
+	generic_prettyprinter/{plugins => }/ini-plugin.py,
+	generic_prettyprinter/{plugins => }/ins-plugin.py,
+	generic_prettyprinter/{plugins => }/iscsi-plugin.py,
+	generic_prettyprinter/{plugins => }/kdump-plugin.py,
+	generic_prettyprinter/{plugins => }/ldap-plugin.py,
+	generic_prettyprinter/{plugins => }/limits-plugin.py,
+	generic_prettyprinter/{plugins => }/lvm-plugin.py,
+	generic_prettyprinter/{plugins => }/main-plugin.py,
+	generic_prettyprinter/{plugins => }/meminfo-plugin.py,
+	generic_prettyprinter/{plugins => }/modinfo-plugin.py,
+	generic_prettyprinter/{plugins => }/modprobe-plugin.py,
+	generic_prettyprinter/{plugins => }/mount-plugin.py,
+	generic_prettyprinter/{plugins => }/mounted-plugin.py,
+	generic_prettyprinter/{plugins => }/multipath-ll-plugin.py,
+	generic_prettyprinter/{plugins => }/multipath-plugin.py,
+	generic_prettyprinter/{plugins => }/nsswitch-plugin.py,
+	generic_prettyprinter/{plugins => }/ntp-plugin.py,
+	generic_prettyprinter/{plugins => }/o2cb-plugin.py,
+	generic_prettyprinter/{plugins => }/ocfs2-plugin.py,
+	generic_prettyprinter/{plugins => }/oswbb-heartbeat-plugin.py,
+	generic_prettyprinter/{plugins => }/pam-plugin.py,
+	generic_prettyprinter/{plugins => }/partitions-plugin.py,
+	generic_prettyprinter/{plugins => }/printcap-plugin.py,
+	generic_prettyprinter/{plugins => }/procsys-plugin.py,
+	generic_prettyprinter/{plugins => }/python.py,
+	generic_prettyprinter/{plugins => }/resolv-plugin.py,
+	generic_prettyprinter/{plugins => }/route-plugin.py,
+	generic_prettyprinter/{plugins => }/rpm-installed-plugin.py,
+	generic_prettyprinter/{plugins => }/rpm-va-plugin.py,
+	generic_prettyprinter/{plugins => }/slabinfo-plugin.py,
+	generic_prettyprinter/{plugins => }/smb-plugin.py,
+	generic_prettyprinter/{plugins => }/snmpd-plugin.py,
+	generic_prettyprinter/{plugins => }/ssh-plugin.py,
+	generic_prettyprinter/{plugins => }/superclass.py,
+	generic_prettyprinter/{plugins => }/sysctl-plugin.py,
+	generic_prettyprinter/{plugins => }/tcpwrapper-plugin.py,
+	generic_prettyprinter/{plugins => }/text-plugin.py,
+	generic_prettyprinter/{plugins => }/udev-plugin.py,
+	generic_prettyprinter/{plugins => }/vmcfg-plugin.py,
+	generic_prettyprinter/{plugins => }/vmstat-plugin.py,
+	generic_prettyprinter/{plugins => }/yum-plugin.py: Promoted plugins
+	to top-level directory.
+
+2014-05-31  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped rev
+
+2014-05-31  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* generic_prettyprinter/plugins/oswbb-heartbeat-plugin.py: Perhaps a
+	better-formatted output filtering.
+
+2014-04-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/dmidecode: A sample DMIDECODE from my quad-core HP.
+
+2014-03-21  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* generic_prettyprinter/plugins/smb-plugin.py, setup.py: Sort
+	section entries, too.
+
+2014-03-21  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* generic_prettyprinter/plugins/smb-plugin.py: Output sections in
+	order.
+
+2014-03-21  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* generic_prettyprinter/plugins/smb-plugin.py: SAMBA files look very
+	much like INI files, but also allow ';' as a comment leadin.
+
+2014-03-21  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped revision.
+
+2014-03-19  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* generic_prettyprinter/bin/gpp, setup.py: Allow run-in-place
+	operation.
+
+2014-03-19  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* {src/gpp => generic_prettyprinter}/__init__.py, {scripts =>
+	generic_prettyprinter/bin}/gpp, {src/gpp =>
+	generic_prettyprinter}/plugins/apache-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/arp-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/asm-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/bind-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/blkdev-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/blkid-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/chrony-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/crontab-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/csv-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/cups-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/df-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/exports-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/free-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/fstab-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/grub-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/help-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/hosts-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/ifcfg-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/ini-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/ins-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/iscsi-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/kdump-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/ldap-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/limits-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/lvm-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/main-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/meminfo-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/modinfo-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/modprobe-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/mount-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/mounted-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/multipath-ll-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/multipath-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/nsswitch-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/ntp-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/o2cb-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/ocfs2-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/oswbb-heartbeat-plugin.py, {src/gpp
+	=> generic_prettyprinter}/plugins/pam-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/partitions-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/printcap-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/procsys-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/python.py, {src/gpp =>
+	generic_prettyprinter}/plugins/resolv-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/route-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/rpm-installed-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/rpm-va-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/slabinfo-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/smb-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/snmpd-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/ssh-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/superclass.py, {src/gpp =>
+	generic_prettyprinter}/plugins/sysctl-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/tcpwrapper-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/text-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/udev-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/vmcfg-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/vmstat-plugin.py, {src/gpp =>
+	generic_prettyprinter}/plugins/yum-plugin.py, setup.py: Canonical
+	layout
+
+2014-03-18  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : Don't archive generated files.
+
+2014-03-18  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* build/bdist.linux-x86_64/rpm/SPECS/generic_prettyprinter.spec: 
+	Goners
+
+2014-03-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* MANIFEST, bootstrap.log: Don't save generated files.
+
+2014-03-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* MANIFEST, bootstrap.log,
+	build/bdist.linux-x86_64/rpm/SPECS/generic_prettyprinter.spec,
+	src/gpp/plugins/free-plugin.py: Calculate memory pressure.
+
+2014-03-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/free-plugin.py: Parse output of free(1)
+
+2014-02-16  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* MANIFEST, README.html, README.txt, bootstrap.log,
+	build/bdist.linux-x86_64/rpm/SPECS/generic_prettyprinter.spec,
+	setup.py, src/gpp/plugins/python.py: Added python prettyprinter
+
+2014-01-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Dropped 'extras' from requirements.
+
+2014-01-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Don't need no steenkin' extras
+
+2013-12-18  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/__init__.py, src/gpp/plugins/fstab-plugin.py,
+	src/gpp/plugins/superclass.py: Allow each module to supply its own
+	GLOB pattern; return None if you don't want this feature.
+
+2013-12-18  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/blkdev-plugin.py: Basic blkdev printout
+
+2013-12-18  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/blkdev-plugin.py: Checkpoint
+
+2013-11-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/meminfo-plugin.py: Recommend
+	"vm.min_free_kbytes" as 0.5% memory.
+
+2013-11-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/superclass.py: Use 'with' clause, because I wanted
+	to.
+
+2013-10-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/csv-plugin.py: CSV working
+
+2013-10-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Added CSV processing.
+
+2013-10-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/csv-plugin.py: First cut at making a CSV reader;
+	it just aligns all the columns.
+
+2013-10-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/resolv-plugin.py: Added
+	'/etc/resolv.conf' handling.  It sorts all the lines, but maybe we
+	could turn that off if the 'strict' option appears.
+
+2013-09-20  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/vmcfg-plugin.py: Cleanup
+
+2013-09-20  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/vmcfg-plugin.py: Checkpoint
+
+2013-09-20  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/superclass.py: Default to stdin
+
+2013-09-20  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/vmcfg-plugin.py: Treat an embedded
+	'./foo' as a new-definition marker.
+
+2013-09-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped revision for the fixed blkid parser.
+
+2013-09-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/blkid-plugin.py: I like this format better.
+
+2013-09-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/blkid-plugin.py: Change missing "fn"
+	symbol
+
+2013-08-18  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/__init__.py, src/gpp/plugins/bind-plugin.py,
+	src/gpp/plugins/iscsi-plugin.py: Added iSCSI handler
+
+2013-08-18  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/iscsi-plugin.py: Baseline
+
+2013-08-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* plist.py: List defined plugins in a columnar format.
+
+2013-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/rpm-va-plugin.py: Output lines in filename order
+
+2013-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/rpm-va-plugin.py: Use better method for
+	decoding rpm -Va flags.
+
+2013-06-30  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/superclass.py: Allow continuation.
+
+2013-06-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/rpm-va-plugin.py: No delimiters, they detract from
+	understanding.
+
+2013-06-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/rpm-va-plugin.py: Parse output of '$ rpm
+	-V'
+
+2013-06-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/modinfo-plugin.py: Fixed indention
+
+2013-06-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/modinfo-plugin.py: Added modinfo
+	parsing.
+
+2013-06-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/mount-plugin.py: Pick up details where they are.
+
+2013-06-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/mount-plugin.py: Details
+
+2013-06-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/mount-plugin.py: Show mount details, if any.
+
+2013-06-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/mount-plugin.py: Flesh out short lines.
+
+2013-06-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/mount-plugin.py: Some mount outputs have seven
+	fields.  Odd.
+
+2013-06-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped the version
+
+2013-06-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/smb-plugin.py: SAMBA
+
+2013-05-30  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/yum-plugin.py: Output final repo in file.
+
+2013-05-30  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/meminfo-plugin.py,
+	src/gpp/plugins/yum-plugin.py: Print each yum.repo file
+
+2013-05-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/meminfo-plugin.py: Be more careful in calculating
+	HugePages wastage.
+
+2013-05-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/nsswitch-plugin.py: Choose proper delimiter for
+	nsswitch.
+
+2013-05-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/nsswitch-plugin.py: Added
+	/etc/nsswitch.conf setup.
+
+2013-04-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/meminfo-plugin.py: Don't complain if we can't find
+	HugePages entries.
+
+2013-04-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/meminfo-plugin.py: Check for
+	Committed_AS > CommitLimit
+
+2013-04-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/o2cb-plugin.py: Added OCFS2 "o2cb"
+	settings handler.
+
+2013-04-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/o2cb: OCFS2 o2cb setup file
+
+2013-04-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/ini-plugin.py,
+	src/gpp/plugins/superclass.py: Handling INI files didn't output the
+	last section.
+
+2013-04-25  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/ini.conf: INI-format sample file
+
+2013-04-24  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/limits-plugin.py: The limits value may be
+	'unlimited'.
+
+2013-04-24  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/limits-plugin.py: Sort key selection.
+
+2013-04-24  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/limits-plugin.py: Output limits.conf in canonical
+	style
+
+2013-04-24  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* samples/limits.conf: Sample files.
+
+2013-04-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/ifcfg-plugin.py: Comment using '#' not '*'
+
+2013-04-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/ifcfg-plugin.py: Make sure the separator
+	bars are at least the length of the filename.
+
+2013-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/asm-plugin.py: Added
+	ORACLEASM_USE_LOGICAL_BLOCK_SIZE
+
+2013-04-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Adding ASMLIB definition
+
+2013-04-10  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/vmstat-plugin.py: Ignore stupid OSWBB
+	stuff.
+
+2013-04-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/crontab-plugin.py: Added variable support to
+	crontab processing.
+
+2013-04-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/crontab-plugin.py: Added crontab
+	handling
+
+2013-04-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/limits-plugin.py: Format /etc/security/limits.* to
+	canonical form.
+
+2013-04-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Added limits.conf helper
+
+2013-04-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/limits-plugin.py: /etc/security/limits.conf
+
+2013-04-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/ini-plugin.py: Show section content.
+
+2013-04-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/ini-plugin.py: Process [ini] files.
+
+2013-03-20  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/modprobe-plugin.py: Allow modprobe to
+	read from stdin.
+
+2013-03-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/vmstat-plugin.py: Add separator underbar line
+	under column titles.
+
+2013-03-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/vmstat-plugin.py: Updated VMSTAT plugin
+	to standard form.
+
+2013-03-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/df-plugin.py: Now it prints.
+
+2013-03-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/df-plugin.py: Canonicalize df(1)
+	outputs.
+
+2013-02-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/route-plugin.py: Recognize 'Destination'
+	as a column header.
+
+2013-02-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/slabinfo-plugin.py: Corrected output iof
+	slabinfo
+
+2013-02-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/hosts-plugin.py: Also, clear accumulated lines
+	between files.
+
+2013-02-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/hosts-plugin.py: Do not coallesc  all
+	files into a single output.
+
+2013-02-15  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped revision.
+
+2013-02-15  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/superclass.py: You got it, use it.
+
+2013-02-15  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/text-plugin.py: Plain text is its own canonical
+	form.
+
+2013-02-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/ntp-plugin.py: Massage the column widths.
+
+2013-02-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/ntp-plugin.py: Process /etc/ntp.conf
+	files, too.
+
+2013-02-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/chrony-plugin.py,
+	src/gpp/plugins/superclass.py: Output /etc/chrony.conf in canonical
+	form.
+
+2013-02-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/sysctl-plugin.py: Removed unused init param.
+
+2013-01-31  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/cups-plugin.py: Do not indent the child
+	header/footer.
+
+2013-01-30  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/cups-plugin.py: Canonical output of
+	"/etc/cups/cupsd.conf" and friends.  (NB: this could serve as the
+	model to rewrite the _wrong_ bind-pp.
+
+2013-01-30  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/bind-plugin.py: Cleanup name daemon
+	output.
+
+2013-01-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/bind-plugin.py: Removed cruft method.
+
+2013-01-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/bind-plugin.py: Does proper indentation now, but I
+	want it to sort the clauses, including inner stanzas.
+
+2013-01-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/bind-plugin.py: Adding "/etc/named.conf"
+	tools.
+
+2013-01-10  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/partitions-plugin.py: Properly handle
+	stdin input for "partitions" plugin.
+
+2012-12-29  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/sysctl-plugin.py: Use report() event.
+
+2012-12-29  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/meminfo-plugin.py: Use new report() event.
+
+2012-12-29  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Regress
+
+2012-12-29  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/superclass.py: Create self.report() events in
+	anticipation of standardizing output logic.  Should'a done this
+	earlier.
+
+2012-12-29  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/meminfo-plugin.py,
+	src/gpp/plugins/sysctl-plugin.py: Missing stdin handling for meminfo
+	and sysctl
+
+2012-12-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/blkid-plugin.py,
+	src/gpp/plugins/fstab-plugin.py, src/gpp/plugins/mount-plugin.py,
+	src/gpp/plugins/mounted-plugin.py, src/gpp/plugins/route-plugin.py: 
+	Some plugins didn't play nicely when reading only from stdin.
+	Probably have missed some.
+
+2012-12-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/route-plugin.py: Don't bother faking up column
+	headers for 'ip route show'; the output is nicer without them.
+
+2012-12-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/route-plugin.py: Canonical output for
+	routes in these forms:         /proc/net/route         ip route show         route -n
+
+2012-12-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped because I skipped 0.0.58
+
+2012-12-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/mounted-plugin.py: Added auto-sensing
+	mounted.ocfs2(8) output parser.
+
+2012-12-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/mount-plugin.py: Automatic field
+	alignment for 'mount' files.
+
+2012-12-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* compile-all.py: Output stderr on stdout.
+
+2012-12-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/fstab-plugin.py: Group fstab output by
+	file.
+
+2012-12-16  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : commit ef86c2f1ff56a53c123cc10af6da52f9384852cb Author: Tommy
+	Reynolds <Tommy.Reynolds@MegaCoder.com> Date:   Sat Dec 15 14:05:28
+	2012 -0600
+
+2012-12-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/modprobe-plugin.py: Separate report for
+	each modprobe.conf file.
+
+2012-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/blkid-plugin.py: Keep blkid reports
+	separate, not melded into one.
+
+2012-12-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/lvm-plugin.py: Keep LVM.CONF file
+	content separate, not melded into a single stream.
+
+2012-12-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/grub-plugin.py: Left-justify detail
+	tokens.
+
+2012-11-29  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/ifcfg-plugin.py: ifcfg-* would not be
+	output unless had both prolog and content; now allows either or
+	both.
+
+2012-11-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/grub-plugin.py: Show /etc/grub.conf in a
+	canonical form.
+
+2012-11-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/ins-plugin.py: Display output of:         # ip neigh show in a canonical form.
+
+2012-11-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/ins-plugin.py: $ ip neigh show | gpp -t ins
+
+2012-11-21  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/meminfo-plugin.py: Properly handle
+	multiple meminfo files.
+
+2012-11-21  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/sysctl-plugin.py: Properly reset between
+	files for the sysctl.conf processor.
+
+2012-11-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/partitions-plugin.py: Canonical output
+	of /proc/partitions
+
+2012-11-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/mount-plugin.py: Invoke superclass
+	reset() method.
+
+2012-11-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/meminfo-plugin.py: Added suggested dom0
+	memory calculation.
+
+2012-11-10  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/exports-plugin.py: Remove debugging 'print token'.
+
+2012-11-10  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/exports-plugin.py: Somehow managed to
+	bork the tokens for /etc/exports.  Not sure if the host list should
+	be sorted, but I will until proven otherwise.
+
+2012-10-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/procsys-plugin.py: Beautiful.
+
+2012-10-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/procsys-plugin.py: Format /proc/sys entries
+
+2012-10-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/meminfo-plugin.py: Added
+	vm.min_free_kbytes calculation to /proc/meminfo display.
+
+2012-10-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/multipath-plugin.py: Fixed
+	multipath.conf processing.
+
+2012-10-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/blkid-plugin.py: Place blkid items in the same
+	column on each line.
+
+2012-10-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/__init__.py, src/gpp/plugins/blkid-plugin.py: 
+	Try to columnize the blkid report.
+
+2012-10-20  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/ldap-plugin.py: Correct LDAP output.
+
+2012-10-20  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/ldap-plugin.py: First cut at LDAP.CONF
+	handler.
+
+2012-10-11  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* scripts/gpp, setup.py: Correct RPM package name collision with gpp
+
+2012-10-11  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : commit 9971d7868b8ac541e2b1a03bdae49bf0fca6a910 Author: Tommy
+	Reynolds <Tommy.Reynolds@MegaCoder.com> Date:   Thu Oct 11 07:49:43
+	2012 -0500
+
+2012-10-10  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/yum-plugin.py: Filter non-repo files.
+
+2012-10-10  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/yum-plugin.py: More separation.
+
+2012-10-10  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/yum-plugin.py: Separate feeds with a
+	space.
+
+2012-10-10  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/{yum_repo-plugin.py => yum-plugin.py}: Gosh, I
+	can't type that load of crap.
+
+2012-10-10  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/yum_repo-plugin.py: Format YUM repos.
+
+2012-10-10  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/yum_repo-plugin.py: Format /etc/yum.repo.d/*.repo
+	files.
+
+2012-10-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Found another place.
+
+2012-10-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bootstrap.sh, setup.py: Checkpoint
+
+2012-10-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/{generic-prettyprinter => gpp}/__init__.py,
+	src/{generic-prettyprinter => gpp}/plugins/apache-plugin.py,
+	src/{generic-prettyprinter => gpp}/plugins/arp-plugin.py,
+	src/{generic-prettyprinter => gpp}/plugins/asm-plugin.py,
+	src/{generic-prettyprinter => gpp}/plugins/blkid-plugin.py,
+	src/{generic-prettyprinter => gpp}/plugins/exports-plugin.py,
+	src/{generic-prettyprinter => gpp}/plugins/fstab-plugin.py,
+	src/{generic-prettyprinter => gpp}/plugins/help-plugin.py,
+	src/{generic-prettyprinter => gpp}/plugins/hosts-plugin.py,
+	src/{generic-prettyprinter => gpp}/plugins/ifcfg-plugin.py,
+	src/{generic-prettyprinter => gpp}/plugins/kdump-plugin.py,
+	src/{generic-prettyprinter => gpp}/plugins/lvm-plugin.py,
+	src/{generic-prettyprinter => gpp}/plugins/main-plugin.py,
+	src/{generic-prettyprinter => gpp}/plugins/meminfo-plugin.py,
+	src/{generic-prettyprinter => gpp}/plugins/modprobe-plugin.py,
+	src/{generic-prettyprinter => gpp}/plugins/mount-plugin.py,
+	src/{generic-prettyprinter => gpp}/plugins/multipath-ll-plugin.py,
+	src/{generic-prettyprinter => gpp}/plugins/multipath-plugin.py,
+	src/{generic-prettyprinter => gpp}/plugins/ocfs2-plugin.py,
+	src/{generic-prettyprinter =>
+	gpp}/plugins/oswbb-heartbeat-plugin.py, src/{generic-prettyprinter
+	=> gpp}/plugins/pam-plugin.py, src/{generic-prettyprinter =>
+	gpp}/plugins/printcap-plugin.py, src/{generic-prettyprinter =>
+	gpp}/plugins/rpm-installed-plugin.py, src/{generic-prettyprinter =>
+	gpp}/plugins/slabinfo-plugin.py, src/{generic-prettyprinter =>
+	gpp}/plugins/snmpd-plugin.py, src/{generic-prettyprinter =>
+	gpp}/plugins/ssh-plugin.py, src/{generic-prettyprinter =>
+	gpp}/plugins/superclass.py, src/{generic-prettyprinter =>
+	gpp}/plugins/sysctl-plugin.py, src/{generic-prettyprinter =>
+	gpp}/plugins/tcpwrapper-plugin.py, src/{generic-prettyprinter =>
+	gpp}/plugins/udev-plugin.py, src/{generic-prettyprinter =>
+	gpp}/plugins/vmcfg-plugin.py, src/{generic-prettyprinter =>
+	gpp}/plugins/vmstat-plugin.py: Cleanup
+
+2012-10-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bootstrap.sh, setup.py, src/{gpp =>
+	generic-prettyprinter}/__init__.py, src/{gpp =>
+	generic-prettyprinter}/plugins/apache-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/arp-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/asm-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/blkid-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/exports-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/fstab-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/help-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/hosts-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/ifcfg-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/kdump-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/lvm-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/main-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/meminfo-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/modprobe-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/mount-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/multipath-ll-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/multipath-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/ocfs2-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/oswbb-heartbeat-plugin.py, src/{gpp
+	=> generic-prettyprinter}/plugins/pam-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/printcap-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/rpm-installed-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/slabinfo-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/snmpd-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/ssh-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/superclass.py, src/{gpp =>
+	generic-prettyprinter}/plugins/sysctl-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/tcpwrapper-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/udev-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/vmcfg-plugin.py, src/{gpp =>
+	generic-prettyprinter}/plugins/vmstat-plugin.py: Goners
+
+2012-10-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bump version now that we can make real RPM packages.
+
+2012-10-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bootstrap.sh, generic-prettyprinter.spec.in, setup.py: Aha!
+	Removing my bogus ~/.pydistutils boilerplate allows the RPM to
+	build.
+
+2012-10-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bootstrap.sh: Let's try to do the RPM bit.
+
+2012-10-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bootstrap.sh, generic-prettyprinter.spec.in, setup.py,
+	src/gpp/CHANGES.txt, src/gpp/USAGE.txt: Ah, do not use the bdist_rpm
+	setup verb.
+
+2012-10-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/doc/PLACEHOLDER, src/gpp/examples/PLACEHOLDER: 
+	Placeholders are goners.
+
+2012-09-16  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/lvm-plugin.py: Order the stanzas, order
+	within the stanzas, space around headers & footers.
+
+2012-09-15  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/CHANGES.txt, src/gpp/USAGE.txt,
+	src/gpp/plugins/ocfs2-plugin.py: Reorganize the
+	"/etc/ocfs2/cluster.conf" to normalize it.
+
+2012-09-15  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : commit 09126294f4e75bb7a1d5971245a44e99c9a52699 Author: Tommy
+	Reynolds <Tommy.Reynolds@MegaCoder.com> Date:   Sat Sep 15 11:50:21
+	2012 -0500
+
+2012-09-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* CHANGES.txt, USAGE.txt, bootstrap.sh, setup.py, {doc =>
+	src/gpp/doc}/PLACEHOLDER, {examples =>
+	src/gpp/examples}/PLACEHOLDER: Checkpoint
+
+2012-09-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* .gitignore: Don't ignore anything, please.
+
+2012-09-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* doc/PLACEHOLDER, examples/PLACEHOLDER: Filler
+
+2012-09-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/snmpd-plugin.py: Format SNMP config files.
+
+2012-09-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/snmpd-plugin.py: Checkpoint
+
+2012-09-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/{cups-plugin.py => apache-plugin.py}: 
+	Rename according to apache-style usage.
+
+2012-09-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/cups-plugin.py: Generically handle
+	APACHE-style files.
+
+2012-09-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/sysctl-plugin.py: Do not concatenate all
+	files together, since there is no "foo.d/" configuration.
+
+2012-09-01  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/tcpwrapper-plugin.py: Format
+	/etc/hosts.*
+
+2012-08-31  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/multipath-plugin.py: Don't output
+	multipath comments.
+
+2012-08-30  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/arp-plugin.py: Format arp(1) output.
+
+2012-08-30  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/pam-plugin.py: Aded PAM prettyprinter.
+	Doesn't handle '[foo bar]' tokens very well.
+
+2012-08-30  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/ssh-plugin.py: Pretty print
+	'/etc/ssh/sshd?_conf' files.
+
+2012-08-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/multipath-ll-plugin.py: Clean up '# multipath -ll'
+	output so I can find the right device name quickly.
+
+2012-08-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/{multipath-ii-plugin.py =>
+	multipath-ll-plugin.py}: Rename properly.
+
+2012-08-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/multipath-ii-plugin.py: Format "multipath -ll"
+	output.
+
+2012-08-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bootstrap.sh, setup.py, src/gpp/plugins/meminfo-plugin.py: Rewrote
+	output formatting for /proc/meminfo, so that all the columns line up
+	even if the line doesn't include a units specification.
+
+2012-08-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* README.md: Changes
+
+2012-08-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* README, README.md: Keep only markdown README
+
+2012-08-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : Import from local repo.
+
+2012-08-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/lvm-plugin.py: Changes to "lvm.conf"
+	parsing, allowing blank lines.
+
+2012-08-17  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Added ~/.ssh/authorized_keys parsing.
+
+2012-08-17  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/asm-plugin.py,
+	src/gpp/plugins/multipath-plugin.py, src/gpp/plugins/superclass.py: 
+	More generic file header processing.
+
+2012-08-17  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/asm-plugin.py: Added oracle ASM setup
+	parsing.
+
+2012-08-17  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/fstab-plugin.py,
+	src/gpp/plugins/superclass.py: Added logic to output change-of-file
+	headers and footers to "fstab".
+
+2012-08-17  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/superclass.py: Pass filename on file begin/end
+	event.
+
+2012-08-16  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/lvm-plugin.py: Sort the LVM config
+	stanzas as well as sort their content.
+
+2012-08-15  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/multipath-plugin.py: multipath column-1
+	comments not handled very well, now simply copied.
+
+2012-08-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : commit e2eaca535345b6babda7f2c67352d96f0238ea76 Author: Tommy
+	Reynolds <Tommy.Reynolds@MegaCoder.com> Date:   Sun Aug 12 14:24:49
+	2012 -0500
+
+2012-08-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/multipath-plugin.py: Change-over
+	multipath to new scheme.
+
+2012-08-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/multipath-plugin.py: Need to call superclass'
+	reset() method in the plugin method.
+
+2012-08-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/plugins/meminfo-plugin.py: Added kdump.conf
+	plugin.
+
+2012-08-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Cleaned up XORG plugin.
+
+2012-08-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/__init__.py, src/gpp/plugins/superclass.py: Had to move
+	the option processing around.
+
+2012-08-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : commit 2115f1f9dcaea02f8d405d116995af551dfa3e90 Author: Tommy
+	Reynolds <Tommy.Reynolds@MegaCoder.com> Date:   Sun Aug 12 10:47:29
+	2012 -0500
+
+2012-08-11  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/__init__.py, src/gpp/plugins/kdump-plugin.py,
+	src/gpp/plugins/superclass.py: Added /etc/kdump.conf processor.
+
+2012-08-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumper
+
+2012-08-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/modprobe-plugin.py: Take longest ("blacklist")
+	verb into account in first column width.
+
+2012-08-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/__init__.py, src/gpp/plugins/blkid-plugin.py,
+	src/gpp/plugins/cups-plugin.py, src/gpp/plugins/exports-plugin.py,
+	src/gpp/plugins/fstab-plugin.py, src/gpp/plugins/help-plugin.py,
+	src/gpp/plugins/hosts-plugin.py, src/gpp/plugins/ifcfg-plugin.py,
+	src/gpp/plugins/lvm-plugin.py, src/gpp/plugins/main-plugin.py,
+	src/gpp/plugins/superclass.py, src/gpp/plugins/sysctl-plugin.py: 
+	Converted to use the event-driven superclass.
+
+2012-08-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/modprobe-plugin.py,
+	src/gpp/plugins/multipath-plugin.py: The modprobe plugin now sorts
+	the lines before outputting them.  The multipath plugin now indents
+	properly.
+
+2012-08-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* doc/PLACEHOLDER, examples/PLACEHOLDER: Goners
+
+2012-08-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped version number.
+
+2012-08-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* README.txt, bootstrap.sh, setup.py: Now builds the RPM as
+	"generic-prettyprinter"
+
+2012-08-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/exports-plugin.py: Unbrake it.
+
+2012-08-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/exports-plugin.py: Oops, somehow replaced code
+	with its output...
+
+2012-08-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/exports-plugin.py: Revert "Can now format NFS
+	exports" This reverts commit de1f7065c153f063fb6b3c1caf2427c1ea5ff4b0.
+
+2012-08-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/vmcfg-plugin.py: Fiddled around enough so that
+	"vmcfg" sorta works.
+
+2012-08-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bootstrap.sh: Make binary distribution by default.
+
+2012-08-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : commit 20e199ec130676c102440f14ed7d80a271a3bace Author: Tommy
+	Reynolds <Tommy.Reynolds@MegaCoder.com> Date:   Fri Aug 3 14:23:45
+	2012 -0500
+
+2012-08-03  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/superclass.py: Output filename and line number, if
+	known, in error messages.
+
+2012-07-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/udev-plugin.py: Done as much as is possible.
+
+2012-07-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/udev-plugin.py: Checkpoint
+
+2012-07-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* bootstrap.sh: Easier typing script.
+
+2012-07-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/udev-plugin.py: First cut at UDEV rules parser.
+
+2012-07-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Bumped version
+
+2012-07-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/exports-plugin.py: Can now format NFS exports
+
+2012-07-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/plugins/exports-plugin.py: Format /etc/exports
+
+2012-07-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* {gpp => src/gpp}/plugins/printcap-plugin.py: Salvaged older
+	plugin.
+
+2012-07-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* doc/PLACEHOLDER, examples/PLACEHOLDER: Boilerplate
+
+2012-07-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* CHANGES.txt, README.txt, USAGE.txt: Boilerplate
+
+2012-07-15  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/__init__.py, src/gpp/plugins/help-plugin.py: 
+	Allow 'gpp help' to display the known plugins
+
+2012-07-15  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* gpp/plugins/printcap-plugin.py: Changed into plugin form.
+
+2012-07-15  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : commit b2e8e5fde93f6863b5f2cf06d6f3390ab5d4bb86 Author: Tommy
+	Reynolds <Tommy.Reynolds@MegaCoder.com> Date:   Sun Jul 15 00:54:42
+	2012 -0500
+
+2012-07-15  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* scripts/gpp, src/gpp/__init__.py: Picks up the plugins properly
+	now.
+
+2012-07-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* scripts/gpp: Checkpoint
+
+2012-07-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* README: Verbiage
+
+2012-07-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/__init__.py, src/gpp/gpp.py: Put the goodies where you can
+	reach them :)
+
+2012-07-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Also
+
+2012-07-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* scripts/{gpp.sh => gpp}: Drop extention, it's a command, Dolt!
+
+2012-07-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/scripts/gpp.sh: Lo and behold, Houston, we have
+	a script in the infrastructure.
+
+2012-07-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* scripts/gpp.sh: Moved
+
+2012-07-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/scripts/gpp.sh: A script
+
+2012-07-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/gpp.py: Fake out the 'os.path.basename' against what might
+	not really be a path...
+
+2012-07-13  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* gpp/plugins/printcap-plugin.py: Basic functionality, but no plugin
+	form yet.
+
+2012-07-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/gpp.py: Appropriate for a plugin now.
+
+2012-07-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/gpp/__init__.py, src/gpp/gpp.py: Checkpoint.
+
+2012-07-11  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/__init__.py, src/gpp/gpp.py: Put good stuff into the
+	__init__.py file.
+
+2012-07-11  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/__init__.py: OK, maybe so.
+
+2012-07-11  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/__init__.py: Cruft!
+
+2012-07-11  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* gpp.spec.in: It appears we don't need a spec file.
+
+2012-07-11  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/__init__.py: Boilerplate
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp/gpp.py: OK, we do now know where our plugins are to be
+	found.
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Looks as if this incantation does a binary build
+	correctly.
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py, src/{ => gpp}/gpp.py, src/{ =>
+	gpp}/plugins/blkid-plugin.py, src/{ => gpp}/plugins/cups-plugin.py,
+	src/{ => gpp}/plugins/fstab-plugin.py, src/{ =>
+	gpp}/plugins/hosts-plugin.py, src/{ =>
+	gpp}/plugins/ifcfg-plugin.py, src/{ => gpp}/plugins/lvm-plugin.py,
+	src/{ => gpp}/plugins/main-plugin.py, src/{ =>
+	gpp}/plugins/meminfo-plugin.py, src/{ =>
+	gpp}/plugins/modprobe-plugin.py, src/{ =>
+	gpp}/plugins/mount-plugin.py, src/{ =>
+	gpp}/plugins/multipath-plugin.py, src/{ =>
+	gpp}/plugins/ocfs2-plugin.py, src/{ =>
+	gpp}/plugins/oswbb-heartbeat-plugin.py, src/{ =>
+	gpp}/plugins/rpm-installed-plugin.py, src/{ =>
+	gpp}/plugins/slabinfo-plugin.py, src/{ =>
+	gpp}/plugins/superclass.py, src/{ => gpp}/plugins/sysctl-plugin.py,
+	src/{ => gpp}/plugins/vmcfg-plugin.py, src/{ =>
+	gpp}/plugins/vmstat-plugin.py: Getting stuff into the proper
+	directories.  Not yet working...
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/plugins/blkid-plugin.py, src/plugins/cups-plugin.py,
+	src/plugins/fstab-plugin.py, src/plugins/hosts-plugin.py,
+	src/plugins/ifcfg-plugin.py, src/plugins/lvm-plugin.py,
+	src/plugins/meminfo-plugin.py, src/plugins/modprobe-plugin.py,
+	src/plugins/mount-plugin.py, src/plugins/multipath-plugin.py,
+	src/plugins/ocfs2-plugin.py, src/plugins/oswbb-heartbeat-plugin.py,
+	src/plugins/rpm-installed-plugin.py,
+	src/plugins/slabinfo-plugin.py, src/plugins/superclass.py,
+	src/plugins/sysctl-plugin.py, src/plugins/vmcfg-plugin.py,
+	src/plugins/vmstat-plugin.py: Plugins are not executble, sir.
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* configure.ac: No need of autotools
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* autogen.sh, bootstrap.sh: No need of autotools
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Checkpoint
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Checkpoint
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* gpp.spec.in: Doin' it in the SPEC file.
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* autogen.sh: Don't need to run make automatically, or at all, even.
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* configure.ac: Don't need Makefiles any longer.
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* Makefile.am, configure.ac, gpp.spec.in, src/Makefile.am,
+	src/plugins/Makefile.am: Not bothering with automake, since nothing
+	to "compile".
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* gpp.spec.in: No compiled C code.
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* gpp.spec.in, src/plugins/Makefile.am: Checkpoint
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* COPYING, INSTALL: Boilerplate
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* AUTHORS, ChangeLog, NEWS, README: Boilerplate
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* configure.ac: Customized
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* gpp.spec.in: Packaging
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* configure.ac: Skeleton
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* autogen.sh, bootstrap.sh: Scripts to make life easier.
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/plugins/Makefile.am, src/plugins/__init__.py: More structure
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/Makefile.am: How to
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* Makefile, Makefile.am, gpp/plugins/__init__.py, {gpp =>
+	src}/gpp.py, {gpp => src/plugins}/__init__.py, {gpp =>
+	src}/plugins/blkid-plugin.py, {gpp => src}/plugins/cups-plugin.py,
+	{gpp => src}/plugins/fstab-plugin.py, {gpp =>
+	src}/plugins/hosts-plugin.py, {gpp => src}/plugins/ifcfg-plugin.py,
+	{gpp => src}/plugins/lvm-plugin.py, {gpp =>
+	src}/plugins/main-plugin.py, {gpp =>
+	src}/plugins/meminfo-plugin.py, {gpp =>
+	src}/plugins/modprobe-plugin.py, {gpp =>
+	src}/plugins/mount-plugin.py, {gpp =>
+	src}/plugins/multipath-plugin.py, {gpp =>
+	src}/plugins/ocfs2-plugin.py, {gpp =>
+	src}/plugins/oswbb-heartbeat-plugin.py, {gpp =>
+	src}/plugins/rpm-installed-plugin.py, {gpp =>
+	src}/plugins/slabinfo-plugin.py, {gpp =>
+	src}/plugins/superclass.py, {gpp => src}/plugins/sysctl-plugin.py,
+	{gpp => src}/plugins/vmcfg-plugin.py, {gpp =>
+	src}/plugins/vmstat-plugin.py: Checkpoint
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: deleted:    setup.py
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* gpp/plugins/vmstat-plugin.py: Imported
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/vmstat-pp => gpp/plugins/vmstat-plugin.py: Renamed.
+
+2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : commit b8935294371517edf734c89d299824e738797f8c Author: Tommy
+	Reynolds <Tommy.Reynolds@MegaCoder.com> Date:   Sat Jul 7 17:30:27
+	2012 -0500
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/mount-pp => gpp/plugins/mount-plugin.py: Renamed.
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* gpp/plugins/blkid-plugin.py, src/blkid-pp: Blkid printer.
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* gpp/plugins/lvm-plugin.py, src/lvm-pp: Relocated.
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* gpp/plugins/lvm-plugin.py: LVM
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : commit 8d252e9a5254eda77c59e6caec5a5547e6e88d5c Author: Tommy
+	Reynolds <Tommy.Reynolds@MegaCoder.com> Date:   Sat Jul 7 11:44:56
+	2012 -0500
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* gpp/__init__.py: Package
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* gpp/Makefile: Goner
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* {src => gpp}/Makefile, {src => gpp}/gpp.py, {src =>
+	gpp}/plugins/cups-plugin.py, {src => gpp}/plugins/fstab-plugin.py,
+	{src => gpp}/plugins/hosts-plugin.py, {src =>
+	gpp}/plugins/ifcfg-plugin.py, {src => gpp}/plugins/main-plugin.py,
+	{src => gpp}/plugins/meminfo-plugin.py, {src =>
+	gpp}/plugins/modprobe-plugin.py, {src =>
+	gpp}/plugins/multipath-plugin.py, {src =>
+	gpp}/plugins/ocfs2-plugin.py, {src =>
+	gpp}/plugins/oswbb-heartbeat-plugin.py, {src =>
+	gpp}/plugins/rpm-installed-plugin.py, {src =>
+	gpp}/plugins/slabinfo-plugin.py, {src =>
+	gpp}/plugins/superclass.py, {src => gpp}/plugins/sysctl-plugin.py,
+	{src => gpp}/plugins/vmcfg-plugin.py: Checkpoint
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Using generic layout.
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* setup.py: Primal setup script;
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp.py, src/plugins/superclass.py,
+	src/plugins/sysctl-plugin.py: Developed superclass to allow more
+	consistent behavior.
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/plugins/vmcfg-plugin.py: Display OVM "vm.cfg" files in
+	canonical style.
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/plugins/fstab-plugin.py: Display /etc/fstab in conical form.
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/plugins/slabinfo-plugin.py: Display /proc/slabinfo files in
+	conical form.
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/plugins/oswbb-heartbeat-plugin.py: Display OSWbb heartbeat
+	file, highlighting any time jitter.
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/plugins/multipath-plugin.py: Display /etc/multipath.conf files
+	in canonical style.
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/plugins/meminfo-plugin.py: Display /proc/meminfo in canonical
+	style.
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/plugins/modprobe-plugin.py: Display /etc/modprobe.* files in
+	canonical style.
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/plugins/hosts-plugin.py: Display /etc/hosts in canonical
+	style.
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/plugins/ifcfg-plugin.py: Display
+	/etc/sysconfig/network-scripts/ifcfg-* files in canonical style.
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/plugins/rpm-installed-plugin.py: Shows installed RPM inventory
+	along with the installation time and vendor name.
+
+2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/plugins/ocfs2-plugin.py: Changed to a plugin.
+
+2012-07-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/gpp.py, src/plugins/main-plugin.py, src/plugins/superclass.py: 
+	Checkpoint
+
+2012-07-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/plugins/cups-plugin.py: Adapted.
+
+2012-07-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/plugins/superclass.py: Generic, do nothing, class.
+
+2012-07-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/grub-pp, src/hosts-pp, src/ifcfg-pp, src/meminfo-pp,
+	src/modprobe-pp, src/ocfs2-pp, src/oswbb-heartbeat-pp, src/{cups-pp
+	=> plugins/cups-plugin.py}, src/{fstab-pp =>
+	plugins/fstab-plugin.py}, src/plugins/hosts-plugin.py,
+	src/plugins/ifcfg-plugin.py, src/plugins/meminfo-plugin.py,
+	src/plugins/modprobe-plugin.py, src/{multipath-pp =>
+	plugins/multipath-plugin.py}, src/plugins/ocfs2-plugin.py,
+	src/plugins/oswbb-heartbeat-plugin.py,
+	src/plugins/rpm-installed-plugin.py,
+	src/plugins/slabinfo-plugin.py, src/plugins/vmcfg-plugin.py,
+	src/rpm-installed-pp, src/slabinfo-pp, src/vmcfg-pp: Baseline
+
+2012-07-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/plugins/sysctl-plugin.py: Sysctl prettyprinter.
+
+2012-07-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/{sysctl-pp => plugins/sysctl-plugin.py}: Plugin
+
+2012-07-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : Nothing compiled
+
+2012-07-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/{main.py => gpp.py}: Changed to distribution name.
+
+2012-07-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/main-pp: Oops, drop that symlink
+
+2012-07-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/main-pp, src/main-pp.py, src/main.py: Checkpoint
+
+2012-07-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/plugins/main-plugin.py: Beginnings of a plugin set.
+
+2012-07-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : Don't need to save compiled code.
+
+2012-07-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/main.py: Checkpoint
+
+2012-07-02  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/main-pp.py, src/main.py: Dynamically loads the prettyprinter
+	module based on the sys.argv[0] name.
+
+2012-06-29  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/vmstat-pp: Basic parsing for vmstat-pp
+
+2012-06-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/vmcfg-pp: Compute width of keys, so we can output the '=' in a
+	straight line.
+
+2012-06-24  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/main.py, src/multipath-pp: Ported first application.
+
+2012-06-24  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/main.py: General-purpose mainline driver.
+
+2012-06-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/blkid-pp: Pretty print blkid(8) output.
+
+2012-06-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/lvm-pp: Decrufted
+
+2012-06-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/lvm-pp: Prettyprint LVM setup files.
+
+2012-06-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/lvm-pp: Pretty print LVM configuration file
+
+2012-06-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/mount-pp: Helps to supply the strings to be formatted.
+
+2012-06-20  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/{mount-pp.py => mount-pp}: Renamed
+
+2012-06-20  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/mount-pp.py: Make mount(8) and /proc/mounts a bit readable by
+	using a consistent format.
+
+2012-06-16  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/rpm-installed-pp: Oops, pulled wrong popt line.
+
+2012-06-16  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/rpm-installed-pp: Read from files or get local inventory.
+
+2012-06-16  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/rpm-installed-pp: Streamline the output.
+
+2012-06-16  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/rpm-installed-pp: Format list of when each RPM was installed.
+
+2012-06-16  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/ocfs2-pp: Handle directories and such
+
+2012-06-16  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* Makefile, src/Makefile: Cleaned up install target.
+
+2012-06-16  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* : commit fb05c7d65507795653ca79b5218d2c9347e35e67 Author: Tommy
+	Reynolds <Tommy.Reynolds@MegaCoder.com> Date:   Sat Jun 16 10:32:00
+	2012 -0500
+
+2012-06-10  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/Makefile: Use smart install via template
+
+2012-06-10  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/oswbb-heartbeat-pp: Added column headers
+
+2012-06-10  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/oswbb-heartbeat-pp: Pretty print the OSWatcher heartbeat file,
+	highlighting timing jitter.
+
+2012-06-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/grub-pp: Forgot to print out the 'default=' line.
+
+2012-06-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/meminfo-pp: Include final ':' in field names.
+
+2012-06-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/meminfo-pp, src/modprobe-pp: meminfo
+
+2012-06-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* src/Makefile: Typo.
+
+2012-06-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* Makefile, src/Makefile, cups-pp => src/cups-pp, fstab-pp =>
+	src/fstab-pp, grub-pp => src/grub-pp, hosts-pp => src/hosts-pp,
+	ifcfg-pp => src/ifcfg-pp, modprobe-pp => src/modprobe-pp,
+	multipath-pp => src/multipath-pp, slabinfo-pp => src/slabinfo-pp,
+	sysctl-pp => src/sysctl-pp, vmcfg-pp => src/vmcfg-pp: Moved to
+	subdir
+
+2012-06-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* grub-pp, hosts-pp, ifcfg-pp, modprobe-pp, multipath-pp,
+	sysctl-pp, vmcfg-pp: More
+
+2012-06-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
+
+	* Baseline
 
