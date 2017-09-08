@@ -23,15 +23,19 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	next_line( self, line ):
 		# Ignore funky comment lines
-		if line[0] in [ '#', ';' ]: return
-		tokens = [ token for token in shlex.shlex(line) ]
+		if len(line) == 0 or line[0] in [ '#', ';' ]: return
 		if line.startswith( '[' ):
 			if self.section_name and len(self.entries):
 				self.sections[ self.section_name ] = self.entries
 			self.section_name = line
 			self.entries = dict()
-		elif len(tokens):
-			self.entries[ token[0] ] = tokens
+		else:
+			tokens = map(
+				str.strip,
+				line.strip().split( '=' )
+			)
+			if len( tokens ) == 2:
+				self.entries[ tokens[0] ] = tokens
 		return
 
 	def	post_end_file( self, name = None ):
@@ -59,7 +63,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 						self.sections[ key ]
 					)
 				)
-				fmt = '{{0:>{0}}} {{1}}'.format( width )
+				fmt = '{{0:>{0}}} = {{1}}'.format( width )
 				for item in sorted(
 					self.sections[key],
 					key = lambda k : k.lower()
