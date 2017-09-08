@@ -63,7 +63,7 @@ class GenericPrettyPrinter( object ):
             extend.""",
             prog            = 'gpp',
 #           usage           = '%{prog} [-o ofile] [-t type] [file..]',
-            version         = version.Version,
+#           version         = version.Version,
             formatter_class = argparse.ArgumentDefaultsHelpFormatter,
             epilog = """Every attempt is made to provide a
             correctness-preserving tansformation.  The content may look
@@ -112,6 +112,13 @@ class GenericPrettyPrinter( object ):
             dest     = 'kind',
             help     = 'kind of pretty-printer desired',
             required = True,
+        )
+        p.add_argument(
+            '-v',
+            '--version',
+            action  = 'version',
+            default = version.Version,
+            help    = 'program version',
         )
         opts = p.parse_args()
         if opts.ofile == fake_ofile:
