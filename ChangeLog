@@ -1,5 +1,20 @@
 * Fri Sep 8 2017 Tommy Reynolds
-- (37fd145) Added MANIFEST.in so we can build RPM (HEAD -> master, origin/master, origin/HEAD)
+- (5bd6fae) Bump (HEAD -> master, origin/master, origin/HEAD)
+
+* Fri Sep 8 2017 Tommy Reynolds
+- (3784304) Made self.error print exception data better.  The msg argument can be a string, a list, a dict, or anything honoring str(foo)
+
+* Fri Sep 8 2017 Tommy Reynolds
+- (50d87f5) Use a simple split('=') for the tokens.  Accept zero-length lines.
+
+* Fri Sep 8 2017 Tommy Reynolds
+- (455ff7d) Added example
+
+* Fri Sep 8 2017 Tommy Reynolds
+- (8dbd07e) Changes
+
+* Fri Sep 8 2017 Tommy Reynolds
+- (37fd145) Added MANIFEST.in so we can build RPM
 
 * Thu Jul 27 2017 Tommy Reynolds
 - (1c57e25) Bumped version after rolling over genpp changes. (tag: v2.0.0)
