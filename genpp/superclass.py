@@ -4,6 +4,7 @@
 import  os
 import  sys
 import  glob
+import  traceback
 
 class   MetaPrettyPrinter( object ):
 
@@ -57,6 +58,8 @@ class   MetaPrettyPrinter( object ):
             else:
                 retval = glob.glob( pattern )
         except Exception, e:
+            for line in traceback.format_exc():
+                self.error( line )
             retval = [ '-' ]
         return retval
 
@@ -77,20 +80,21 @@ class   MetaPrettyPrinter( object ):
             try:
                 self.do_open_file( sys.stdin )
             except Exception, e:
-                self.error( 'error handling {stdin}' )
+                self.error( 'error handling {stdin}', e )
                 raise e
         elif os.path.isfile( name ):
             try:
                 self._do_file( name )
             except Exception, e:
-                self.error( 'processing "{0}"'.format( name ) )
+                self.error( 'processing "{0}"'.format( name ), e )
                 raise e
         elif os.path.isdir( name ):
             try:
                 names = sorted( os.listdir( name ) )
             except Exception, e:
                 self.error(
-                    'could not read directory "{0}"'.format( name )
+                    'could not read directory "{0}"'.format( name ),
+                    e
                 )
                 raise e
             self.sc_multi += len( names )
@@ -107,8 +111,10 @@ class   MetaPrettyPrinter( object ):
                         self.error(
                             'could not process derived file "{0}"'.format(
                                 name
-                            )
+                            ),
+                            e
                         )
+                        raise e
         elif os.path.islink( name ):
             self.error( 'ignoring symlink "%s".' % name )
         else:
@@ -152,7 +158,7 @@ class   MetaPrettyPrinter( object ):
             try:
                 self.do_open_file( sys.stdin )
             except Exception, e:
-                self.error( 'could not process "{stdin}"' )
+                self.error( 'could not process "{stdin}"', e )
                 raise e
         else:
             try:
@@ -160,10 +166,13 @@ class   MetaPrettyPrinter( object ):
                     try:
                         self.do_open_file( f )
                     except Exception, e:
-                        self.error( 'processing "{0}" failed.'.format( fn ) )
+                        self.error(
+                            'processing "{0}" failed.'.format( fn ),
+                            e
+                        )
                         raise e
             except Exception, e:
-                self.error( 'could not open "{0}"'.format( fn ) )
+                self.error( 'could not open "{0}"'.format( fn ), e )
                 raise e
         self.end_file( fn )
         self.post_end_file()
@@ -181,7 +190,7 @@ class   MetaPrettyPrinter( object ):
                 self.next_line( line )
                 line = ''
         except Exception, e:
-            self.error( 'error processing file "{0}"'.format( name ) )
+            self.error( 'error processing file "{0}"'.format( name ), e )
             raise e
         return
 
@@ -223,13 +232,41 @@ class   MetaPrettyPrinter( object ):
 
     def error( self, msg, e = None ):
         self.sc_out.flush()
+        prefix = []
         if self.sc_filename is not None:
-            print >>sys.stderr, 'File %s: ' % self.sc_filename,
+            prefix.append(
+                'File "{0}"'.format( self.sc_filename )
+            )
         if self.sc_lineno > 0:
-            print >>sys.stderr, 'Line %d: ' % self.sc_lineno,
-        print >>sys.stderr, msg
+            prefix.append(
+                'Line {0}'.format( self.sc_lineno )
+            )
+        gutter = ', '
+        if isinstance( msg, str ):
+            print >>sys.stderr, gutter.join( prefix + [ msg ] )
+        elif isinstance( msg, list ):
+            for line in msg:
+                print >>sys.stderr, gutter.join( prefix + [ line ] )
+        elif isinstance( msg, dict ):
+            width = max(
+                map(
+                    len,
+                    msg.keys()
+                )
+            )
+            fmt = '{{0:{0}}}: {{1}}'.format( width )
+            for key in sorted( msg.keys() ):
+                print >>sys.stderr, gutter.join(
+                    prefix + [
+                        fmt.format( key, msg[key] )
+                    ]
+                )
+        else:
+            print >>sys.stderr, gutter.join( prefix + [ str(msg) ] )
         if e is not None:
-            print >>sys.stderr, e
+            print >>sys.stderr, gutter.join( prefix + [ str(e) ] )
+            for line in traceback.format_exc().splitlines():
+                print >>sys.stderr, gutter.join( prefix + [ line ] )
             raise e
         return
 
