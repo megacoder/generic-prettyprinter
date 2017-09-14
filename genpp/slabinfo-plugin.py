@@ -15,7 +15,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		super( PrettyPrint, self ).__init__()
 		return
 
-	def	pre_begin_file( self ):
+	def	pre_begin_file( self, name = None ):
 		self.items = align.Align( titles = 1 )
 		return
 
