@@ -86,7 +86,7 @@ class   MetaPrettyPrinter( object ):
             try:
                 self._do_file( name )
             except Exception, e:
-                self.error( 'processing "{0}"'.format( name , e )
+                self.error( 'processing "{0}"'.format( name , e ) )
                 raise e
         elif os.path.isdir( name ):
             try:
