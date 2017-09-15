@@ -13,65 +13,82 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	__init__( self ):
 		super( PrettyPrint, self ).__init__()
-		self.reset()
 		return
 
-	def	reset( self ):
-		super( PrettyPrint, self ).reset()
-		self._reset()
-		return
-
-	def	_reset( self ):
-		self.chain    = None
-		self.entries  = []
-		self.headers  = None
-		self.nHeaders = 0
-		self.widths   = None
+	def	pre_begin_file( self, name = None ):
+		self.tables = dict()
+		self.tname = None
 		return
 
 	def	own_glob( self ):
 		return '-'
 
 	def	next_line( self, line ):
-		if line.startswith( 'Chain' ):
-			self.report()
-			self._reset()
-			self.chain = line
-		elif line.startswith( 'target' ):
-			self.headers = line.split()
-			self.headers.append( 'modifiers' )
-			self.widths = map(len,self.headers)
-			self.nHeaders = len( self.headers )
+		tokens = map(
+			str.strip,
+			line.split( '#', 1 )[0].split()
+		)
+		if len( tokens ) == 0: return
+		key = tokens[0]
+		if key.startswith( '*' ):
+			# New table
+			self.tname = key[1:]
+			self.tables[ self.tname ] = dict()
+		elif key.startswith( ':' ):
+			# New chain for table
+			chain_name = key[1:]
+			self.tables[ self.tname ][ chain_name ] = dict({
+				'args' : tokens[1:],
+				'rules' : list()
+			})
+		elif key.startswith( '-' ):
+			# New rule for table chain
+			if len( tokens ) < 2: return
+			chain_name = tokens[ 1 ]
+			if chain_name in self.tables[ self.tname ]:
+				self.tables[ self.tname ][ chain_name ]['rules'].append(
+					tokens
+				)
+			else:
+				self.error(
+					'unknown chain: {0}: {1}'.format(
+						chain_name,
+						tokens
+					)
+				)
+		elif key == 'COMMIT':
+			# End the table
+			pass
 		else:
-			tokens = line.split( None, 5 )
-			n = len( tokens )
-			if n > 0:
-				while len(tokens) < 6:
-					tokens.append( '' )
-				tokens = map( string.strip, tokens )
-				for i in xrange( 0, len(tokens) ):
-					self.widths[i] = max( self.widths[i], len(tokens[i]) )
-				self.entries.append( tokens )
+			# Dunno
+			self.println( 'Ignoring line: {0}'.format( line ) )
+			pass
 		return
 
 	def	report( self, final = False ):
-		if self.chain:
-			self.println( self.chain )
-			gutter = '  '
-			fmts = [
-				('%%-%ds' % self.widths[i]) for i in xrange(0, self.nHeaders)
-			]
+		if final: return
+		for table_name in sorted( self.tables ):
 			self.println(
-				gutter.join(
-					(
-						fmts[i] % self.headers[i]
-					) for i in xrange(0,len(self.headers))
+				'*{0}'.format( table_name )
+			)
+			chain_width = max(
+				map(
+					len,
+					self.tables[ table_name ]
 				)
 			)
-			for tokens in self.entries:
+			chain_fmt = ':{{0:{0}s}} {{1}}'.format( chain_width )
+			for chain_name in sorted( self.tables[ table_name ] ):
 				self.println(
-					gutter.join(
-						(fmts[i] % tokens[i]) for i in xrange(0,self.nHeaders)
+					chain_fmt.format(
+						chain_name,
+						'\t'.join( self.tables[ table_name ][chain_name]['args'] ),
 					)
 				)
+				for rule in self.tables[ table_name ][ chain_name
+											  ]['rules']:
+					self.println(
+						' '.join( rule )
+					)
+			self.println( 'COMMIT' )
 		return

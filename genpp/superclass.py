@@ -58,9 +58,13 @@ class   MetaPrettyPrinter( object ):
             else:
                 retval = glob.glob( pattern )
         except Exception, e:
-            for line in traceback.format_exc():
-                self.error( line )
-            retval = [ '-' ]
+            self.error(
+                'glob( {0} ) failed.'.format(
+                    pattern
+                ),
+                e
+            )
+            raise e
         return retval
 
     def advise( self, names = [ '-' ] ):

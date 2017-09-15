@@ -16,6 +16,7 @@ except:
 import  os
 import  sys
 import  version
+import  traceback
 
 class GenericPrettyPrinter( object ):
 
@@ -41,10 +42,15 @@ class GenericPrettyPrinter( object ):
         # Here is the session
         handler.start()
         handler.advise( names )
-        for name in names:
-            handler.process( name )
+        retval = True
+        try:
+            for name in names:
+                handler.process( name )
+            retval = False
+        except Exception, e:
+            traceback.print_exc()
         handler.finish()
-        return False
+        return retval
 
     def process( self, f = sys.stdin ):
         for line in f:
