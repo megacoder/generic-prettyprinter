@@ -73,7 +73,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				self.pairs
 			):
 				info = self.pairs[ key ]
-				self.printLn(
+				self.println(
 					fmt.format(
 						info['key'],
 						info['value'],
@@ -88,7 +88,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 					)
 				else:
 					footnotes = ''
-				self.printLn(
+				self.println(
 					fmt.format(
 						info['key'],
 						value,
