@@ -1,0 +1,7 @@
+UUID=0004fb000001000068b46cbe7e6f7026
+USETLS1=NO
+RUN_OVMM=YES
+JVM_MEMORY_MAX=4096m
+JVM_MAX_PERM=512m
+DBBACKUP_CMD=/opt/mysql/meb-3.12/bin/mysqlbackup
+DBBACKUP=/u01/app/oracle/mysql/dbbackup
