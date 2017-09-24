@@ -88,7 +88,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 					)
 				else:
 					footnotes = ''
-				self.println(
+				self.printLn(
 					fmt.format(
 						info['key'],
 						value,
