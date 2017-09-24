@@ -80,19 +80,4 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 						info['footnotes']
 					)
 				)
-				value = info[ 'value' ]
-				footnotes = info['footnotes']
-				if len(footnotes):
-					footnotes = '** {0}'.format(
-						', '.join( footnotes )
-					)
-				else:
-					footnotes = ''
-				self.println(
-					fmt.format(
-						info['key'],
-						value,
-						footnotes
-					)
-				)
 		return
