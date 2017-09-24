@@ -73,7 +73,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 				self.pairs
 			):
 				info = self.pairs[ key ]
-				self.printlin(
+				self.printLn(
 					fmt.format(
 						info['key'],
 						info['value'],
