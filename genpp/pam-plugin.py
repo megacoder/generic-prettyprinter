@@ -24,6 +24,39 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		self.widths = dict()
 		return
 
+	def	_parse( self, s ):
+		resid = s
+		token = None
+		state = 'begin'
+		while len(resid):
+			c = resid[ 0 ]
+			if c.isspace():
+				if state == 'append':
+					# Do not append whitespace to token
+					resid = resid[1:]
+					break
+				if state == 'bracket':
+					# Do append whitespace to token
+					token += c
+					resid = resid[1:]
+					break
+				# Fall through to ignore space
+			# Not a whitespace character
+			if state == 'begin':
+				token = c
+				state = 'append'
+			elif state == 'append':
+				token += c
+			elif c == '[':
+				state = 'bracket'
+				token = c
+			elif c == ']' and state == 'bracket':
+				token += c
+				resid = resid[1:]
+				break
+			resid = resid[1:]
+		return token, resid
+
 	def	next_line( self, line ):
 		tokens = map(
 			str.strip,
