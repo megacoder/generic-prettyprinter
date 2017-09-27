@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 #!/usr/bin/python
 # vim: et sw=4 ts=4
 
