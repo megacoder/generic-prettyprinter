@@ -7,7 +7,7 @@ import	glob
 import	os
 
 NAME	= 'genpp'
-VERSION = '2.0.2'
+VERSION = '2.0.3'
 
 with open( '{0}/version.py'.format( 'genpp' ), 'w') as f:
 	print >>f, 'Version="{0}"'.format( VERSION )
