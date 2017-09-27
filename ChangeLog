@@ -1,5 +1,83 @@
+* Wed Sep 27 2017 Tommy Reynolds
+- (30f52e6) Merge branch 'master' of github.com:megacoder/generic-prettyprinter (HEAD -> master)
+
+* Wed Sep 27 2017 Tommy Reynolds
+- (b81ff66) Generated file, don't cha know?
+
+* Wed Sep 27 2017 Tommy Reynolds
+- (2472bae) How did generated file get in here? (origin/master, origin/HEAD)
+
+* Wed Sep 27 2017 Tommy Reynolds
+- (6314ca2) Use flexable idiom to locate python executable.
+
+* Wed Sep 27 2017 Tommy Reynolds
+- (084c046) Merge branch 'master' of github.com:megacoder/generic-prettyprinter
+
+* Wed Sep 27 2017 Tommy Reynolds
+- (bf03a7e) PAM better
+
+* Wed Sep 27 2017 Tommy Reynolds
+- (622f2b4) Make scripts executable to stop some rpmlint complaints.
+
+* Wed Sep 27 2017 Tommy Reynolds
+- (618a9d5) Added tcpdump ascii handler (only for ssh(1) at present)
+
+* Wed Sep 27 2017 Tommy Reynolds
+- (9fd0287) Sample tcpdump of ssh(1) session.
+
+* Sun Sep 24 2017 Tommy Reynolds
+- (13bb52f) Avoid dup output
+
+* Sun Sep 24 2017 Tommy Reynolds
+- (f9aa8e2) More
+
+* Sun Sep 24 2017 Tommy Reynolds
+- (7e5dc61) Again, strange visions
+
+* Sun Sep 24 2017 Tommy Reynolds
+- (8f8377f) Typo
+
+* Sun Sep 24 2017 Tommy Reynolds
+- (8cbcebe) Example /etc/sysconfig/ovmm configuration file.
+
+* Sun Sep 24 2017 Tommy Reynolds
+- (ada0f5d) Add /etc/sysconfig/ovmm handler.
+
+* Fri Sep 15 2017 Tommy Reynolds
+- (bdbbfaf) Added exception traceback more places.  Obey semantics of an /etc/sysconfig/iptables save file. (pam, ifcfg)
+
+* Thu Sep 14 2017 Tommy Reynolds
+- (3d4a63c) Added optional arg
+
+* Thu Sep 14 2017 Tommy Reynolds
+- (475e126) Moved paren to end
+
+* Thu Sep 14 2017 Tommy Reynolds
+- (42057cd) Removed extra paren
+
 * Fri Sep 8 2017 Tommy Reynolds
-- (5bd6fae) Bump (HEAD -> master, origin/master, origin/HEAD)
+- (9ef0187) Merge branch 'master' of github.com:megacoder/generic-prettyprinter
+
+* Fri Sep 8 2017 Tommy Reynolds
+- (12de80b) Goner
+
+* Fri Sep 8 2017 Tommy Reynolds
+- (ac204dc) Goner
+
+* Fri Sep 8 2017 Tommy Reynolds
+- (54b8fb1) Don't consider generated files.
+
+* Fri Sep 8 2017 Tommy Reynolds
+- (e781cb0) Removed 'version' value from ArgumentParser() and made into an 'add_argument'
+
+* Fri Sep 8 2017 Tommy Reynolds
+- (9e4cd35) Removed module loading debug prints
+
+* Fri Sep 8 2017 Tommy Reynolds
+- (9b7780c) What I've been up to (tag: v2.0.1)
+
+* Fri Sep 8 2017 Tommy Reynolds
+- (5bd6fae) Bump
 
 * Fri Sep 8 2017 Tommy Reynolds
 - (3784304) Made self.error print exception data better.  The msg argument can be a string, a list, a dict, or anything honoring str(foo)
@@ -1037,7 +1115,7 @@
 - (1ed1cf8) List defined plugins in a columnar format. (tag: v0.0.92, tag: 0.0.92)
 
 * Sun Jul 7 2013 Tommy Reynolds
-- (c2de832) Output lines in filename order (origin/0.0.91)
+- (c2de832) Output lines in filename order
 
 * Sun Jul 7 2013 Tommy Reynolds
 - (11d7608) Use better method for decoding rpm -Va flags.
@@ -1145,7 +1223,7 @@
 - (9daefef) Added crontab handling
 
 * Thu Apr 4 2013 Tommy Reynolds
-- (04fe28e) Format /etc/security/limits.* to canonical form. (origin/0.0.77, origin/0.0.76)
+- (04fe28e) Format /etc/security/limits.* to canonical form.
 
 * Thu Apr 4 2013 Tommy Reynolds
 - (c0b9f9d) Added limits.conf helper
@@ -1160,28 +1238,28 @@
 - (f17d678) Process [ini] files.
 
 * Wed Mar 20 2013 Tommy Reynolds
-- (8f942fe) Allow modprobe to read from stdin. (origin/0.0.75)
+- (8f942fe) Allow modprobe to read from stdin.
 
 * Thu Mar 14 2013 Tommy Reynolds
 - (e96faf1) Add separator underbar line under column titles.
 
 * Thu Mar 14 2013 Tommy Reynolds
-- (9ed1e72) Updated VMSTAT plugin to standard form. (origin/0.0.74)
+- (9ed1e72) Updated VMSTAT plugin to standard form.
 
 * Sun Mar 3 2013 Tommy Reynolds
-- (22c1f7e) Now it prints. (origin/0.0.73)
+- (22c1f7e) Now it prints.
 
 * Sun Mar 3 2013 Tommy Reynolds
 - (b18c955) Canonicalize df(1) outputs.
 
 * Wed Feb 27 2013 Tommy Reynolds
-- (d7b41e3) Recognize 'Destination' as a column header. (origin/0.0.72)
+- (d7b41e3) Recognize 'Destination' as a column header.
 
 * Fri Feb 22 2013 Tommy Reynolds
-- (0f7f202) Corrected output iof slabinfo (origin/0.0.71)
+- (0f7f202) Corrected output iof slabinfo
 
 * Fri Feb 22 2013 Tommy Reynolds
-- (47b8649) Also, clear accumulated lines between files. (origin/0.0.70)
+- (47b8649) Also, clear accumulated lines between files.
 
 * Fri Feb 22 2013 Tommy Reynolds
 - (89476f9) Do not coallesc  all files into a single output.
@@ -1196,13 +1274,13 @@
 - (4d7e3b4) Plain text is its own canonical form.
 
 * Fri Feb 8 2013 Tommy Reynolds
-- (169698f) Massage the column widths. (origin/0.0.68)
+- (169698f) Massage the column widths.
 
 * Fri Feb 8 2013 Tommy Reynolds
 - (9c98a88) Process /etc/ntp.conf files, too.
 
 * Thu Feb 7 2013 Tommy Reynolds
-- (ec01b05) Output /etc/chrony.conf in canonical form. (origin/0.0.67)
+- (ec01b05) Output /etc/chrony.conf in canonical form.
 
 * Thu Feb 7 2013 Tommy Reynolds
 - (d0e6c21) Removed unused init param.
@@ -1211,10 +1289,10 @@
 - (c48168c) Do not indent the child header/footer.
 
 * Wed Jan 30 2013 Tommy Reynolds
-- (ebcef13) Canonical output of "/etc/cups/cupsd.conf" and friends. (NB: this could serve as the model to rewrite the _wrong_ bind-pp. (origin/0.0.66)
+- (ebcef13) Canonical output of "/etc/cups/cupsd.conf" and friends. (NB: this could serve as the model to rewrite the _wrong_ bind-pp.
 
 * Wed Jan 30 2013 Tommy Reynolds
-- (c961a40) Cleanup name daemon output. (origin/0.0.65)
+- (c961a40) Cleanup name daemon output.
 
 * Wed Jan 23 2013 Tommy Reynolds
 - (c16c50e) Removed cruft method.
@@ -1250,97 +1328,97 @@
 - (7a6146e) Don't bother faking up column headers for 'ip route show'; the output is nicer without them.
 
 * Fri Dec 28 2012 Tommy Reynolds
-- (f4a6f1a) Canonical output for routes in these forms: (origin/0.0.61)
+- (f4a6f1a) Canonical output for routes in these forms:
 
 * Sun Dec 23 2012 Tommy Reynolds
-- (fee612b) Bumped because I skipped 0.0.58 (origin/0.0.60)
+- (fee612b) Bumped because I skipped 0.0.58
 
 * Sun Dec 23 2012 Tommy Reynolds
 - (87716ad) Added auto-sensing mounted.ocfs2(8) output parser.
 
 * Sun Dec 23 2012 Tommy Reynolds
-- (23d22e0) Automatic field alignment for 'mount' files. (origin/0.0.59)
+- (23d22e0) Automatic field alignment for 'mount' files.
 
 * Sun Dec 23 2012 Tommy Reynolds
 - (146a9c6) Output stderr on stdout.
 
 * Sun Dec 23 2012 Tommy Reynolds
-- (af1a1be) Group fstab output by file. (origin/0.0.57)
+- (af1a1be) Group fstab output by file.
 
 * Sun Dec 16 2012 Tommy Reynolds
-- (3854b30) Merge branch 'master' of github.com:megacoder/generic-prettyprinter (origin/0.0.56)
+- (3854b30) Merge branch 'master' of github.com:megacoder/generic-prettyprinter
 
 * Sat Dec 15 2012 Tommy Reynolds
-- (ef86c2f) Drop comments; align all columns, no matter how long the line gets. (origin/0.0.55)
+- (ef86c2f) Drop comments; align all columns, no matter how long the line gets.
 
 * Sun Dec 9 2012 Tommy Reynolds
 - (ab1e9f4) Separate report for each modprobe.conf file.
 
 * Thu Dec 6 2012 Tommy Reynolds
-- (161dc46) Keep blkid reports separate, not melded into one. (origin/0.0.54)
+- (161dc46) Keep blkid reports separate, not melded into one.
 
 * Thu Dec 6 2012 Tommy Reynolds
-- (cf63c99) Keep LVM.CONF file content separate, not melded into a single stream. (origin/0.0.53)
+- (cf63c99) Keep LVM.CONF file content separate, not melded into a single stream.
 
 * Wed Dec 5 2012 Tommy Reynolds
-- (07f3891) Left-justify detail tokens. (origin/0.0.52)
+- (07f3891) Left-justify detail tokens.
 
 * Thu Nov 29 2012 Tommy Reynolds
-- (de5bf22) ifcfg-* would not be output unless had both prolog and content; now allows either or both. (origin/0.0.51)
+- (de5bf22) ifcfg-* would not be output unless had both prolog and content; now allows either or both.
 
 * Tue Nov 27 2012 Tommy Reynolds
 - (7f90e20) Show /etc/grub.conf in a canonical form.
 
 * Thu Nov 22 2012 Tommy Reynolds
-- (13c412d) Display output of: (origin/0.0.49)
+- (13c412d) Display output of:
 
 * Thu Nov 22 2012 Tommy Reynolds
 - (eb1a463) $ ip neigh show | gpp -t ins
 
 * Wed Nov 21 2012 Tommy Reynolds
-- (5cb7b2f) Properly handle multiple meminfo files. (origin/0.0.48)
+- (5cb7b2f) Properly handle multiple meminfo files.
 
 * Wed Nov 21 2012 Tommy Reynolds
-- (f25b380) Properly reset between files for the sysctl.conf processor. (origin/0.0.47)
+- (f25b380) Properly reset between files for the sysctl.conf processor.
 
 * Wed Nov 14 2012 Tommy Reynolds
-- (1e61694) Canonical output of /proc/partitions (origin/0.0.46)
+- (1e61694) Canonical output of /proc/partitions
 
 * Wed Nov 14 2012 Tommy Reynolds
-- (f647d76) Invoke superclass reset() method. (origin/0.0.45)
+- (f647d76) Invoke superclass reset() method.
 
 * Wed Nov 14 2012 Tommy Reynolds
-- (9858836) Added suggested dom0 memory calculation. (origin/0.0.44)
+- (9858836) Added suggested dom0 memory calculation.
 
 * Sat Nov 10 2012 Tommy Reynolds
 - (5120031) Remove debugging 'print token'.
 
 * Sat Nov 10 2012 Tommy Reynolds
-- (0ee674c) Somehow managed to bork the tokens for /etc/exports. Not sure if the host list should be sorted, but I will until proven otherwise. (origin/0.0.43)
+- (0ee674c) Somehow managed to bork the tokens for /etc/exports. Not sure if the host list should be sorted, but I will until proven otherwise.
 
 * Sun Oct 28 2012 Tommy Reynolds
-- (38b9cdd) Beautiful. (origin/0.0.42)
+- (38b9cdd) Beautiful.
 
 * Sun Oct 28 2012 Tommy Reynolds
 - (2c99f8f) Format /proc/sys entries
 
 * Sun Oct 28 2012 Tommy Reynolds
-- (a3f70cc) Added vm.min_free_kbytes calculation to /proc/meminfo display. (origin/0.0.41)
+- (a3f70cc) Added vm.min_free_kbytes calculation to /proc/meminfo display.
 
 * Sat Oct 27 2012 Tommy Reynolds
-- (502e475) Fixed multipath.conf processing. (origin/0.0.40)
+- (502e475) Fixed multipath.conf processing.
 
 * Sat Oct 27 2012 Tommy Reynolds
-- (7de5e3d) Place blkid items in the same column on each line. (origin/0.0.39)
+- (7de5e3d) Place blkid items in the same column on each line.
 
 * Sat Oct 27 2012 Tommy Reynolds
 - (65d88ce) Try to columnize the blkid report.
 
 * Sat Oct 20 2012 Tommy Reynolds
-- (0e7c09e) Correct LDAP output. (origin/0.0.38)
+- (0e7c09e) Correct LDAP output.
 
 * Sat Oct 20 2012 Tommy Reynolds
-- (ed5e35d) First cut at LDAP.CONF handler. (origin/0.0.37)
+- (ed5e35d) First cut at LDAP.CONF handler.
 
 * Thu Oct 11 2012 Tommy Reynolds
 - (82c3b79) Correct RPM package name collision with gpp
@@ -1355,13 +1433,13 @@
 - (70bd065) Filter non-repo files.
 
 * Wed Oct 10 2012 Tommy Reynolds
-- (468bce4) More separation. (origin/0.0.36)
+- (468bce4) More separation.
 
 * Wed Oct 10 2012 Tommy Reynolds
 - (e833f52) Separate feeds with a space.
 
 * Wed Oct 10 2012 Tommy Reynolds
-- (60cf377) Gosh, I can't type that load of crap. (origin/0.0.35)
+- (60cf377) Gosh, I can't type that load of crap.
 
 * Wed Oct 10 2012 Tommy Reynolds
 - (a1d1090) Format YUM repos.
@@ -1397,10 +1475,10 @@
 - (1d6a958) Placeholders are goners.
 
 * Sun Sep 16 2012 Tommy Reynolds
-- (21b3d43) Order the stanzas, order within the stanzas, space around headers & footers. (origin/0.0.33)
+- (21b3d43) Order the stanzas, order within the stanzas, space around headers & footers.
 
 * Sat Sep 15 2012 Tommy Reynolds
-- (0e09bae) Reorganize the "/etc/ocfs2/cluster.conf" to normalize it. (origin/0.0.32)
+- (0e09bae) Reorganize the "/etc/ocfs2/cluster.conf" to normalize it.
 
 * Sat Sep 15 2012 Tommy Reynolds
 - (90f4230) Merge branch 'master' of github.com:megacoder/generic-prettyprinter
@@ -1418,7 +1496,7 @@
 - (4d5891b) Filler
 
 * Wed Sep 12 2012 Tommy Reynolds
-- (b6fde81) Format SNMP config files. (origin/0.0.31)
+- (b6fde81) Format SNMP config files.
 
 * Wed Sep 12 2012 Tommy Reynolds
 - (aefc39b) Checkpoint
@@ -1427,28 +1505,28 @@
 - (1a4dc3a) Rename according to apache-style usage.
 
 * Wed Sep 12 2012 Tommy Reynolds
-- (0d0907f) Generically handle APACHE-style files. (origin/0.0.30)
+- (0d0907f) Generically handle APACHE-style files.
 
 * Sun Sep 2 2012 Tommy Reynolds
-- (7cf6134) Do not concatenate all files together, since there is no "foo.d/" configuration. (origin/0.0.29)
+- (7cf6134) Do not concatenate all files together, since there is no "foo.d/" configuration.
 
 * Sat Sep 1 2012 Tommy Reynolds
-- (8ba1a3c) Format /etc/hosts.* (origin/0.0.28)
+- (8ba1a3c) Format /etc/hosts.*
 
 * Fri Aug 31 2012 Tommy Reynolds
-- (fd07705) Don't output multipath comments. (origin/0.0.27)
+- (fd07705) Don't output multipath comments.
 
 * Thu Aug 30 2012 Tommy Reynolds
 - (01205cb) Format arp(1) output.
 
 * Thu Aug 30 2012 Tommy Reynolds
-- (5f9ef53) Aded PAM prettyprinter.  Doesn't handle '[foo bar]' tokens very well. (origin/0.0.24)
+- (5f9ef53) Aded PAM prettyprinter.  Doesn't handle '[foo bar]' tokens very well.
 
 * Thu Aug 30 2012 Tommy Reynolds
-- (66eec55) Pretty print '/etc/ssh/sshd?_conf' files. (origin/0.0.23)
+- (66eec55) Pretty print '/etc/ssh/sshd?_conf' files.
 
 * Sun Aug 26 2012 Tommy Reynolds
-- (cd241f8) Clean up '# multipath -ll' output so I can find the right device name quickly. (origin/0.0.22)
+- (cd241f8) Clean up '# multipath -ll' output so I can find the right device name quickly.
 
 * Sun Aug 26 2012 Tommy Reynolds
 - (64b0e47) Rename properly.
@@ -1457,7 +1535,7 @@
 - (e43f64d) Format "multipath -ll" output.
 
 * Sun Aug 26 2012 Tommy Reynolds
-- (0006df5) Rewrote output formatting for /proc/meminfo, so that all the columns line up even if the line doesn't include a units specification. (origin/0.0.21)
+- (0006df5) Rewrote output formatting for /proc/meminfo, so that all the columns line up even if the line doesn't include a units specification.
 
 * Thu Aug 23 2012 Tommy Reynolds
 - (2187ef5) Changes
@@ -1472,16 +1550,16 @@
 - (6b04ad4) Initial commit
 
 * Thu Aug 23 2012 Tommy Reynolds
-- (5838e06) Changes to "lvm.conf" parsing, allowing blank lines. (origin/0.0.20)
+- (5838e06) Changes to "lvm.conf" parsing, allowing blank lines.
 
 * Fri Aug 17 2012 Tommy Reynolds
-- (08ce3f6) Added ~/.ssh/authorized_keys parsing. (origin/0.0.19)
+- (08ce3f6) Added ~/.ssh/authorized_keys parsing.
 
 * Fri Aug 17 2012 Tommy Reynolds
-- (67c870c) More generic file header processing. (origin/0.0.18)
+- (67c870c) More generic file header processing.
 
 * Fri Aug 17 2012 Tommy Reynolds
-- (57daafb) Added oracle ASM setup parsing. (origin/0.0.17, origin/0.0.16)
+- (57daafb) Added oracle ASM setup parsing.
 
 * Fri Aug 17 2012 Tommy Reynolds
 - (ced4b4e) Added logic to output change-of-file headers and footers to "fstab".
@@ -1490,13 +1568,13 @@
 - (75060c2) Pass filename on file begin/end event.
 
 * Thu Aug 16 2012 Tommy Reynolds
-- (4eadf64) Sort the LVM config stanzas as well as sort their content. (origin/0.0.15)
+- (4eadf64) Sort the LVM config stanzas as well as sort their content.
 
 * Wed Aug 15 2012 Tommy Reynolds
-- (046b801) multipath column-1 comments not handled very well, now simply copied. (origin/0.0.14)
+- (046b801) multipath column-1 comments not handled very well, now simply copied.
 
 * Sun Aug 12 2012 Tommy Reynolds
-- (1069223) Merge branch 'master' of ssh://192.168.1.254/home/vault/depot/generic-prettyprinter (origin/0.0.13)
+- (1069223) Merge branch 'master' of ssh://192.168.1.254/home/vault/depot/generic-prettyprinter
 
 * Sun Aug 12 2012 Tommy Reynolds
 - (e2eaca5) Utility to compile everything.
@@ -1511,7 +1589,7 @@
 - (6d997b6) Added kdump.conf plugin.
 
 * Sun Aug 12 2012 Tommy Reynolds
-- (88ea460) Cleaned up XORG plugin. (origin/0.0.11)
+- (88ea460) Cleaned up XORG plugin.
 
 * Sun Aug 12 2012 Tommy Reynolds
 - (d26c0ae) Had to move the option processing around.
@@ -1526,7 +1604,7 @@
 - (fcccaa6) Added /etc/kdump.conf processor.
 
 * Wed Aug 8 2012 Tommy Reynolds
-- (8ffcf73) Bumper (origin/0.0.9)
+- (8ffcf73) Bumper
 
 * Sun Aug 5 2012 Tommy Reynolds
 - (aeffca4) Take longest ("blacklist") verb into account in first column width.
@@ -1541,7 +1619,7 @@
 - (c933b51) Goners
 
 * Fri Aug 3 2012 Tommy Reynolds
-- (acccc35) Bumped version number. (origin/0.0.8)
+- (acccc35) Bumped version number.
 
 * Fri Aug 3 2012 Tommy Reynolds
 - (f2639d6) Now builds the RPM as "generic-prettyprinter"
@@ -1565,7 +1643,7 @@
 - (7ad98b3) Merge branch '0.0.6'
 
 * Fri Aug 3 2012 Tommy Reynolds
-- (20e199e) Read in content of script before trying to parse it. (origin/0.0.6)
+- (20e199e) Read in content of script before trying to parse it.
 
 * Fri Aug 3 2012 Tommy Reynolds
 - (6205fb1) Output filename and line number, if known, in error messages.
@@ -1610,7 +1688,7 @@
 - (8422312) Merge branch '0.0.5'
 
 * Sun Jul 15 2012 Tommy Reynolds
-- (b2e8e5f) First cut at the distro. (origin/0.0.5)
+- (b2e8e5f) First cut at the distro.
 
 * Sun Jul 15 2012 Tommy Reynolds
 - (2c0bfde) Picks up the plugins properly now.
@@ -1739,7 +1817,7 @@
 - (f2b9e9d) deleted:    setup.py
 
 * Sun Jul 8 2012 Tommy Reynolds
-- (8657cf0) Imported (origin/0.0.4)
+- (8657cf0) Imported
 
 * Sun Jul 8 2012 Tommy Reynolds
 - (3d6cfe3) Renamed.
@@ -1748,7 +1826,7 @@
 - (2ebb001) Merge branch '0.0.4' of ssh://192.168.1.254/home/vault/depot/files-pp into 0.0.4
 
 * Sat Jul 7 2012 Tommy Reynolds
-- (b893529) Display mounts. (origin/0.0.3)
+- (b893529) Display mounts.
 
 * Sat Jul 7 2012 Tommy Reynolds
 - (680ed25) Renamed.
@@ -1828,7 +1906,7 @@
 * Fri Jul 6 2012 Tommy Reynolds
 - (b6124be) Generic, do nothing, class.
 
-* Thu Jul 5 2012 Tommy Reynolds
+* Wed Jul 4 2012 Tommy Reynolds
 - (4eed8aa) Baseline
 
 * Wed Jul 4 2012 Tommy Reynolds
