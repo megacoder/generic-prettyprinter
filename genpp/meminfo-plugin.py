@@ -41,6 +41,11 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			)
 		return
 
+	def	post_end_file( self, name = None ):
+		super( PrettyPrint, self ).post_end_file( fn )
+		self.show_footnotes()
+		return
+
 	def	_get_entry( self, name, default = 0 ):
 		return int(self.entries[name]['value']) if name in self.entries else default
 

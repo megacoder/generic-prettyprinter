@@ -18,72 +18,77 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		super( PrettyPrint, self ).__init__()
 		return
 
-	def	reset( self ):
-		super( PrettyPrint, self ).reset()
-		self.depth = 0
-		self.do_capture = False
-		self.captured = []
-		return
-
-	def _print_tokens( self, tokens, fmt = '{0} {1}'  ):
-		if len( tokens ) > 0:
-			leadin = PrettyPrint.INDENT_WITH * self.depth
-			content = fmt.format( tokens[0], ' '.join( tokens[1:] ) )
-			self.println( '{0}{1}'.format( leadin, content ) )
-		return
-
 	def	ignore( self, name ):
 		ignore_it = False
 		if os.path.isfile( name ) and not name.endswith( '.conf' ):
 			ignore_it = True
 		return
 
-	def	begin_file( self, name ):
-		super( PrettyPrint, self ).begin_file( name )
-		self.depth = 0
-		return
+	def	_new_clause( self, name, parent = None ):
+		return dict({
+			'_name'   : name,
+			'_parent' : parent,
+		})
 
-	def	_dump_captured_content( self ):
-		fmt = '{0:<%ds} {1}' % self.width
-		for tokens in sorted( self.captured, key = lambda t: t[0].lower() ):
-			self._print_tokens( tokens, fmt = fmt )
-		self.captured = []
+	def	pre_begin_file( self, name = None ):
+		self.focus = self._new_clause( '_default' )
 		return
 
 	def	next_line( self, line ):
 		tokens = [x for x in shlex.shlex( line )]
 		if len(tokens) > 0:
 			keyword = tokens[0]
-			final = tokens[-1]
-			if final == '{':
-				self._print_tokens( tokens )
-				self.depth += 1
-				if keyword in [
-					'blacklist',
-					'blacklist_exceptions',
-					'device',
-					'multipath',
-					'defaults'
-				]:
-					self.captured = []
-					self.do_capture = True
-					self.width = 7
-			elif final == '}':
-				self._dump_captured_content()
-				self.do_capture = False
-				self.depth -= 1
-				self._print_tokens( tokens )
-			elif tokens[1] == '=':
-				self._print_tokens( tokens )
-			elif self.do_capture:
-				self.width = max( self.width, len( keyword ) )
-				if keyword in [ 'udev_dir' ]:
-					args = ''.join( tokens[1:] )
-				else:
-					args = ' '.join( tokens[1:] )
-				self.captured.append( [ keyword, args ] )
+			final   = tokens[-1]
+			if keyword == '}':
+				self.focus = self.focus[ '_parent' ]
+			elif final == '{':
+				child = self._new_clause(
+					name = keyword,
+					parent = self.focus
+				)
+				self.focus = child
 			else:
-				# Silently discard
-				print 'ignoring {0}'.format( tokens )
-				pass
+				self.focus[ tokens[ 0 ] ] = tokens
+		return
+
+	def	report( self, final = False ):
+		if not final:
+			self._print_node( self.focus )
+		else:
+			pass
+		return
+
+	def	_print_line( self, v, depth ):
+		indent = '        ' * depth
+		s = '{0}\t{1}'.format(
+			v[ 0 ],
+			v[ 1: ] if len(v) else ''
+		)
+		print '{0}{1}'.format(
+			indent,
+			s,
+		)
+		return
+
+	def	_print_node( self, node, depth = 0 ):
+		width = max(
+			map(
+				len,
+				node.keys()
+			)
+		)
+		fmt = '{{0:{0}}}\t{{1}}'.format( width )
+		for name in sorted( node ):
+			v = node[ name ]
+			if isinstance( v, dict ):
+				print fmt.format(
+					[ name, '{' ]
+				)
+				self._print_node( v, depth = depth + 1 )
+				print fmt.format(
+					[ '}', '' ]
+				)
+			else:
+				v = node[ name ]
+				self._print_line( v, depth )
 		return

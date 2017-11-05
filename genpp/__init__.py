@@ -16,7 +16,13 @@ except:
 
 import  os
 import  sys
-import  version
+
+try:
+    import  version
+except:
+    class version:
+        Version = 'v?.?.?'
+
 import  traceback
 
 class GenericPrettyPrinter( object ):
