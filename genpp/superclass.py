@@ -317,5 +317,5 @@ class   MetaPrettyPrinter( object ):
                 self.println(
                     fmt.format( n+1, s )
                 )
-            self.sc_footnotes = None
+            self.sc_footnotes = []
         return
