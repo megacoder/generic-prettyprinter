@@ -45,7 +45,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		if not final:
 			for key in sorted( self.used ):
 				if not key in PrettyPrint.NAMES:
-					footnote = self.footnode(
+					footnote = self.footnote(
 						'Warning: "{0}" may not be spelled correctly.'.format(
 							key
 						)
