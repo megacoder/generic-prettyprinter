@@ -1,50 +1,51 @@
 #!/usr/bin/python
+# vim: noet ai sm ts=4 sw=4
 
 import	os
 import	sys
 import	superclass
-import	csv
+import	shlex
 
 class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	NAME = 'csv-pp'
-	DESCRIPTION = """Display comma-separated-value files in canonical style."""
+	DESCRIPTION = '''
+		Display comma-separated-value files in canonical style.
+	'''
 
 	def	__init__( self ):
 		super( PrettyPrint, self ).__init__()
 		return
 
-	def	reset( self ):
-		super( PrettyPrint, self ).reset()
-		self.lines = []
-		return
-
-	def	begin_file( self, name ):
-		super( PrettyPrint, self ).begin_file( name )
-		self.lines = []
+	def	pre_begin_file( self, name = None ):
+		super( PrettyPrint, self ).pre_begin_file( name )
+		self.lines  = []
+		self.widths = dict()
 		return
 
 	def	next_line( self, line ):
-		self.lines.append( line )
+		fields = [
+			f for f in shlex.shlex( line, posix = True ) if f != ','
+		]
+		for i in range( len( fields ) ):
+			self.widths[ i ] = max(
+				self.widths.get( i, 0 ),
+				len( fields[i] )
+			)
+		self.lines.append( fields )
 		return
 
 	def	report( self, final = False ):
-		rows   = list()
-		widths = dict()
-		for row in csv.reader( self.lines ):
-		    for i, width in enumerate( row ):
-			if not i in widths:
-			    widths[i] = 0
-			widths[i] = max( widths[i], len(width) )
-		    rows.append( row )
-		fmts = dict()
-		for i, width in enumerate( widths ):
-		    fmts[i] = '%%s%%-%ds' % width
-		for row in rows:
-			sep = ''
-			line = ''
-			for i, item in enumerate( row ):
-			    line += (fmts[i] % (sep, item))
-			self.println( line )
+		gutter = '  '
+		fmts = map(
+			'{{0:{0}}}'.format,
+			self.widths
+		)
+		for fields in self.lines:
+			columns = map(
+				lambda i : fmts[i].format( fields[i] ),
+				fields
+			)
+			self.println( gutter.join( columns ) )
 		self.lines = []
 		return
