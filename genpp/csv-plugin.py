@@ -36,16 +36,17 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	report( self, final = False ):
-		gutter = '  '
-		fmts = map(
-			'{{0:{0}}}'.format,
-			self.widths
-		)
-		for fields in self.lines:
-			columns = map(
-				lambda i : fmts[i].format( fields[i] ),
-				fields
+		if not final:
+			gutter = '  '
+			fmts = map(
+				'{{0:{0}}}'.format,
+				[ self.widths[w] for w in self.widths ]
 			)
-			self.println( gutter.join( columns ) )
-		self.lines = []
+			for line in self.lines:
+				columns = map(
+					lambda i : fmts[i].format( line[i] ),
+					range( len(line) )
+				)
+				self.println( gutter.join( columns ) )
+			self.lines = []
 		return
