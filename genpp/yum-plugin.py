@@ -12,54 +12,20 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 
 	def	__init__( self ):
 		super( PrettyPrint, self ).__init__()
-		self.channel_names = dict()
+		self.pre_begin_file()
 		return
 
 	def	ignore( self, fn ):
 		return not fn.endswith( '.repo' )
 
 	def	pre_begin_file( self, name = None ):
-		super( PrettyPrint, self ).pre_begin_file( name )
-		self.repo_filename = name if name else '_ORPHAN_'
-		self._channel_start()
-		self.max_width         = 6
-		self.channels      = dict()
-		return
-
-	def	_channel_start( self, channel_name = None ):
-		if channel_name:
-			if channel_name in self.channel_names:
-				self.footnote(
-					'Channel {0} already defined in "{0}"'.format(
-						self.channel_names[ channel ]
-					)
-				)
-			else:
-				self.channel_names[ channel_name ] = self.repo_filename
-		self.channel_name = channel_name
-		self.channel_attrs = dict()
-		return
-
-	def	_channel_end( self ):
-		if self.channel_name:
-			# Calculate width of longest attribute seen
-			width = max(
-				map(
-					len,
-					self.channel_attrs
-				)
-			)
-			self.max_width = max( self.max_width, width )
-			#
-			self.channels[ self.channel_name ] = self.channel_attrs
-			#
-			self.channel_name = None
+		self.repos   = dict()
+		self.channel = '[ORPHAN]'
 		return
 
 	def	next_line( self, line ):
 		if line.startswith( '[' ):
-			self._channel_end()
-			self._channel_start( line.strip() )
+			self.channel = line.strip()
 		else:
 			tokens = map(
 				str.strip,
@@ -68,32 +34,38 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 			if len(tokens) == 2:
 				name  = tokens[0]
 				value = tokens[1]
-				self.channel_attrs[ name ] = value
-		return
-
-	def	post_end_file( self, name = None ):
-		self._channel_end()
-		super( PrettyPrint, self ).post_end_file( name )
+				self.repos[ self.channel ] = self.repos.get(
+					self.channel,
+					list()
+				) + [ (name, value) ]
 		return
 
 	def	report( self, final = False ):
 		if final: return
 		# Find the longest repo attribute amongst all those
 		# defined in this file.
-		fmt = ' {{0:>{0}}} = {{1}}'.format( self.max_width )
+		width = max( max(
+			map(
+				lambda l : map(
+					lambda (n,v) : len(n),
+					l
+				),
+				[ self.repos[key] for key in self.repos.keys() ]
+			)
+		))
+		fmt = ' {{0:>{0}}} = {{1}}'.format( width )
 		others = False
-		for channel in sorted( self.channels, key = lambda k : k.lower() ):
+		for channel in sorted( self.repos, key = lambda k : k.lower() ):
 			if others:
 				self.println()
 			others = True
 			self.println( '{0}'.format( channel ) )
 			self.println()
-			attrs = self.channels[ channel ]
-			for key in sorted( attrs, key = lambda k : k.lower() ):
+			for (n,v) in sorted(
+				self.repos[channel],
+				key = lambda (n,v) : n.lower()
+			):
 				self.println(
-					fmt.format(
-						key,
-						attrs[ key ]
-					)
+					fmt.format( n, v )
 				)
 		return
