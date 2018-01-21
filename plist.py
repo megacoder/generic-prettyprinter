@@ -49,7 +49,7 @@ class	Plugger():
 			map(
 				len,
 				self.plugins
-			)
+			) + [ 1 ]
 		)
 		fmt = '{{0:>{0}}} {{1}}'.format( max_name )
 		for key in sorted( self.plugins ):
@@ -72,7 +72,7 @@ class	Plugger():
 if __name__ == '__main__':
 	p = Plugger()
 	if len(sys.argv) == 1:
-		p.process( 'src' )
+		p.process( 'genpp' )
 	else:
 		for dn in sys.argv[1:]:
 			p.process( dn )
