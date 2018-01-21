@@ -1,3 +1,23 @@
+2018-01-20  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* setup.py: Bump version
+
+2018-01-20  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* genpp/yum-plugin.py: Avoid referencing undefined object; rewrite
+
+2018-01-20  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* genpp/superclass.py: Enforce two blank lines between files.
+
+2018-01-20  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* plist.py: Changed name of source directory.
+
+2018-01-14  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* ChangeLog: History
+
 2018-01-14  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
 	* genpp/csv-plugin.py: Get the formatting right.
