@@ -1,3 +1,17 @@
+2018-01-27  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* genpp/ifcfg-plugin.py, samples/vsftpd.conf, setup.py: Added
+	vsftpd(1) support
+
+2018-01-27  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* genpp/vsftpd-plugin.py: Q&D parser for the vsftpd(1) configuration
+	file
+
+2018-01-20  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* ChangeLog: History
+
 2018-01-20  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
 	* setup.py: Bump version
