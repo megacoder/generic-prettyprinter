@@ -6,166 +6,96 @@ import  superclass
 class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     NAME = 'ifcfg-pp'
-    DESCRIPTION="""Show ifcfg network files in canonical style."""
+    DESCRIPTION='''Show ifcfg network files in canonical style.'''
 
     def __init__( self ):
         super( PrettyPrint, self ).__init__()
-        self.ifcfgs = dict()    # Key is iface name
-        self.iface  = None
+        self.device    = None
+        self.nics      = dict()
+        self.max_width = 7
         return
 
     def ignore( self, name ):
-        """ Ignore directory entries not ending with '.conf' """
+        ''' Ignore directory entries not ending with '.conf' '''
         return not name.endswith( '.conf' )
 
-    def moder( self, mode ):
-        """ Replace a numeric bonding mode with its alpha form. """
-        if mode.startswith( 'mode=' ):
-            spelling = {
-                '0': 'balance-rr',
-                '1': 'active-backup',
-                '2': 'balance-xor',
-                '3': 'broadcast',
-                '4': '802.3ad',
-                '5': 'balance-tlb',
-                '6': 'balance-alb',
-            }
-            code = mode[ len('mode=') ]
-            if code in spelling:
-                self.footnote(
-                    'The mode is actually given as "{0}" in the file.'.format(
-                        mode
-                    )
-                )
-                mode = 'mode={0}'.format(
-                    spelling[ code ]
-                )
-        return mode
-
-    def pre_begin_file( self, name = None ):
-        self.iface  = dict(
-            _seen = False
-        )
-        self.prolog = list()
+    def begin_file( self, fn ):
+        self.nic = dict()
         return
 
     def next_line( self, line ):
-        """ Called with each ifcfg-<*> file line, already rstrip()'ed. """
-        if line.startswith( '#' ):
-            self.prolog.append( line )
-        else:
-            # Isolate and strip left- and right-hand portions
-            parts = map(
-                str.strip,
-                line.split( '=', 1 )
-            )
-            if len(parts) != 2:
-                # Treat anything without an equal sign as prolog
-                self.prolog.append( line )
-            else:
-                name  = parts[0]
-                value = parts[1]
-                # Elide incoming quotes because we will unconditionally
-                # quote the value later.
-                if value.startswith( '"' ) or value.startswith( "'" ):
-                    value = value[1:-1]
-                self.iface[name] = value
-        return
-
-    def _normalize( self, iface ):
-        """ The rules for creating an ifcfg-<*> file are very lax.
-            As a result, many defintions omit implied values.  In
-            the interest of clarity, try to intuit the companion
-            values if a related setting is used. """
-        #
-        # footnotes = []
-        if 'DEVICE' in iface and 'NAME' not in iface:
-            # footnotes.append( 'Intuited NAME from DEVICE' )
-            self.footnote( 'Intuited NAME from DEVICE' )
-            iface['NAME'] = iface['DEVICE']
-        if 'NAME' not in iface:
-            # footnotes.append( 'No name for ifcfg {0}'.format( iface ) )
-            self.footnote( 'No name for ifcfg {0}'.format( iface ) )
-            iface['NAME'] = '***'
-        #
-        if 'BONDING_OPTS' in iface and 'TYPE' not in iface:
-            iface[ 'TYPE' ] = 'Bond'
-        #
-        if 'NAME' in iface and 'DEVICE' not in iface:
-            # footnotes.append( 'Intuited DEVICE from NAME' )
-            self.footnote( 'Intuited DEVICE from NAME' )
-            iface['DEVICE'] = iface['NAME']
-        #
-        if 'MASTER' in iface and 'TYPE' not in iface:
-            # footnotes.append( 'Interpreted as bonded interface' )
-            self.footnote( 'Assuming this is a bonded interface' )
-            iface['TYPE'] = 'Bonding'
-        #
-        if not 'TYPE' in iface:
-            # footnotes.append( 'Assuming type is "Ethernet"' )
-            self.footnote( 'Assuming type is "Ethernet"' )
-            iface[ 'TYPE' ] = 'Ethernet'
-        #
-        if 'MTU' not in iface:
-            mtu = '1500'
-            # footnotes.append( 'MTU missing; assuming {0}'.format( mtu ) )
-            self.footnote( 'MTU missing; assuming {0}'.format( mtu ) )
-            iface['MTU'] = mtu
-        # print >>sys.stderr, iface
-        return iface
-
-    def post_end_file( self ):
-        """ Normalize and save the interface definition. """
-        self.iface        = self._normalize( self.iface )
-        name              = self.iface['NAME']
-        self.ifcfgs[name] = self.iface
-        super( PrettyPrint, self ).post_end_file()
-        return
-
-    def get_seen( self, iface ):
-        return iface.get( '_seen', False )
-
-    def set_seen( self, iface, value = True ):
-        iface['_seen'] = value
-        return
-
-    def _iface_is_vlan( self, iface ):
-        return '.' in iface['NAME']
-
-    def _iface_is_alias( self, iface ):
-        return ':' in iface['NAME']
-
-    def _filter_bridge_unclaimed( self, iface ):
-        accept  = not self.get_seen( iface )
-        accept &= (iface['TYPE'] == 'Bridge')
-        accept &= not self._iface_is_vlan( iface )
-        accept &= not self._iface_is_alias( iface )
-        return accept
-
-    def _filter_any_unclaimed( self, iface ):
-        accept = not self.get_seen( iface )
-        return accept
-
-    def _filter_ethernet_unclaimed( self, iface ):
-        accept = not self.get_seen( iface )
-        accept &= (iface['TYPE'] == 'Ethernet')
-        return accept
-
-    def find_all( self, filter = lambda iface: True ):
-        names = [
-            name for name in self.ifcfgs if filter( self.ifcfgs[name] )
-        ]
-        if len(names) == 0:
-            names = None
-        return names
-
-    def _indent_print( self, s, indents = [] ):
-        self.println(
-            '{0}{1}'.format(
-                ''.join( indents ),
-                s
-            )
+        parts = map(
+            str.strip,
+            line.split( '#', 1 )[ 0 ].split( '=', 1 )
         )
+        if len( parts ) == 2:
+            name = parts[ 0 ]
+            value = parts[ 1 ]
+            if value.startswith( '"' ) or value.startswith( "'" ):
+                value          = value[1:-1]
+                self.nic[name] = value
+            self.max_width = max(
+                self.max_width,
+                len( name )
+            )
+        return
+
+    def end_file( self, fn ):
+        name                 = self.nic.get( 'DEVICE', 'ANONYMOUS' )
+        self.nic[ 'DEVICE' ] = name
+        self.nic[ '_used' ]  = False
+        self.nics[ name ]    = self.nic
+        super( PrettyPrint, self ).post_end_file( name )
+        return
+
+    def find_nics( self, type = 'Ethernet', BACKLINK = None, MATCH = None ):
+        candidates = [
+            self.nics[key] for key in self.nics if 'TYPE' in self.nics[
+                key
+            ] and self.nics[ key ][ 'TYPE' ] == type and not self.nics[
+                key
+            ][ '_seen' ]
+        ]
+        if BACKLINK:
+            candidates = [
+                candidates[ key ] for key in candidates if BACKLINK in
+                candidates[ key ] and candidates[ key ][ BACKLINK ] == MATCH
+            ]
+        return candidates
+
+    def report( self, final = False ):
+        if not final:
+            return
+        title = 'Network Interface Cards'
+        self.println()
+        self.println( title )
+        self.println( '=' * len( title ) )
+        fmr = '{{0:>{0}}} = {{1}}'.format( width )
+        for nic in sorted( self.nics, key = n : n['DEVICE'].lower() ):
+            self.println()
+            for name in sorted( nic.keys() ):
+                vaule = nic[ name ]
+                if value.isdigit():
+                    delim = ''
+                else:
+                    delim = "'" if value.find( "'" ) == -1 else '"'
+                self.println(
+                    fmt.format(
+                        name,
+                        '{0}{1}{0}'.format(
+                            delim,
+                            vaule
+                        )
+                    )
+                )
+        title = 'Network Topology'
+        self.println()
+        self.println( title )
+        self.println( '=' * len( title ) )
+        network = Node( 'network' )
+        for type in [ 'Bridge', 'Bond', 'Ethernet' ]:
+            topnodes = self.find_nics( type
+    find_nics( self, type = 'Ethernet', BACKLINK = None, MATCH = None ):
         return
 
     def _final_report( self ):
@@ -185,7 +115,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             self.println( '-' * len( title ) )
             last = len( indents ) - 1
             for i,name in enumerate( sorted( bridges ) ):
-                iface = self.ifcfgs[ name ]
+                iface = self.dev2ifcfg[ name ]
                 self._indent_print( iface['NAME'], indents )
                 self.set_seen( iface )
         ethernets = self.find_all(
@@ -199,7 +129,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             indents = []
             for name in ethernets:
                 self._indent_print( name, indents )
-                self.set_seen( self.ifcfgs[name] )
+                self.set_seen( self.dev2ifcfg[name] )
         resid = self.find_all( self._filter_any_unclaimed )
         if resid:
             self.println()
@@ -208,7 +138,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             self.println( '-' * len( title ) )
             for name in sorted( resid ):
                 self.println( name )
-                self.set_seen( self.ifcfgs[name] )
+                self.set_seen( self.dev2ifcfg[name] )
         return
 
     def _nic_report( self ):
