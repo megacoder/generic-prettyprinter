@@ -71,7 +71,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         self.println( title )
         self.println( '=' * len( title ) )
         fmr = '{{0:>{0}}} = {{1}}'.format( width )
-        for nic in sorted( self.nics, key = n : n['DEVICE'].lower() ):
+        for nic in sorted( self.nics, key = lambda n : n['DEVICE'].lower() ):
             self.println()
             for name in sorted( nic.keys() ):
                 vaule = nic[ name ]
@@ -88,14 +88,14 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                         )
                     )
                 )
-        title = 'Network Topology'
-        self.println()
-        self.println( title )
-        self.println( '=' * len( title ) )
-        network = Node( 'network' )
-        for type in [ 'Bridge', 'Bond', 'Ethernet' ]:
-            topnodes = self.find_nics( type
-    find_nics( self, type = 'Ethernet', BACKLINK = None, MATCH = None ):
+        if False:
+            title = 'Network Topology'
+            self.println()
+            self.println( title )
+            self.println( '=' * len( title ) )
+            network = Node( 'network' )
+            for type in [ 'Bridge', 'Bond', 'Ethernet' ]:
+                topnodes = self.find_nics( self, type = 'Ethernet', BACKLINK = None, MATCH = None )
         return
 
     def _final_report( self ):
