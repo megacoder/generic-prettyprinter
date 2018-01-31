@@ -15,8 +15,8 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		super( PrettyPrint, self ).__init__()
 		return
 
-	def	pre_begin_file( self, fn = None ):
-		super( PrettyPrint, self ).pre_begin_file( fn )
+	def	pre_begin_file( self, name = None ):
+		super( PrettyPrint, self ).pre_begin_file( name )
 		self.entries = dict()
 		self.ordered_keys = []
 		return
@@ -42,7 +42,7 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	post_end_file( self, name = None ):
-		super( PrettyPrint, self ).post_end_file( fn )
+		super( PrettyPrint, self ).post_end_file( name )
 		self.show_footnotes()
 		return
 
