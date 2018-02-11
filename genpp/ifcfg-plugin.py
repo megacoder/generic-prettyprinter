@@ -142,11 +142,6 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         return
 
     def _nic_report( self ):
-        # Dump any accumulated prolog
-        if len(self.prolog) > 0:
-            for line in self.prolog:
-                self.println( line )
-            self.println()
         # Output iface lines, sorted in order
         names = [
             name for name in self.iface if name[0].isupper()
