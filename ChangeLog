@@ -1,3 +1,33 @@
+2018-02-16  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* setup.py: Bumped version
+
+2018-02-16  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* genpp/nscd-plugin.py, genpp/superclass.py: Added support for
+	/etc/nscd.conf
+
+2018-02-16  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* samples/nscd.conf: Generic /etc/ncsd.conf (unchanged from the
+	RPM).
+
+2018-02-11  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* genpp/ifcfg-plugin.py: We drop all the prolog commentary now.
+
+2018-01-31  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* genpp/meminfo-plugin.py: Fix missing "nm"
+
+2018-01-27  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* genpp/ifcfg-plugin.py: Disable non-working code
+
+2018-01-27  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* ChangeLog: History
+
 2018-01-27  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
 	* genpp/ifcfg-plugin.py, samples/vsftpd.conf, setup.py: Added
