@@ -30,6 +30,7 @@ class   MetaPrettyPrinter( object ):
         self.sc_multi        = 0
         self.sc_do_backslash = None
         self.sc_footnotes    = []
+        self.sc_titleno      = 0
         return
 
     def get_lineno( self ):
@@ -317,4 +318,19 @@ class   MetaPrettyPrinter( object ):
                     fmt.format( n+1, s )
                 )
             self.sc_footnotes = []
+        return
+
+    def title( self, t ):
+        if self.sc_titleno:
+            self.println()
+            self.println()
+        self.sc_titleno += 1
+        self.println( t )
+        self.println( '=' * len( t ) )
+        return
+
+    def subtitle( self, s ):
+        self.println()
+        self.println( s )
+        self.println( '-' * len( s ) )
         return
