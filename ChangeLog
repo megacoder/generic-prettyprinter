@@ -1,3 +1,24 @@
+2018-02-21  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* setup.py: Versioned
+
+2018-02-21  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* genpp/apache-plugin.py: Better parser, now quotes what should be
+	quoted.
+
+2018-02-21  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* samples/httpd.conf: Sample apache configuration file.
+
+2018-02-21  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* genpp/bunch.py: Simple object whose attributes are names
+
+2018-02-16  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* ChangeLog: History
+
 2018-02-16  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
 	* setup.py: Bumped version
