@@ -29,11 +29,17 @@ class	Bunch( object ):
 	def	__iter__( self ):
 		return iter( self.__dict__ )
 
+	def	__repr__( self ):
+		labels = [ l for l in dir(self) if l[0].islower() ]
+		values = [ '{0}:{1}'.format( l, self.__dict__[l] ) for l in labels ]
+		return '; '.join( values )
+
 if __name__ == '__main__':
 	b = Bunch(
 		first = 'Tommy',
 		last = 'Reynolds'
 	)
+	print b
 	print 'Name: {0}, {1}'.format(
 		b.last,
 		b.first
