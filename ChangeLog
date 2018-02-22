@@ -1,3 +1,30 @@
+2018-02-22  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* setup.py: Revision
+
+2018-02-22  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* genpp/superclass.py: Corrected reference to self.sc_filename
+
+2018-02-22  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* genpp/multipath-plugin.py: Store all file lines, parse using
+	stored text.
+
+2018-02-22  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* genpp/bunch.py: Added __repr__ method to the bunch
+
+2018-02-21  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* compile-all, plist.py: Use python to compile the modules
+
+2018-02-21  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* : commit 4327ad8da70c9856a5dd276570a1bcd4880cbfaa Author: Tommy
+	Reynolds <Oldest.Software.Guy@gmail.com> Date:   Wed Feb 21 16:19:10
+	2018 -0600
+
 2018-02-21  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
 	* setup.py: Versioned
@@ -14,6 +41,10 @@
 2018-02-21  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
 	* genpp/bunch.py: Simple object whose attributes are names
+
+2018-02-17  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* genpp/bunch.py: Simple aggregate container
 
 2018-02-16  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
