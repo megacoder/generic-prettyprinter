@@ -19,8 +19,8 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         ''' Ignore directory entries not ending with '.conf' '''
         return not name.endswith( '.conf' )
 
-    def begin_file( self, fn ):
-        self.nic = dict()
+    def pre_begin_file( self, fn ):
+        self.nic = dict({ '_used' : False })
         return
 
     def next_line( self, line ):
@@ -29,73 +29,35 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
             line.split( '#', 1 )[ 0 ].split( '=', 1 )
         )
         if len( parts ) == 2:
-            name = parts[ 0 ]
+            name  = parts[ 0 ]
             value = parts[ 1 ]
             if value.startswith( '"' ) or value.startswith( "'" ):
                 value          = value[1:-1]
-                self.nic[name] = value
-            self.max_width = max(
-                self.max_width,
-                len( name )
-            )
+            self.nic[name] = value
         return
 
     def end_file( self, fn ):
-        name                 = self.nic.get( 'DEVICE', 'ANONYMOUS' )
-        self.nic[ 'DEVICE' ] = name
-        self.nic[ '_used' ]  = False
-        self.nics[ name ]    = self.nic
-        super( PrettyPrint, self ).post_end_file( name )
+        if 'NAME' in self.nic:
+            name = self.nic[ 'NAME' ]
+        elif 'DEVICE' in self.nic:
+            name = self.nic[ 'DEVICE' ]
+        else:
+            name = 'ANONYMOUS'
+        self.nic[ 'NAME' ]  = name
+        self.nics[ name ]   = self.nic
+        # Leave the 'self.nic' intact so we can display it later in
+        # self.report()
         return
 
-    def find_nics( self, type = 'Ethernet', BACKLINK = None, MATCH = None ):
+    def screen( self, candidates, name, value ):
         candidates = [
-            self.nics[key] for key in self.nics if 'TYPE' in self.nics[
-                key
-            ] and self.nics[ key ][ 'TYPE' ] == type and not self.nics[
-                key
-            ][ '_seen' ]
+            key for key in candidates if
+                self.nics[key].get( name, '_dunno' ) == value
         ]
-        if BACKLINK:
-            candidates = [
-                candidates[ key ] for key in candidates if BACKLINK in
-                candidates[ key ] and candidates[ key ][ BACKLINK ] == MATCH
-            ]
         return candidates
 
-    def report( self, final = False ):
-        if not final:
-            return
-        title = 'Network Interface Cards'
-        self.println()
-        self.println( title )
-        self.println( '=' * len( title ) )
-        fmr = '{{0:>{0}}} = {{1}}'.format( width )
-        for nic in sorted( self.nics, key = lambda n : n['DEVICE'].lower() ):
-            self.println()
-            for name in sorted( nic.keys() ):
-                vaule = nic[ name ]
-                if value.isdigit():
-                    delim = ''
-                else:
-                    delim = "'" if value.find( "'" ) == -1 else '"'
-                self.println(
-                    fmt.format(
-                        name,
-                        '{0}{1}{0}'.format(
-                            delim,
-                            vaule
-                        )
-                    )
-                )
-        if False:
-            title = 'Network Topology'
-            self.println()
-            self.println( title )
-            self.println( '=' * len( title ) )
-            network = Node( 'network' )
-            for type in [ 'Bridge', 'Bond', 'Ethernet' ]:
-                topnodes = self.find_nics( self, type = 'Ethernet', BACKLINK = None, MATCH = None )
+    def set_used( self, key ):
+        self.nics[ key ][ '_used' ] = True
         return
 
     def _final_report( self ):
@@ -104,57 +66,73 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         self.println( title )
         self.println( '=' * len( title ) )
         # Pass 1: construct bridged interfaces
-        indents = []
-        bridges = self.find_all(
-            self._filter_bridge_unclaimed
-        )
-        if bridges:
+        bridges = self.screen( self.nics.keys(), '_used', False )
+        bridges = self.screen( bridges, 'TYPE', 'Bridge' )
+        if len(bridges):
             self.println()
             title = 'Bridges'
             self.println( title )
             self.println( '-' * len( title ) )
-            last = len( indents ) - 1
-            for i,name in enumerate( sorted( bridges ) ):
-                iface = self.dev2ifcfg[ name ]
-                self._indent_print( iface['NAME'], indents )
-                self.set_seen( iface )
-        ethernets = self.find_all(
-            self._filter_ethernet_unclaimed
-        )
-        if ethernets:
+            for name in sorted( bridges ):
+                if 'DEVICE' in self.nics[ name ]:
+                    iface = self.nics[ name ]['DEVICE']
+                else:
+                    iface = name
+                self.println( iface )
+                self.set_used( name )
+        bonds = self.screen( self.nics.keys(), '_used', False )
+        bonds = self.screen( bonds, 'TYPE', 'Bond' )
+        if len( bonds ):
+            self.println()
+            title = 'Bonded'
+            self.println( title )
+            self.println( '-' * len( title ) )
+            for name in sorted( bonds ):
+                if 'DEVICE' in self.nics[ name ]:
+                    iface = self.nics[ name ][ 'DEVICE' ]
+                else:
+                    iface = name
+                self.println( iface )
+                self.set_used( name )
+        ethernets = self.screen( self.nics.keys(), '_used', False )
+        ethernets = self.screen( ethernets, 'TYPE', 'Ethernet' )
+        if len(ethernets):
             self.println()
             title = 'Ethernet'
             self.println( title )
             self.println( '-' * len(title) )
-            indents = []
             for name in ethernets:
-                self._indent_print( name, indents )
-                self.set_seen( self.dev2ifcfg[name] )
-        resid = self.find_all( self._filter_any_unclaimed )
-        if resid:
+                if 'DEVICE' in self.nics[ name ]:
+                    iface = self.nics[ name ][ 'DEVICE' ]
+                else:
+                    iface = name
+                self.println( iface )
+                self.set_used( name )
+        unclaimed = self.screen( self.nics.keys(), '_used', False )
+        if len(unclaimed):
             self.println()
             title = 'Unprocessed NICs'
             self.println( title )
             self.println( '-' * len( title ) )
-            for name in sorted( resid ):
+            for name in sorted( unclaimed ):
                 self.println( name )
-                self.set_seen( self.dev2ifcfg[name] )
+                self.set_used( name )
         return
 
     def _nic_report( self ):
         # Output iface lines, sorted in order
-        names = [
-            name for name in self.iface if name[0].isupper()
+        keys = [
+            key for key in self.nic if key[0].isupper()
         ]
-        max_name =  max(
+        width =  max(
             map(
                 len,
-                names
+                keys
             )
         )
-        fmt = '  {{0:>{0}}}={{1}}'.format( max_name )
-        for key in sorted( names ):
-            value = self.iface[ key ]
+        fmt = '{{0:>{0}}}={{1}}'.format( width )
+        for key in sorted( keys ):
+            value = self.nic[ key ]
             # delim = "'" if '"' in value else '"'
             delim = '"'
             self.println(
