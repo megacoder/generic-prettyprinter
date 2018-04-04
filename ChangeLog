@@ -1,3 +1,16 @@
+2018-04-04  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* genpp/ifcfg-plugin.py: Indents bridge paths
+
+2018-04-04  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* genpp/ifcfg-plugin.py, setup.py: Checkpoint: prints devices
+	reasonably, identifies composite devices.
+
+2018-02-22  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* ChangeLog: History
+
 2018-02-22  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
 	* setup.py: Revision
