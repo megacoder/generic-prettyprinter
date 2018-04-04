@@ -49,15 +49,30 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         # self.report()
         return
 
-    def screen( self, candidates, name, value ):
-        candidates = [
-            key for key in candidates if
-                self.nics[key].get( name, '_dunno' ) == value
-        ]
+    def screen( self, candidates, name, value, same = True ):
+        if same:
+            candidates = [
+                key for key in candidates if
+                    self.nics[key].get( name, '_dunno' ) == value
+            ]
+        else:
+            candidates = [
+                key for key in candidates if
+                    self.nics[key].get( name, '_dunno' ) != value
+            ]
         return candidates
 
     def set_used( self, key ):
         self.nics[ key ][ '_used' ] = True
+        return
+
+    def indent_print( self, s, indent = 0 ):
+        self.println(
+            '{0}{1}'.format(
+                '    ' * indent,
+                s,
+            )
+        )
         return
 
     def _final_report( self ):
@@ -78,8 +93,14 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                     iface = self.nics[ name ]['DEVICE']
                 else:
                     iface = name
-                self.println( iface )
+                self.indent_print( iface )
                 self.set_used( name )
+                paths = self.screen( self.nics.keys(), '_used', False )
+                paths = self.screen( paths, 'BRIDGE', iface )
+                if len( paths ):
+                    for path in sorted( paths ):
+                        self.indent_print( path, 1 )
+                        self.set_used( path )
         bonds = self.screen( self.nics.keys(), '_used', False )
         bonds = self.screen( bonds, 'TYPE', 'Bond' )
         if len( bonds ):
@@ -92,7 +113,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                     iface = self.nics[ name ][ 'DEVICE' ]
                 else:
                     iface = name
-                self.println( iface )
+                self.indent_print( iface )
                 self.set_used( name )
         ethernets = self.screen( self.nics.keys(), '_used', False )
         ethernets = self.screen( ethernets, 'TYPE', 'Ethernet' )
@@ -106,16 +127,17 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                     iface = self.nics[ name ][ 'DEVICE' ]
                 else:
                     iface = name
-                self.println( iface )
+                self.indent_print( iface )
                 self.set_used( name )
         unclaimed = self.screen( self.nics.keys(), '_used', False )
+        unclaimed = self.screen( unclaimed, 'DEVICE', 'lo', False )
         if len(unclaimed):
             self.println()
             title = 'Unprocessed NICs'
             self.println( title )
             self.println( '-' * len( title ) )
             for name in sorted( unclaimed ):
-                self.println( name )
+                self.indent_print( name )
                 self.set_used( name )
         return
 
