@@ -83,6 +83,16 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         )
         return
 
+    def vlans_for( self, id ):
+        leadin = '{0}.'.format( id )
+        candidates = self.screen( None, '_used', False )
+        candidates = [
+            key for key in self.nics if self.nics[key].get(
+                'NAME', '_nope'
+            ).startswith( leadin )
+        ]
+        return candidates
+
     def _print_a_nic( self, nic, depth = 0 ):
         # Output iface lines, sorted in order
         keys = [
@@ -110,6 +120,9 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def _print_a_bridge( self, bridge, depth = 0 ):
         self.indent_print( bridge, depth )
+        for vlan in self.vlans_for( bridge ):
+            self.indent_print( vlan, depth + 1 )
+            self.set_used( vlan )
         candidates = self.screen( None, '_used', False )
         candidates = self.screen( candidates, 'BRIDGE', bridge )
         ethernets  = self.screen( candidates, 'Type', 'Ethernet' )
@@ -125,11 +138,17 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def _print_a_bond( self, bond, depth = 0 ):
         self.indent_print( bond, depth )
+        for vlan in self.vlans_for( bond ):
+            self.indent_print( vlan, depth + 1 )
+            self.set_used( vlan )
         candidates = self.screen( None, '_used', False )
         candidates = self.screen( candidates, 'SLAVE', 'yes' )
         candidates = self.screen( candidates, 'MASTER', bond )
         for slave in sorted( candidates ):
             self.indent_print( slave, depth + 1 )
+            for vlan in self.vlans_for( slave ):
+                self.indent_print( vlan, depth + 1 )
+                self.set_used( vlan )
             self.set_used( slave )
         return
 
@@ -167,6 +186,9 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                         nic,
                         depth + 1
                     )
+                    for vlan in self.vlans_for( nic ):
+                        self.indent_print( vlan, depth + 1 )
+                        self.set_used( vlan )
         # Step 4: Show any left-overs
         unclaimed = self.screen( None, '_used', False )
         unclaimed = self.screen( unclaimed, 'DEVICE', 'lo', False )
