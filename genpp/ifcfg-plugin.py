@@ -139,6 +139,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         self.println( title )
         self.println( '=' * len( title ) )
         # Step 0: The network (tm)
+        self.println()
         depth = 0
         self.indent_print( 'network', depth )
         # Step 1: construct bridged interfaces
