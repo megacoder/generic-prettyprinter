@@ -85,12 +85,11 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
 
     def vlans_for( self, id ):
         leadin = '{0}.'.format( id )
-        candidates = self.screen( None, '_used', False )
-        candidates = [
-            key for key in self.nics if self.nics[key].get(
-                'NAME', '_nope'
-            ).startswith( leadin )
-        ]
+        candidates = list()
+        for candidate in self.screen( None, '_used', False ):
+            device = self.nics[ candidate ][ 'DEVICE' ]
+            if device.startswith( leadin ):
+                candidates.append( device )
         return candidates
 
     def _print_a_nic( self, nic, depth = 0 ):
@@ -147,7 +146,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
         for slave in sorted( candidates ):
             self.indent_print( slave, depth + 1 )
             for vlan in self.vlans_for( slave ):
-                self.indent_print( vlan, depth + 1 )
+                self.indent_print( vlan, depth + 2 )
                 self.set_used( vlan )
             self.set_used( slave )
         return
@@ -187,7 +186,7 @@ class   PrettyPrint( superclass.MetaPrettyPrinter ):
                         depth + 1
                     )
                     for vlan in self.vlans_for( nic ):
-                        self.indent_print( vlan, depth + 1 )
+                        self.indent_print( vlan, depth + 2 )
                         self.set_used( vlan )
         # Step 4: Show any left-overs
         unclaimed = self.screen( None, '_used', False )
