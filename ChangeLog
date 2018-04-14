@@ -1,3 +1,15 @@
+2018-04-14  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* genpp/ifcfg-plugin.py, setup.py: List VLANs
+
+2018-04-14  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* genpp/ifcfg-plugin.py: Space before the "network" line.
+
+2018-04-13  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* ChangeLog: History
+
 2018-04-13  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
 	* genpp/ifcfg-plugin.py, setup.py: Print structured network setup
@@ -338,53 +350,72 @@
 2017-07-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* ChangeLog, INSTALL, LICENSE, MANIFEST.in, README.md, bin/gpp,
-	bootstrap.sh, compile-all.py, {src => genpp}/__init__.py, {src =>
-	genpp}/align.py, {src => genpp}/apache-plugin.py, {src =>
-	genpp}/arp-plugin.py, {src => genpp}/asm-plugin.py, {src =>
-	genpp}/bind-plugin.py, {src => genpp}/blkdev-plugin.py, {src =>
-	genpp}/blkid-plugin.py, {src => genpp}/chrony-plugin.py, {src =>
-	genpp}/codegen.py, {src => genpp}/crontab-plugin.py, {src =>
-	genpp}/csv-plugin.py, {src => genpp}/cups-plugin.py, {src =>
-	genpp}/df-plugin.py, {src => genpp}/exports-plugin.py, {src =>
-	genpp}/free-plugin.py, {src => genpp}/fstab-plugin.py,
-	genpp/genpp.egg-info/PKG-INFO, genpp/genpp.egg-info/SOURCES.txt,
+	bootstrap.sh, compile-all.py, genpp/__init__.py, genpp/align.py,
+	genpp/apache-plugin.py, genpp/arp-plugin.py, genpp/asm-plugin.py,
+	genpp/bind-plugin.py, genpp/blkdev-plugin.py,
+	genpp/blkid-plugin.py, genpp/chrony-plugin.py, genpp/codegen.py,
+	genpp/crontab-plugin.py, genpp/csv-plugin.py, genpp/cups-plugin.py,
+	genpp/df-plugin.py, genpp/exports-plugin.py, genpp/free-plugin.py,
+	genpp/fstab-plugin.py, genpp/genpp.egg-info/PKG-INFO,
+	genpp/genpp.egg-info/SOURCES.txt,
 	genpp/genpp.egg-info/dependency_links.txt,
-	genpp/genpp.egg-info/top_level.txt, {src => genpp}/grub-plugin.py,
-	{src => genpp}/help-plugin.py, {src => genpp}/hosts-plugin.py, {src
-	=> genpp}/ifcfg-plugin.py, {src => genpp}/ini-plugin.py, {src =>
-	genpp}/ins-plugin.py, {src => genpp}/ipneigh-plugin.py,
-	genpp/ipsave-plugin.py, {src => genpp}/iptables-plugin.py, {src =>
-	genpp}/iscsi-plugin.py, {src => genpp}/kdump-plugin.py, {src =>
-	genpp}/ldap-plugin.py, {src => genpp}/limits-plugin.py, {src =>
-	genpp}/lvm-plugin.py, {src => genpp}/main-plugin.py, {src =>
-	genpp}/mc-plugin.py, {src => genpp}/meminfo-plugin.py, {src =>
-	genpp}/misc.py, {src => genpp}/modinfo-plugin.py, {src =>
-	genpp}/modprobe-plugin.py, {src => genpp}/mount-plugin.py, {src =>
-	genpp}/mounted-plugin.py, {src => genpp}/multipath-ll-plugin.py,
-	{src => genpp}/multipath-plugin.py, {src =>
-	genpp}/network-plugin.py, {src => genpp}/nocomment-plugin.py, {src
-	=> genpp}/nsswitch-plugin.py, {src => genpp}/ntp-plugin.py, {src =>
-	genpp}/o2cb-plugin.py, {src => genpp}/ocfs2-plugin.py, {src =>
-	genpp}/oswbb-heartbeat-plugin.py, {src => genpp}/oswtick-plugin.py,
-	{src => genpp}/oswticker.py, {src => genpp}/oswts-plugin.py, {src
-	=> genpp}/pam-plugin.py, {src => genpp}/partitions-plugin.py, {src
-	=> genpp}/pna-plugin.py, {src => genpp}/printcap-plugin.py, {src =>
-	genpp}/printk-plugin.py, {src => genpp}/procsys-plugin.py, {src =>
-	genpp}/python.py, {src => genpp}/resolv-plugin.py, {src =>
-	genpp}/route-plugin.py, {src => genpp}/rpm-installed-plugin.py,
-	{src => genpp}/rpm-va-plugin.py, {src => genpp}/run-me.skel, {src
-	=> genpp}/sem-plugin.py, {src => genpp}/showexport-plugin.py, {src
-	=> genpp}/slabinfo-plugin.py, {src => genpp}/smb-plugin.py, {src =>
-	genpp}/snmpd-plugin.py, {src => genpp}/ssh-plugin.py, {src =>
-	genpp}/sssd-plugin.py, {src => genpp}/superclass.py, {src =>
-	genpp}/swapon-plugin.py, {src => genpp}/sysctl-plugin.py, {src =>
-	genpp}/tcpwrapper-plugin.py, {src => genpp}/text-plugin.py, {src =>
-	genpp}/udev-plugin.py, genpp/version.py, {src =>
-	genpp}/vmcfg-plugin.py, {src => genpp}/vmstat-plugin.py, {src =>
-	genpp}/yum-plugin.py, plist.py, samples/audit.log,
-	samples/iptables, samples/smb.conf, scripts/genpp, setup.py,
-	src/version.py: Migrated development from 'genpp' back to here.
-	I'll keep the 'genpp' name, though.
+	genpp/genpp.egg-info/top_level.txt, genpp/grub-plugin.py,
+	genpp/help-plugin.py, genpp/hosts-plugin.py, genpp/ifcfg-plugin.py,
+	genpp/ini-plugin.py, genpp/ins-plugin.py, genpp/ipneigh-plugin.py,
+	genpp/ipsave-plugin.py, genpp/iptables-plugin.py,
+	genpp/iscsi-plugin.py, genpp/kdump-plugin.py, genpp/ldap-plugin.py,
+	genpp/limits-plugin.py, genpp/lvm-plugin.py, genpp/main-plugin.py,
+	genpp/mc-plugin.py, genpp/meminfo-plugin.py, genpp/misc.py,
+	genpp/modinfo-plugin.py, genpp/modprobe-plugin.py,
+	genpp/mount-plugin.py, genpp/mounted-plugin.py,
+	genpp/multipath-ll-plugin.py, genpp/multipath-plugin.py,
+	genpp/network-plugin.py, genpp/nocomment-plugin.py,
+	genpp/nsswitch-plugin.py, genpp/ntp-plugin.py,
+	genpp/o2cb-plugin.py, genpp/ocfs2-plugin.py,
+	genpp/oswbb-heartbeat-plugin.py, genpp/oswtick-plugin.py,
+	genpp/oswticker.py, genpp/oswts-plugin.py, genpp/pam-plugin.py,
+	genpp/partitions-plugin.py, genpp/pna-plugin.py,
+	genpp/printcap-plugin.py, genpp/printk-plugin.py,
+	genpp/procsys-plugin.py, genpp/python.py, genpp/resolv-plugin.py,
+	genpp/route-plugin.py, genpp/rpm-installed-plugin.py,
+	genpp/rpm-va-plugin.py, genpp/run-me.skel, genpp/sem-plugin.py,
+	genpp/showexport-plugin.py, genpp/slabinfo-plugin.py,
+	genpp/smb-plugin.py, genpp/snmpd-plugin.py, genpp/ssh-plugin.py,
+	genpp/sssd-plugin.py, genpp/superclass.py, genpp/swapon-plugin.py,
+	genpp/sysctl-plugin.py, genpp/tcpwrapper-plugin.py,
+	genpp/text-plugin.py, genpp/udev-plugin.py, genpp/version.py,
+	genpp/vmcfg-plugin.py, genpp/vmstat-plugin.py, genpp/yum-plugin.py,
+	plist.py, samples/audit.log, samples/iptables, samples/smb.conf,
+	scripts/genpp, setup.py, src/__init__.py, src/align.py,
+	src/apache-plugin.py, src/arp-plugin.py, src/asm-plugin.py,
+	src/bind-plugin.py, src/blkdev-plugin.py, src/blkid-plugin.py,
+	src/chrony-plugin.py, src/codegen.py, src/crontab-plugin.py,
+	src/csv-plugin.py, src/cups-plugin.py, src/df-plugin.py,
+	src/exports-plugin.py, src/free-plugin.py, src/fstab-plugin.py,
+	src/grub-plugin.py, src/help-plugin.py, src/hosts-plugin.py,
+	src/ifcfg-plugin.py, src/ini-plugin.py, src/ins-plugin.py,
+	src/ipneigh-plugin.py, src/iptables-plugin.py, src/iscsi-plugin.py,
+	src/kdump-plugin.py, src/ldap-plugin.py, src/limits-plugin.py,
+	src/lvm-plugin.py, src/main-plugin.py, src/mc-plugin.py,
+	src/meminfo-plugin.py, src/misc.py, src/modinfo-plugin.py,
+	src/modprobe-plugin.py, src/mount-plugin.py, src/mounted-plugin.py,
+	src/multipath-ll-plugin.py, src/multipath-plugin.py,
+	src/network-plugin.py, src/nocomment-plugin.py,
+	src/nsswitch-plugin.py, src/ntp-plugin.py, src/o2cb-plugin.py,
+	src/ocfs2-plugin.py, src/oswbb-heartbeat-plugin.py,
+	src/oswtick-plugin.py, src/oswticker.py, src/oswts-plugin.py,
+	src/pam-plugin.py, src/partitions-plugin.py, src/pna-plugin.py,
+	src/printcap-plugin.py, src/printk-plugin.py,
+	src/procsys-plugin.py, src/python.py, src/resolv-plugin.py,
+	src/route-plugin.py, src/rpm-installed-plugin.py,
+	src/rpm-va-plugin.py, src/run-me.skel, src/sem-plugin.py,
+	src/showexport-plugin.py, src/slabinfo-plugin.py,
+	src/smb-plugin.py, src/snmpd-plugin.py, src/ssh-plugin.py,
+	src/sssd-plugin.py, src/superclass.py, src/swapon-plugin.py,
+	src/sysctl-plugin.py, src/tcpwrapper-plugin.py, src/text-plugin.py,
+	src/udev-plugin.py, src/version.py, src/vmcfg-plugin.py,
+	src/vmstat-plugin.py, src/yum-plugin.py: Migrated development from
+	'genpp' back to here.  I'll keep the 'genpp' name, though.
 
 2017-06-10  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
@@ -1187,7 +1218,7 @@
 
 2015-06-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* samples/{vm.cfg => lvm.conf}: Oops, wrong file type.
+	* samples/lvm.conf, samples/vm.cfg: Oops, wrong file type.
 
 2015-06-05  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
@@ -1639,68 +1670,90 @@
 
 2014-06-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* setup.py, src/{generic_prettyprinter => }/__init__.py,
-	src/{generic_prettyprinter => }/apache-plugin.py,
-	src/{generic_prettyprinter => }/arp-plugin.py,
-	src/{generic_prettyprinter => }/asm-plugin.py,
-	src/{generic_prettyprinter => }/bind-plugin.py,
-	src/{generic_prettyprinter => }/blkdev-plugin.py,
-	src/{generic_prettyprinter => }/blkid-plugin.py,
-	src/{generic_prettyprinter => }/chrony-plugin.py,
-	src/{generic_prettyprinter => }/crontab-plugin.py,
-	src/{generic_prettyprinter => }/csv-plugin.py,
-	src/{generic_prettyprinter => }/cups-plugin.py,
-	src/{generic_prettyprinter => }/df-plugin.py,
-	src/{generic_prettyprinter => }/exports-plugin.py,
-	src/{generic_prettyprinter => }/free-plugin.py,
-	src/{generic_prettyprinter => }/fstab-plugin.py,
-	src/{generic_prettyprinter => }/grub-plugin.py,
-	src/{generic_prettyprinter => }/help-plugin.py,
-	src/{generic_prettyprinter => }/hosts-plugin.py,
-	src/{generic_prettyprinter => }/ifcfg-plugin.py,
-	src/{generic_prettyprinter => }/ini-plugin.py,
-	src/{generic_prettyprinter => }/ins-plugin.py,
-	src/{generic_prettyprinter => }/iscsi-plugin.py,
-	src/{generic_prettyprinter => }/kdump-plugin.py,
-	src/{generic_prettyprinter => }/ldap-plugin.py,
-	src/{generic_prettyprinter => }/limits-plugin.py,
-	src/{generic_prettyprinter => }/lvm-plugin.py,
-	src/{generic_prettyprinter => }/main-plugin.py,
-	src/{generic_prettyprinter => }/meminfo-plugin.py,
-	src/{generic_prettyprinter => }/modinfo-plugin.py,
-	src/{generic_prettyprinter => }/modprobe-plugin.py,
-	src/{generic_prettyprinter => }/mount-plugin.py,
-	src/{generic_prettyprinter => }/mounted-plugin.py,
-	src/{generic_prettyprinter => }/multipath-ll-plugin.py,
-	src/{generic_prettyprinter => }/multipath-plugin.py,
-	src/{generic_prettyprinter => }/nsswitch-plugin.py,
-	src/{generic_prettyprinter => }/ntp-plugin.py,
-	src/{generic_prettyprinter => }/o2cb-plugin.py,
-	src/{generic_prettyprinter => }/ocfs2-plugin.py,
-	src/{generic_prettyprinter => }/oswbb-heartbeat-plugin.py,
-	src/{generic_prettyprinter => }/pam-plugin.py,
-	src/{generic_prettyprinter => }/partitions-plugin.py,
-	src/{generic_prettyprinter => }/pna-plugin.py,
-	src/{generic_prettyprinter => }/printcap-plugin.py,
-	src/{generic_prettyprinter => }/procsys-plugin.py,
-	src/{generic_prettyprinter => }/python.py,
-	src/{generic_prettyprinter => }/resolv-plugin.py,
-	src/{generic_prettyprinter => }/route-plugin.py,
-	src/{generic_prettyprinter => }/rpm-installed-plugin.py,
-	src/{generic_prettyprinter => }/rpm-va-plugin.py,
-	src/{generic_prettyprinter => }/slabinfo-plugin.py,
-	src/{generic_prettyprinter => }/smb-plugin.py,
-	src/{generic_prettyprinter => }/snmpd-plugin.py,
-	src/{generic_prettyprinter => }/ssh-plugin.py,
-	src/{generic_prettyprinter => }/superclass.py,
-	src/{generic_prettyprinter => }/sysctl-plugin.py,
-	src/{generic_prettyprinter => }/tcpwrapper-plugin.py,
-	src/{generic_prettyprinter => }/text-plugin.py,
-	src/{generic_prettyprinter => }/udev-plugin.py,
-	src/{generic_prettyprinter => }/vmcfg-plugin.py,
-	src/{generic_prettyprinter => }/vmstat-plugin.py,
-	src/{generic_prettyprinter => }/yum-plugin.py: Move everything up
-	one level.
+	* setup.py, src/__init__.py, src/apache-plugin.py,
+	src/arp-plugin.py, src/asm-plugin.py, src/bind-plugin.py,
+	src/blkdev-plugin.py, src/blkid-plugin.py, src/chrony-plugin.py,
+	src/crontab-plugin.py, src/csv-plugin.py, src/cups-plugin.py,
+	src/df-plugin.py, src/exports-plugin.py, src/free-plugin.py,
+	src/fstab-plugin.py, src/generic_prettyprinter/__init__.py,
+	src/generic_prettyprinter/apache-plugin.py,
+	src/generic_prettyprinter/arp-plugin.py,
+	src/generic_prettyprinter/asm-plugin.py,
+	src/generic_prettyprinter/bind-plugin.py,
+	src/generic_prettyprinter/blkdev-plugin.py,
+	src/generic_prettyprinter/blkid-plugin.py,
+	src/generic_prettyprinter/chrony-plugin.py,
+	src/generic_prettyprinter/crontab-plugin.py,
+	src/generic_prettyprinter/csv-plugin.py,
+	src/generic_prettyprinter/cups-plugin.py,
+	src/generic_prettyprinter/df-plugin.py,
+	src/generic_prettyprinter/exports-plugin.py,
+	src/generic_prettyprinter/free-plugin.py,
+	src/generic_prettyprinter/fstab-plugin.py,
+	src/generic_prettyprinter/grub-plugin.py,
+	src/generic_prettyprinter/help-plugin.py,
+	src/generic_prettyprinter/hosts-plugin.py,
+	src/generic_prettyprinter/ifcfg-plugin.py,
+	src/generic_prettyprinter/ini-plugin.py,
+	src/generic_prettyprinter/ins-plugin.py,
+	src/generic_prettyprinter/iscsi-plugin.py,
+	src/generic_prettyprinter/kdump-plugin.py,
+	src/generic_prettyprinter/ldap-plugin.py,
+	src/generic_prettyprinter/limits-plugin.py,
+	src/generic_prettyprinter/lvm-plugin.py,
+	src/generic_prettyprinter/main-plugin.py,
+	src/generic_prettyprinter/meminfo-plugin.py,
+	src/generic_prettyprinter/modinfo-plugin.py,
+	src/generic_prettyprinter/modprobe-plugin.py,
+	src/generic_prettyprinter/mount-plugin.py,
+	src/generic_prettyprinter/mounted-plugin.py,
+	src/generic_prettyprinter/multipath-ll-plugin.py,
+	src/generic_prettyprinter/multipath-plugin.py,
+	src/generic_prettyprinter/nsswitch-plugin.py,
+	src/generic_prettyprinter/ntp-plugin.py,
+	src/generic_prettyprinter/o2cb-plugin.py,
+	src/generic_prettyprinter/ocfs2-plugin.py,
+	src/generic_prettyprinter/oswbb-heartbeat-plugin.py,
+	src/generic_prettyprinter/pam-plugin.py,
+	src/generic_prettyprinter/partitions-plugin.py,
+	src/generic_prettyprinter/pna-plugin.py,
+	src/generic_prettyprinter/printcap-plugin.py,
+	src/generic_prettyprinter/procsys-plugin.py,
+	src/generic_prettyprinter/python.py,
+	src/generic_prettyprinter/resolv-plugin.py,
+	src/generic_prettyprinter/route-plugin.py,
+	src/generic_prettyprinter/rpm-installed-plugin.py,
+	src/generic_prettyprinter/rpm-va-plugin.py,
+	src/generic_prettyprinter/slabinfo-plugin.py,
+	src/generic_prettyprinter/smb-plugin.py,
+	src/generic_prettyprinter/snmpd-plugin.py,
+	src/generic_prettyprinter/ssh-plugin.py,
+	src/generic_prettyprinter/superclass.py,
+	src/generic_prettyprinter/sysctl-plugin.py,
+	src/generic_prettyprinter/tcpwrapper-plugin.py,
+	src/generic_prettyprinter/text-plugin.py,
+	src/generic_prettyprinter/udev-plugin.py,
+	src/generic_prettyprinter/vmcfg-plugin.py,
+	src/generic_prettyprinter/vmstat-plugin.py,
+	src/generic_prettyprinter/yum-plugin.py, src/grub-plugin.py,
+	src/help-plugin.py, src/hosts-plugin.py, src/ifcfg-plugin.py,
+	src/ini-plugin.py, src/ins-plugin.py, src/iscsi-plugin.py,
+	src/kdump-plugin.py, src/ldap-plugin.py, src/limits-plugin.py,
+	src/lvm-plugin.py, src/main-plugin.py, src/meminfo-plugin.py,
+	src/modinfo-plugin.py, src/modprobe-plugin.py, src/mount-plugin.py,
+	src/mounted-plugin.py, src/multipath-ll-plugin.py,
+	src/multipath-plugin.py, src/nsswitch-plugin.py, src/ntp-plugin.py,
+	src/o2cb-plugin.py, src/ocfs2-plugin.py,
+	src/oswbb-heartbeat-plugin.py, src/pam-plugin.py,
+	src/partitions-plugin.py, src/pna-plugin.py,
+	src/printcap-plugin.py, src/procsys-plugin.py, src/python.py,
+	src/resolv-plugin.py, src/route-plugin.py,
+	src/rpm-installed-plugin.py, src/rpm-va-plugin.py,
+	src/slabinfo-plugin.py, src/smb-plugin.py, src/snmpd-plugin.py,
+	src/ssh-plugin.py, src/superclass.py, src/sysctl-plugin.py,
+	src/tcpwrapper-plugin.py, src/text-plugin.py, src/udev-plugin.py,
+	src/vmcfg-plugin.py, src/vmstat-plugin.py, src/yum-plugin.py: Move
+	everything up one level.
 
 2014-06-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
@@ -1716,284 +1769,421 @@
 
 2014-06-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* README.txt, bootstrap.sh, compile-all.py, setup.py,
-	{generic_prettyprinter => src/generic_prettyprinter}/__init__.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/apache-plugin.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/arp-plugin.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/asm-plugin.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/bind-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/blkdev-plugin.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/blkid-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/chrony-plugin.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/crontab-plugin.py,
-	{generic_prettyprinter => src/generic_prettyprinter}/csv-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/cups-plugin.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/df-plugin.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/exports-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/free-plugin.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/fstab-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/grub-plugin.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/help-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/hosts-plugin.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/ifcfg-plugin.py,
-	{generic_prettyprinter => src/generic_prettyprinter}/ini-plugin.py,
-	{generic_prettyprinter => src/generic_prettyprinter}/ins-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/iscsi-plugin.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/kdump-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/ldap-plugin.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/limits-plugin.py,
-	{generic_prettyprinter => src/generic_prettyprinter}/lvm-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/main-plugin.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/meminfo-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/modinfo-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/modprobe-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/mount-plugin.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/mounted-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/multipath-ll-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/multipath-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/nsswitch-plugin.py,
-	{generic_prettyprinter => src/generic_prettyprinter}/ntp-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/o2cb-plugin.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/ocfs2-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/oswbb-heartbeat-plugin.py,
-	{generic_prettyprinter => src/generic_prettyprinter}/pam-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/partitions-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/printcap-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/procsys-plugin.py,
-	{generic_prettyprinter => src/generic_prettyprinter}/python.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/resolv-plugin.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/route-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/rpm-installed-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/rpm-va-plugin.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/slabinfo-plugin.py,
-	{generic_prettyprinter => src/generic_prettyprinter}/smb-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/snmpd-plugin.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/ssh-plugin.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/superclass.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/sysctl-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/tcpwrapper-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/text-plugin.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/udev-plugin.py,
-	{generic_prettyprinter =>
-	src/generic_prettyprinter}/vmcfg-plugin.py, {generic_prettyprinter
-	=> src/generic_prettyprinter}/vmstat-plugin.py,
-	{generic_prettyprinter => src/generic_prettyprinter}/yum-plugin.py: 
-	Flailing with setup.py done for now.
+	* README.txt, bootstrap.sh, compile-all.py,
+	generic_prettyprinter/__init__.py,
+	generic_prettyprinter/apache-plugin.py,
+	generic_prettyprinter/arp-plugin.py,
+	generic_prettyprinter/asm-plugin.py,
+	generic_prettyprinter/bind-plugin.py,
+	generic_prettyprinter/blkdev-plugin.py,
+	generic_prettyprinter/blkid-plugin.py,
+	generic_prettyprinter/chrony-plugin.py,
+	generic_prettyprinter/crontab-plugin.py,
+	generic_prettyprinter/csv-plugin.py,
+	generic_prettyprinter/cups-plugin.py,
+	generic_prettyprinter/df-plugin.py,
+	generic_prettyprinter/exports-plugin.py,
+	generic_prettyprinter/free-plugin.py,
+	generic_prettyprinter/fstab-plugin.py,
+	generic_prettyprinter/grub-plugin.py,
+	generic_prettyprinter/help-plugin.py,
+	generic_prettyprinter/hosts-plugin.py,
+	generic_prettyprinter/ifcfg-plugin.py,
+	generic_prettyprinter/ini-plugin.py,
+	generic_prettyprinter/ins-plugin.py,
+	generic_prettyprinter/iscsi-plugin.py,
+	generic_prettyprinter/kdump-plugin.py,
+	generic_prettyprinter/ldap-plugin.py,
+	generic_prettyprinter/limits-plugin.py,
+	generic_prettyprinter/lvm-plugin.py,
+	generic_prettyprinter/main-plugin.py,
+	generic_prettyprinter/meminfo-plugin.py,
+	generic_prettyprinter/modinfo-plugin.py,
+	generic_prettyprinter/modprobe-plugin.py,
+	generic_prettyprinter/mount-plugin.py,
+	generic_prettyprinter/mounted-plugin.py,
+	generic_prettyprinter/multipath-ll-plugin.py,
+	generic_prettyprinter/multipath-plugin.py,
+	generic_prettyprinter/nsswitch-plugin.py,
+	generic_prettyprinter/ntp-plugin.py,
+	generic_prettyprinter/o2cb-plugin.py,
+	generic_prettyprinter/ocfs2-plugin.py,
+	generic_prettyprinter/oswbb-heartbeat-plugin.py,
+	generic_prettyprinter/pam-plugin.py,
+	generic_prettyprinter/partitions-plugin.py,
+	generic_prettyprinter/printcap-plugin.py,
+	generic_prettyprinter/procsys-plugin.py,
+	generic_prettyprinter/python.py,
+	generic_prettyprinter/resolv-plugin.py,
+	generic_prettyprinter/route-plugin.py,
+	generic_prettyprinter/rpm-installed-plugin.py,
+	generic_prettyprinter/rpm-va-plugin.py,
+	generic_prettyprinter/slabinfo-plugin.py,
+	generic_prettyprinter/smb-plugin.py,
+	generic_prettyprinter/snmpd-plugin.py,
+	generic_prettyprinter/ssh-plugin.py,
+	generic_prettyprinter/superclass.py,
+	generic_prettyprinter/sysctl-plugin.py,
+	generic_prettyprinter/tcpwrapper-plugin.py,
+	generic_prettyprinter/text-plugin.py,
+	generic_prettyprinter/udev-plugin.py,
+	generic_prettyprinter/vmcfg-plugin.py,
+	generic_prettyprinter/vmstat-plugin.py,
+	generic_prettyprinter/yum-plugin.py, setup.py,
+	src/generic_prettyprinter/__init__.py,
+	src/generic_prettyprinter/apache-plugin.py,
+	src/generic_prettyprinter/arp-plugin.py,
+	src/generic_prettyprinter/asm-plugin.py,
+	src/generic_prettyprinter/bind-plugin.py,
+	src/generic_prettyprinter/blkdev-plugin.py,
+	src/generic_prettyprinter/blkid-plugin.py,
+	src/generic_prettyprinter/chrony-plugin.py,
+	src/generic_prettyprinter/crontab-plugin.py,
+	src/generic_prettyprinter/csv-plugin.py,
+	src/generic_prettyprinter/cups-plugin.py,
+	src/generic_prettyprinter/df-plugin.py,
+	src/generic_prettyprinter/exports-plugin.py,
+	src/generic_prettyprinter/free-plugin.py,
+	src/generic_prettyprinter/fstab-plugin.py,
+	src/generic_prettyprinter/grub-plugin.py,
+	src/generic_prettyprinter/help-plugin.py,
+	src/generic_prettyprinter/hosts-plugin.py,
+	src/generic_prettyprinter/ifcfg-plugin.py,
+	src/generic_prettyprinter/ini-plugin.py,
+	src/generic_prettyprinter/ins-plugin.py,
+	src/generic_prettyprinter/iscsi-plugin.py,
+	src/generic_prettyprinter/kdump-plugin.py,
+	src/generic_prettyprinter/ldap-plugin.py,
+	src/generic_prettyprinter/limits-plugin.py,
+	src/generic_prettyprinter/lvm-plugin.py,
+	src/generic_prettyprinter/main-plugin.py,
+	src/generic_prettyprinter/meminfo-plugin.py,
+	src/generic_prettyprinter/modinfo-plugin.py,
+	src/generic_prettyprinter/modprobe-plugin.py,
+	src/generic_prettyprinter/mount-plugin.py,
+	src/generic_prettyprinter/mounted-plugin.py,
+	src/generic_prettyprinter/multipath-ll-plugin.py,
+	src/generic_prettyprinter/multipath-plugin.py,
+	src/generic_prettyprinter/nsswitch-plugin.py,
+	src/generic_prettyprinter/ntp-plugin.py,
+	src/generic_prettyprinter/o2cb-plugin.py,
+	src/generic_prettyprinter/ocfs2-plugin.py,
+	src/generic_prettyprinter/oswbb-heartbeat-plugin.py,
+	src/generic_prettyprinter/pam-plugin.py,
+	src/generic_prettyprinter/partitions-plugin.py,
+	src/generic_prettyprinter/printcap-plugin.py,
+	src/generic_prettyprinter/procsys-plugin.py,
+	src/generic_prettyprinter/python.py,
+	src/generic_prettyprinter/resolv-plugin.py,
+	src/generic_prettyprinter/route-plugin.py,
+	src/generic_prettyprinter/rpm-installed-plugin.py,
+	src/generic_prettyprinter/rpm-va-plugin.py,
+	src/generic_prettyprinter/slabinfo-plugin.py,
+	src/generic_prettyprinter/smb-plugin.py,
+	src/generic_prettyprinter/snmpd-plugin.py,
+	src/generic_prettyprinter/ssh-plugin.py,
+	src/generic_prettyprinter/superclass.py,
+	src/generic_prettyprinter/sysctl-plugin.py,
+	src/generic_prettyprinter/tcpwrapper-plugin.py,
+	src/generic_prettyprinter/text-plugin.py,
+	src/generic_prettyprinter/udev-plugin.py,
+	src/generic_prettyprinter/vmcfg-plugin.py,
+	src/generic_prettyprinter/vmstat-plugin.py,
+	src/generic_prettyprinter/yum-plugin.py: Flailing with setup.py done
+	for now.
 
 2014-06-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* bin/gpp, {src => generic_prettyprinter}/__init__.py, {src =>
-	generic_prettyprinter}/apache-plugin.py, {src =>
-	generic_prettyprinter}/arp-plugin.py, {src =>
-	generic_prettyprinter}/asm-plugin.py, {src =>
-	generic_prettyprinter}/bind-plugin.py, {src =>
-	generic_prettyprinter}/blkdev-plugin.py, {src =>
-	generic_prettyprinter}/blkid-plugin.py, {src =>
-	generic_prettyprinter}/chrony-plugin.py, {src =>
-	generic_prettyprinter}/crontab-plugin.py, {src =>
-	generic_prettyprinter}/csv-plugin.py, {src =>
-	generic_prettyprinter}/cups-plugin.py, {src =>
-	generic_prettyprinter}/df-plugin.py, {src =>
-	generic_prettyprinter}/exports-plugin.py, {src =>
-	generic_prettyprinter}/free-plugin.py, {src =>
-	generic_prettyprinter}/fstab-plugin.py, {src =>
-	generic_prettyprinter}/grub-plugin.py, {src =>
-	generic_prettyprinter}/help-plugin.py, {src =>
-	generic_prettyprinter}/hosts-plugin.py, {src =>
-	generic_prettyprinter}/ifcfg-plugin.py, {src =>
-	generic_prettyprinter}/ini-plugin.py, {src =>
-	generic_prettyprinter}/ins-plugin.py, {src =>
-	generic_prettyprinter}/iscsi-plugin.py, {src =>
-	generic_prettyprinter}/kdump-plugin.py, {src =>
-	generic_prettyprinter}/ldap-plugin.py, {src =>
-	generic_prettyprinter}/limits-plugin.py, {src =>
-	generic_prettyprinter}/lvm-plugin.py, {src =>
-	generic_prettyprinter}/main-plugin.py, {src =>
-	generic_prettyprinter}/meminfo-plugin.py, {src =>
-	generic_prettyprinter}/modinfo-plugin.py, {src =>
-	generic_prettyprinter}/modprobe-plugin.py, {src =>
-	generic_prettyprinter}/mount-plugin.py, {src =>
-	generic_prettyprinter}/mounted-plugin.py, {src =>
-	generic_prettyprinter}/multipath-ll-plugin.py, {src =>
-	generic_prettyprinter}/multipath-plugin.py, {src =>
-	generic_prettyprinter}/nsswitch-plugin.py, {src =>
-	generic_prettyprinter}/ntp-plugin.py, {src =>
-	generic_prettyprinter}/o2cb-plugin.py, {src =>
-	generic_prettyprinter}/ocfs2-plugin.py, {src =>
-	generic_prettyprinter}/oswbb-heartbeat-plugin.py, {src =>
-	generic_prettyprinter}/pam-plugin.py, {src =>
-	generic_prettyprinter}/partitions-plugin.py, {src =>
-	generic_prettyprinter}/printcap-plugin.py, {src =>
-	generic_prettyprinter}/procsys-plugin.py, {src =>
-	generic_prettyprinter}/python.py, {src =>
-	generic_prettyprinter}/resolv-plugin.py, {src =>
-	generic_prettyprinter}/route-plugin.py, {src =>
-	generic_prettyprinter}/rpm-installed-plugin.py, {src =>
-	generic_prettyprinter}/rpm-va-plugin.py, {src =>
-	generic_prettyprinter}/slabinfo-plugin.py, {src =>
-	generic_prettyprinter}/smb-plugin.py, {src =>
-	generic_prettyprinter}/snmpd-plugin.py, {src =>
-	generic_prettyprinter}/ssh-plugin.py, {src =>
-	generic_prettyprinter}/superclass.py, {src =>
-	generic_prettyprinter}/sysctl-plugin.py, {src =>
-	generic_prettyprinter}/tcpwrapper-plugin.py, {src =>
-	generic_prettyprinter}/text-plugin.py, {src =>
-	generic_prettyprinter}/udev-plugin.py, {src =>
-	generic_prettyprinter}/vmcfg-plugin.py, {src =>
-	generic_prettyprinter}/vmstat-plugin.py, {src =>
-	generic_prettyprinter}/yum-plugin.py: Maybe not _that_ pleasing.
+	* bin/gpp, generic_prettyprinter/__init__.py,
+	generic_prettyprinter/apache-plugin.py,
+	generic_prettyprinter/arp-plugin.py,
+	generic_prettyprinter/asm-plugin.py,
+	generic_prettyprinter/bind-plugin.py,
+	generic_prettyprinter/blkdev-plugin.py,
+	generic_prettyprinter/blkid-plugin.py,
+	generic_prettyprinter/chrony-plugin.py,
+	generic_prettyprinter/crontab-plugin.py,
+	generic_prettyprinter/csv-plugin.py,
+	generic_prettyprinter/cups-plugin.py,
+	generic_prettyprinter/df-plugin.py,
+	generic_prettyprinter/exports-plugin.py,
+	generic_prettyprinter/free-plugin.py,
+	generic_prettyprinter/fstab-plugin.py,
+	generic_prettyprinter/grub-plugin.py,
+	generic_prettyprinter/help-plugin.py,
+	generic_prettyprinter/hosts-plugin.py,
+	generic_prettyprinter/ifcfg-plugin.py,
+	generic_prettyprinter/ini-plugin.py,
+	generic_prettyprinter/ins-plugin.py,
+	generic_prettyprinter/iscsi-plugin.py,
+	generic_prettyprinter/kdump-plugin.py,
+	generic_prettyprinter/ldap-plugin.py,
+	generic_prettyprinter/limits-plugin.py,
+	generic_prettyprinter/lvm-plugin.py,
+	generic_prettyprinter/main-plugin.py,
+	generic_prettyprinter/meminfo-plugin.py,
+	generic_prettyprinter/modinfo-plugin.py,
+	generic_prettyprinter/modprobe-plugin.py,
+	generic_prettyprinter/mount-plugin.py,
+	generic_prettyprinter/mounted-plugin.py,
+	generic_prettyprinter/multipath-ll-plugin.py,
+	generic_prettyprinter/multipath-plugin.py,
+	generic_prettyprinter/nsswitch-plugin.py,
+	generic_prettyprinter/ntp-plugin.py,
+	generic_prettyprinter/o2cb-plugin.py,
+	generic_prettyprinter/ocfs2-plugin.py,
+	generic_prettyprinter/oswbb-heartbeat-plugin.py,
+	generic_prettyprinter/pam-plugin.py,
+	generic_prettyprinter/partitions-plugin.py,
+	generic_prettyprinter/printcap-plugin.py,
+	generic_prettyprinter/procsys-plugin.py,
+	generic_prettyprinter/python.py,
+	generic_prettyprinter/resolv-plugin.py,
+	generic_prettyprinter/route-plugin.py,
+	generic_prettyprinter/rpm-installed-plugin.py,
+	generic_prettyprinter/rpm-va-plugin.py,
+	generic_prettyprinter/slabinfo-plugin.py,
+	generic_prettyprinter/smb-plugin.py,
+	generic_prettyprinter/snmpd-plugin.py,
+	generic_prettyprinter/ssh-plugin.py,
+	generic_prettyprinter/superclass.py,
+	generic_prettyprinter/sysctl-plugin.py,
+	generic_prettyprinter/tcpwrapper-plugin.py,
+	generic_prettyprinter/text-plugin.py,
+	generic_prettyprinter/udev-plugin.py,
+	generic_prettyprinter/vmcfg-plugin.py,
+	generic_prettyprinter/vmstat-plugin.py,
+	generic_prettyprinter/yum-plugin.py, src/__init__.py,
+	src/apache-plugin.py, src/arp-plugin.py, src/asm-plugin.py,
+	src/bind-plugin.py, src/blkdev-plugin.py, src/blkid-plugin.py,
+	src/chrony-plugin.py, src/crontab-plugin.py, src/csv-plugin.py,
+	src/cups-plugin.py, src/df-plugin.py, src/exports-plugin.py,
+	src/free-plugin.py, src/fstab-plugin.py, src/grub-plugin.py,
+	src/help-plugin.py, src/hosts-plugin.py, src/ifcfg-plugin.py,
+	src/ini-plugin.py, src/ins-plugin.py, src/iscsi-plugin.py,
+	src/kdump-plugin.py, src/ldap-plugin.py, src/limits-plugin.py,
+	src/lvm-plugin.py, src/main-plugin.py, src/meminfo-plugin.py,
+	src/modinfo-plugin.py, src/modprobe-plugin.py, src/mount-plugin.py,
+	src/mounted-plugin.py, src/multipath-ll-plugin.py,
+	src/multipath-plugin.py, src/nsswitch-plugin.py, src/ntp-plugin.py,
+	src/o2cb-plugin.py, src/ocfs2-plugin.py,
+	src/oswbb-heartbeat-plugin.py, src/pam-plugin.py,
+	src/partitions-plugin.py, src/printcap-plugin.py,
+	src/procsys-plugin.py, src/python.py, src/resolv-plugin.py,
+	src/route-plugin.py, src/rpm-installed-plugin.py,
+	src/rpm-va-plugin.py, src/slabinfo-plugin.py, src/smb-plugin.py,
+	src/snmpd-plugin.py, src/ssh-plugin.py, src/superclass.py,
+	src/sysctl-plugin.py, src/tcpwrapper-plugin.py, src/text-plugin.py,
+	src/udev-plugin.py, src/vmcfg-plugin.py, src/vmstat-plugin.py,
+	src/yum-plugin.py: Maybe not _that_ pleasing.
 
 2014-06-06  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* {generic_prettyprinter/bin => bin}/gpp, setup.py,
-	{generic_prettyprinter => src}/__init__.py, {generic_prettyprinter
-	=> src}/apache-plugin.py, {generic_prettyprinter =>
-	src}/arp-plugin.py, {generic_prettyprinter => src}/asm-plugin.py,
-	{generic_prettyprinter => src}/bind-plugin.py,
-	{generic_prettyprinter => src}/blkdev-plugin.py,
-	{generic_prettyprinter => src}/blkid-plugin.py,
-	{generic_prettyprinter => src}/chrony-plugin.py,
-	{generic_prettyprinter => src}/crontab-plugin.py,
-	{generic_prettyprinter => src}/csv-plugin.py,
-	{generic_prettyprinter => src}/cups-plugin.py,
-	{generic_prettyprinter => src}/df-plugin.py, {generic_prettyprinter
-	=> src}/exports-plugin.py, {generic_prettyprinter =>
-	src}/free-plugin.py, {generic_prettyprinter =>
-	src}/fstab-plugin.py, {generic_prettyprinter =>
-	src}/grub-plugin.py, {generic_prettyprinter => src}/help-plugin.py,
-	{generic_prettyprinter => src}/hosts-plugin.py,
-	{generic_prettyprinter => src}/ifcfg-plugin.py,
-	{generic_prettyprinter => src}/ini-plugin.py,
-	{generic_prettyprinter => src}/ins-plugin.py,
-	{generic_prettyprinter => src}/iscsi-plugin.py,
-	{generic_prettyprinter => src}/kdump-plugin.py,
-	{generic_prettyprinter => src}/ldap-plugin.py,
-	{generic_prettyprinter => src}/limits-plugin.py,
-	{generic_prettyprinter => src}/lvm-plugin.py,
-	{generic_prettyprinter => src}/main-plugin.py,
-	{generic_prettyprinter => src}/meminfo-plugin.py,
-	{generic_prettyprinter => src}/modinfo-plugin.py,
-	{generic_prettyprinter => src}/modprobe-plugin.py,
-	{generic_prettyprinter => src}/mount-plugin.py,
-	{generic_prettyprinter => src}/mounted-plugin.py,
-	{generic_prettyprinter => src}/multipath-ll-plugin.py,
-	{generic_prettyprinter => src}/multipath-plugin.py,
-	{generic_prettyprinter => src}/nsswitch-plugin.py,
-	{generic_prettyprinter => src}/ntp-plugin.py,
-	{generic_prettyprinter => src}/o2cb-plugin.py,
-	{generic_prettyprinter => src}/ocfs2-plugin.py,
-	{generic_prettyprinter => src}/oswbb-heartbeat-plugin.py,
-	{generic_prettyprinter => src}/pam-plugin.py,
-	{generic_prettyprinter => src}/partitions-plugin.py,
-	{generic_prettyprinter => src}/printcap-plugin.py,
-	{generic_prettyprinter => src}/procsys-plugin.py,
-	{generic_prettyprinter => src}/python.py, {generic_prettyprinter =>
-	src}/resolv-plugin.py, {generic_prettyprinter =>
-	src}/route-plugin.py, {generic_prettyprinter =>
-	src}/rpm-installed-plugin.py, {generic_prettyprinter =>
-	src}/rpm-va-plugin.py, {generic_prettyprinter =>
-	src}/slabinfo-plugin.py, {generic_prettyprinter =>
-	src}/smb-plugin.py, {generic_prettyprinter => src}/snmpd-plugin.py,
-	{generic_prettyprinter => src}/ssh-plugin.py,
-	{generic_prettyprinter => src}/superclass.py,
-	{generic_prettyprinter => src}/sysctl-plugin.py,
-	{generic_prettyprinter => src}/tcpwrapper-plugin.py,
-	{generic_prettyprinter => src}/text-plugin.py,
-	{generic_prettyprinter => src}/udev-plugin.py,
-	{generic_prettyprinter => src}/vmcfg-plugin.py,
-	{generic_prettyprinter => src}/vmstat-plugin.py,
-	{generic_prettyprinter => src}/yum-plugin.py: Moved files around
-	into a more-pleasing arrangement.
+	* bin/gpp, generic_prettyprinter/__init__.py,
+	generic_prettyprinter/apache-plugin.py,
+	generic_prettyprinter/arp-plugin.py,
+	generic_prettyprinter/asm-plugin.py, generic_prettyprinter/bin/gpp,
+	generic_prettyprinter/bind-plugin.py,
+	generic_prettyprinter/blkdev-plugin.py,
+	generic_prettyprinter/blkid-plugin.py,
+	generic_prettyprinter/chrony-plugin.py,
+	generic_prettyprinter/crontab-plugin.py,
+	generic_prettyprinter/csv-plugin.py,
+	generic_prettyprinter/cups-plugin.py,
+	generic_prettyprinter/df-plugin.py,
+	generic_prettyprinter/exports-plugin.py,
+	generic_prettyprinter/free-plugin.py,
+	generic_prettyprinter/fstab-plugin.py,
+	generic_prettyprinter/grub-plugin.py,
+	generic_prettyprinter/help-plugin.py,
+	generic_prettyprinter/hosts-plugin.py,
+	generic_prettyprinter/ifcfg-plugin.py,
+	generic_prettyprinter/ini-plugin.py,
+	generic_prettyprinter/ins-plugin.py,
+	generic_prettyprinter/iscsi-plugin.py,
+	generic_prettyprinter/kdump-plugin.py,
+	generic_prettyprinter/ldap-plugin.py,
+	generic_prettyprinter/limits-plugin.py,
+	generic_prettyprinter/lvm-plugin.py,
+	generic_prettyprinter/main-plugin.py,
+	generic_prettyprinter/meminfo-plugin.py,
+	generic_prettyprinter/modinfo-plugin.py,
+	generic_prettyprinter/modprobe-plugin.py,
+	generic_prettyprinter/mount-plugin.py,
+	generic_prettyprinter/mounted-plugin.py,
+	generic_prettyprinter/multipath-ll-plugin.py,
+	generic_prettyprinter/multipath-plugin.py,
+	generic_prettyprinter/nsswitch-plugin.py,
+	generic_prettyprinter/ntp-plugin.py,
+	generic_prettyprinter/o2cb-plugin.py,
+	generic_prettyprinter/ocfs2-plugin.py,
+	generic_prettyprinter/oswbb-heartbeat-plugin.py,
+	generic_prettyprinter/pam-plugin.py,
+	generic_prettyprinter/partitions-plugin.py,
+	generic_prettyprinter/printcap-plugin.py,
+	generic_prettyprinter/procsys-plugin.py,
+	generic_prettyprinter/python.py,
+	generic_prettyprinter/resolv-plugin.py,
+	generic_prettyprinter/route-plugin.py,
+	generic_prettyprinter/rpm-installed-plugin.py,
+	generic_prettyprinter/rpm-va-plugin.py,
+	generic_prettyprinter/slabinfo-plugin.py,
+	generic_prettyprinter/smb-plugin.py,
+	generic_prettyprinter/snmpd-plugin.py,
+	generic_prettyprinter/ssh-plugin.py,
+	generic_prettyprinter/superclass.py,
+	generic_prettyprinter/sysctl-plugin.py,
+	generic_prettyprinter/tcpwrapper-plugin.py,
+	generic_prettyprinter/text-plugin.py,
+	generic_prettyprinter/udev-plugin.py,
+	generic_prettyprinter/vmcfg-plugin.py,
+	generic_prettyprinter/vmstat-plugin.py,
+	generic_prettyprinter/yum-plugin.py, setup.py, src/__init__.py,
+	src/apache-plugin.py, src/arp-plugin.py, src/asm-plugin.py,
+	src/bind-plugin.py, src/blkdev-plugin.py, src/blkid-plugin.py,
+	src/chrony-plugin.py, src/crontab-plugin.py, src/csv-plugin.py,
+	src/cups-plugin.py, src/df-plugin.py, src/exports-plugin.py,
+	src/free-plugin.py, src/fstab-plugin.py, src/grub-plugin.py,
+	src/help-plugin.py, src/hosts-plugin.py, src/ifcfg-plugin.py,
+	src/ini-plugin.py, src/ins-plugin.py, src/iscsi-plugin.py,
+	src/kdump-plugin.py, src/ldap-plugin.py, src/limits-plugin.py,
+	src/lvm-plugin.py, src/main-plugin.py, src/meminfo-plugin.py,
+	src/modinfo-plugin.py, src/modprobe-plugin.py, src/mount-plugin.py,
+	src/mounted-plugin.py, src/multipath-ll-plugin.py,
+	src/multipath-plugin.py, src/nsswitch-plugin.py, src/ntp-plugin.py,
+	src/o2cb-plugin.py, src/ocfs2-plugin.py,
+	src/oswbb-heartbeat-plugin.py, src/pam-plugin.py,
+	src/partitions-plugin.py, src/printcap-plugin.py,
+	src/procsys-plugin.py, src/python.py, src/resolv-plugin.py,
+	src/route-plugin.py, src/rpm-installed-plugin.py,
+	src/rpm-va-plugin.py, src/slabinfo-plugin.py, src/smb-plugin.py,
+	src/snmpd-plugin.py, src/ssh-plugin.py, src/superclass.py,
+	src/sysctl-plugin.py, src/tcpwrapper-plugin.py, src/text-plugin.py,
+	src/udev-plugin.py, src/vmcfg-plugin.py, src/vmstat-plugin.py,
+	src/yum-plugin.py: Moved files around into a more-pleasing
+	arrangement.
 
 2014-06-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* generic_prettyprinter/{plugins => }/apache-plugin.py,
-	generic_prettyprinter/{plugins => }/arp-plugin.py,
-	generic_prettyprinter/{plugins => }/asm-plugin.py,
-	generic_prettyprinter/{plugins => }/bind-plugin.py,
-	generic_prettyprinter/{plugins => }/blkdev-plugin.py,
-	generic_prettyprinter/{plugins => }/blkid-plugin.py,
-	generic_prettyprinter/{plugins => }/chrony-plugin.py,
-	generic_prettyprinter/{plugins => }/crontab-plugin.py,
-	generic_prettyprinter/{plugins => }/csv-plugin.py,
-	generic_prettyprinter/{plugins => }/cups-plugin.py,
-	generic_prettyprinter/{plugins => }/df-plugin.py,
-	generic_prettyprinter/{plugins => }/exports-plugin.py,
-	generic_prettyprinter/{plugins => }/free-plugin.py,
-	generic_prettyprinter/{plugins => }/fstab-plugin.py,
-	generic_prettyprinter/{plugins => }/grub-plugin.py,
-	generic_prettyprinter/{plugins => }/help-plugin.py,
-	generic_prettyprinter/{plugins => }/hosts-plugin.py,
-	generic_prettyprinter/{plugins => }/ifcfg-plugin.py,
-	generic_prettyprinter/{plugins => }/ini-plugin.py,
-	generic_prettyprinter/{plugins => }/ins-plugin.py,
-	generic_prettyprinter/{plugins => }/iscsi-plugin.py,
-	generic_prettyprinter/{plugins => }/kdump-plugin.py,
-	generic_prettyprinter/{plugins => }/ldap-plugin.py,
-	generic_prettyprinter/{plugins => }/limits-plugin.py,
-	generic_prettyprinter/{plugins => }/lvm-plugin.py,
-	generic_prettyprinter/{plugins => }/main-plugin.py,
-	generic_prettyprinter/{plugins => }/meminfo-plugin.py,
-	generic_prettyprinter/{plugins => }/modinfo-plugin.py,
-	generic_prettyprinter/{plugins => }/modprobe-plugin.py,
-	generic_prettyprinter/{plugins => }/mount-plugin.py,
-	generic_prettyprinter/{plugins => }/mounted-plugin.py,
-	generic_prettyprinter/{plugins => }/multipath-ll-plugin.py,
-	generic_prettyprinter/{plugins => }/multipath-plugin.py,
-	generic_prettyprinter/{plugins => }/nsswitch-plugin.py,
-	generic_prettyprinter/{plugins => }/ntp-plugin.py,
-	generic_prettyprinter/{plugins => }/o2cb-plugin.py,
-	generic_prettyprinter/{plugins => }/ocfs2-plugin.py,
-	generic_prettyprinter/{plugins => }/oswbb-heartbeat-plugin.py,
-	generic_prettyprinter/{plugins => }/pam-plugin.py,
-	generic_prettyprinter/{plugins => }/partitions-plugin.py,
-	generic_prettyprinter/{plugins => }/printcap-plugin.py,
-	generic_prettyprinter/{plugins => }/procsys-plugin.py,
-	generic_prettyprinter/{plugins => }/python.py,
-	generic_prettyprinter/{plugins => }/resolv-plugin.py,
-	generic_prettyprinter/{plugins => }/route-plugin.py,
-	generic_prettyprinter/{plugins => }/rpm-installed-plugin.py,
-	generic_prettyprinter/{plugins => }/rpm-va-plugin.py,
-	generic_prettyprinter/{plugins => }/slabinfo-plugin.py,
-	generic_prettyprinter/{plugins => }/smb-plugin.py,
-	generic_prettyprinter/{plugins => }/snmpd-plugin.py,
-	generic_prettyprinter/{plugins => }/ssh-plugin.py,
-	generic_prettyprinter/{plugins => }/superclass.py,
-	generic_prettyprinter/{plugins => }/sysctl-plugin.py,
-	generic_prettyprinter/{plugins => }/tcpwrapper-plugin.py,
-	generic_prettyprinter/{plugins => }/text-plugin.py,
-	generic_prettyprinter/{plugins => }/udev-plugin.py,
-	generic_prettyprinter/{plugins => }/vmcfg-plugin.py,
-	generic_prettyprinter/{plugins => }/vmstat-plugin.py,
-	generic_prettyprinter/{plugins => }/yum-plugin.py: Promoted plugins
-	to top-level directory.
+	* generic_prettyprinter/apache-plugin.py,
+	generic_prettyprinter/arp-plugin.py,
+	generic_prettyprinter/asm-plugin.py,
+	generic_prettyprinter/bind-plugin.py,
+	generic_prettyprinter/blkdev-plugin.py,
+	generic_prettyprinter/blkid-plugin.py,
+	generic_prettyprinter/chrony-plugin.py,
+	generic_prettyprinter/crontab-plugin.py,
+	generic_prettyprinter/csv-plugin.py,
+	generic_prettyprinter/cups-plugin.py,
+	generic_prettyprinter/df-plugin.py,
+	generic_prettyprinter/exports-plugin.py,
+	generic_prettyprinter/free-plugin.py,
+	generic_prettyprinter/fstab-plugin.py,
+	generic_prettyprinter/grub-plugin.py,
+	generic_prettyprinter/help-plugin.py,
+	generic_prettyprinter/hosts-plugin.py,
+	generic_prettyprinter/ifcfg-plugin.py,
+	generic_prettyprinter/ini-plugin.py,
+	generic_prettyprinter/ins-plugin.py,
+	generic_prettyprinter/iscsi-plugin.py,
+	generic_prettyprinter/kdump-plugin.py,
+	generic_prettyprinter/ldap-plugin.py,
+	generic_prettyprinter/limits-plugin.py,
+	generic_prettyprinter/lvm-plugin.py,
+	generic_prettyprinter/main-plugin.py,
+	generic_prettyprinter/meminfo-plugin.py,
+	generic_prettyprinter/modinfo-plugin.py,
+	generic_prettyprinter/modprobe-plugin.py,
+	generic_prettyprinter/mount-plugin.py,
+	generic_prettyprinter/mounted-plugin.py,
+	generic_prettyprinter/multipath-ll-plugin.py,
+	generic_prettyprinter/multipath-plugin.py,
+	generic_prettyprinter/nsswitch-plugin.py,
+	generic_prettyprinter/ntp-plugin.py,
+	generic_prettyprinter/o2cb-plugin.py,
+	generic_prettyprinter/ocfs2-plugin.py,
+	generic_prettyprinter/oswbb-heartbeat-plugin.py,
+	generic_prettyprinter/pam-plugin.py,
+	generic_prettyprinter/partitions-plugin.py,
+	generic_prettyprinter/plugins/apache-plugin.py,
+	generic_prettyprinter/plugins/arp-plugin.py,
+	generic_prettyprinter/plugins/asm-plugin.py,
+	generic_prettyprinter/plugins/bind-plugin.py,
+	generic_prettyprinter/plugins/blkdev-plugin.py,
+	generic_prettyprinter/plugins/blkid-plugin.py,
+	generic_prettyprinter/plugins/chrony-plugin.py,
+	generic_prettyprinter/plugins/crontab-plugin.py,
+	generic_prettyprinter/plugins/csv-plugin.py,
+	generic_prettyprinter/plugins/cups-plugin.py,
+	generic_prettyprinter/plugins/df-plugin.py,
+	generic_prettyprinter/plugins/exports-plugin.py,
+	generic_prettyprinter/plugins/free-plugin.py,
+	generic_prettyprinter/plugins/fstab-plugin.py,
+	generic_prettyprinter/plugins/grub-plugin.py,
+	generic_prettyprinter/plugins/help-plugin.py,
+	generic_prettyprinter/plugins/hosts-plugin.py,
+	generic_prettyprinter/plugins/ifcfg-plugin.py,
+	generic_prettyprinter/plugins/ini-plugin.py,
+	generic_prettyprinter/plugins/ins-plugin.py,
+	generic_prettyprinter/plugins/iscsi-plugin.py,
+	generic_prettyprinter/plugins/kdump-plugin.py,
+	generic_prettyprinter/plugins/ldap-plugin.py,
+	generic_prettyprinter/plugins/limits-plugin.py,
+	generic_prettyprinter/plugins/lvm-plugin.py,
+	generic_prettyprinter/plugins/main-plugin.py,
+	generic_prettyprinter/plugins/meminfo-plugin.py,
+	generic_prettyprinter/plugins/modinfo-plugin.py,
+	generic_prettyprinter/plugins/modprobe-plugin.py,
+	generic_prettyprinter/plugins/mount-plugin.py,
+	generic_prettyprinter/plugins/mounted-plugin.py,
+	generic_prettyprinter/plugins/multipath-ll-plugin.py,
+	generic_prettyprinter/plugins/multipath-plugin.py,
+	generic_prettyprinter/plugins/nsswitch-plugin.py,
+	generic_prettyprinter/plugins/ntp-plugin.py,
+	generic_prettyprinter/plugins/o2cb-plugin.py,
+	generic_prettyprinter/plugins/ocfs2-plugin.py,
+	generic_prettyprinter/plugins/oswbb-heartbeat-plugin.py,
+	generic_prettyprinter/plugins/pam-plugin.py,
+	generic_prettyprinter/plugins/partitions-plugin.py,
+	generic_prettyprinter/plugins/printcap-plugin.py,
+	generic_prettyprinter/plugins/procsys-plugin.py,
+	generic_prettyprinter/plugins/python.py,
+	generic_prettyprinter/plugins/resolv-plugin.py,
+	generic_prettyprinter/plugins/route-plugin.py,
+	generic_prettyprinter/plugins/rpm-installed-plugin.py,
+	generic_prettyprinter/plugins/rpm-va-plugin.py,
+	generic_prettyprinter/plugins/slabinfo-plugin.py,
+	generic_prettyprinter/plugins/smb-plugin.py,
+	generic_prettyprinter/plugins/snmpd-plugin.py,
+	generic_prettyprinter/plugins/ssh-plugin.py,
+	generic_prettyprinter/plugins/superclass.py,
+	generic_prettyprinter/plugins/sysctl-plugin.py,
+	generic_prettyprinter/plugins/tcpwrapper-plugin.py,
+	generic_prettyprinter/plugins/text-plugin.py,
+	generic_prettyprinter/plugins/udev-plugin.py,
+	generic_prettyprinter/plugins/vmcfg-plugin.py,
+	generic_prettyprinter/plugins/vmstat-plugin.py,
+	generic_prettyprinter/plugins/yum-plugin.py,
+	generic_prettyprinter/printcap-plugin.py,
+	generic_prettyprinter/procsys-plugin.py,
+	generic_prettyprinter/python.py,
+	generic_prettyprinter/resolv-plugin.py,
+	generic_prettyprinter/route-plugin.py,
+	generic_prettyprinter/rpm-installed-plugin.py,
+	generic_prettyprinter/rpm-va-plugin.py,
+	generic_prettyprinter/slabinfo-plugin.py,
+	generic_prettyprinter/smb-plugin.py,
+	generic_prettyprinter/snmpd-plugin.py,
+	generic_prettyprinter/ssh-plugin.py,
+	generic_prettyprinter/superclass.py,
+	generic_prettyprinter/sysctl-plugin.py,
+	generic_prettyprinter/tcpwrapper-plugin.py,
+	generic_prettyprinter/text-plugin.py,
+	generic_prettyprinter/udev-plugin.py,
+	generic_prettyprinter/vmcfg-plugin.py,
+	generic_prettyprinter/vmstat-plugin.py,
+	generic_prettyprinter/yum-plugin.py: Promoted plugins to top-level
+	directory.
 
 2014-05-31  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
@@ -2034,68 +2224,102 @@
 
 2014-03-19  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* {src/gpp => generic_prettyprinter}/__init__.py, {scripts =>
-	generic_prettyprinter/bin}/gpp, {src/gpp =>
-	generic_prettyprinter}/plugins/apache-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/arp-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/asm-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/bind-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/blkdev-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/blkid-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/chrony-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/crontab-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/csv-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/cups-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/df-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/exports-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/free-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/fstab-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/grub-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/help-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/hosts-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/ifcfg-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/ini-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/ins-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/iscsi-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/kdump-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/ldap-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/limits-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/lvm-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/main-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/meminfo-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/modinfo-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/modprobe-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/mount-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/mounted-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/multipath-ll-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/multipath-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/nsswitch-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/ntp-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/o2cb-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/ocfs2-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/oswbb-heartbeat-plugin.py, {src/gpp
-	=> generic_prettyprinter}/plugins/pam-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/partitions-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/printcap-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/procsys-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/python.py, {src/gpp =>
-	generic_prettyprinter}/plugins/resolv-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/route-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/rpm-installed-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/rpm-va-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/slabinfo-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/smb-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/snmpd-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/ssh-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/superclass.py, {src/gpp =>
-	generic_prettyprinter}/plugins/sysctl-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/tcpwrapper-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/text-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/udev-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/vmcfg-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/vmstat-plugin.py, {src/gpp =>
-	generic_prettyprinter}/plugins/yum-plugin.py, setup.py: Canonical
-	layout
+	* generic_prettyprinter/__init__.py, generic_prettyprinter/bin/gpp,
+	generic_prettyprinter/plugins/apache-plugin.py,
+	generic_prettyprinter/plugins/arp-plugin.py,
+	generic_prettyprinter/plugins/asm-plugin.py,
+	generic_prettyprinter/plugins/bind-plugin.py,
+	generic_prettyprinter/plugins/blkdev-plugin.py,
+	generic_prettyprinter/plugins/blkid-plugin.py,
+	generic_prettyprinter/plugins/chrony-plugin.py,
+	generic_prettyprinter/plugins/crontab-plugin.py,
+	generic_prettyprinter/plugins/csv-plugin.py,
+	generic_prettyprinter/plugins/cups-plugin.py,
+	generic_prettyprinter/plugins/df-plugin.py,
+	generic_prettyprinter/plugins/exports-plugin.py,
+	generic_prettyprinter/plugins/free-plugin.py,
+	generic_prettyprinter/plugins/fstab-plugin.py,
+	generic_prettyprinter/plugins/grub-plugin.py,
+	generic_prettyprinter/plugins/help-plugin.py,
+	generic_prettyprinter/plugins/hosts-plugin.py,
+	generic_prettyprinter/plugins/ifcfg-plugin.py,
+	generic_prettyprinter/plugins/ini-plugin.py,
+	generic_prettyprinter/plugins/ins-plugin.py,
+	generic_prettyprinter/plugins/iscsi-plugin.py,
+	generic_prettyprinter/plugins/kdump-plugin.py,
+	generic_prettyprinter/plugins/ldap-plugin.py,
+	generic_prettyprinter/plugins/limits-plugin.py,
+	generic_prettyprinter/plugins/lvm-plugin.py,
+	generic_prettyprinter/plugins/main-plugin.py,
+	generic_prettyprinter/plugins/meminfo-plugin.py,
+	generic_prettyprinter/plugins/modinfo-plugin.py,
+	generic_prettyprinter/plugins/modprobe-plugin.py,
+	generic_prettyprinter/plugins/mount-plugin.py,
+	generic_prettyprinter/plugins/mounted-plugin.py,
+	generic_prettyprinter/plugins/multipath-ll-plugin.py,
+	generic_prettyprinter/plugins/multipath-plugin.py,
+	generic_prettyprinter/plugins/nsswitch-plugin.py,
+	generic_prettyprinter/plugins/ntp-plugin.py,
+	generic_prettyprinter/plugins/o2cb-plugin.py,
+	generic_prettyprinter/plugins/ocfs2-plugin.py,
+	generic_prettyprinter/plugins/oswbb-heartbeat-plugin.py,
+	generic_prettyprinter/plugins/pam-plugin.py,
+	generic_prettyprinter/plugins/partitions-plugin.py,
+	generic_prettyprinter/plugins/printcap-plugin.py,
+	generic_prettyprinter/plugins/procsys-plugin.py,
+	generic_prettyprinter/plugins/python.py,
+	generic_prettyprinter/plugins/resolv-plugin.py,
+	generic_prettyprinter/plugins/route-plugin.py,
+	generic_prettyprinter/plugins/rpm-installed-plugin.py,
+	generic_prettyprinter/plugins/rpm-va-plugin.py,
+	generic_prettyprinter/plugins/slabinfo-plugin.py,
+	generic_prettyprinter/plugins/smb-plugin.py,
+	generic_prettyprinter/plugins/snmpd-plugin.py,
+	generic_prettyprinter/plugins/ssh-plugin.py,
+	generic_prettyprinter/plugins/superclass.py,
+	generic_prettyprinter/plugins/sysctl-plugin.py,
+	generic_prettyprinter/plugins/tcpwrapper-plugin.py,
+	generic_prettyprinter/plugins/text-plugin.py,
+	generic_prettyprinter/plugins/udev-plugin.py,
+	generic_prettyprinter/plugins/vmcfg-plugin.py,
+	generic_prettyprinter/plugins/vmstat-plugin.py,
+	generic_prettyprinter/plugins/yum-plugin.py, scripts/gpp, setup.py,
+	src/gpp/__init__.py, src/gpp/plugins/apache-plugin.py,
+	src/gpp/plugins/arp-plugin.py, src/gpp/plugins/asm-plugin.py,
+	src/gpp/plugins/bind-plugin.py, src/gpp/plugins/blkdev-plugin.py,
+	src/gpp/plugins/blkid-plugin.py, src/gpp/plugins/chrony-plugin.py,
+	src/gpp/plugins/crontab-plugin.py, src/gpp/plugins/csv-plugin.py,
+	src/gpp/plugins/cups-plugin.py, src/gpp/plugins/df-plugin.py,
+	src/gpp/plugins/exports-plugin.py, src/gpp/plugins/free-plugin.py,
+	src/gpp/plugins/fstab-plugin.py, src/gpp/plugins/grub-plugin.py,
+	src/gpp/plugins/help-plugin.py, src/gpp/plugins/hosts-plugin.py,
+	src/gpp/plugins/ifcfg-plugin.py, src/gpp/plugins/ini-plugin.py,
+	src/gpp/plugins/ins-plugin.py, src/gpp/plugins/iscsi-plugin.py,
+	src/gpp/plugins/kdump-plugin.py, src/gpp/plugins/ldap-plugin.py,
+	src/gpp/plugins/limits-plugin.py, src/gpp/plugins/lvm-plugin.py,
+	src/gpp/plugins/main-plugin.py, src/gpp/plugins/meminfo-plugin.py,
+	src/gpp/plugins/modinfo-plugin.py,
+	src/gpp/plugins/modprobe-plugin.py,
+	src/gpp/plugins/mount-plugin.py, src/gpp/plugins/mounted-plugin.py,
+	src/gpp/plugins/multipath-ll-plugin.py,
+	src/gpp/plugins/multipath-plugin.py,
+	src/gpp/plugins/nsswitch-plugin.py, src/gpp/plugins/ntp-plugin.py,
+	src/gpp/plugins/o2cb-plugin.py, src/gpp/plugins/ocfs2-plugin.py,
+	src/gpp/plugins/oswbb-heartbeat-plugin.py,
+	src/gpp/plugins/pam-plugin.py,
+	src/gpp/plugins/partitions-plugin.py,
+	src/gpp/plugins/printcap-plugin.py,
+	src/gpp/plugins/procsys-plugin.py, src/gpp/plugins/python.py,
+	src/gpp/plugins/resolv-plugin.py, src/gpp/plugins/route-plugin.py,
+	src/gpp/plugins/rpm-installed-plugin.py,
+	src/gpp/plugins/rpm-va-plugin.py,
+	src/gpp/plugins/slabinfo-plugin.py, src/gpp/plugins/smb-plugin.py,
+	src/gpp/plugins/snmpd-plugin.py, src/gpp/plugins/ssh-plugin.py,
+	src/gpp/plugins/superclass.py, src/gpp/plugins/sysctl-plugin.py,
+	src/gpp/plugins/tcpwrapper-plugin.py,
+	src/gpp/plugins/text-plugin.py, src/gpp/plugins/udev-plugin.py,
+	src/gpp/plugins/vmcfg-plugin.py, src/gpp/plugins/vmstat-plugin.py,
+	src/gpp/plugins/yum-plugin.py: Canonical layout
 
 2014-03-18  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
@@ -2557,7 +2781,7 @@
 2012-12-28  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
 	* setup.py, src/gpp/plugins/route-plugin.py: Canonical output for
-	routes in these forms:         /proc/net/route         ip route show         route -n
+	routes in these forms: 	/proc/net/route 	ip route show 	route -n
 
 2012-12-23  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
@@ -2621,7 +2845,7 @@
 
 2012-11-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* setup.py, src/gpp/plugins/ins-plugin.py: Display output of:         # ip neigh show in a canonical form.
+	* setup.py, src/gpp/plugins/ins-plugin.py: Display output of: 	# ip neigh show in a canonical form.
 
 2012-11-22  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
@@ -2724,8 +2948,8 @@
 
 2012-10-10  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* src/gpp/plugins/{yum_repo-plugin.py => yum-plugin.py}: Gosh, I
-	can't type that load of crap.
+	* src/gpp/plugins/yum-plugin.py, src/gpp/plugins/yum_repo-plugin.py: 
+	Gosh, I can't type that load of crap.
 
 2012-10-10  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
@@ -2746,75 +2970,115 @@
 
 2012-10-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* src/{generic-prettyprinter => gpp}/__init__.py,
-	src/{generic-prettyprinter => gpp}/plugins/apache-plugin.py,
-	src/{generic-prettyprinter => gpp}/plugins/arp-plugin.py,
-	src/{generic-prettyprinter => gpp}/plugins/asm-plugin.py,
-	src/{generic-prettyprinter => gpp}/plugins/blkid-plugin.py,
-	src/{generic-prettyprinter => gpp}/plugins/exports-plugin.py,
-	src/{generic-prettyprinter => gpp}/plugins/fstab-plugin.py,
-	src/{generic-prettyprinter => gpp}/plugins/help-plugin.py,
-	src/{generic-prettyprinter => gpp}/plugins/hosts-plugin.py,
-	src/{generic-prettyprinter => gpp}/plugins/ifcfg-plugin.py,
-	src/{generic-prettyprinter => gpp}/plugins/kdump-plugin.py,
-	src/{generic-prettyprinter => gpp}/plugins/lvm-plugin.py,
-	src/{generic-prettyprinter => gpp}/plugins/main-plugin.py,
-	src/{generic-prettyprinter => gpp}/plugins/meminfo-plugin.py,
-	src/{generic-prettyprinter => gpp}/plugins/modprobe-plugin.py,
-	src/{generic-prettyprinter => gpp}/plugins/mount-plugin.py,
-	src/{generic-prettyprinter => gpp}/plugins/multipath-ll-plugin.py,
-	src/{generic-prettyprinter => gpp}/plugins/multipath-plugin.py,
-	src/{generic-prettyprinter => gpp}/plugins/ocfs2-plugin.py,
-	src/{generic-prettyprinter =>
-	gpp}/plugins/oswbb-heartbeat-plugin.py, src/{generic-prettyprinter
-	=> gpp}/plugins/pam-plugin.py, src/{generic-prettyprinter =>
-	gpp}/plugins/printcap-plugin.py, src/{generic-prettyprinter =>
-	gpp}/plugins/rpm-installed-plugin.py, src/{generic-prettyprinter =>
-	gpp}/plugins/slabinfo-plugin.py, src/{generic-prettyprinter =>
-	gpp}/plugins/snmpd-plugin.py, src/{generic-prettyprinter =>
-	gpp}/plugins/ssh-plugin.py, src/{generic-prettyprinter =>
-	gpp}/plugins/superclass.py, src/{generic-prettyprinter =>
-	gpp}/plugins/sysctl-plugin.py, src/{generic-prettyprinter =>
-	gpp}/plugins/tcpwrapper-plugin.py, src/{generic-prettyprinter =>
-	gpp}/plugins/udev-plugin.py, src/{generic-prettyprinter =>
-	gpp}/plugins/vmcfg-plugin.py, src/{generic-prettyprinter =>
-	gpp}/plugins/vmstat-plugin.py: Cleanup
+	* src/generic-prettyprinter/__init__.py,
+	src/generic-prettyprinter/plugins/apache-plugin.py,
+	src/generic-prettyprinter/plugins/arp-plugin.py,
+	src/generic-prettyprinter/plugins/asm-plugin.py,
+	src/generic-prettyprinter/plugins/blkid-plugin.py,
+	src/generic-prettyprinter/plugins/exports-plugin.py,
+	src/generic-prettyprinter/plugins/fstab-plugin.py,
+	src/generic-prettyprinter/plugins/help-plugin.py,
+	src/generic-prettyprinter/plugins/hosts-plugin.py,
+	src/generic-prettyprinter/plugins/ifcfg-plugin.py,
+	src/generic-prettyprinter/plugins/kdump-plugin.py,
+	src/generic-prettyprinter/plugins/lvm-plugin.py,
+	src/generic-prettyprinter/plugins/main-plugin.py,
+	src/generic-prettyprinter/plugins/meminfo-plugin.py,
+	src/generic-prettyprinter/plugins/modprobe-plugin.py,
+	src/generic-prettyprinter/plugins/mount-plugin.py,
+	src/generic-prettyprinter/plugins/multipath-ll-plugin.py,
+	src/generic-prettyprinter/plugins/multipath-plugin.py,
+	src/generic-prettyprinter/plugins/ocfs2-plugin.py,
+	src/generic-prettyprinter/plugins/oswbb-heartbeat-plugin.py,
+	src/generic-prettyprinter/plugins/pam-plugin.py,
+	src/generic-prettyprinter/plugins/printcap-plugin.py,
+	src/generic-prettyprinter/plugins/rpm-installed-plugin.py,
+	src/generic-prettyprinter/plugins/slabinfo-plugin.py,
+	src/generic-prettyprinter/plugins/snmpd-plugin.py,
+	src/generic-prettyprinter/plugins/ssh-plugin.py,
+	src/generic-prettyprinter/plugins/superclass.py,
+	src/generic-prettyprinter/plugins/sysctl-plugin.py,
+	src/generic-prettyprinter/plugins/tcpwrapper-plugin.py,
+	src/generic-prettyprinter/plugins/udev-plugin.py,
+	src/generic-prettyprinter/plugins/vmcfg-plugin.py,
+	src/generic-prettyprinter/plugins/vmstat-plugin.py,
+	src/gpp/__init__.py, src/gpp/plugins/apache-plugin.py,
+	src/gpp/plugins/arp-plugin.py, src/gpp/plugins/asm-plugin.py,
+	src/gpp/plugins/blkid-plugin.py, src/gpp/plugins/exports-plugin.py,
+	src/gpp/plugins/fstab-plugin.py, src/gpp/plugins/help-plugin.py,
+	src/gpp/plugins/hosts-plugin.py, src/gpp/plugins/ifcfg-plugin.py,
+	src/gpp/plugins/kdump-plugin.py, src/gpp/plugins/lvm-plugin.py,
+	src/gpp/plugins/main-plugin.py, src/gpp/plugins/meminfo-plugin.py,
+	src/gpp/plugins/modprobe-plugin.py,
+	src/gpp/plugins/mount-plugin.py,
+	src/gpp/plugins/multipath-ll-plugin.py,
+	src/gpp/plugins/multipath-plugin.py,
+	src/gpp/plugins/ocfs2-plugin.py,
+	src/gpp/plugins/oswbb-heartbeat-plugin.py,
+	src/gpp/plugins/pam-plugin.py, src/gpp/plugins/printcap-plugin.py,
+	src/gpp/plugins/rpm-installed-plugin.py,
+	src/gpp/plugins/slabinfo-plugin.py,
+	src/gpp/plugins/snmpd-plugin.py, src/gpp/plugins/ssh-plugin.py,
+	src/gpp/plugins/superclass.py, src/gpp/plugins/sysctl-plugin.py,
+	src/gpp/plugins/tcpwrapper-plugin.py,
+	src/gpp/plugins/udev-plugin.py, src/gpp/plugins/vmcfg-plugin.py,
+	src/gpp/plugins/vmstat-plugin.py: Cleanup
 
 2012-10-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* bootstrap.sh, setup.py, src/{gpp =>
-	generic-prettyprinter}/__init__.py, src/{gpp =>
-	generic-prettyprinter}/plugins/apache-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/arp-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/asm-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/blkid-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/exports-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/fstab-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/help-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/hosts-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/ifcfg-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/kdump-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/lvm-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/main-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/meminfo-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/modprobe-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/mount-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/multipath-ll-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/multipath-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/ocfs2-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/oswbb-heartbeat-plugin.py, src/{gpp
-	=> generic-prettyprinter}/plugins/pam-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/printcap-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/rpm-installed-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/slabinfo-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/snmpd-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/ssh-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/superclass.py, src/{gpp =>
-	generic-prettyprinter}/plugins/sysctl-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/tcpwrapper-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/udev-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/vmcfg-plugin.py, src/{gpp =>
-	generic-prettyprinter}/plugins/vmstat-plugin.py: Goners
+	* bootstrap.sh, setup.py, src/generic-prettyprinter/__init__.py,
+	src/generic-prettyprinter/plugins/apache-plugin.py,
+	src/generic-prettyprinter/plugins/arp-plugin.py,
+	src/generic-prettyprinter/plugins/asm-plugin.py,
+	src/generic-prettyprinter/plugins/blkid-plugin.py,
+	src/generic-prettyprinter/plugins/exports-plugin.py,
+	src/generic-prettyprinter/plugins/fstab-plugin.py,
+	src/generic-prettyprinter/plugins/help-plugin.py,
+	src/generic-prettyprinter/plugins/hosts-plugin.py,
+	src/generic-prettyprinter/plugins/ifcfg-plugin.py,
+	src/generic-prettyprinter/plugins/kdump-plugin.py,
+	src/generic-prettyprinter/plugins/lvm-plugin.py,
+	src/generic-prettyprinter/plugins/main-plugin.py,
+	src/generic-prettyprinter/plugins/meminfo-plugin.py,
+	src/generic-prettyprinter/plugins/modprobe-plugin.py,
+	src/generic-prettyprinter/plugins/mount-plugin.py,
+	src/generic-prettyprinter/plugins/multipath-ll-plugin.py,
+	src/generic-prettyprinter/plugins/multipath-plugin.py,
+	src/generic-prettyprinter/plugins/ocfs2-plugin.py,
+	src/generic-prettyprinter/plugins/oswbb-heartbeat-plugin.py,
+	src/generic-prettyprinter/plugins/pam-plugin.py,
+	src/generic-prettyprinter/plugins/printcap-plugin.py,
+	src/generic-prettyprinter/plugins/rpm-installed-plugin.py,
+	src/generic-prettyprinter/plugins/slabinfo-plugin.py,
+	src/generic-prettyprinter/plugins/snmpd-plugin.py,
+	src/generic-prettyprinter/plugins/ssh-plugin.py,
+	src/generic-prettyprinter/plugins/superclass.py,
+	src/generic-prettyprinter/plugins/sysctl-plugin.py,
+	src/generic-prettyprinter/plugins/tcpwrapper-plugin.py,
+	src/generic-prettyprinter/plugins/udev-plugin.py,
+	src/generic-prettyprinter/plugins/vmcfg-plugin.py,
+	src/generic-prettyprinter/plugins/vmstat-plugin.py,
+	src/gpp/__init__.py, src/gpp/plugins/apache-plugin.py,
+	src/gpp/plugins/arp-plugin.py, src/gpp/plugins/asm-plugin.py,
+	src/gpp/plugins/blkid-plugin.py, src/gpp/plugins/exports-plugin.py,
+	src/gpp/plugins/fstab-plugin.py, src/gpp/plugins/help-plugin.py,
+	src/gpp/plugins/hosts-plugin.py, src/gpp/plugins/ifcfg-plugin.py,
+	src/gpp/plugins/kdump-plugin.py, src/gpp/plugins/lvm-plugin.py,
+	src/gpp/plugins/main-plugin.py, src/gpp/plugins/meminfo-plugin.py,
+	src/gpp/plugins/modprobe-plugin.py,
+	src/gpp/plugins/mount-plugin.py,
+	src/gpp/plugins/multipath-ll-plugin.py,
+	src/gpp/plugins/multipath-plugin.py,
+	src/gpp/plugins/ocfs2-plugin.py,
+	src/gpp/plugins/oswbb-heartbeat-plugin.py,
+	src/gpp/plugins/pam-plugin.py, src/gpp/plugins/printcap-plugin.py,
+	src/gpp/plugins/rpm-installed-plugin.py,
+	src/gpp/plugins/slabinfo-plugin.py,
+	src/gpp/plugins/snmpd-plugin.py, src/gpp/plugins/ssh-plugin.py,
+	src/gpp/plugins/superclass.py, src/gpp/plugins/sysctl-plugin.py,
+	src/gpp/plugins/tcpwrapper-plugin.py,
+	src/gpp/plugins/udev-plugin.py, src/gpp/plugins/vmcfg-plugin.py,
+	src/gpp/plugins/vmstat-plugin.py: Goners
 
 2012-10-09  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
@@ -2860,9 +3124,9 @@
 
 2012-09-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* CHANGES.txt, USAGE.txt, bootstrap.sh, setup.py, {doc =>
-	src/gpp/doc}/PLACEHOLDER, {examples =>
-	src/gpp/examples}/PLACEHOLDER: Checkpoint
+	* CHANGES.txt, USAGE.txt, bootstrap.sh, doc/PLACEHOLDER,
+	examples/PLACEHOLDER, setup.py, src/gpp/doc/PLACEHOLDER,
+	src/gpp/examples/PLACEHOLDER: Checkpoint
 
 2012-09-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
@@ -2882,8 +3146,9 @@
 
 2012-09-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* setup.py, src/gpp/plugins/{cups-plugin.py => apache-plugin.py}: 
-	Rename according to apache-style usage.
+	* setup.py, src/gpp/plugins/apache-plugin.py,
+	src/gpp/plugins/cups-plugin.py: Rename according to apache-style
+	usage.
 
 2012-09-12  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
@@ -2926,8 +3191,8 @@
 
 2012-08-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* setup.py, src/gpp/plugins/{multipath-ii-plugin.py =>
-	multipath-ll-plugin.py}: Rename properly.
+	* setup.py, src/gpp/plugins/multipath-ii-plugin.py,
+	src/gpp/plugins/multipath-ll-plugin.py: Rename properly.
 
 2012-08-26  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
@@ -3137,8 +3402,8 @@
 
 2012-07-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* {gpp => src/gpp}/plugins/printcap-plugin.py: Salvaged older
-	plugin.
+	* gpp/plugins/printcap-plugin.py,
+	src/gpp/plugins/printcap-plugin.py: Salvaged older plugin.
 
 2012-07-27  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
@@ -3187,7 +3452,7 @@
 
 2012-07-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* scripts/{gpp.sh => gpp}: Drop extention, it's a command, Dolt!
+	* scripts/gpp, scripts/gpp.sh: Drop extention, it's a command, Dolt!
 
 2012-07-14  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
@@ -3253,23 +3518,30 @@
 
 2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* setup.py, src/{ => gpp}/gpp.py, src/{ =>
-	gpp}/plugins/blkid-plugin.py, src/{ => gpp}/plugins/cups-plugin.py,
-	src/{ => gpp}/plugins/fstab-plugin.py, src/{ =>
-	gpp}/plugins/hosts-plugin.py, src/{ =>
-	gpp}/plugins/ifcfg-plugin.py, src/{ => gpp}/plugins/lvm-plugin.py,
-	src/{ => gpp}/plugins/main-plugin.py, src/{ =>
-	gpp}/plugins/meminfo-plugin.py, src/{ =>
-	gpp}/plugins/modprobe-plugin.py, src/{ =>
-	gpp}/plugins/mount-plugin.py, src/{ =>
-	gpp}/plugins/multipath-plugin.py, src/{ =>
-	gpp}/plugins/ocfs2-plugin.py, src/{ =>
-	gpp}/plugins/oswbb-heartbeat-plugin.py, src/{ =>
-	gpp}/plugins/rpm-installed-plugin.py, src/{ =>
-	gpp}/plugins/slabinfo-plugin.py, src/{ =>
-	gpp}/plugins/superclass.py, src/{ => gpp}/plugins/sysctl-plugin.py,
-	src/{ => gpp}/plugins/vmcfg-plugin.py, src/{ =>
-	gpp}/plugins/vmstat-plugin.py: Getting stuff into the proper
+	* setup.py, src/gpp.py, src/gpp/gpp.py,
+	src/gpp/plugins/blkid-plugin.py, src/gpp/plugins/cups-plugin.py,
+	src/gpp/plugins/fstab-plugin.py, src/gpp/plugins/hosts-plugin.py,
+	src/gpp/plugins/ifcfg-plugin.py, src/gpp/plugins/lvm-plugin.py,
+	src/gpp/plugins/main-plugin.py, src/gpp/plugins/meminfo-plugin.py,
+	src/gpp/plugins/modprobe-plugin.py,
+	src/gpp/plugins/mount-plugin.py,
+	src/gpp/plugins/multipath-plugin.py,
+	src/gpp/plugins/ocfs2-plugin.py,
+	src/gpp/plugins/oswbb-heartbeat-plugin.py,
+	src/gpp/plugins/rpm-installed-plugin.py,
+	src/gpp/plugins/slabinfo-plugin.py, src/gpp/plugins/superclass.py,
+	src/gpp/plugins/sysctl-plugin.py, src/gpp/plugins/vmcfg-plugin.py,
+	src/gpp/plugins/vmstat-plugin.py, src/plugins/blkid-plugin.py,
+	src/plugins/cups-plugin.py, src/plugins/fstab-plugin.py,
+	src/plugins/hosts-plugin.py, src/plugins/ifcfg-plugin.py,
+	src/plugins/lvm-plugin.py, src/plugins/main-plugin.py,
+	src/plugins/meminfo-plugin.py, src/plugins/modprobe-plugin.py,
+	src/plugins/mount-plugin.py, src/plugins/multipath-plugin.py,
+	src/plugins/ocfs2-plugin.py, src/plugins/oswbb-heartbeat-plugin.py,
+	src/plugins/rpm-installed-plugin.py,
+	src/plugins/slabinfo-plugin.py, src/plugins/superclass.py,
+	src/plugins/sysctl-plugin.py, src/plugins/vmcfg-plugin.py,
+	src/plugins/vmstat-plugin.py: Getting stuff into the proper
 	directories.  Not yet working...
 
 2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
@@ -3361,24 +3633,29 @@
 
 2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* Makefile, Makefile.am, gpp/plugins/__init__.py, {gpp =>
-	src}/gpp.py, {gpp => src/plugins}/__init__.py, {gpp =>
-	src}/plugins/blkid-plugin.py, {gpp => src}/plugins/cups-plugin.py,
-	{gpp => src}/plugins/fstab-plugin.py, {gpp =>
-	src}/plugins/hosts-plugin.py, {gpp => src}/plugins/ifcfg-plugin.py,
-	{gpp => src}/plugins/lvm-plugin.py, {gpp =>
-	src}/plugins/main-plugin.py, {gpp =>
-	src}/plugins/meminfo-plugin.py, {gpp =>
-	src}/plugins/modprobe-plugin.py, {gpp =>
-	src}/plugins/mount-plugin.py, {gpp =>
-	src}/plugins/multipath-plugin.py, {gpp =>
-	src}/plugins/ocfs2-plugin.py, {gpp =>
-	src}/plugins/oswbb-heartbeat-plugin.py, {gpp =>
-	src}/plugins/rpm-installed-plugin.py, {gpp =>
-	src}/plugins/slabinfo-plugin.py, {gpp =>
-	src}/plugins/superclass.py, {gpp => src}/plugins/sysctl-plugin.py,
-	{gpp => src}/plugins/vmcfg-plugin.py, {gpp =>
-	src}/plugins/vmstat-plugin.py: Checkpoint
+	* Makefile, Makefile.am, gpp/__init__.py, gpp/gpp.py,
+	gpp/plugins/__init__.py, gpp/plugins/blkid-plugin.py,
+	gpp/plugins/cups-plugin.py, gpp/plugins/fstab-plugin.py,
+	gpp/plugins/hosts-plugin.py, gpp/plugins/ifcfg-plugin.py,
+	gpp/plugins/lvm-plugin.py, gpp/plugins/main-plugin.py,
+	gpp/plugins/meminfo-plugin.py, gpp/plugins/modprobe-plugin.py,
+	gpp/plugins/mount-plugin.py, gpp/plugins/multipath-plugin.py,
+	gpp/plugins/ocfs2-plugin.py, gpp/plugins/oswbb-heartbeat-plugin.py,
+	gpp/plugins/rpm-installed-plugin.py,
+	gpp/plugins/slabinfo-plugin.py, gpp/plugins/superclass.py,
+	gpp/plugins/sysctl-plugin.py, gpp/plugins/vmcfg-plugin.py,
+	gpp/plugins/vmstat-plugin.py, src/gpp.py, src/plugins/__init__.py,
+	src/plugins/blkid-plugin.py, src/plugins/cups-plugin.py,
+	src/plugins/fstab-plugin.py, src/plugins/hosts-plugin.py,
+	src/plugins/ifcfg-plugin.py, src/plugins/lvm-plugin.py,
+	src/plugins/main-plugin.py, src/plugins/meminfo-plugin.py,
+	src/plugins/modprobe-plugin.py, src/plugins/mount-plugin.py,
+	src/plugins/multipath-plugin.py, src/plugins/ocfs2-plugin.py,
+	src/plugins/oswbb-heartbeat-plugin.py,
+	src/plugins/rpm-installed-plugin.py,
+	src/plugins/slabinfo-plugin.py, src/plugins/superclass.py,
+	src/plugins/sysctl-plugin.py, src/plugins/vmcfg-plugin.py,
+	src/plugins/vmstat-plugin.py: Checkpoint
 
 2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
@@ -3390,7 +3667,7 @@
 
 2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* src/vmstat-pp => gpp/plugins/vmstat-plugin.py: Renamed.
+	* gpp/plugins/vmstat-plugin.py, src/vmstat-pp: Renamed.
 
 2012-07-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
@@ -3400,7 +3677,7 @@
 
 2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* src/mount-pp => gpp/plugins/mount-plugin.py: Renamed.
+	* gpp/plugins/mount-plugin.py, src/mount-pp: Renamed.
 
 2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
@@ -3430,19 +3707,25 @@
 
 2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* {src => gpp}/Makefile, {src => gpp}/gpp.py, {src =>
-	gpp}/plugins/cups-plugin.py, {src => gpp}/plugins/fstab-plugin.py,
-	{src => gpp}/plugins/hosts-plugin.py, {src =>
-	gpp}/plugins/ifcfg-plugin.py, {src => gpp}/plugins/main-plugin.py,
-	{src => gpp}/plugins/meminfo-plugin.py, {src =>
-	gpp}/plugins/modprobe-plugin.py, {src =>
-	gpp}/plugins/multipath-plugin.py, {src =>
-	gpp}/plugins/ocfs2-plugin.py, {src =>
-	gpp}/plugins/oswbb-heartbeat-plugin.py, {src =>
-	gpp}/plugins/rpm-installed-plugin.py, {src =>
-	gpp}/plugins/slabinfo-plugin.py, {src =>
-	gpp}/plugins/superclass.py, {src => gpp}/plugins/sysctl-plugin.py,
-	{src => gpp}/plugins/vmcfg-plugin.py: Checkpoint
+	* gpp/Makefile, gpp/gpp.py, gpp/plugins/cups-plugin.py,
+	gpp/plugins/fstab-plugin.py, gpp/plugins/hosts-plugin.py,
+	gpp/plugins/ifcfg-plugin.py, gpp/plugins/main-plugin.py,
+	gpp/plugins/meminfo-plugin.py, gpp/plugins/modprobe-plugin.py,
+	gpp/plugins/multipath-plugin.py, gpp/plugins/ocfs2-plugin.py,
+	gpp/plugins/oswbb-heartbeat-plugin.py,
+	gpp/plugins/rpm-installed-plugin.py,
+	gpp/plugins/slabinfo-plugin.py, gpp/plugins/superclass.py,
+	gpp/plugins/sysctl-plugin.py, gpp/plugins/vmcfg-plugin.py,
+	src/Makefile, src/gpp.py, src/plugins/cups-plugin.py,
+	src/plugins/fstab-plugin.py, src/plugins/hosts-plugin.py,
+	src/plugins/ifcfg-plugin.py, src/plugins/main-plugin.py,
+	src/plugins/meminfo-plugin.py, src/plugins/modprobe-plugin.py,
+	src/plugins/multipath-plugin.py, src/plugins/ocfs2-plugin.py,
+	src/plugins/oswbb-heartbeat-plugin.py,
+	src/plugins/rpm-installed-plugin.py,
+	src/plugins/slabinfo-plugin.py, src/plugins/superclass.py,
+	src/plugins/sysctl-plugin.py, src/plugins/vmcfg-plugin.py: 
+	Checkpoint
 
 2012-07-07  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
@@ -3526,14 +3809,13 @@
 
 2012-07-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* src/grub-pp, src/hosts-pp, src/ifcfg-pp, src/meminfo-pp,
-	src/modprobe-pp, src/ocfs2-pp, src/oswbb-heartbeat-pp, src/{cups-pp
-	=> plugins/cups-plugin.py}, src/{fstab-pp =>
-	plugins/fstab-plugin.py}, src/plugins/hosts-plugin.py,
+	* src/cups-pp, src/fstab-pp, src/grub-pp, src/hosts-pp,
+	src/ifcfg-pp, src/meminfo-pp, src/modprobe-pp, src/multipath-pp,
+	src/ocfs2-pp, src/oswbb-heartbeat-pp, src/plugins/cups-plugin.py,
+	src/plugins/fstab-plugin.py, src/plugins/hosts-plugin.py,
 	src/plugins/ifcfg-plugin.py, src/plugins/meminfo-plugin.py,
-	src/plugins/modprobe-plugin.py, src/{multipath-pp =>
-	plugins/multipath-plugin.py}, src/plugins/ocfs2-plugin.py,
-	src/plugins/oswbb-heartbeat-plugin.py,
+	src/plugins/modprobe-plugin.py, src/plugins/multipath-plugin.py,
+	src/plugins/ocfs2-plugin.py, src/plugins/oswbb-heartbeat-plugin.py,
 	src/plugins/rpm-installed-plugin.py,
 	src/plugins/slabinfo-plugin.py, src/plugins/vmcfg-plugin.py,
 	src/rpm-installed-pp, src/slabinfo-pp, src/vmcfg-pp: Baseline
@@ -3544,7 +3826,7 @@
 
 2012-07-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* src/{sysctl-pp => plugins/sysctl-plugin.py}: Plugin
+	* src/plugins/sysctl-plugin.py, src/sysctl-pp: Plugin
 
 2012-07-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
@@ -3552,7 +3834,7 @@
 
 2012-07-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* src/{main.py => gpp.py}: Changed to distribution name.
+	* src/gpp.py, src/main.py: Changed to distribution name.
 
 2012-07-04  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
@@ -3618,7 +3900,7 @@
 
 2012-06-20  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* src/{mount-pp.py => mount-pp}: Renamed
+	* src/mount-pp, src/mount-pp.py: Renamed
 
 2012-06-20  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
@@ -3686,12 +3968,11 @@
 
 2012-06-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
-	* Makefile, src/Makefile, cups-pp => src/cups-pp, fstab-pp =>
-	src/fstab-pp, grub-pp => src/grub-pp, hosts-pp => src/hosts-pp,
-	ifcfg-pp => src/ifcfg-pp, modprobe-pp => src/modprobe-pp,
-	multipath-pp => src/multipath-pp, slabinfo-pp => src/slabinfo-pp,
-	sysctl-pp => src/sysctl-pp, vmcfg-pp => src/vmcfg-pp: Moved to
-	subdir
+	* Makefile, cups-pp, fstab-pp, grub-pp, hosts-pp, ifcfg-pp,
+	modprobe-pp, multipath-pp, slabinfo-pp, src/Makefile, src/cups-pp,
+	src/fstab-pp, src/grub-pp, src/hosts-pp, src/ifcfg-pp,
+	src/modprobe-pp, src/multipath-pp, src/slabinfo-pp, src/sysctl-pp,
+	src/vmcfg-pp, sysctl-pp, vmcfg-pp: Moved to subdir
 
 2012-06-08  Tommy Reynolds <Tommy.Reynolds@MegaCoder.com>
 
