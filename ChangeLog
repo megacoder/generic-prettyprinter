@@ -1,3 +1,16 @@
+2018-04-26  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* genpp/mount-plugin.py, setup.py: More python-like implementation
+	for /proc/mount output.
+
+2018-04-14  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* genpp/ifcfg-plugin.py: A stroke at cleaning up the VLAN output
+
+2018-04-14  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
+
+	* ChangeLog: History
+
 2018-04-14  Tommy Reynolds <Oldest.Software.Guy@gmail.com>
 
 	* genpp/ifcfg-plugin.py, setup.py: List VLANs
