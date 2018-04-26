@@ -28,72 +28,125 @@ class	PrettyPrint( superclass.MetaPrettyPrinter ):
 		return
 
 	def	pre_begin_file( self, name = None ):
-		self.widths  = dict()
-		self.content = list()
-		self.is_proc = False
-		self.first   = True
+		self.widths = dict()
+		self.mounts = dict()
+		self.flavor = 'RANCID'
+		return
+
+	def	reorder( self, s ):
+		return ','.join(
+			sorted(
+				s.split( ',' )
+			)
+		)
+
+	def	set_widest( self, l ):
+		for i in range( len( l ) ):
+			self.widths[ i ] = max(
+				self.widths.get( i, 0 ),
+				len( l[ i ] )
+			)
 		return
 
 	def	next_line( self, line ):
+		# Tokenize input line
 		tokens = map(
 			str.strip,
 			line.split()
 		)
-		if len(tokens) == 6:
-			# Make 7 tokens if only 6
-			tokens.append( None )
-		if len(tokens) != 7:
-			self.footnote(
-				'Expected 7 tokens, got {0}'.format( len( tokens ) )
-			)
-			return
-		if self.first:
-			self.is_proc = tokens[5].isdigit()
-			self.first = False
-		fields = dict()
-		if self.is_proc:
-			# /proc/mounts type of file.
-			fields['name']    = tokens[0]
-			fields['mp']      = tokens[1]
-			fields['type']    = tokens[2]
-			attr              = tokens[3].split( ',' )
-			fields['backup']  = tokens[4]
-			fields['fsck']    = tokens[5]
-			fields['details'] = tokens[6]
+		N = len( tokens )
+		if len( tokens ) != 6: return
+		if tokens[ -1 ].isdigit():
+				# tail -n1 /proc/mounts
+				# binfmt_misc /proc/sys/fs/binfmt_misc binfmt_misc rw,relatime 0 0
+				self.flavor = 'proc'
+				fs          = tokens[ 0 ]
+				mp          = tokens[ 1 ]
+				kind        = tokens[ 2 ]
+				opts        = self.reorder( tokens[ 3 ] )
+				freq        = tokens[ 4 ]
+				passno      = tokens[ 5 ]
+				record      = [ fs, mp, kind, opts, freq, passno ]
 		else:
-			# /bin/mount type of file
-			fields['name']    = tokens[0]
-			fields['mp']      = tokens[2]
-			fields['type']    = tokens[4]
-			# Reorder the mount flags for readability.
-			fields['attr']	  = ','.join(
-				[ x for x in sorted( tokens[5][1:-1].split( ',' ) ) ]
+			# mount | tail -n1
+			# binfmt_misc on /proc/sys/fs/binfmt_misc type binfmt_misc (rw,relatime)
+			self.flavor = 'cmd'
+			fs     = tokens[ 0 ]
+			mp     = tokens[ 2 ]
+			kind   = tokens[ 4 ]
+			opts   = self.reorder( tokens[ 5 ][1:-1] )
+			record = [ fs, mp, kind, opts ]
+		key = '{0},{1}'.format( mp, fs )
+		if key in self.mounts:
+			k = self.footnote(
+				'{0} mounted multiple times'.format( key )
 			)
-			fields['backup']  = None
-			fields['fsck']    = None
-			fields['details'] = tokens[6]
-		for key in fields:
-			field = fields[key]
-			if field:
-				if key not in self.widths:
-					self.widths[key] = len(field)
-				else:
-					self.widths[key] = max( self.widths[key], len(field) )
-		self.content.append( fields )
+			record += [
+				'** See footnote {0}'.format( k )
+			]
+			print '*** collision "{0}"'.format( key )
+			self._print_mounts()
+		self.mounts[ key ] = record
+		self.set_widest( record )
+		return
+
+	def	_print_mounts( self ):
+		for key in sorted( self.mounts ):
+			print '{0:31}  {1}'.format(
+				key,
+				'|'.join( self.mounts[ key ] )
+			)
 		return
 
 	def	report( self, final = False ):
-		if not final:
-			for fields in sorted(
-				self.content,
-				key = lambda f: f['name']
-			):
-				columns = list()
-				for key in PrettyPrint.FIELDS:
-					if key in fields and fields[key]:
-						fmt = '{{0:<{0}}}'.format( self.widths[key] )
-						columns.append(
-							fmt.format( fields[key] )
-						)
-				self.println( ' '.join( columns ) )
+		if final: return
+		if self.flavor == 'cmd':
+			titles = [
+				'Filesystem',
+				'Mount Point',
+				'Type',
+				'Options',
+			]
+		elif self.flavor == 'proc':
+			titles = [
+				'Filesystem',
+				'Mount Point',
+				'Type',
+				'Options',
+				'Back Up',
+				'fsck(8)',
+			]
+		else:
+			self.error(
+				'Flavor of the month is "[)]".'.format( self.flavor )
+			)
+			return
+		self.set_widest( titles )
+		fmts = map(
+			'{{0:{0}}}'.format,
+			[ self.widths[key] for key in self.widths ]
+		)
+		self.write_row( fmts, titles )
+		bars = map(
+			lambda s : '-' * len( s ),
+			titles
+		)
+		self.write_row( fmts, bars )
+		for key in sorted( self.mounts ):
+			self.write_row( fmts, self.mounts[ key ] )
+		return
+
+	def	write_row( self, fmts, fields ):
+		Lfmts   = len( fmts )
+		Lfields = len( fields )
+		gutter = '  '
+		if Lfmts == Lfields:
+			self.println(
+				gutter.join(
+					map(
+						lambda i : fmts[i].format( fields[i] ),
+						range( Lfields )
+					)
+				).rstrip()
+			)
 		return
